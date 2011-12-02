@@ -1,0 +1,60 @@
+---
+layout: post
+title: CodeIgniter 1.7 Session Bug within object storage
+categories:
+- PHP
+tags:
+- CodeIgniter
+- PHP
+published: true
+comments: true
+---
+<p>I don’t know whether it’s a bug or what.<br />
+I would store a object in session sometimes, like this.
+<div class="codeblock"><code><span style="color: #000000;">
+<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">session</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">set_userdata</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_name'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$object</span><span style="color: #007700;">); </span>
+</span>
+</code></div>
+before 1.7, it worked just fine. But when I trying to upgrade my application to CI 1.7, it came wrong.</p>
+
+<p>It will cause error messages like this:
+<blockquote>A PHP Error was encountered</blockquote></p>
+
+<p>Severity: 4096</p>
+
+<p>Message: Object of class stdClass could not be converted to string</p>
+
+<p>Filename: libraries/Session.php</p>
+
+<p>Line Number: 715
+When I digged into 1.7 Session library, I found the problem.
+<blockquote>Fixed a bug in the Session class that was disallowing slashes in the serialized array.</blockquote>
+There are some new functions in Session library.</p>
+
+<p>GOTO line 683 and line 714,
+<div class="codeblock"><code><span style="color: #000000;">
+<span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'{{slash}}'</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
+</span>
+</code></div>
+When $val is a object, it came wrong, just replace this line with
+<div class="codeblock"><code><span style="color: #000000;">
+<span style="color: #007700;">if(!</span><span style="color: #0000bb;">is_object</span><span style="color: #007700;">(</span><span style="color: #0000bb;">$val</span><span style="color: #007700;">)) </span><span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'{{slash}}'</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
+</span>
+</code></div>
+For those who got the same problem, this is my solution.<br />
+Hope there will be a hotfix soon.</p>
+
+<p>I also made my own hotfix for this problem.</p>
+
+<p>I made a session_fix library extends the original Session library,<br />
+only overrides these two functions.</p>
+
+<p>Get my code from <a href="http://www.hsatac.net/Session_fix.phps">here</a>
+and put it into /system/application/libraries/Session_fix.php</p>
+
+<p>Load this library with a CI 1.7 new feature:
+<div class="codeblock"><code><span style="color: #000000;">
+<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">load</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">library</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_fix'</span><span style="color: #007700;">, </span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'session'</span><span style="color: #007700;">); </span>
+</span>
+</code></div>
+Now it’s done!</p>

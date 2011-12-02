@@ -1,0 +1,44 @@
+---
+layout: post
+title: PHP framework執行效能
+categories:
+- PHP
+tags:
+- CodeIgniter
+- PHP
+published: true
+comments: true
+---
+<p>最近在玩 RoR...突然想到執行效能的問題<br />
+上網找了一些<a href="http://www.avnetlabs.com/php/php-framework-comparison-benchmarks" target="_blank">資料</a></p>
+
+<p>常用的三套 PHP Framework - CakePHP, Zend, CodeIginter<br />
+Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
+
+<p>雖然當初我選擇 CI 主要不是為了效能的因素<br />
+而是著眼在輕量和架構上...</p>
+
+<p>eAccelerator我沒在用就不管了...<br />
+其他 framework 在打開 APC Cache 後效能明顯提昇<br />
+好像是說 APC Cache 在 PHP 6 會成為內建 mod 之一？印象中...</p>
+
+<p>現在對版本都很不敏感...<br />
+一方面是懶...<span style="text-decoration: line-through;">(人老了...)
+</span>另一方面是很多在 maintain 的專案都還在用穩定的舊版本...<br />
+而新開發的當然也沿用...不會去給自己找麻煩...</p>
+
+<p>再者是以前吃過這種虧太多了...<br />
+看到覺得不錯的新技術就一頭栽進去...<br />
+結果發現這技術被淘汰 / 做不起來...</p>
+
+<p>所以現在都寧願觀望好一陣子，等穩定、社群和資源都夠多後再進場<br />
+像 RoR 也是兩年前就想摸了，不過到最近才動手</p>
+
+<p><span style="text-decoration: line-through;">(這真的和老一點關係都沒有</span>)</p>
+
+<p>扯遠了...RoR 的效能略遜 CodeIginter 一些 (在單 Mongrel 的情況)<br />
+不過以人為出發點的語言效能能到這樣，我覺得不錯。<br />
+應該還有一些可以提昇效能的方法</p>
+
+<p>不過等以後碰到效能瓶頸時再研究吧<br />
+先把 RoR 摸熟點再說。</p>

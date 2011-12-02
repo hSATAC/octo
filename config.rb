@@ -2,9 +2,9 @@
 project_type = :stand_alone
 
 # Publishing paths
-http_path = "/octo/"
-http_images_path = "/octo/images"
-http_fonts_path = "/octo/fonts"
+http_path = "/"
+http_images_path = "/images"
+http_fonts_path = "/fonts"
 css_dir = "public/octo/stylesheets"
 
 # Local development paths

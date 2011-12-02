@@ -1,0 +1,42 @@
+---
+layout: post
+title: tm_syntax_highlighting + rails 3 + MacOs
+categories:
+- Mac
+- Rails
+tags:
+- mac
+- rails
+- tm_syntax_highlighting
+published: true
+comments: true
+---
+<p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
+
+<p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
+
+<p><a title="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails">http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails</a></p>
+
+<p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
+
+<p><a href="/images/wp-uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="/images/wp-uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+
+<p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
+
+<p>正常來說直接gem install ultraviolet就可以了，但我在我的mac上面碰到了一些問題，gem install無法正常安裝 oniguruma。</p>
+
+<p><!--more--></p>
+
+<p>2011/03/07更新：homebrew有oniguruma，直接brew install oniguruma
+<del datetime="2011-03-07T07:46:55+00:00">所以只好直接下載 <a href="http://www.geocities.jp/kosako3/oniguruma/" target="_blank">oniguruma</a> 下來一樣三步驟 ./configure;make;make install 後</del>再繼續安裝ultraviolet 就可以了。</p>
+
+<p>但如果直接用gem install tm_syntax_highlighting，安裝的版本非常奇怪，在rails 3 環境根本 run 不起來，generator 也沒有作用。去作者的 github 比對一下原始碼可以發現有許多修改都沒有放進去。好在 rails 3 的 Gemfile 可以指定git作為source了！但指定原作者的github為source，卻傳回錯誤訊息？</p>
+
+<p>稍微 google一下，發現有別人 release了 <a href="http://github.com/dasil003/tm_syntax_highlighting" target="_blank">for rails 3的此套件</a>，使用這個github來當source：
+<pre lang="ruby">gem 'tm_syntax_highlighting', :git=&gt;'http://github.com/dasil003/tm_syntax_highlighting.git'</pre>
+這樣就可以正常使用這個套件了，他的generator說明有點錯誤，直接下rails g syntax_css 就會把所有css檔案統統複製到public下面了，什麼list, all那些參數完全沒有作用。</p>
+
+<p>ultraviolet 支援的 syntax <a href="http://svn.textmate.org/trunk/Bundles/" target="_blank">列表在這</a></p>
+
+<p>使用時，傳:lang進去時記得要：
+<pre lang="ruby">str.downcase.gsub(" ","_")</pre></p>

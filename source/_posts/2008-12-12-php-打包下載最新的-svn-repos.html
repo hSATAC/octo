@@ -1,0 +1,50 @@
+---
+layout: post
+title: PHP 打包下載最新的 svn repos
+categories:
+- PHP
+tags:
+- PHP
+published: true
+comments: true
+---
+<p>最近有個需求，是要能透過一個簡單的網頁介面<br />
+把svn repos打包下載</p>
+
+<p>首先先把 www-data 加入 svn user group 讓 php可以使用 svn
+<pre>groupadd svn
+chgrp svn repos/ -Rchmod g+sw repos -R</pre>
+<pre>再來就是單純的執行 svn export; tar 以後下載</pre>
+<pre>不過在執行的時候中文檔名會有問題會出現錯誤訊息</pre>
+svn: Can't convert string from 'UTF-8' to native encoding:</p>
+
+<p>若使用 php 的 shell_exec 要寫在同一行</p>
+
+<p>shell_exec('LANG=zhTW.utf8; svn export....');</p>
+
+<p>若分兩個函式執行會變成兩個不同的 thread</p>
+
+<p>不過寫個 bash script 再讓 php 去執行應該會是比較好的方式。</p>
+
+<p>最後，tar完下載後，由於windows平台下 rar 處理 big5 檔名會有問題</p>
+
+<p>因此使用 convmv 這套來處理一下檔名編碼的問題</p>
+
+<p>apt-get install convmv</p>
+
+<p>最後再寫個 html 介面來處理一些選項和下載就可以了</p>
+
+<p>bash 大概長這樣</p>
+
+<p>#svnpackager [svnserver] [repos name]<br />
+rm -rf $2<br />
+rm $2.tar.gz</p>
+
+<p>export LANG=zh_TW.utf8;<br />
+svn export --force svn://$1/$2<br />
+convmv -f UTF-8 -t BIG5 -r --notest $2<br />
+tar -zcvf $2.tar.gz $2</p>
+
+<p>rm -rf $2</p>
+
+<p>稍微紀錄一下</p>

@@ -1,0 +1,142 @@
+---
+layout: post
+title: 延伸 MVC 的 V - 以 CodeIgniter 為例
+categories:
+- PHP
+tags:
+- CodeIgniter
+- PHP
+published: true
+comments: true
+---
+<p>今天在 CodeIgniter#irc.freenode.net 有位網友拋出了這篇文章討論
+<a href="http://alessandrovermeulen.me/2009/04/16/extending-the-v-in-mvc/" target="_blank">Extending the V in MVC</a></p>
+
+<p>稍微看了一下，其實概念和 Ruby on Rails 的架構一樣，<br />
+主要是引進了 partial 以及 layout 的概念。<br />
+(原文用 layout，但我認為用format應該比較洽當。)
+<!--more--></p>
+
+<p>partial 就是是部份樣板，增加 view 的可重用性，這沒什麼特殊的。<br />
+而 format 的部份則是比較有趣的部份，<br />
+controller 只要負責丟出資料，而用什麼格式 (layout, format) 來呈現，<br />
+則交給 view 來做，讓「資料」和「畫面」分割的更徹底。<br />
+以實例說明，就是同樣的 controller ，url 加個不同的副檔名，就會用不同的 view 去呈現資料，<br />
+例如：<br />
+http://blog.hsatac.net/1/format.html 就是一般網頁；<br />
+http://blog.hsatac.net/1/format.xml 是xml；<br />
+http://blog.hsatac.net/1/format.rss 則是rss</p>
+
+<p>概念雖非創新，但如此在 CodeIgniter 中實做出來，<br />
+也頗有可借鏡之處。</p>
+
+<p>這邊把該文的實做貼出，由於文章有段時間了，可能視不同 CI 版本需稍加調整。</p>
+
+<p>Controller:
+<pre lang="php" line="1">
+ <?php
+ /**
+ * This function remaps the url and retrieves the desired extension
+from it. It then calls the appropiate controller method.
+ *
+ * @param string $aMethod
+ */
+ function _remap($aMethod) {
+ $lParams = $this->uri->segment_array();
+ array_shift($lParams);array_shift($lParams);</pre></p>
+
+<p> $lMethod = $aMethod;<br />
+ $lLayout = ’xhtml’;<br />
+ if (strpos($lMethod, ’.’) !== False)<br />
+ list($lMethod, $lLayout) = explode(’.’, $lMethod);<br />
+ $this->load->setLayout($lLayout);</p>
+
+<p> $lMethod = (empty($lMethod) ? ’index’ : $lMethod);<br />
+ if (in_array($lMethod, get_class_methods(get_class($this)))) {<br />
+ $this->load->setController(get_class($this), $lMethod);<br />
+ call_user_func_array(array($this, $lMethod), $lParams);<br />
+ }<br />
+ else {<br />
+ show_404($lMethod);<br />
+ }<br />
+ }<br />
+?>
+</p>
+
+<p>Loader:
+<pre lang="php" line="1">
+<?php
+ class MY_Loader extends CI_Loader {
+ protected $layout;
+ protected $controllerFunction;
+ protected $controllerName;</pre></p>
+
+<p>public function partial($aPartial, $aData=array(), $aLayout=null) {<br />
+ $lLayout = (is_null($aLayout) ? $this->layout : $aLayout);</p>
+
+<p> $lastItem = ’’;<br />
+ $parts = array();<br />
+ if (strpos($aPartial, ’/’) !== false) {<br />
+ $parts = explode(’/’, $aPartial);</p>
+
+<p> $lastItem = array_pop($parts);<br />
+ }<br />
+ else {<br />
+ $lastItem = $aPartial;<br />
+ }</p>
+
+<p> if ($lastItem{0} !== ’_’) {<br />
+ $lastItem = ’_’.$lastItem;<br />
+ }<br />
+ array_push($parts, $lastItem);</p>
+
+<p> $this->view(implode(’/’, $parts), $aData, $aLayout);<br />
+ }</p>
+
+<p> public function setLayout($aLayout) {<br />
+ if (is_dir(APPPATH.’/views/’.$aLayout)) {<br />
+ $this->layout = $aLayout;<br />
+ }<br />
+ }</p>
+
+<p> /**<br />
+ * @param string $aView<br />
+ */<br />
+ public function view($aView=null, $aData=array(), $aLayout=null) {<br />
+ if (is_null($aView))<br />
+ $aView = $this->controllerName.’/’.$this->controllerFunction;<br />
+ $lLayout = (is_null($aLayout) ? $this->layout : $aLayout);<br />
+ parent::view($lLayout.DIRECTORY_SEPARATOR.$aView, $aData);<br />
+ }</p>
+
+<p> public function setController($aControllerName, $aControllerFunction) {<br />
+ $this->controllerName = $aControllerName;<br />
+ $this->controllerFunction = $aControllerFunction;<br />
+ }<br />
+ ?>
+</p>
+
+<p>接著就可以用不同的 view 來對應同一個 contoller 了<br />
+http://someurl/blog/category/5 => APPPATH/xhtml/blog/category
+<pre lang="php" line="1">
+<?php $this?>partial(’header’, $data); ?>
+ <div id="content">
+ <?php
+ foreach ($posts as $post)
+ $this->partial(’blog/shortsummary’, array(’post’ => $post));
+ ?>
+ </div>
+ <?php $this?>partial(’footer’, $data); ?>
+</pre></p>
+
+<p>http://someurl/blog/category.rss/5 => APPPATH/views/rss/blog/summary.php
+<pre lang="php" line="1">
+<channel>
+ <items>
+ <?php</items></channel>
+ foreach ($posts as $post)
+ $this->partial(’blog/shortsummary’, array(’post’ => $post));
+ ?>
+ 
+ 
+</pre></p>

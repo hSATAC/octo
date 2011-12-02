@@ -1,0 +1,55 @@
+---
+layout: post
+title: Logitech G300 on ArchLinux
+categories:
+- Archlinux
+tags:
+- archlinux
+- g300
+- logitech
+published: true
+comments: true
+---
+<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。<!--more-->
+<pre lang="bash">xinput list</pre>
+應該可以看到各有一個 Logitech G300 的鍵盤和滑鼠，後面會有 id 例如 12
+<pre lang="bash">xinput list-props 12</pre>
+會看到類似
+<pre lang="bash">Device Enabled (132)</pre>
+再下
+<pre lang="bash">xinput set-prop 12 132 0</pre>
+就可以把這個裝置 disable 掉。</p>
+
+<p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
+所以我寫成 script 可以放在 xinitrc 裏面去自動執行
+<pre lang="bash">#!/bin/sh
+DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`</pre></p>
+
+<p>if xinput -list-props $DEVICE_ID | grep "Device Enabled" | grep "1$" &gt; /dev/null<br />
+then<br />
+    xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0<br />
+fi
+接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
+在 /etc/pm/sleep.d/ 下<br />
+新增一個 script 讓他去執行上一段程式就可以了。
+<pre lang="bash">!/bin/sh
+# 90G300: suspend/wakeup Logitech G300 devices</pre></p>
+
+<p>case "$1" in<br />
+hibernate|suspend)<br />
+;;<br />
+thaw|resume)<br />
+/home/cat/.xinitrc.d/50-logitech-g300-mouse<br />
+;;<br />
+*) exit $NA<br />
+;;<br />
+esac</p>
+
+<p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>

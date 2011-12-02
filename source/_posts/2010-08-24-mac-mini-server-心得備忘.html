@@ -1,0 +1,62 @@
+---
+layout: post
+title: Mac mini server 心得&備忘
+categories:
+- Mac
+tags:
+- mac
+published: true
+comments: true
+---
+<p><p>最近很熱門的Mac mini server我有幸也拿到了一台。</p>  <p><a href="/images/wp-uploads/2010/08/20100817_112424_451.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2010-08-17_11-24-24_45" border="0" alt="2010-08-17_11-24-24_45" src="/images/wp-uploads/2010/08/20100817_112424_45_thumb1.jpg" width="260" height="155" /></a> </p>  <p>之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。</p>  <p>我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。原本買這台Mac mini server就是為了替代原本的主機。再來就是想用textmate來開發程式，體驗一下MacOS傳說中的人性化介面，還有把Mac mini server當作家裡的多媒體中心，把音樂影片等等都丟上去。最後是把他當無線AP，讓家中網路無線化。</p>  <p>但是當Mac mini server來了以後，這些願景一個接著一個破滅了。</p> <!--more-->沒想到textmate完全不支援中文顯示、輸入。輸入的部份還好，裝個plugin就解決了，但是顯示的部份相當麻煩，有日本人釋出了字型patch，可以勉強顯示中文，但卻是用一個半形的寬度去顯示一個全形中文，導致字都擠在一起，相當難看。  <p></p>  <p>把所有音樂，影片集中，當itunes server的想法也失敗了。itunes區網分享只能播放，不能維護server資料庫，而家庭共享雖然可以抓server的歌，但也不能維護資料庫，更重要的是上面兩個方法client端都不能和ipod同步。後來想了另一個方法，在mac上開一個samba網路磁碟，其他電腦的itunes資料庫就指在這邊，共用一個資料庫。此法雖然可行，但當一邊的電腦更新資料庫後，另一邊的電腦要重新手動將資料夾加入資料庫才能看到變更，相當不方便。</p>  <p>接著是用Mac mini server當無線AP的想法，OSX server並不像OSX一樣有很簡單的網路共享，輕輕一勾就可以用airport分享網路，要在Mac mini server這樣做，似乎需要設定NAT, DHCP, DNS, firewall, bridge等等…折騰了好幾天還是無法搞定，最後只好去買了一台無線router。</p>  <p>儘管原本四個目標有三個失敗了，但我從不曾想要把Mac mini賣掉，因為在操作的過程中，Mac真的給了我很多的驚奇，不管是在硬體還是軟體方面。他確實顛覆了我過去長久以來在windows的使用經驗，我好像回到小學剛接觸電腦的時候，一種單純的快樂。</p>  <p><a href="/images/wp-uploads/2010/08/leopardserver1.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="leopardserver" border="0" alt="leopardserver" src="/images/wp-uploads/2010/08/leopardserver_thumb1.png" width="260" height="215" /></a> </p>  <p>現在我對Mac mini的用途定位在，web server和家中的NAS，之後可能會移到客廳接電視當多媒體播放機。</p>  <p>因為可能會很常重灌，以下就一些心得做一些備忘和分享。</p>  <h2>安裝</h2>  <p>內建兩顆500G硬碟，第一件事就是選擇要如何運用？因為我重要資料不多，所以選擇了raid 0。</p>  <p>設定raid 0相當簡單，光碟放進去按安裝以後，開機進入安裝模式，有個磁碟工具，建立raid，然後把兩顆硬碟拉進來，再選需要的raid模式就好了(raid 0是strip raid)。</p>  <p>安裝完以後記得安裝Xcode(for developer)，之後更新到10.6.4後語言的地方就有繁體中文可以選了。</p>  <p>Mac mini server管理真的滿簡單的，server admin開起來要的勾一勾，firewall也是要的勾一勾就設定完成了。</p>  <h2>鍵盤</h2>  <p>我是用一般windows的USB鍵盤，一進來他應該會叫你按z和/來偵測鍵盤類型。確認是USB鍵盤後，macos很奇怪的會把command(alt)和option(win) key位置互換，記得去換回來。</p>  <p>大部分快速鍵都差不多，ctrl換成command就可以了，差異比較大的是home和end鍵，在Mac這兩個鍵是直接到頁首和頁尾，要到行首行尾的快速鍵是command+← 和 command+→。</p>  <h2>終端機</h2>  <p>打開terminal，把自己的.bash_profile和.vimrc丟進去，一秒就回到自己熟悉的terminal環境了。</p>  <p>我習慣的prompt顏色設定是這樣：</p>  <pre lang="bash">LANG=zh_TW.UTF-8
+export LANG
+export CLICOLOR=1
+export LSCOLORS=dxfxcxdxbxegedabagacad
+PS1='\[\033[1;33m\]\u\[\033[1;37m\]@\[\033[1;32m\]\h\[\033[1;37m\]:\[\033[1;31m\]\w \[\033[1;36m\]\$ \[\033[0m\]'
+export PS1</pre></p>
+
+<p><h2>VNC</h2></p>
+
+<p><p>Mac mini server內建VNC功能了，也就是windows的遠端桌面。雖然我們有ssh可以連進來操作，但有些東西還是有桌面會比較方便。windows端有許多VNC軟體可以使用，我是使用<a href="http://www.tightvnc.com/">TightVNC</a>輕巧免費。</p></p>
+
+<p><p>Mac這邊的設定很簡單，打開系統偏好 &gt; 共享 把Remote Management打勾，按Computer Setting，把VNC viewers may control screen with password打勾並且設定密碼。</p></p>
+
+<p><p>接著進入Server Admin設定Firewall，不知道為什麼他沒有預設VNC的 service，只好自己新增一個service, port設5800,5900，儲存後win端的VNC就可以連接上了。</p></p>
+
+<p><p>值得注意VNC密碼似乎是用明碼來傳送，看是要限制連線ip還是用ssh加密，安全性各有巧妙不同，大家各顯神通吧。</p></p>
+
+<p><h2>軟體KVM</h2></p>
+
+<p><p>兩台電腦有兩組鍵盤滑鼠相當不方便，常常會搞錯，如果能像一般延伸桌面那樣多好。這時要介紹一套好軟體<a href="http://synergy2.sourceforge.net/" target="_blank">Synergy</a>，原理很簡單，用網路連結兩台電腦，模擬server端滑鼠和鍵盤的訊號傳送到到client端，更棒的是連text copy paste都做進去了。在區往的latency下根本感覺不到lag。linux, mac, win平台都有。</p></p>
+
+<p><p><a href="/images/wp-uploads/2010/08/macminiserver1.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="macminiserver" border="0" alt="macminiserver" src="/images/wp-uploads/2010/08/macminiserver_thumb1.jpg" width="260" height="155" /></a> </p></p>
+
+<p><p>簡單講一下我的設置，我是用win當server。win端程式有GUI介面，簡單設定一下就好。設定相對位置後就可以開啟等待連線了。比較麻煩的是client這邊連過來的時候要如何識別。</p></p>
+
+<p><p>client端(mac)下載以後，client端不需要設定config檔，直接執行synergyc –f 192.168.1.2 (這是我win ip)應該就可以連接起來了。試著把滑鼠移到mac桌面試試，如果過得去，恭喜你成功了。滑鼠在哪個桌面，就是控制哪台電腦。</p></p>
+
+<p><p>如果連線沒有成功，別擔心，看看mac端或win端的log是不是有電腦的名稱，把這名稱加入你剛剛的設定別名中，就可以順利連線了。</p></p>
+
+<p><div style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: none; padding-top: 0px" id="scid:5737277B-5D6D-4f48-ABFC-DD9C333F4C5D:328b0373-0746-4af8-9d5c-5179ab88c86e" class="wlWriterEditableSmartContent"><div><object width="425" height="355"><param name="movie" value="http://www.youtube.com/v/VvTqTQCEO2o?fs=1&amp;hl=zh_TW&amp;hl=en" /><embed src="http://www.youtube.com/v/VvTqTQCEO2o?fs=1&amp;hl=zh_TW&amp;hl=en" type="application/x-shockwave-flash" width="425" height="355"></embed></object></div></div></p>
+
+<p><p>再來講如何讓mac登入就自動連線，mac有個很cool的東西叫做AppleScript，他在你的應用程式中的Utilities下面，這個有點類似vbscript+bash但又更強大。輸入</p></p>
+
+<p><pre lang="applescript">do shell script "/your_path/synergyc -f 192.168.1.2 &> /dev/null 2>&1 &"</pre></p>
+
+<p><p>按compile後save as Application，然後在你個人的開機程式設定中加入這隻app，以後登入就會自動連線啦！如果連線失敗或斷線，他會自動一直重連，所以就算你server沒開，只要server一開機就能連的上了，相當方便！</p></p>
+
+<p><p>目前唯一的缺點應該是，我這樣設定是要「登入」才會連線，但剛開機時要輸入帳號密碼才會登入，所以還是不能把Mac mini server的鍵盤拔掉。如果有人知道要怎樣能「開機」就執行，請不吝告知。</p></p>
+
+<p><h2>開發環境</h2></p>
+
+<p><p>基本上我主要參考ihower大神和xdite大神的這兩篇關於Mac的文章來建置環境。<br />
+  <br /><a href="http://ihower.tw/blog/archives/4318">Mac 推薦軟體 (2010)</a></p>
+
+<p>  <br /><a href="http://blog.xdite.net/?p=1795">在 Mac 上建立乾淨的 Rails 開發環境 ( OSX 10.6 Snow Leopard )</a></p></p>
+
+<p><p>不過因為Mac mini server內建Mysql了，所以我是選擇直接用server admin開啟mysql service。但卻一直無法啟動成功，mysql的狀態卡在starting，也無法移除這個service。最後發現要停止mysql starting狀態的指令是：</p></p>
+
+<p><pre lang="bash">sudo launchctl unload /System/Library/LaunchDaemons/org.mysql.mysqld.plist</pre></p>
+
+<p><p>
+  <br />追了一下log，造成這個詭異的原因是某些用到的檔案找不到，開terminal去看，才發現是root:admin權限，_mysql:admin讀取不到。chown以後就能正常啟動了。</p></p>

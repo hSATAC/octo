@@ -1,0 +1,23 @@
+---
+layout: post
+title: Login SFTP with www-data
+categories:
+- 工作紀錄
+tags:
+- SFTP
+- SSH
+- Ubuntu
+published: true
+comments: true
+---
+<p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
+也想幫自己的主機設定一下，<br />
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
+
+<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
+那要怎樣使用 www-data 登入呢？<br />
+一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
+
+<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
+那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
+用 scp 一連，果然順利登入了，非常方便。</p>

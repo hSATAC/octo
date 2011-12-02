@@ -1,0 +1,16 @@
+---
+layout: post
+title: Mac mini server console指令備忘
+categories: []
+tags: []
+published: false
+comments: true
+---
+<p>重啟sshd
+<pre lang="bash">sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist</pre>
+關閉防火牆
+<pre lang="bash">sudo sysctl -w net.inet.ip.fw.enable=1</pre>
+停止Mysql service starting
+<pre lang="bash">sudo launchctl unload /System/Library/LaunchDaemons/org.mysql.mysqld.plist</pre>
+自動啟動服務清單/刪除
+<pre lang="bash">launchctl list/remove</pre></p>

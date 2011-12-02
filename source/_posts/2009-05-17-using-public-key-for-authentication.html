@@ -1,0 +1,31 @@
+---
+layout: post
+title: Using Public Key for Authentication
+categories:
+- 工作紀錄
+tags:
+- SSH
+published: true
+comments: true
+---
+<p>首先產生 public 和 private keys:
+<pre lang="bash">ssh-keygen -t RSA</pre>
+輸入passphrase 即產生兩個 key<br />
+id_rsa為private key, id_rsa.pub 為 public key</p>
+
+<p>接著下載 puttygen 轉換成 putty 格式的 key，<br />
+以及 pageant 代理認證程式 [<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank">下載網址</a>]</p>
+
+<p><!--more--></p>
+
+<p>將產生的 id_rsa (private key) 抓出來，使用 puttygen轉格式後，<br />
+打開 pageant 把 privatekey.ppk 加入，此代理程式遇到 ssh 的場合，<br />
+會自動試圖使用這些 key 來做認證。</p>
+
+<p>在欲使用此認證登入的主機，在 user 的 home 目錄中，
+<pre lang="bash">mkdir .ssh
+cd .ssh
+vim authorized_keys</pre>
+並把剛剛產生的 public key 內容貼入。<br />
+之後有支援此認證方法的 client 例如 putty, pietty, winSCP 等，<br />
+就可以不用輸入密碼登入。</p>

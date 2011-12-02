@@ -1,0 +1,60 @@
+---
+layout: post
+title: Rake 0.9 爆炸解法
+categories:
+- Rails
+tags:
+- rake
+- RoR
+- Ruby
+- rvm
+published: true
+comments: true
+---
+<p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
+<pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:6: warning: already initialized constant BUILD
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:3: warning: already initialized constant NUMBERS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:9: warning: already initialized constant VERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:26: warning: already initialized constant RAKEVERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/early_time.rb:17: warning: already initialized constant EARLY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/alt_system.rb:32: warning: already initialized constant WINDOWS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/application.rb:28: warning: already initialized constant DEFAULT_RAKEFILES
+WARNING: Possible conflict with Rake extension: String#ext already exists
+WARNING: Possible conflict with Rake extension: String#pathmap already exists
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/task_arguments.rb:73: warning: already initialized constant EMPTY_TASK_ARGS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/invocation_chain.rb:49: warning: already initialized constant EMPTY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:10: warning: already initialized constant RUBY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:84: warning: already initialized constant LN_SUPPORTED
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/dsl_definition.rb:143: warning: already initialized constant Commands
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:44: warning: already initialized constant ARRAY_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:47: warning: already initialized constant MUST_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:51: warning: already initialized constant MUST_NOT_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:55: warning: already initialized constant SPECIAL_RETURN
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:61: warning: already initialized constant DELEGATING_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:364: warning: already initialized constant DEFAULT_IGNORE_PATTERNS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:370: warning: already initialized constant DEFAULT_IGNORE_PROCS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:64: warning: already initialized constant FileList
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:65: warning: already initialized constant RakeFileUtils
+rake aborted!
+stack level too deep</pre></p>
+
+<p>(See full trace by running task with --trace)
+<!--more--></p>
+
+<p>解決的方法很簡單，你知道、我知道、獨眼龍也知道：就是 bundle exec rake</p>
+
+<p>但是一直打一直打實在很煩。寫 Ruby 的時候，當你開始覺得有重複的打字作業的時候，就表示事情不太對勁了......</p>
+
+<p>那該怎麼辦呢？<del>你怎麼不問問神奇海螺呢？</del></p>
+
+<p>Google 了一下，發現 <a href="http://ihower.tw/blog/archives/5762" target="_blank">ihower 的這個解法</a>不錯。</p>
+
+<p>簡單說，在你的目錄下先下
+<pre lang="bash">bundle install --binstubs</pre>
+這個指令會把 Gemfile 裡面的執行檔安裝在專案目錄的 bin 目錄下面。</p>
+
+<p>接著在專案目錄開一個 .rvmrc 裡面填
+<pre lang="bash">export PATH="./bin:$PATH"</pre>
+這樣當你執行 rake 的時候 rvm 就會幫你抓到專案目錄下的 bin 下的 rake 執行檔了！</p>

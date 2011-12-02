@@ -1,0 +1,73 @@
+---
+layout: post
+title: 用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎
+categories:
+- 工作紀錄
+tags:
+- chrome
+- firefox
+- ie
+- javascript
+- opensearch
+- search engine
+published: true
+comments: true
+---
+<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
+
+<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
+
+<p><!--more--></p>
+
+<p><pre lang="xml">
+<?xml version="1.0" encoding="UTF-8"?>
+ <opensearchdescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <shortname>Web Search</shortname>
+   <description>Use Example.com to search the Web.</description>
+   <tags>example web</tags>
+   <contact>admin@example.com</contact>
+   <Url type="application/atom+xml"</opensearchdescription>
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=atom"/>
+   <Url type="application/rss+xml"
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=rss"/>
+   <Url type="text/html" 
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}"/>
+   <longname>Example.com Web Search</longname>
+   <image height="64" width="64" type="image/png">http://example.com/websearch.png</image>
+   <image height="16" width="16" type="image/vnd.microsoft.icon">http://example.com/websearch.ico</image>
+   <query role="example" searchterms="cat" />
+   <developer>Example.com Development Team</developer>
+   <attribution>
+     Search data Copyright 2005, Example.com, Inc., All Rights Reserved</attribution>
+   
+   <syndicationright>open</syndicationright>
+   <adultcontent>false</adultcontent>
+   <language>en-us</language>
+   <outputencoding>UTF-8</outputencoding>
+   <inputencoding>UTF-8</inputencoding>
+ 
+</pre></p>
+
+<p>接著使用 Javascript 讓瀏覽器安裝你的搜尋引擎：
+<pre lang="javascript">
+window.external.AddSearchProvider("http://your.search.description.xml");
+</pre></p>
+
+<p>實測 Chrome 9, Firefox 3.6+, IE9 都可以正常使用，其他瀏覽器和版本沒有試過。<br />
+Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用者自己去 Chrome 的選項改為預設。</p>
+
+<p>另外在搜尋建議這個部份， OpenSearch 官網給的範例是：
+<pre lang="xml">
+ <Url type="application/json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre></p>
+
+<p>不過 Firefox 吃不出來，要改成：
+<pre lang="xml">
+ <Url type="application/x-suggestions+json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre>
+這樣 Chrome 和 Firefox 都能解析了。</p>

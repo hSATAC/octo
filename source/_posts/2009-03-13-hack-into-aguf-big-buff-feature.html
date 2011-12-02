@@ -1,0 +1,125 @@
+---
+layout: post
+title: ! 'Hack into AGUF: Big Buff Feature (Updated for 3.1)'
+categories:
+- Game
+tags:
+- Addon
+- ag_unitframes
+- lua
+- UI
+- WOW
+published: true
+comments: true
+---
+<p>I updated this article for WoW 3.1, AGUF r700 release.</p>
+
+<p>Before:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1ac52a7.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="before" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1b65f58.jpg" border="0" alt="before" width="208" height="112" /></a></p>
+
+<p>After:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1bdc5f2.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="after" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1c68782.jpg" border="0" alt="after" width="241" height="113" /></a></p>
+
+<p><!--more--></p>
+
+<p>Recently I stop using Xperl instead of ag_unitframes, which is absolutly wonderful and nice-looking.</p>
+
+<p>But there is one thing that I love about Xperl and ag_unitframes couldnot satisfied my need: Big Buff Feature.</p>
+
+<p>Xperl can display the debuff that you cast in twice size, so I could easily manage my debuffs.</p>
+
+<p>I know there are so many Uis for this for instance, I use dotimer for my other needs. But I still want this feature.</p>
+
+<p>I went through the internet and found no solutions. But I did notice that there are people like me who wants this feature.</p>
+
+<p>So I decide to do it myself.</p>
+
+<p>Here are my steps:</p>
+
+<p>File:ag_UnitFrames\modules\auras\auras.lua</p>
+
+<p>1.add a function GetAuraScale()
+<pre lang="lua" line="1">
+--add GetAuraScale
+function plugin.GetAuraScale(self, frame)
+--error('test getaura scale')
+	local position, rows, columns, scale
+	
+	if frame and frame == self.debuffFrame then
+		position = plugin.db.profile.units[self.type].DebuffPos
+		rows = plugin.db.profile.units[self.type].DebuffRows
+		columns = plugin.db.profile.units[self.type].DebuffColumns	
+	else
+		position = plugin.db.profile.units[self.type].AuraPos
+		rows = plugin.db.profile.units[self.type].AuraRows
+		columns = plugin.db.profile.units[self.type].AuraColumns
+	end
+	local count = rows * columns
+	if frame.growAs then
+		position = frame.growAs
+	end</pre></p>
+
+<p>	if position == "Below" or position == "Above" then<br />
+		if frame.autoScale then<br />
+			local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
+			scale = (self.frame:GetWidth() + offset)/(16*columns+(columns-1)*2)<br />
+		end<br />
+	elseif position == "Left" or position == "Right" then<br />
+		if frame.autoScale then<br />
+			local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
+			scale = (self.frame:GetHeight() + offset)/(16*rows+(rows-1)*2)<br />
+		end<br />
+	end<br />
+	if frame.auraScale then<br />
+		scale = frame.auraScale<br />
+	end<br />
+	if not scale or scale <= 0 then<br />
+		scale = 1<br />
+	end<br />
+	return scale<br />
+end<br />
+--end here
+
+2.modity function UpdateAuraFrame()</p>
+
+<p>a.find:
+<pre lang="lua" line="1">
+plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+local scale = plugin.GetAuraScale(self, frame)
+plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration, scale)
+</pre>
+b.find:
+<pre lang="lua" line="1">
+plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+local aura_name, aura_rank, aura_icon, aura_count, aura_debuffType,aura_duration, aura_expirationTime, aura_isMine, aura_isStealable =UnitAura(self.type, i,"HARMFUL")
+local scale = plugin.GetAuraScale(self, frame)
+if self.type == "target" and aura_isMine=="player" then
+	scale = scale * 2;
+end
+plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration, scale)
+</pre>
+3.modity function SetAura()</p>
+
+<p>a.find:
+<pre lang="lua" line="1">
+function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expirationTime, duration, scale)
+</pre>
+b.add these line at the begining of this function:
+<pre lang="lua" line="1">
+--start 就放大兩倍
+if scale then
+	buffFrame:SetScale(scale)
+end
+--end 
+</pre>
+附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="/images/wp-uploads/2009/04/auras.lua">下載</a></p>

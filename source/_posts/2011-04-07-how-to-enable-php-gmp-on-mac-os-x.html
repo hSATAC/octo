@@ -1,0 +1,46 @@
+---
+layout: post
+title: How to enable php gmp on Mac OS X without macports
+categories:
+- Mac
+- PHP
+tags:
+- gmp
+- mac
+- PHP
+published: true
+comments: true
+---
+<p>If you are using macports, you can easily install the package of "php-gmp".</p>
+
+<p>But if you are a user of homebrew like me, you may need these tips.</p>
+
+<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn't work with PHP 5.3</p>
+
+<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
+<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
+sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
+to
+<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
+sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
+
+<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
+
+<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
+
+<p>Extract the source code and go to phpsource/ext/gmp/</p>
+
+<p>run
+<pre lang="bash">
+phpize
+./configure
+MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
+</pre></p>
+
+<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
+
+<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
+
+<p>And load it in your /private/etc/php.ini</p>
+
+<p>It's done!</p>

@@ -1,0 +1,27 @@
+---
+layout: post
+title: Firefox4 x WebM x Apache
+categories:
+- 工作紀錄
+tags:
+- apache2
+- chrome
+- firefox
+- html5
+- webm
+published: true
+comments: true
+---
+<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
+
+<p>&nbsp;</p>
+
+<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
+
+<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
+
+<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
+<pre lang="bash">video/webm webm</pre>
+至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧...</p>
+
+<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>

@@ -1,0 +1,52 @@
+---
+layout: post
+title: 使用 jQuery BlockUI 取代 confirm()
+categories:
+- 工作紀錄
+tags:
+- blockUI
+- Javscript
+- jQuery
+published: true
+comments: true
+---
+<p>今天想用 jquery.blockUI 來實做一個 conform 來取代原有的 javascript confirm()<br />
+但卻碰到 blockUI 沒法回傳 boolean 的問題，<br />
+應該是在中途 block UI自己就 return 掉了</p>
+
+<p><!--more-->
+山不轉路轉，blockUI 既然沒有辦法 return ，<br />
+何不把要執行的程式碼當作參數傳進去？
+<pre lang="javascript" line="1">var confirmfunc = function() {};
+function MyConfirm(msg, title, f) {
+	confirmfunc = f;
+	if(!title) title = '確認';
+	$.blockUI({ message: '
+<div class="z">
+<div style="border: 3px solid #ff4d02; margin: 0px auto; background: #ffffff none repeat scroll 0% 0%; width: 300px; text-align: center;">
+<div style="padding: 5px 10px 0px; background: #ff4d02 none repeat scroll 0% 0%; height: 25px; text-align: left;"><strong style="color:#FFFFFF">'+title+'</strong></div>
+<div class="section">
+<div class="tac" style="padding-top:10px">'+msg+'</div>
+<div class="tac" style="padding:15px 0px 0px 50px">
+<div class="l" style="width: 90px;">
+<input class="inputbutton" style="width: 80px;" onclick="javascript: confirmfunc(); $.unblockUI();" onmouseover="this.className=\'inputbutton2\';" onmouseout="this.className=\'inputbutton\';" type="button" value="確定" /></div>
+<div class="l" style="width: 90px; margin-left: 5px;">
+<input class="inputbutton3" style="width: 80px;" onclick="javascript: $.unblockUI();" onmouseover="this.className=\'inputbutton4\';" onmouseout="this.className=\'inputbutton3\';" type="button" value=" 取消 " /></div>
+</div>
+</div>
+</div>
+</div>
+',
+	            css: {
+				border: 'none',
+                top:  ($(window).height() - 300) /2 + 'px',
+                left: ($(window).width() - 300) /2 + 'px',
+                width: '300px'
+            }
+	});</pre></p>
+
+<p>}
+用法：
+<pre lang="javascript" line="1">	MyConfirm('確定要刪除？', '確認', function(){
+            //....whatever you want to do.
+	});</pre></p>

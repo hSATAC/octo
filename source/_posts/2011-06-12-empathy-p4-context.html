@@ -1,0 +1,43 @@
+---
+layout: post
+title: 讓 Empathy 支援 P4-Context
+categories:
+- 工作紀錄
+tags:
+- msn
+- python
+- Ubuntu
+published: true
+comments: true
+---
+<p>這兩天灌了 Ubuntu 11.04 在玩<br />
+內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
+但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
+最直接的影響就是 m群看不到是誰在說話。<br />
+看了一下發現他底層是用 python-papyon 這套 msn lib<br />
+於是就可以直接動手修改啦！</p>
+
+<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
+找到 387 行：
+<pre lang="python" line="387">        if message_type == 'text/plain':
+            msg = ConversationMessage(unicode(message.body, message_encoding),
+                    TextFormat.parse(message_formatting),
+                    self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+<!--more-->
+將這段改成：
+<pre lang="python" line="387">       if message_type == 'text/plain':
+            try:
+                msg = ConversationMessage(unicode("["+message.get_header('P4-Context')+"]"+message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            except KeyError:
+                msg = ConversationMessage(unicode(message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+存檔後重新啟動 empathy 就可以了！</p>
+
+<p>ps. 請自行注意 python 縮排</p>

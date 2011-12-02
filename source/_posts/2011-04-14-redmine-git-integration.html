@@ -1,0 +1,38 @@
+---
+layout: post
+title: 整合 Redmine 和 git
+categories:
+- Mac
+- Rails
+tags:
+- git
+- mod_rails
+- passenger
+- rails
+- redmine
+- Ruby
+published: true
+comments: true
+---
+<p>其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已<br />
+不過一直報找不到專案，看了一下 error log  原來是找不到 git 執行檔<br />
+解法很簡單，原本 httpd.conf 設定的 ruby 要再包一層去 export path<br />
+例如原本你設定的是
+<pre lang="bash">
+PassengerRuby /usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby
+</pre></p>
+
+<p>就開一個  /usr/local/bin/ruby_with_env 的可執行檔<br />
+裡面把 export $PATH
+<pre lang="bash">
+#!/bin/bash
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin:/usr/local/git/bin/:$PATH"
+/usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby $*
+</pre></p>
+
+<p>再把 httpd.conf 的裡面設定的 ruby 改成
+<pre lang="bash">
+PassengerRuby /usr/local/bin/ruby_with_env
+</pre></p>
+
+<p>大功告成！</p>

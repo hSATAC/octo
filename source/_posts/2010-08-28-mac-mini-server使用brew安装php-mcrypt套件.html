@@ -1,0 +1,39 @@
+---
+layout: post
+title: Mac mini server使用homebrew安裝PHP mcrypt套件
+categories:
+- Mac
+- PHP
+tags:
+- homebrew
+- mac
+- mcrypt
+- PHP
+published: true
+comments: true
+---
+<p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
+
+<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
+
+<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
+
+<p>將install區塊改成
+<pre lang="ruby">def install
+  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
+  system "make -j6"
+  system "make install"
+end</pre></p>
+
+<p>接著執行brew安裝mcrypt
+<!--more-->
+<pre lang="bash">$ sudo brew install mcrypt</pre>
+再來要去<a href="http://us.php.net/get/php-5.3.0.tar.gz/from/a/mirror" target="_blank">PHP網站</a>下載PHP最新的source code，我們只需編譯mcrypt這個套件就好。</p>
+
+<p>解壓縮後到ext/mcrypt下面執行 phpize 指令</p>
+
+<p>等結束後，執行
+<pre lang="bash">$ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --with-php-config=/Developer/SDKs/MacOSX10.6.sdk/usr/bin/php-config; make -j6;sudo make install</pre>
+會跳出一堆編譯訊息，編譯成功後，修改/etc/php.ini將enable_dl設成On，再加上extension=mcrypt.so重啟後就大功告成啦。</p>
+
+<p>以上步驟參考自 <a title="http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/" href="http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/">http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/</a></p>
