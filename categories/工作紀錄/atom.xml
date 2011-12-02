@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 工作紀錄 | hSATAC]]></title>
+  <link href="http://octo.hsatac.net/categories/工作紀錄/atom.xml" rel="self"/>
+  <link href="http://octo.hsatac.net/"/>
+  <updated>2011-12-02T14:49:48+08:00</updated>
+  <id>http://octo.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CloudAAA 雲端大亂鬥簡記]]></title>
+    <link href="http://octo.hsatac.net/2011/06/cloudaaa/"/>
+    <updated>2011-06-23T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/cloudaaa</id>
+    <content type="html"><![CDATA[<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
+借到了精誠資訊的大樓，相當棒的一個場地。<br />
+不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
+食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
+
+
+
+
+<p>一開始 Hank Lin 主講 aws 的部份<br />
+Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
+因為我本身對 aws 比較沒有深入研究<br />
+加上 Hank 講得實在是有點快<br />
+只略約有印象好像介紹了一些 Route 53 的新特色<br />
+還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
+然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
+(認識的要買可以找我，打6折)<!--more--></p>
+
+
+
+
+<p>再來是微軟的 Tom 介紹 Windows Azure<br />
+Windows Azure 應該大家比較沒有接觸過，應該都很有興趣<br />
+簡單的說：「aws 有的微軟都有，價格只會便宜不會貴」<br />
+然後展示了一下 WebMatrix 這套 IDE 搭配 Windows Azure 的佈署方式<br />
+整合的相當好的一個 IDE，感覺開發起來也很方便，習慣 .net 的用戶應該很容易能夠上手<br />
+WebMatrix 這套 IDE 是免費的，現場微軟也提供了一組 30 天 Windows Azure 試用序號
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://blog.hsatac.net/wp-content/uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
+使用 windows live 帳號登入 http://windowsazurepass.com/ 輸入 SSAPERUZAWT<br />
+然後 ericsk 上官大大有提到 SQL Azure 使用 MSSQL 的話可以做 scalibility<br />
+這點我還滿有興趣的，目前 GAE 和 aws 似乎都做不到<br />
+詳細實做方式可能還要再研究一下。</p>
+
+
+
+
+<p>ericsk 上官大大提供的相關資料：
+<a href="http://blog.smarx.com/posts/node-js-ruby-and-python-in-windows-azure-my-mix-talk">其他語言在 Windows Azure</a>
+<a href="http://webpi.dotblogs.com.tw/">下載微軟 Web Platform 抽 Kinect</a></p>
+
+
+
+
+<p>Tom 在 session 中提到的這篇文章：
+<a href="http://highscalability.com/blog/2010/5/26/end-to-end-performance-study-of-cloud-services.html">有 AAA 的 performance 比較</a></p>
+
+
+
+
+<p>接下來的時間因為 Google 的講者 Ikai 還在機場過來的路上，因此先進行了 Lightning Talk<br />
+cloudena 在徵人<br />
+PyConTW 和 HIT 2011 歡迎報名 (PyConTW 早就爆滿啦)<br />
+Ken 介紹了自己開發的<a href="http://www.ps158.com/blog/archives/1664">活動簽到 App</a> 概念很不錯</p>
+
+
+
+
+<p>最後 Ikai 終於到場了，稍微介紹了一下 GAE 和 GO<br />
+GAE 的部份跟以前認知的差不多，<br />
+GO 感覺滿吸引人的</p>
+
+
+
+
+<p>我提供的 GO 相關文章：<br />
+剛好 Hack News 那邊同時跳出來XD<br />
+http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[讓 Empathy 支援 P4-Context]]></title>
+    <link href="http://octo.hsatac.net/2011/06/empathy-p4-context/"/>
+    <updated>2011-06-12T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/empathy-p4-context</id>
+    <content type="html"><![CDATA[<p>這兩天灌了 Ubuntu 11.04 在玩<br />
+內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
+但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
+最直接的影響就是 m群看不到是誰在說話。<br />
+看了一下發現他底層是用 python-papyon 這套 msn lib<br />
+於是就可以直接動手修改啦！</p>
+
+
+
+
+<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
+找到 387 行：
+<pre lang="python" line="387">        if message_type == 'text/plain':
+            msg = ConversationMessage(unicode(message.body, message_encoding),
+                    TextFormat.parse(message_formatting),
+                    self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+<!--more-->
+將這段改成：
+<pre lang="python" line="387">       if message_type == 'text/plain':
+            try:
+                msg = ConversationMessage(unicode("["+message.get_header('P4-Context')+"]"+message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            except KeyError:
+                msg = ConversationMessage(unicode(message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+存檔後重新啟動 empathy 就可以了！</p>
+
+
+
+
+<p>ps. 請自行注意 python 縮排</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better Array, Better PHP]]></title>
+    <link href="http://octo.hsatac.net/2011/06/better-array-better-php/"/>
+    <updated>2011-06-11T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
+    <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
+
+
+
+
+<p>不過我最想要的只有 array 這個語法，而且不想被作者的版本綁死，於是我決定下載他的程式碼來研究一下如何修改。結果發現，只要改一行，就可以擁有這個功能！</p>
+
+
+
+
+<p>以下紀錄一下我修改成功的過程，我開了一台乾淨的 Ubuntu 11.04 vm 出來測試。</p>
+
+
+
+
+<p>首先抓好 PHP 5.3.6 的原始碼生肉，找到 Zend/zend_language_parser.y 這個檔案：</p>
+
+
+
+
+<p>找到
+<pre lang="c">  |  T_ARRAY '(' array_pair_list ')' { $$ = $3; }</pre>
+這行，在下面多加一行
+<pre lang="c">  |  '[' array_pair_list ']'         { $$ = $2; }</pre>
+接著安裝一些必要的元件：
+<pre lang="bash">sudo apt-get install apache
+sudo apt-get install apache2-prefork-dev #要編譯成 libphp5.so 需要裝這個
+sudo apt-get install libxml2-dev
+sudo apt-get install re2c</pre>
+接著還要安裝 <a href="http://www.gnu.org/software/bison/" target="_blank">bison</a> ，apt-get 裝的 bison 版本太舊不合用，可以自己去抓 2.3 版來編譯</p>
+
+
+
+
+<p>bison 需要 m4, 所以編譯過程中有需要的話就 apt-get install m4 吧。</p>
+
+
+
+
+<p>以上準備工作都做好後，就可以開始編譯 PHP 啦。
+<pre lang="bash">./configure --prefix=/usr/local/lib/php5.3.6.infusion --with-apxs2=/usr/bin/apxs2
+make && sudo make install</pre>
+記得在 configure 的過程要注意有沒抓到 bison ，這是最重要的，如果沒抓到的話這個修改是不會有作用的。</p>
+
+
+
+
+<p>都編完以後趕快
+<pre lang="bash">a2enmod php5
+sudo apachectl restart</pre>
+來試試看有沒有成功吧！我編完以後，8245個測試都跑過了，應該是沒問題，enjoy it！</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的 vimrc for vim, win32 gvim, macvim]]></title>
+    <link href="http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
+    <updated>2011-05-18T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.hsatac.net/wp-content/uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://blog.hsatac.net/wp-content/uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
+
+
+
+
+<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。<!--more--></p>
+
+
+
+
+<p>先說明一下我的工作環境，我有一台 Mac mini server，平常會用 pietty 連上去改 code；有一台 Macbook Air ，使用 MacVim 開發，家中和公司使用的是 Win 7 64bit，使用放在 dropbox 的 portable gvim。</p>
+
+
+
+
+<p>主要用到的 plugin 是 Command-T, taglist 以及 omnicomplete 。</p>
+
+
+
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://blog.hsatac.net/wp-content/uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
+
+
+
+
+<p>一開始我用 <a href="https://github.com/vgod/vimrc" target="_blank">vgod 的 vimrc</a> 來當範本修改，詳細設定可以參考<a href="https://github.com/hSATAC/vimrc" target="_blank">我的 vimrc </a></p>
+
+
+
+
+<p>主要的困難點大概有幾個：
+<h2>Command-T</h2>
+在 MacVim 上， Command-T 使用相當簡單，裝好以後直接執行
+<pre lang="bash">ruby extconf.rb
+make</pre>
+之後就可以使用了。<br />
+但純文字模式下的 vim 就沒這麼簡單了，我在 mac server 上重編的 +ruby vim 無論如何都沒辦法把編譯好的 plugin 載入。<br />
+後來只好折衷直接使用 macvim 內置的 vim ，他在你的 MacVim.app/Contents/MacOS/Vim 。</p>
+
+
+
+
+<p>這個檔案不管是複製或是 ln -s 到其他 path 執行，都會報錯，最後是用
+<pre lang="bash">alias vim='PATH/MacVim.app/Contents/MacOS/Vim'</pre>
+來解決。</p>
+
+
+
+
+<p>不過這個用法有一個需要注意的地方，就是在 vim 中我們判斷 MacVim 一般會用
+<pre lang="vim">has("gui_macvim")</pre>
+來判斷，但用 MacVim 自帶的 Vim，這個判斷會成立。</p>
+
+
+
+
+<p>因此要改用
+<pre lang="vim">has("gui_macvim") && has("gui_running")</pre>
+Windows 的部份比較麻煩，你要先安裝 <a href="http://rubyinstaller.org/downloads/" target="_blank">Ruby 和 DevKit</a> 才能編譯這個 plugin。</p>
+
+
+
+
+<p>編譯：
+<pre lang="bash">C:\Ruby192\DevKit\devkitvars.bat
+cd yourvimfiles\plugins\ruby\command-t
+ruby extconf.rb
+make
+make install</pre>
+然後因為現在官網的 gvim 7.3.46 版只支援 ruby 1.9.1，要抓最新的 trunk code 下來編譯成 +ruby。</p>
+
+
+
+
+<p>這個動作在 windows 實在不是很容易，所以這邊提供了<a href="http://dl.dropbox.com/u/7919509/gvim73.zip" target="_blank">編譯好的版本</a>。
+<h2>taglist</h2>
+taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant Ctags</a></p>
+
+
+
+
+<p>這個部份 windows 平台反而單純，直接下載編譯好的執行檔丟到 vim 目錄下就好。</p>
+
+
+
+
+<p>Mac 自帶的 ctags 不相容，所以需要抓新的來編。</p>
+
+
+
+
+<p>我是直接用
+<pre lang="bash">brew install ctags</pre>
+讓各平台的 plugin 都能正常運作以後，最後就是設定一些快速鍵和 fix term 的問題，這邊就是個人偏好了，詳情可以直接看我的 <a href="https://github.com/hSATAC/vimrc" target="_blank">vimrc github</a></p>
+
+
+
+
+<p>最後，如上所述，這份 vimrc 主要是在 mac 和 windows 使用，沒有在其他作業系統測試過。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Firefox4 x WebM x Apache]]></title>
+    <link href="http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
+    <updated>2011-04-28T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
+    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://blog.hsatac.net/wp-content/uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
+
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
+
+
+
+
+<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
+
+
+
+
+<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
+<pre lang="bash">video/webm webm</pre>
+至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧...</p>
+
+
+
+
+<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
+
+]]></content>
+  </entry>
+  
+</feed>

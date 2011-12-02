@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://octo.hsatac.net/atom.xml" rel="self"/>
   <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-02T14:04:06+08:00</updated>
+  <updated>2011-12-02T14:49:48+08:00</updated>
   <id>http://octo.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -14,574 +14,1100 @@
 
   
   <entry>
-    <title type="html"><![CDATA[測試中文 title]]></title>
-    <link href="http://octo.hsatac.net/2011/12/ce-shi-zhong-wen-title/"/>
-    <updated>2011-12-02T12:03:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/12/ce-shi-zhong-wen-title</id>
-    <content type="html"><![CDATA[
+    <title type="html"><![CDATA[Logitech G300 on ArchLinux]]></title>
+    <link href="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
+    <updated>2011-11-30T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
+    <content type="html"><![CDATA[<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。<!--more-->
+<pre lang="bash">xinput list</pre>
+應該可以看到各有一個 Logitech G300 的鍵盤和滑鼠，後面會有 id 例如 12
+<pre lang="bash">xinput list-props 12</pre>
+會看到類似
+<pre lang="bash">Device Enabled (132)</pre>
+再下
+<pre lang="bash">xinput set-prop 12 132 0</pre>
+就可以把這個裝置 disable 掉。</p>
+
+<p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
+所以我寫成 script 可以放在 xinitrc 裏面去自動執行
+<pre lang="bash">#!/bin/sh
+DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`</pre></p>
+
+<p>if xinput -list-props $DEVICE_ID | grep &#8220;Device Enabled&#8221; | grep &#8220;1$&#8221; &gt; /dev/null<br />
+then<br />
+    xinput set-int-prop $DEVICE_ID &#8220;Device Enabled&#8221; 8 0<br />
+fi
+接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
+在 /etc/pm/sleep.d/ 下<br />
+新增一個 script 讓他去執行上一段程式就可以了。
+<pre lang="bash">!/bin/sh
+# 90G300: suspend/wakeup Logitech G300 devices</pre></p>
+
+<p>case &#8220;$1&#8221; in<br />
+hibernate|suspend)<br />
+;;<br />
+thaw|resume)<br />
+/home/cat/.xinitrc.d/50-logitech-g300-mouse<br />
+;;<br />
+*) exit $NA<br />
+;;<br />
+esac</p>
+
+<p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[test]]></title>
-    <link href="http://octo.hsatac.net/2011/12/test/"/>
-    <updated>2011-12-02T12:02:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/12/test</id>
-    <content type="html"><![CDATA[<figure class='code'><figcaption><span>test </span><a href='http://www.google.com'>Google</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">test</span>
-</span><span class='line'>    <span class="n">something</span><span class="o">.</span><span class="n">do!</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+    <title type="html"><![CDATA[Archlinux 推廣]]></title>
+    <link href="http://octo.hsatac.net/2011/11/archlinux/"/>
+    <updated>2011-11-30T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/11/archlinux</id>
+    <content type="html"><![CDATA[<p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
 
+<p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。<!--more-->
+<h1>Why Arch?</h1>
+Archlinux 設計的理念是「簡單」、「正確」、「使用者至上」、「開放」、「自由」(參見 <a href="https://wiki.archlinux.org/index.php/The_Arch_Way_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">Arch 之道</a>)。</p>
 
-<figure class='code'><figcaption><span>test </span><a href='http://www.google.com'>Google</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">sudo</span> <span class="n">make</span> <span class="n">me</span> <span class="n">a</span> <span class="n">sandwich</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>他採取滾動式升級 (rolling release system)，不再有每次大版本升級的噩夢。<br />
+他的套件管理 pacman 相當優秀，更有社群貢獻的套件庫 AUR，安裝軟體簡單又不髒手。
+<a href="https://wiki.archlinux.org/" target="_blank">Archwiki</a> 應該是網路上資料最豐富最齊全的 linux wiki 了，不管什麼疑難雜症都可以在裏面找到。<br />
+Archlinux 安裝完是一個乾淨輕巧的系統，你可以依照自己的喜好打造自己的工作環境。
+<h1>Install</h1>
+一開始的安裝可以跟著這兩篇 wiki：
+<ul>
+	<li><a href="https://wiki.archlinux.org/index.php/Official_Installation_Guide" target="_blank">Official Installation Guide</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide" target="_blank">Beginner&#8217;s Guide</a></li>
+</ul>
+其實安裝很簡單，光碟插進去以後下一步就結束了，不過選項還是要稍微看一下。
+<h2>套件管理</h2>
+安裝完以後先把 pacman mirror 只留台灣站，做一次系統升級 sudo pacman -Syu<br />
+再想辦法安裝 AUR (Arch User Repositories) 輔助程式。<br />
+比較有名的是 Yaourt 不過已經停止開發了，我推薦使用 packer。<br />
+想辦法安裝 packer 以後，離成功就不遠啦！
+<div>
+<ul>
+	<li><a href="https://wiki.archlinux.org/index.php/Pacman_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">pacman 說明</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/AUR" target="_blank">AUR 說明</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/AUR_Helpers" target="_blank">AUR helper 說明</a></li>
+</ul>
+</div>
+<h2>桌面環境</h2>
+桌面環境有許多選擇，例如 gnome, kde, xfce4, lxde 等等，可以按自己的喜好做選擇。<br />
+安裝過程可以參考 archwiki，當然也有許多 Archlinux 分支出去，隨附 Desktop Environment 的發行版：<br />
+例如 kde 的 <a href="http://chakra-linux.org/about.html" target="_blank">Chakra</a> 、gnome 的 <a href="http://www.kahelos.org/" target="_blank">KahelOS</a> 、openbox 的 <a href="http://archbang.org/" target="_blank">Archbang</a> 等等，這裡有<a href="https://wiki.archlinux.org/index.php/Arch_Based_Distributions_(Active)" target="_blank">清單一覽</a>。<br />
+這些桌面發行版，除了簡化安裝流程外，通常也會針對桌面環境做設定和優化，想省時間的話不妨可以考慮。
+<h2>中文使用</h2>
+中文使用者的兩大問題不外乎就是字型和輸入法。<br />
+字型的部份可以參考<a href="http://imxie.net/2010/06/basic-lcd-font-config-on-archlinux.htm" target="_blank">這篇文章</a>來做設定。<br />
+我中文字型是選擇 Hiragino Sans GB ，從我的 Mac 上複製過來，效果非常好。<br />
+輸入法的部份大概就 scim, gcin, ibus 選一套，ibus 我用不太習慣，用了一陣子 scim ，發現不是很穩定，目前改用 gcin ，使用狀況良好。
+<h1>結語</h1>
+本來有很多踩到的雷想寫，後來想想都太瑣碎了。<br />
+玩 Arch 只要把握一個原則：查 wiki ，大概什麼問題都可以迎刃而解。<br />
+Linux DE 的原罪就是選擇太多，通常要自己試用、設定後才能符合自己的需求。<br />
+在這之中可能會有很多挫折，不過解決問題的過程也是一種喜悅。<br />
+只要肯花時間，絕對能把環境打造到你喜歡的樣子。<br />
+一起來享受 Arch 吧！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Redmine + Bundler 復活記]]></title>
+    <link href="http://octo.hsatac.net/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/"/>
+    <updated>2011-09-30T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/09/redmine-bundler-復活記</id>
+    <content type="html"><![CDATA[<p>老實說，不記得之前是動了什麼，總之我的佈署 apache + passenger + ree 環境<br />
+redmine 爆炸了。推測應該是 gem 的關係。<br />
+上網看了一下， rails 2.3 只支援 rubygems 1.7<br />
+就先把 rubygems downgrade 回來
+<pre lang="bash">gem update --system 1.7</pre></p>
 
+<p>和 tkalu, xdite, ihower, 以及小蟹詢問了各種可能的解決方案後<br />
+確定我應該是要用 bundler 來管理一下 redmine 的 gems</p>
 
-<div><script src='https://gist.github.com/1403187.js?file=test.sh'></script>
-<noscript><pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset='utf-8'&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;chrome=1&quot;&gt;
-        &lt;title&gt;404 - GitHub&lt;/title&gt;
-    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
-    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+<p>根據 ihower 提供的資訊， redmine 有一個內建 bundler 的 fork 版<br />
+搜尋了一下找到了 https://www.chiliproject.org/<br />
+把他的 <a href="https://github.com/chiliproject/chiliproject/blob/unstable/Gemfile" target="_blank">Gemfile</a> 借過來一用</p>
 
-    
-    
+<p>再按照 <a href="http://gembundler.com/rails23.html" target="_blank">Bundler 官網上的 Rails 2 教學</a>
+來設定，果然成功把我的 redmine 救了回來！</p>
 
-    
+<p>chiliproject 的 Gemfile 可能要稍加修改，例如他用 rails 2.3.14，可以改成 redmine 官網支援的 2.3.11<br />
+然後一些沒用到的 gem 例如 pg 可以移除。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rake 0.9 爆炸解法]]></title>
+    <link href="http://octo.hsatac.net/2011/09/rake-0-9/"/>
+    <updated>2011-09-20T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/09/rake-0-9</id>
+    <content type="html"><![CDATA[<p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
+<pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:6: warning: already initialized constant BUILD
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:3: warning: already initialized constant NUMBERS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:9: warning: already initialized constant VERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:26: warning: already initialized constant RAKEVERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/early_time.rb:17: warning: already initialized constant EARLY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/alt_system.rb:32: warning: already initialized constant WINDOWS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/application.rb:28: warning: already initialized constant DEFAULT_RAKEFILES
+WARNING: Possible conflict with Rake extension: String#ext already exists
+WARNING: Possible conflict with Rake extension: String#pathmap already exists
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/task_arguments.rb:73: warning: already initialized constant EMPTY_TASK_ARGS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/invocation_chain.rb:49: warning: already initialized constant EMPTY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:10: warning: already initialized constant RUBY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:84: warning: already initialized constant LN_SUPPORTED
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/dsl_definition.rb:143: warning: already initialized constant Commands
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:44: warning: already initialized constant ARRAY_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:47: warning: already initialized constant MUST_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:51: warning: already initialized constant MUST_NOT_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:55: warning: already initialized constant SPECIAL_RETURN
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:61: warning: already initialized constant DELEGATING_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:364: warning: already initialized constant DEFAULT_IGNORE_PATTERNS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:370: warning: already initialized constant DEFAULT_IGNORE_PROCS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:64: warning: already initialized constant FileList
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:65: warning: already initialized constant RakeFileUtils
+rake aborted!
+stack level too deep</pre></p>
 
-    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/stylesheets/bundles/github-5dacb37ed36cb852993cacd88d92a6ce1162068b.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
-    
+<p>(See full trace by running task with &#8211;trace)
+<!--more--></p>
 
-    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/javascripts/bundles/jquery-ed3a41259bdbf3be7ef7854020787d98a99b969f.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/javascripts/bundles/github-551423cea019fe63aafa8104f2f7f21105fc1bd4.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-    
+<p>解決的方法很簡單，你知道、我知道、獨眼龍也知道：就是 bundle exec rake</p>
 
-    
-  &lt;/head&gt;
+<p>但是一直打一直打實在很煩。寫 Ruby 的時候，當你開始覺得有重複的打字作業的時候，就表示事情不太對勁了&#8230;&#8230;</p>
 
+<p>那該怎麼辦呢？<del>你怎麼不問問神奇海螺呢？</del></p>
 
-  &lt;body class=&quot;logged_out   env-production  &quot;&gt;
-    
+<p>Google 了一下，發現 <a href="http://ihower.tw/blog/archives/5762" target="_blank">ihower 的這個解法</a>不錯。</p>
 
+<p>簡單說，在你的目錄下先下
+<pre lang="bash">bundle install --binstubs</pre>
+這個指令會把 Gemfile 裡面的執行檔安裝在專案目錄的 bin 目錄下面。</p>
 
-    
-    &lt;div id=&quot;main&quot;&gt;
-      &lt;div id=&quot;header&quot; class=&quot;true&quot;&gt;
-          &lt;a class=&quot;logo&quot; href=&quot;/&quot;&gt;
-            &lt;img alt=&quot;github&quot; class=&quot;default svg&quot; height=&quot;45&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov6.svg?1315858552&quot; /&gt;
-            &lt;img alt=&quot;github&quot; class=&quot;default png&quot; height=&quot;45&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov6.png?1315858552&quot; /&gt;
-            &lt;!--[if (gt IE 8)|!(IE)]&gt;&lt;!--&gt;
-            &lt;img alt=&quot;github&quot; class=&quot;hover svg&quot; height=&quot;45&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov6-hover.svg?1315858552&quot; /&gt;
-            &lt;img alt=&quot;github&quot; class=&quot;hover png&quot; height=&quot;45&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov6-hover.png?1315858552&quot; /&gt;
-            &lt;!--&lt;![endif]--&gt;
-          &lt;/a&gt;
+<p>接著在專案目錄開一個 .rvmrc 裡面填
+<pre lang="bash">export PATH="./bin:$PATH"</pre>
+這樣當你執行 rake 的時候 rvm 就會幫你抓到專案目錄下的 bin 下的 rake 執行檔了！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CloudAAA 雲端大亂鬥簡記]]></title>
+    <link href="http://octo.hsatac.net/2011/06/cloudaaa/"/>
+    <updated>2011-06-23T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/cloudaaa</id>
+    <content type="html"><![CDATA[<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
+借到了精誠資訊的大樓，相當棒的一個場地。<br />
+不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
+食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
 
-        &lt;div class=&quot;topsearch&quot;&gt;
-    &lt;!--
-      make sure to use fully qualified URLs here since this nav
-      is used on error pages on other domains
-    --&gt;
-    &lt;ul class=&quot;nav logged_out&quot;&gt;
-        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
-        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
-        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
-      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F1403187%2Ftest.sh&quot;&gt;Login&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;
+<p>一開始 Hank Lin 主講 aws 的部份<br />
+Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
+因為我本身對 aws 比較沒有深入研究<br />
+加上 Hank 講得實在是有點快<br />
+只略約有印象好像介紹了一些 Route 53 的新特色<br />
+還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
+然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
+(認識的要買可以找我，打6折)<!--more--></p>
 
-      &lt;/div&gt;
+<p>再來是微軟的 Tom 介紹 Windows Azure<br />
+Windows Azure 應該大家比較沒有接觸過，應該都很有興趣<br />
+簡單的說：「aws 有的微軟都有，價格只會便宜不會貴」<br />
+然後展示了一下 WebMatrix 這套 IDE 搭配 Windows Azure 的佈署方式<br />
+整合的相當好的一個 IDE，感覺開發起來也很方便，習慣 .net 的用戶應該很容易能夠上手<br />
+WebMatrix 這套 IDE 是免費的，現場微軟也提供了一組 30 天 Windows Azure 試用序號
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://blog.hsatac.net/wp-content/uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
+使用 windows live 帳號登入 http://windowsazurepass.com/ 輸入 SSAPERUZAWT<br />
+然後 ericsk 上官大大有提到 SQL Azure 使用 MSSQL 的話可以做 scalibility<br />
+這點我還滿有興趣的，目前 GAE 和 aws 似乎都做不到<br />
+詳細實做方式可能還要再研究一下。</p>
 
-      
-        &lt;div class=&quot;site&quot;&gt;
-          
+<p>ericsk 上官大大提供的相關資料：
+<a href="http://blog.smarx.com/posts/node-js-ruby-and-python-in-windows-azure-my-mix-talk">其他語言在 Windows Azure</a>
+<a href="http://webpi.dotblogs.com.tw/">下載微軟 Web Platform 抽 Kinect</a></p>
 
-&lt;style type=&quot;text/css&quot;&gt;
-    * {
-        margin: 0px;
-        padding: 0px;
-    }
-    #parallax_illustration {
-        display:block;
-        width: 940px;
-        height: 375px;
-        margin: 20px 0 0 20px;
-        position: relative;
-        overflow: hidden;
-    }
-    #parallax_illustration #parallax_error_text {
-        position: absolute;
-        top: 72px;
-        left: 72px;
-        z-index: 10;
-    }
-    #parallax_illustration #parallax_octocat {
-        position: absolute;
-        top: 94px;
-        left: 356px;
-        z-index: 9;
-    }
-    #parallax_illustration #parallax_speeder {
-        position: absolute;
-        top: 150px;
-        left: 432px;
-        z-index: 8;
-    }
-    #parallax_illustration #parallax_octocatshadow {
-        position: absolute;
-        top: 297px;
-        left: 371px;
-        z-index: 7;
-    }
-    #parallax_illustration #parallax_speedershadow {
-        position: absolute;
-        top: 263px;
-        left: 442px;
-        z-index: 6;
-    }
-    #parallax_illustration #parallax_building_1 {
-        position: absolute;
-        top: 73px;
-        left: 467px;
-        z-index: 5;
-    }
-    #parallax_illustration #parallax_building_2 {
-        position: absolute;
-        top: 113px;
-        left: 762px;
-        z-index: 4;
-    }
-    #parallax_illustration #parallax_bg {
-        position: absolute;
-        top: -20px;
-        left: -20px;
-        z-index: 1;
-    }
-&lt;/style&gt;
+<p>Tom 在 session 中提到的這篇文章：
+<a href="http://highscalability.com/blog/2010/5/26/end-to-end-performance-study-of-cloud-services.html">有 AAA 的 performance 比較</a></p>
 
+<p>接下來的時間因為 Google 的講者 Ikai 還在機場過來的路上，因此先進行了 Lightning Talk<br />
+cloudena 在徵人<br />
+PyConTW 和 HIT 2011 歡迎報名 (PyConTW 早就爆滿啦)<br />
+Ken 介紹了自己開發的<a href="http://www.ps158.com/blog/archives/1664">活動簽到 App</a> 概念很不錯</p>
 
+<p>最後 Ikai 終於到場了，稍微介紹了一下 GAE 和 GO<br />
+GAE 的部份跟以前認知的差不多，<br />
+GO 感覺滿吸引人的</p>
 
-&lt;div id=&quot;parallax_illustration&quot;&gt;
-  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1310104853&quot; width=&quot;271&quot; /&gt;
-  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1310104853&quot; width=&quot;188&quot; /&gt;
-  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1310104853&quot; width=&quot;440&quot; /&gt;
-  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1310104853&quot; width=&quot;166&quot; /&gt;
-  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1310104853&quot; width=&quot;430&quot; /&gt;
-  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1310104853&quot; width=&quot;304&quot; /&gt;
-  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1310104853&quot; width=&quot;116&quot; /&gt;
-  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;40&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1310104853&quot; width=&quot;940&quot; /&gt;
-&lt;/div&gt;
+<p>我提供的 GO 相關文章：<br />
+剛好 Hack News 那邊同時跳出來XD<br />
+http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[讓 Empathy 支援 P4-Context]]></title>
+    <link href="http://octo.hsatac.net/2011/06/empathy-p4-context/"/>
+    <updated>2011-06-12T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/empathy-p4-context</id>
+    <content type="html"><![CDATA[<p>這兩天灌了 Ubuntu 11.04 在玩<br />
+內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
+但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
+最直接的影響就是 m群看不到是誰在說話。<br />
+看了一下發現他底層是用 python-papyon 這套 msn lib<br />
+於是就可以直接動手修改啦！</p>
 
-&lt;/script&gt;
+<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
+找到 387 行：
+<pre lang="python" line="387">        if message_type == 'text/plain':
+            msg = ConversationMessage(unicode(message.body, message_encoding),
+                    TextFormat.parse(message_formatting),
+                    self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+<!--more-->
+將這段改成：
+<pre lang="python" line="387">       if message_type == 'text/plain':
+            try:
+                msg = ConversationMessage(unicode("["+message.get_header('P4-Context')+"]"+message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            except KeyError:
+                msg = ConversationMessage(unicode(message.body, message_encoding),
+                        TextFormat.parse(message_formatting),
+                        self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+存檔後重新啟動 empathy 就可以了！</p>
 
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;!-- footer --&gt;
-    &lt;div id=&quot;footer&quot; &gt;
-      
-  &lt;div class=&quot;upper_footer&quot;&gt;
-     &lt;div class=&quot;site&quot; class=&quot;clearfix&quot;&gt;
+<p>ps. 請自行注意 python 縮排</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better Array, Better PHP]]></title>
+    <link href="http://octo.hsatac.net/2011/06/better-array-better-php/"/>
+    <updated>2011-06-11T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
+    <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
 
-       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
-       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+<p>不過我最想要的只有 array 這個語法，而且不想被作者的版本綁死，於是我決定下載他的程式碼來研究一下如何修改。結果發現，只要改一行，就可以擁有這個功能！</p>
 
-       &lt;ul class=&quot;footer_nav&quot;&gt;
-         &lt;h4&gt;GitHub&lt;/h4&gt;
-         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
-       &lt;/ul&gt;
+<p>以下紀錄一下我修改成功的過程，我開了一台乾淨的 Ubuntu 11.04 vm 出來測試。</p>
 
-       &lt;ul class=&quot;footer_nav&quot;&gt;
-         &lt;h4&gt;Tools&lt;/h4&gt;
-         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;Issues for iPhone&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code Snippets&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
-       &lt;/ul&gt;
+<p>首先抓好 PHP 5.3.6 的原始碼生肉，找到 Zend/zend_language_parser.y 這個檔案：</p>
 
-       &lt;ul class=&quot;footer_nav&quot;&gt;
-         &lt;h4&gt;Extras&lt;/h4&gt;
-         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
-       &lt;/ul&gt;
+<p>找到
+<pre lang="c">  |  T_ARRAY '(' array_pair_list ')' { $$ = $3; }</pre>
+這行，在下面多加一行
+<pre lang="c">  |  '[' array_pair_list ']'         { $$ = $2; }</pre>
+接著安裝一些必要的元件：
+<pre lang="bash">sudo apt-get install apache
+sudo apt-get install apache2-prefork-dev #要編譯成 libphp5.so 需要裝這個
+sudo apt-get install libxml2-dev
+sudo apt-get install re2c</pre>
+接著還要安裝 <a href="http://www.gnu.org/software/bison/" target="_blank">bison</a> ，apt-get 裝的 bison 版本太舊不合用，可以自己去抓 2.3 版來編譯</p>
 
-       &lt;ul class=&quot;footer_nav&quot;&gt;
-         &lt;h4&gt;Documentation&lt;/h4&gt;
-         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
-         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
-       &lt;/ul&gt;
+<p>bison 需要 m4, 所以編譯過程中有需要的話就 apt-get install m4 吧。</p>
 
-     &lt;/div&gt;&lt;!-- /.site --&gt;
-  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+<p>以上準備工作都做好後，就可以開始編譯 PHP 啦。
+<pre lang="bash">./configure --prefix=/usr/local/lib/php5.3.6.infusion --with-apxs2=/usr/bin/apxs2
+make && sudo make install</pre>
+記得在 configure 的過程要注意有沒抓到 bison ，這是最重要的，如果沒抓到的話這個修改是不會有作用的。</p>
 
-&lt;div class=&quot;lower_footer&quot;&gt;
-  &lt;div class=&quot;site&quot; class=&quot;clearfix&quot;&gt;
-    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
-    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
-      &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
+<p>都編完以後趕快
+<pre lang="bash">a2enmod php5
+sudo apachectl restart</pre>
+來試試看有沒有成功吧！我編完以後，8245個測試都跑過了，應該是沒問題，enjoy it！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的 vimrc for vim, win32 gvim, macvim]]></title>
+    <link href="http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
+    <updated>2011-05-18T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.hsatac.net/wp-content/uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://blog.hsatac.net/wp-content/uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
 
-      &lt;p&gt;&amp;copy; 2011 &lt;span id=&quot;_rrt&quot; title=&quot;0.02945s from fe8.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
-    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。<!--more--></p>
 
-      &lt;div class=&quot;sponsor&quot;&gt;
-        &lt;a href=&quot;http://www.rackspace.com&quot; class=&quot;logo&quot;&gt;
-          &lt;img alt=&quot;Dedicated Server&quot; height=&quot;36&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/footer/rackspace_logo.png?v2&quot; width=&quot;38&quot; /&gt;
-        &lt;/a&gt;
-        Powered by the &lt;a href=&quot;http://www.rackspace.com &quot;&gt;Dedicated
-        Servers&lt;/a&gt; and&lt;br/&gt; &lt;a href=&quot;http://www.rackspacecloud.com&quot;&gt;Cloud
-        Computing&lt;/a&gt; of Rackspace Hosting&lt;span&gt;&amp;reg;&lt;/span&gt;
-      &lt;/div&gt;
-  &lt;/div&gt;&lt;!-- /.site --&gt;
-&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+<p>先說明一下我的工作環境，我有一台 Mac mini server，平常會用 pietty 連上去改 code；有一台 Macbook Air ，使用 MacVim 開發，家中和公司使用的是 Win 7 64bit，使用放在 dropbox 的 portable gvim。</p>
 
-    &lt;/div&gt;&lt;!-- /#footer --&gt;
+<p>主要用到的 plugin 是 Command-T, taglist 以及 omnicomplete 。</p>
 
-    
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://blog.hsatac.net/wp-content/uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
 
-&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
-  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+<p>一開始我用 <a href="https://github.com/vgod/vimrc" target="_blank">vgod 的 vimrc</a> 來當範本修改，詳細設定可以參考<a href="https://github.com/hSATAC/vimrc" target="_blank">我的 vimrc </a></p>
 
-  &lt;div class=&quot;columns threecols&quot;&gt;
-    &lt;div class=&quot;column first&quot;&gt;
-      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;s&lt;/dt&gt;
-        &lt;dd&gt;Focus site search&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;?&lt;/dt&gt;
-        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
-      &lt;/dl&gt;
-    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+<p>主要的困難點大概有幾個：
+<h2>Command-T</h2>
+在 MacVim 上， Command-T 使用相當簡單，裝好以後直接執行
+<pre lang="bash">ruby extconf.rb
+make</pre>
+之後就可以使用了。<br />
+但純文字模式下的 vim 就沒這麼簡單了，我在 mac server 上重編的 +ruby vim 無論如何都沒辦法把編譯好的 plugin 載入。<br />
+後來只好折衷直接使用 macvim 內置的 vim ，他在你的 MacVim.app/Contents/MacOS/Vim 。</p>
 
-    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
-      &lt;h3&gt;Commit list&lt;/h3&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;j&lt;/dt&gt;
-        &lt;dd&gt;Move selection down&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;k&lt;/dt&gt;
-        &lt;dd&gt;Move selection up&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
-        &lt;dd&gt;Open commit&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;y&lt;/dt&gt;
-        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
-      &lt;/dl&gt;
-    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+<p>這個檔案不管是複製或是 ln -s 到其他 path 執行，都會報錯，最後是用
+<pre lang="bash">alias vim='PATH/MacVim.app/Contents/MacOS/Vim'</pre>
+來解決。</p>
 
-    &lt;div class=&quot;column last&quot; style='display:none'&gt;
-      &lt;h3&gt;Pull request list&lt;/h3&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;j&lt;/dt&gt;
-        &lt;dd&gt;Move selection down&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;k&lt;/dt&gt;
-        &lt;dd&gt;Move selection up&lt;/dd&gt;
-      &lt;/dl&gt;
-      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
-        &lt;dd&gt;Open issue&lt;/dd&gt;
-      &lt;/dl&gt;
-    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+<p>不過這個用法有一個需要注意的地方，就是在 vim 中我們判斷 MacVim 一般會用
+<pre lang="vim">has("gui_macvim")</pre>
+來判斷，但用 MacVim 自帶的 Vim，這個判斷會成立。</p>
 
-  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+<p>因此要改用
+<pre lang="vim">has("gui_macvim") && has("gui_running")</pre>
+Windows 的部份比較麻煩，你要先安裝 <a href="http://rubyinstaller.org/downloads/" target="_blank">Ruby 和 DevKit</a> 才能編譯這個 plugin。</p>
 
-  &lt;div style='display:none'&gt;
-    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+<p>編譯：
+<pre lang="bash">C:\Ruby192\DevKit\devkitvars.bat
+cd yourvimfiles\plugins\ruby\command-t
+ruby extconf.rb
+make
+make install</pre>
+然後因為現在官網的 gvim 7.3.46 版只支援 ruby 1.9.1，要抓最新的 trunk code 下來編譯成 +ruby。</p>
 
-    &lt;h3&gt;Issues&lt;/h3&gt;
+<p>這個動作在 windows 實在不是很容易，所以這邊提供了<a href="http://dl.dropbox.com/u/7919509/gvim73.zip" target="_blank">編譯好的版本</a>。
+<h2>taglist</h2>
+taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant Ctags</a></p>
 
-    &lt;div class=&quot;columns threecols&quot;&gt;
-      &lt;div class=&quot;column first&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;j&lt;/dt&gt;
-          &lt;dd&gt;Move selection down&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;k&lt;/dt&gt;
-          &lt;dd&gt;Move selection up&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;x&lt;/dt&gt;
-          &lt;dd&gt;Toggle selection&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
-          &lt;dd&gt;Open issue&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;&lt;!-- /.column.first --&gt;
-      &lt;div class=&quot;column middle&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;I&lt;/dt&gt;
-          &lt;dd&gt;Mark selection as read&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;U&lt;/dt&gt;
-          &lt;dd&gt;Mark selection as unread&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;e&lt;/dt&gt;
-          &lt;dd&gt;Close selection&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;y&lt;/dt&gt;
-          &lt;dd&gt;Remove selection from view&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;&lt;!-- /.column.middle --&gt;
-      &lt;div class=&quot;column last&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;c&lt;/dt&gt;
-          &lt;dd&gt;Create issue&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;l&lt;/dt&gt;
-          &lt;dd&gt;Create label&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;i&lt;/dt&gt;
-          &lt;dd&gt;Back to inbox&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;u&lt;/dt&gt;
-          &lt;dd&gt;Back to issues&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;/&lt;/dt&gt;
-          &lt;dd&gt;Focus issues search&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<p>這個部份 windows 平台反而單純，直接下載編譯好的執行檔丟到 vim 目錄下就好。</p>
 
-  &lt;div style='display:none'&gt;
-    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+<p>Mac 自帶的 ctags 不相容，所以需要抓新的來編。</p>
 
-    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+<p>我是直接用
+<pre lang="bash">brew install ctags</pre>
+讓各平台的 plugin 都能正常運作以後，最後就是設定一些快速鍵和 fix term 的問題，這邊就是個人偏好了，詳情可以直接看我的 <a href="https://github.com/hSATAC/vimrc" target="_blank">vimrc github</a></p>
 
-    &lt;div class=&quot;columns threecols&quot;&gt;
-      &lt;div class=&quot;column first&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;j&lt;/dt&gt;
-          &lt;dd&gt;Move selection down&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;k&lt;/dt&gt;
-          &lt;dd&gt;Move selection up&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
-          &lt;dd&gt;Open issue&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;&lt;!-- /.column.first --&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<p>最後，如上所述，這份 vimrc 主要是在 mac 和 windows 使用，沒有在其他作業系統測試過。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Firefox4 x WebM x Apache]]></title>
+    <link href="http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
+    <updated>2011-04-28T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
+    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://blog.hsatac.net/wp-content/uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
 
-  &lt;div style='display:none'&gt;
-    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+<p>&nbsp;</p>
 
-    &lt;h3&gt;Network Graph&lt;/h3&gt;
-    &lt;div class=&quot;columns equacols&quot;&gt;
-      &lt;div class=&quot;column first&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
-          &lt;dd&gt;Scroll left&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
-          &lt;dd&gt;Scroll right&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
-          &lt;dd&gt;Scroll up&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
-          &lt;dd&gt;Scroll down&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;t&lt;/dt&gt;
-          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;&lt;!-- /.column.first --&gt;
-      &lt;div class=&quot;column last&quot;&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
-          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
-          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
-          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
-          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;&lt;!-- /.column.last --&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
 
-  &lt;div style='display:none'&gt;
-    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;columns threecols&quot;&gt;
-      &lt;div class=&quot;column first&quot; style='display:none'&gt;
-        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;t&lt;/dt&gt;
-          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;l&lt;/dt&gt;
-          &lt;dd&gt;Jump to line&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;w&lt;/dt&gt;
-          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
-        &lt;/dl&gt;
-        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
-          &lt;dt&gt;y&lt;/dt&gt;
-          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
-        &lt;/dl&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
 
-    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
-  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
+<pre lang="bash">video/webm webm</pre>
+至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧&#8230;</p>
 
-  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[整合 Redmine 和 git]]></title>
+    <link href="http://octo.hsatac.net/2011/04/redmine-git-integration/"/>
+    <updated>2011-04-14T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/04/redmine-git-integration</id>
+    <content type="html"><![CDATA[<p>其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已<br />
+不過一直報找不到專案，看了一下 error log  原來是找不到 git 執行檔<br />
+解法很簡單，原本 httpd.conf 設定的 ruby 要再包一層去 export path<br />
+例如原本你設定的是
+<pre lang="bash">
+PassengerRuby /usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby
+</pre></p>
 
-  &lt;div class=&quot;mod&quot;&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;h3&gt;Format Text&lt;/h3&gt;
-      &lt;p&gt;Headers&lt;/p&gt;
-      &lt;pre&gt;
-# This is an &amp;lt;h1&amp;gt; tag
-## This is an &amp;lt;h2&amp;gt; tag
-###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
-     &lt;p&gt;Text styles&lt;/p&gt;
-     &lt;pre&gt;
-*This text will be italic*
-_This will also be italic_
-**This text will be bold**
-__This will also be bold__
+<p>就開一個  /usr/local/bin/ruby_with_env 的可執行檔<br />
+裡面把 export $PATH
+<pre lang="bash">
+#!/bin/bash
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin:/usr/local/git/bin/:$PATH"
+/usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby $*
+</pre></p>
 
-*You **can** combine them*
-&lt;/pre&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;h3&gt;Lists&lt;/h3&gt;
-      &lt;p&gt;Unordered&lt;/p&gt;
-      &lt;pre&gt;
-* Item 1
-* Item 2
-  * Item 2a
-  * Item 2b&lt;/pre&gt;
-     &lt;p&gt;Ordered&lt;/p&gt;
-     &lt;pre&gt;
-1. Item 1
-2. Item 2
-3. Item 3
-   * Item 3a
-   * Item 3b&lt;/pre&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
-      &lt;p&gt;Images&lt;/p&gt;
-      &lt;pre&gt;
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](url)
-&lt;/pre&gt;
-     &lt;p&gt;Links&lt;/p&gt;
-     &lt;pre&gt;
-http://github.com - automatic!
-[GitHub](http://github.com)&lt;/pre&gt;
-&lt;p&gt;Blockquotes&lt;/p&gt;
-     &lt;pre&gt;
-As Kanye West said:
-&gt; We're living the future so
-&gt; the present is our past.
-&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+<p>再把 httpd.conf 的裡面設定的 ruby 改成
+<pre lang="bash">
+PassengerRuby /usr/local/bin/ruby_with_env
+</pre></p>
 
-  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
-  &lt;div class=&quot;col&quot;&gt;
-      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
-      &lt;pre&gt;
-```javascript
-function fancyAlert(arg) {
-  if(arg) {
-    $.facebox({div:'#foo'})
-  }
-}
-```&lt;/pre&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
-      &lt;pre&gt;
-Here is a Python code example
-without syntax highlighting:
+<p>大功告成！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
+    <link href="http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
+    <updated>2011-04-07T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
+    <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
 
-    def foo:
-      if not bar:
-        return true&lt;/pre&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;col&quot;&gt;
-      &lt;p&gt;Inline code for comments&lt;/p&gt;
-      &lt;pre&gt;
-I think you should use an
-`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<p>But if you are a user of homebrew like me, you may need these tips.</p>
 
-  &lt;/div&gt;
-&lt;/div&gt;
+<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
 
-    &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
+<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
+sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
+to
+<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
+sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
 
-    &lt;div class=&quot;ajax-error-message&quot;&gt;
-      &lt;p&gt;&lt;span class=&quot;icon&quot;&gt;&lt;/span&gt; Something went wrong with that request. Please try again. &lt;a href=&quot;javascript:;&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;&lt;/p&gt;
-    &lt;/div&gt;
+<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
 
-    
-    
-    
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre></noscript></div>
+<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
 
+<p>Extract the source code and go to phpsource/ext/gmp/</p>
 
+<p>run
+<pre lang="bash">
+phpize
+./configure
+MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
+</pre></p>
 
+<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
+
+<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
+
+<p>And load it in your /private/etc/php.ini</p>
+
+<p>It&#8217;s done!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[連猴子也會之：在 Mac mini server 上架設 WebDAV git server]]></title>
+    <link href="http://octo.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
+    <updated>2011-04-04T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/04/連猴子也會之：在-mac-mini-server-上架設-webdav-git-server</id>
+    <content type="html"><![CDATA[<p>因為我的 mac mini server 不想開著 ssh 一直給人掃，所以想設定 https 的 git server，試了一下真的超簡單的。
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
+▲首先打開你的 Server Admin 建立一個新 Site 例如 repo.hsatac.net
+<!--more--></p>
+
+<p><p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg"><img class="aligncenter size-full wp-image-371" title="螢幕快照 2011-04-04 下午1.48.24" src="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg" alt="" width="523" height="307" /></a></p>
+▲Option 的部份把 WebDAV 打勾，我們要用這個做認證，Folding Listing 也勾起來比較方便。
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg"><img class="aligncenter size-full wp-image-372" title="螢幕快照 2011-04-04 下午1.49.02" src="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg" alt="" width="332" height="162" /></a></p>
+▲接著建立一個新的 Realm ，範例就用 project.git
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg"><img class="aligncenter size-full wp-image-373" title="螢幕快照 2011-04-04 下午1.49.51" src="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg" alt="" width="522" height="288" /></a></p>
+▲按+號把你的使用者拖過來，給他權限 Browse and Read/Write WebDAV，</p>
+
+<p>當然如果你要公開這個 repo 給別人讀取，可以把 everyone 的權限設成 Browse and Read
+<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg"><img class="aligncenter size-full wp-image-374" title="螢幕快照 2011-04-04 下午1.50.20" src="http://blog.hsatac.net/wp-content/uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg" alt="" width="521" height="310" /></a></p>
+▲最後在 Security 的部份 把 SSL 打勾並選你的憑證</p>
+
+<p>接著就來設定 remote repo 吧！<br />
+把你剛剛設定的目錄建立起來
+<pre lang="bash">mkdir /Library/WebServer/Documents/repo/project.git
+cd /Library/WebServer/Documents/repo/project.git
+git init --bare
+mv hooks/post-update.sample hooks/post-update
+git update-server-info</pre>
+記得整個目錄的owner要改回 _www</p>
+
+<p>遠端這樣就設定好啦！<br />
+接著本地端的部份：</p>
+
+<p>因為我們是走 https ，如果你的憑證是自簽的話，請先跟我這樣做：
+<pre lang="bash">git config --global http.sslVerify false</pre>
+接著一樣三步驟：
+<pre lang="bash">git init
+git add .
+git commit -m "first commit"
+git remote add origin https://repo.hsatac.net/project.git/
+git push origin master --force -v</pre>
+最後編輯 .git/config<br />
+加上
+<pre lang="bash">[branch "master"]
+	 remote = origin
+	 merge = refs/heads/master</pre></p>
+
+<p>以上，就大功告成啦！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版]]></title>
+    <link href="http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/"/>
+    <updated>2011-02-28T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-歌詞-漢字假名拼音對照版</id>
+    <content type="html"><![CDATA[<p>最近在迷這首&#8230;
+<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/UcOb5dDKNqI" frameborder="0" allowfullscreen></iframe>
+<!--more-->
+<div class="title">Connect</div>
+<hr />
+<ruby><rb>交</rb><rp>(</rp><rt>カ</rt><rp>)</rp></ruby>わした<ruby><rb>約束</rb><rp>(</rp><rt>やくそく</rt><rp>)</rp></ruby><ruby><rb>忘</rb><rp>(</rp><rt>わす</rt><rp>)</rp></ruby>れないよ<br />
+<span class="romaji">KAwashita Yakusoku Wasurenaiyo</span><br />
+<ruby><rb>目</rb><rp>(</rp><rt>め</rt><rp>)</rp></ruby>を<ruby><rb>閉</rb><rp>(</rp><rt>と</rt><rp>)</rp></ruby>じた<ruby><rb>確</rb><rp>(</rp><rt>し</rt><rp>)</rp></ruby>かめる<br />
+<span class="romaji">Meo Tojita Shikameru</span><br />
+<ruby><rb>押</rb><rp>(</rp><rt>お</rt><rp>)</rp></ruby>し<ruby><rb>寄</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>せた<ruby><rb>闇</rb><rp>(</rp><rt>やみ</rt><rp>)</rp></ruby>　<ruby><rb>振</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>り<ruby><rb>払</rb><rp>(</rp><rt>はら</rt><rp>)</rp></ruby>って<ruby><rb>進</rb><rp>(</rp><rt>すす</rt><rp>)</rp></ruby>むよ<br />
+<span class="romaji">Oshi Yoseta Yami Furi Haratte Susumuyo</span><br />
+<br />
+<span class="romaji"></span><br />
+いつになったらなくした<ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby>を<br />
+<span class="romaji">Itsuninattaranakushita Miraio</span><br />
+<ruby><rb>私</rb><rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>ここでまた<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>ることできるの？<br />
+<span class="romaji">Watashikokodemata Mirukotodekiruno?</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>溢</rb><rp>(</rp><rt>あふ</rt><rp>)</rp></ruby>れ<ruby><rb>出</rb><rp>(</rp><rt>だ</rt><rp>)</rp></ruby>した<ruby><rb>不安</rb><rp>(</rp><rt>ふあん</rt><rp>)</rp></ruby>の<ruby><rb>影</rb><rp>(</rp><rt>かげ</rt><rp>)</rp></ruby>を<ruby><rb>何度</rb><rp>(</rp><rt>なんど</rt><rp>)</rp></ruby>でも<ruby><rb>裂</rb><rp>(</rp><rt>さ</rt><rp>)</rp></ruby>いて<br />
+<span class="romaji">Afure Dashita Fuanno Kageo Nandodemo Saite</span><br />
+この<ruby><rb>世界</rb><rp>(</rp><rt>せかい</rt><rp>)</rp></ruby><ruby><rb>歩</rb><rp>(</rp><rt>あゆ</rt><rp>)</rp></ruby>んでこう<br />
+<span class="romaji">Kono Sekai Ayundekou</span><br />
+<br />
+<span class="romaji"></span><br />
+とめどなく<ruby><rb>刻</rb><rp>(</rp><rt>きざ</rt><rp>)</rp></ruby>まれた<ruby><rb>時</rb><rp>(</rp><rt>とき</rt><rp>)</rp></ruby>は<ruby><rb>今</rb><rp>(</rp><rt>いま</rt><rp>)</rp></ruby><ruby><rb>始</rb><rp>(</rp><rt>はじ</rt><rp>)</rp></ruby>まり<ruby><rb>告</rb><rp>(</rp><rt>つ</rt><rp>)</rp></ruby>げ<br />
+<span class="romaji">Tomedonaku Kizamareta Tokiwa Ima Hajimari Tsuge</span><br />
+<ruby><rb>変</rb><rp>(</rp><rt>か</rt><rp>)</rp></ruby>わらない<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>いをのせ<br />
+<span class="romaji">Kawaranai Omoio Nose</span><br />
+<ruby><rb>閉</rb><rp>(</rp><rt>と</rt><rp>)</rp></ruby>ざされた<ruby><rb>扉</rb><rp>(</rp><rt>とびら</rt><rp>)</rp></ruby><ruby><rb>開</rb><rp>(</rp><rt>ひら</rt><rp>)</rp></ruby>けよう<br />
+<span class="romaji">Tozasareta Tobira Hirakeyou</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>目覚</rb><rp>(</rp><rt>めざ</rt><rp>)</rp></ruby>めた<ruby><rb>心</rb><rp>(</rp><rt>こころ</rt><rp>)</rp></ruby>は<ruby><rb>走</rb><rp>(</rp><rt>はし</rt><rp>)</rp></ruby>りだした<ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby>を<ruby><rb>描</rb><rp>(</rp><rt>えが</rt><rp>)</rp></ruby>くため<br />
+<span class="romaji">Mezameta Kokorowa Hashiridashita Miraio Egaku Tame</span><br />
+<ruby><rb>難</rb><rp>(</rp><rt>むずか</rt><rp>)</rp></ruby>しい<ruby><rb>道</rb><rp>(</rp><rt>みち</rt><rp>)</rp></ruby>で<ruby><rb>立</rb><rp>(</rp><rt>た</rt><rp>)</rp></ruby>ち<ruby><rb>止</rb><rp>(</rp><rt>と</rt><rp>)</rp></ruby>まっても<br />
+<span class="romaji">Muzukashi- Michide Tachi Tomattemo</span><br />
+<ruby><rb>空</rb><rp>(</rp><rt>そら</rt><rp>)</rp></ruby>はきれいな<ruby><rb>青</rb><rp>(</rp><rt>あお</rt><rp>)</rp></ruby>さでいつも<ruby><rb>待</rb><rp>(</rp><rt>ま</rt><rp>)</rp></ruby>っててくれる<br />
+<span class="romaji">Sorahakireina Aosadeitsumo Mattetekureru</span><br />
+だから<ruby><rb>怖</rb><rp>(</rp><rt>こわ</rt><rp>)</rp></ruby>くない<br />
+<span class="romaji">Dakara Kowaku Nai</span><br />
+もう<ruby><rb>何</rb><rp>(</rp><rt>なに</rt><rp>)</rp></ruby>があっても<ruby><rb>挫</rb><rp>(</rp><rt>くじ</rt><rp>)</rp></ruby>けない<br />
+<span class="romaji">Mou Naniga-ttemo Kujikenai</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>振り返</rb><rp>(</rp><rt>ふりかえ</rt><rp>)</rp></ruby>れば<ruby><rb>仲間</rb><rp>(</rp><rt>なかま</rt><rp>)</rp></ruby>がいて<br />
+<span class="romaji">Furikaereba Nakamagaite</span><br />
+<ruby><rb>気</rb><rp>(</rp><rt>き</rt><rp>)</rp></ruby>がつけば<ruby><rb>優</rb><rp>(</rp><rt>やさ</rt><rp>)</rp></ruby>しく<ruby><rb>包</rb><rp>(</rp><rt>つつ</rt><rp>)</rp></ruby>まれてた<br />
+<span class="romaji">Kiga Tsukeba Yasashiku Tsutsumareteta</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>何</rb><rp>(</rp><rt>なに</rt><rp>)</rp></ruby>もかもが<ruby><rb>歪</rb><rp>(</rp><rt>ひず</rt><rp>)</rp></ruby>んだ<ruby><rb>世界</rb><rp>(</rp><rt>せかい</rt><rp>)</rp></ruby>で<br />
+<span class="romaji">Nanimo Kamoga Hizunda Sekaide</span><br />
+<ruby><rb>唯一</rb><rp>(</rp><rt>ゆいいつ</rt><rp>)</rp></ruby><ruby><rb>信</rb><rp>(</rp><rt>しん</rt><rp>)</rp></ruby>じれるここが<ruby><rb>救</rb><rp>(</rp><rt>すく</rt><rp>)</rp></ruby>いだった<br />
+<span class="romaji">Yui-tsu Shinjirerukokoga Sukuidatta</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>喜</rb><rp>(</rp><rt>よろこ</rt><rp>)</rp></ruby>びも<ruby><rb>悲</rb><rp>(</rp><rt>かな</rt><rp>)</rp></ruby>しみもわけあえば<ruby><rb>強</rb><rp>(</rp><rt>つよ</rt><rp>)</rp></ruby>まる<ruby><rb>思</rb><rp>(</rp><rt>おも</rt><rp>)</rp></ruby>い<br />
+<span class="romaji">Yorokobimo Kanashimimowakeaeba Tsuyomaru Omoi</span><br />
+この<ruby><rb>声</rb><rp>(</rp><rt>こえ</rt><rp>)</rp></ruby>が<ruby><rb>届</rb><rp>(</rp><rt>とど</rt><rp>)</rp></ruby>くのなら<br />
+<span class="romaji">Kono Koega Todoku Nonara</span><br />
+きっと<ruby><rb>奇跡</rb><rp>(</rp><rt>きせき</rt><rp>)</rp></ruby>はおこせるだろう<br />
+<span class="romaji">Kitto Kisekihaokoserudarou</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>交</rb><rp>(</rp><rt>カ</rt><rp>)</rp></ruby>わした<ruby><rb>約束</rb><rp>(</rp><rt>やくそく</rt><rp>)</rp></ruby><ruby><rb>忘</rb><rp>(</rp><rt>わす</rt><rp>)</rp></ruby>れないよ<br />
+<span class="romaji">KAwashita Yakusoku Wasurenaiyo</span><br />
+<ruby><rb>目</rb><rp>(</rp><rt>め</rt><rp>)</rp></ruby>を<ruby><rb>閉</rb><rp>(</rp><rt>と</rt><rp>)</rp></ruby>じ<ruby><rb>確</rb><rp>(</rp><rt>たし</rt><rp>)</rp></ruby>かめる<br />
+<span class="romaji">Meo Toji Tashikameru</span><br />
+<ruby><rb>押</rb><rp>(</rp><rt>お</rt><rp>)</rp></ruby>し<ruby><rb>寄</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>せた<ruby><rb>闇</rb><rp>(</rp><rt>やみ</rt><rp>)</rp></ruby>　<ruby><rb>振</rb><rp>(</rp><rt>ふ</rt><rp>)</rp></ruby>り<ruby><rb>払</rb><rp>(</rp><rt>はら</rt><rp>)</rp></ruby>って<ruby><rb>進</rb><rp>(</rp><rt>すす</rt><rp>)</rp></ruby>むよ<br />
+<span class="romaji">Oshi Yoseta Yami Furi Haratte Susumuyo</span><br />
+どんなに<ruby><rb>大</rb><rp>(</rp><rt>おお</rt><rp>)</rp></ruby>きな<ruby><rb>壁</rb><rp>(</rp><rt>かべ</rt><rp>)</rp></ruby>があっても<br />
+<span class="romaji">Donnani O-kina Kabega-ttemo</span><br />
+<ruby><rb>越</rb><rp>(</rp><rt>こ</rt><rp>)</rp></ruby>えて<ruby><rb>見</rb><rp>(</rp><rt>み</rt><rp>)</rp></ruby>せるからきっと<br />
+<span class="romaji">Koete Miserukarakitto</span><br />
+<ruby><rb>明日</rb><rp>(</rp><rt>あした</rt><rp>)</rp></ruby><ruby><rb>信</rb><rp>(</rp><rt>しん</rt><rp>)</rp></ruby>じて<ruby><rb>祈</rb><rp>(</rp><rt>いの</rt><rp>)</rp></ruby>って<br />
+<span class="romaji">Ashita Shinjite Inotte</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>壊</rb><rp>(</rp><rt>こわ</rt><rp>)</rp></ruby>れた<ruby><rb>世界</rb><rp>(</rp><rt>せかい</rt><rp>)</rp></ruby>で<ruby><rb>彷徨</rb><rp>(</rp><rt>ほうこう</rt><rp>)</rp></ruby>って<ruby><rb>私</rb><rp>(</rp><rt>わたし</rt><rp>)</rp></ruby>は<br />
+<span class="romaji">Kowareta Sekaide Houkoutte Watashiwa</span><br />
+<ruby><rb>引</rb><rp>(</rp><rt>び</rt><rp>)</rp></ruby>き<ruby><rb>寄</rb><rp>(</rp><rt>よ</rt><rp>)</rp></ruby>せられるように<ruby><rb>辿</rb><rp>(</rp><rt>たど</rt><rp>)</rp></ruby>り<ruby><rb>着</rb><rp>(</rp><rt>つ</rt><rp>)</rp></ruby>いた<br />
+<span class="romaji">Biki Yoserareruyouni Tadori Tsuita</span><br />
+<br />
+<span class="romaji"></span><br />
+<ruby><rb>目覚</rb><rp>(</rp><rt>めざ</rt><rp>)</rp></ruby>めた<ruby><rb>心</rb><rp>(</rp><rt>こころ</rt><rp>)</rp></ruby>は<ruby><rb>走</rb><rp>(</rp><rt>はし</rt><rp>)</rp></ruby>り<ruby><rb>出</rb><rp>(</rp><rt>だ</rt><rp>)</rp></ruby>した<ruby><rb>未来</rb><rp>(</rp><rt>みらい</rt><rp>)</rp></ruby>を<ruby><rb>描</rb><rp>(</rp><rt>えが</rt><rp>)</rp></ruby>くため<br />
+<span class="romaji">Mezameta Kokorowa Hashiri Dashita Miraio Egaku Tame</span><br />
+<ruby><rb>難</rb><rp>(</rp><rt>むずか</rt><rp>)</rp></ruby>しい<ruby><rb>道</rb><rp>(</rp><rt>みち</rt><rp>)</rp></ruby>で<ruby><rb>立</rb><rp>(</rp><rt>た</rt><rp>)</rp></ruby>ち<ruby><rb>止</rb><rp>(</rp><rt>と</rt><rp>)</rp></ruby>まっても<br />
+<span class="romaji">Muzukashi- Michide Tachi Tomattemo</span><br />
+<ruby><rb>空</rb><rp>(</rp><rt>そら</rt><rp>)</rp></ruby>はきれいな<ruby><rb>青</rb><rp>(</rp><rt>あお</rt><rp>)</rp></ruby>さでいつも<ruby><rb>待</rb><rp>(</rp><rt>ま</rt><rp>)</rp></ruby>っててくれる<br />
+<span class="romaji">Sorahakireina Aosadeitsumo Mattetekureru</span><br />
+だから<ruby><rb>怖</rb><rp>(</rp><rt>こわ</rt><rp>)</rp></ruby>くない<br />
+<span class="romaji">Dakara Kowaku Nai</span><br />
+もう<ruby><rb>何</rb><rp>(</rp><rt>なに</rt><rp>)</rp></ruby>があっても<ruby><rb>挫</rb><rp>(</rp><rt>くじ</rt><rp>)</rp></ruby>けない<br />
+<span class="romaji">Mou Naniga-ttemo Kujikenai</span><br />
+<br />
+<span class="romaji"></span><br />
+ずっと<ruby><rb>明日</rb><rp>(</rp><rt>あした</rt><rp>)</rp></ruby><ruby><rb>待</rb><rp>(</rp><rt>ま</rt><rp>)</rp></ruby>った<br />
+<span class="romaji">Zutto Ashita Matta</span><br />
+<br />&nbsp;<em class="cpinfo">&mdash;本文件以 <a href="http://but.lolicom.org/tool/" target="_blank">bRubyEditor</a> 編輯產生 &copy; but &mdash;</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用 Passenger(mod_rails) 部屬 Sinatra]]></title>
+    <link href="http://octo.hsatac.net/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/"/>
+    <updated>2011-02-22T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/02/用-passengermod_rails-部屬-sinatra</id>
+    <content type="html"><![CDATA[<p>最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。<br />
+寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。<br />
+部屬方面也很容易<br />
+在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾<br />
+config.ru 檔案內容為
+<pre lang="ruby">
+require 'project'</pre></p>
+
+<p>root_dir = File.dirname(__FILE__)</p>
+
+<p>set :environment, ENV[&#8216;RACK_ENV&#8217;].to_sym<br />
+set :root,        root_dir<br />
+set :app_file,    File.join(root_dir, &#8216;project.rb&#8217;)<br />
+disable :run</p>
+
+<p>run Sinatra::Application</p>
+
+<p>
+把 project 替換成你的專案名稱<br />
+apache vhost的設法和 rails 的一樣即可
+<pre lang="bash">
+<VirtualHost *:80>
+  ServerName project.hsatac.net
+  DocumentRoot "/project/public"
+  RackEnv production
+  <Directory "/project/public">
+    Order allow,deny
+    Allow from all
+  
+
+</pre></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OSX Server 10.6 安裝 mysql2 gem]]></title>
+    <link href="http://octo.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
+    <updated>2011-02-22T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
+    <content type="html"><![CDATA[<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
+下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
+
+<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
+<pre lang="bash">
+EBuilding native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+    ERROR: Failed to build gem native extension.</pre></p>
+
+<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
+checking for rb_thread_blocking_region()&#8230; no<br />
+checking for mysql.h&#8230; no<br />
+checking for mysql/mysql.h&#8230; no<br />
+&#8212;&#8211;<br />
+mysql.h is missing.  please check your installation of mysql and try again.<br />
+&#8212;&#8211;
+</p>
+
+<p>請下：
+<pre lang="bash">
+env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+</pre></p>
+
+<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎]]></title>
+    <link href="http://octo.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/"/>
+    <updated>2011-02-17T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/02/用-javascript-更改-chrome-firefox-ie-的預設搜尋引擎</id>
+    <content type="html"><![CDATA[<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
+
+<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
+
+<p><!--more--></p>
+
+<p><pre lang="xml">
+<?xml version="1.0" encoding="UTF-8"?>
+ <opensearchdescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <shortname>Web Search</shortname>
+   <description>Use Example.com to search the Web.</description>
+   <tags>example web</tags>
+   <contact>admin@example.com</contact>
+   <Url type="application/atom+xml"</opensearchdescription>
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=atom"/>
+   <Url type="application/rss+xml"
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=rss"/>
+   <Url type="text/html" 
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}"/>
+   <longname>Example.com Web Search</longname>
+   <image height="64" width="64" type="image/png">http://example.com/websearch.png</image>
+   <image height="16" width="16" type="image/vnd.microsoft.icon">http://example.com/websearch.ico</image>
+   <query role="example" searchterms="cat" />
+   <developer>Example.com Development Team</developer>
+   <attribution>
+     Search data Copyright 2005, Example.com, Inc., All Rights Reserved</attribution>
+   
+   <syndicationright>open</syndicationright>
+   <adultcontent>false</adultcontent>
+   <language>en-us</language>
+   <outputencoding>UTF-8</outputencoding>
+   <inputencoding>UTF-8</inputencoding>
+ 
+</pre></p>
+
+<p>接著使用 Javascript 讓瀏覽器安裝你的搜尋引擎：
+<pre lang="javascript">
+window.external.AddSearchProvider("http://your.search.description.xml");
+</pre></p>
+
+<p>實測 Chrome 9, Firefox 3.6+, IE9 都可以正常使用，其他瀏覽器和版本沒有試過。<br />
+Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用者自己去 Chrome 的選項改為預設。</p>
+
+<p>另外在搜尋建議這個部份， OpenSearch 官網給的範例是：
+<pre lang="xml">
+ <Url type="application/json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre></p>
+
+<p>不過 Firefox 吃不出來，要改成：
+<pre lang="xml">
+ <Url type="application/x-suggestions+json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre>
+這樣 Chrome 和 Firefox 都能解析了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Freenode伺服器名稱]]></title>
+    <link href="http://octo.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
+    <updated>2011-01-25T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/01/freenode伺服器名稱</id>
+    <content type="html"><![CDATA[<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
+當登入的時候會顯示作家的簡介，整理如下：</p>
+
+<p><em><strong>roddenberry.freenode.ne</strong>t</em>
+RODDENBERRY, GENE (1921-1991). Born in Texas, USA,<br />
+Roddenberry worked as a pilot for the US Army and later<br />
+as a commercial pilot. He then went on to create the<br />
+Star Trek television series, among others.<!--more--></p>
+
+<p><em><strong> kornbluth.freenode.net</strong></em>
+KORNBLUTH, CYRIL M. [1923-1958].  Born in New York City and<br />
+an active member of the Futurians, Cyril Kornbluth sold his<br />
+first story professionally at age 15.  By the 1940&#8217;s his<br />
+stories appeared widely under several pennames, including<br />
+S.D. Gottesman and Cecil Corman.  He left his university<br />
+studies in Chicago to serve in the Army in Europe during<br />
+WWII, then returned to school and work in Chicago until he<br />
+began writing full-time in 1951.  The author of The Marching<br />
+Morons and the novels The Space Merchants (with Frederik<br />
+Pohl) and The Syndic, he&#8217;s best known for his biting social<br />
+satire and his collaborations with Pohl and with Judith<br />
+Merril.</p>
+
+<p><strong><em> orwell.freenode.net<br />
+calvino.freenode.net</em></strong>
+CALVINO, ITALO [1923-1985].  Born in Cuba, Italo Calvino grew<br />
+up in San Remo, Italy.  During World War II, he joined the<br />
+partisans during the German occupation and, after writing a<br />
+series of stories which drew on his experiences, he became a<br />
+journalist. His work included Mr. Palomar, Under the<br />
+Jaguar Sun, Cosmicomics and t zero.  Calvino made<br />
+important contributions to Italian literature in the middle<br />
+of the last century.</p>
+
+<p><strong><em> gibson.freenode.net</em></strong>
+GIBSON, WILLIAM (1948-) He is married with two children. In<br />
+the early 1980s he wrote Neuromancer, and with this novel he<br />
+helped establish a new kind of science fiction literature<br />
+called cyberpunk. William Gibson defined the word cyberspace,<br />
+and described virtual reality long before we saw the<br />
+similarities with todays Internet. He has won the Hugo Award,<br />
+Nebula Award and the Philipp K. Dick Award.</p>
+
+<p><strong><em>leguin.freenode.net</em></strong>
+URSULA K. LEGUIN (1929-)  The author of the Earthsea<br />
+trilogy, City of Illusions and The Dispossessed.</p>
+
+<p><strong><em> lem.freenode.net<br />
+wolfe.freenode.net<br />
+sendak.freenode.net</em></strong>
+SENDAK, MAURICE [1928-].  The author of Seven Little<br />
+Monsters and Where the Wild Things Are, Maurice Sendak was<br />
+born in Brooklyn, NY, US, to a family of poor Polish<br />
+immigrants who moved to the US before World War II.  He<br />
+became an illustrator while in high school.</p>
+
+<p><strong><em> jordan.freenode.net</em></strong>
+JORDAN, ROBERT (1948-2007).  Esteemed author of The Wheel of<br />
+Time, Lord of Chaos and A Crown of Swords.
+<strong><em> lindbohm.freenode.net</em></strong>
+Denis Lindbohm (1927-2005) was a Swedish author and one of the<br />
+founders of Swedish science fiction.
+<strong><em> holmes.freenode.net</em></strong>
+HOLMES, ROBERT (1928-1986). An English television scriptwriter,<br />
+most notably remembered for his work on the sci-fi series;<br />
+Doctor Who.
+<strong><em> barjavel.freenode.net</em></strong>
+BARJAVEL, RENE [1911-1985].  Born in Nyons, he was a<br />
+science-fiction author, a journalist and a critic. He is<br />
+credited with having written the first novel to introduce<br />
+the Grandfather Paradox in time travel, in his 1943 work<br />
+&#8216;Le Voyageur imprudent&#8217;.</p>
+
+<p><strong><em> bartol.freenode.net</em></strong>
+BARTOL, VLADIMIR [1903-1967].  Born in Trieste, Austria-<br />
+Hungary. He is the author of, among others, the novel<br />
+Alamut (published in 1938 in Slovenia).</p>
+
+<p><strong><em> pratchett.freenode.net</em></strong>
+PRATCHETT, TERRY (1948-).  Born in Buckinghamshire, England,<br />
+Pratchett is the famous author of the Discworld series of<br />
+novels and, more recently, an active Alzheimer&#8217;s Disease awareness<br />
+campaigner.</p>
+
+<p><strong><em> niven.freenode.net</em></strong>
+NIVEN, LAWRENCE VAN COTT [1938-].  Architect of Known Space,<br />
+the setting of Protector, World of Ptaavs and the<br />
+Ringworld series.  Author of &#8220;Flash Crowd&#8221;, a canonical<br />
+sociological hard science fiction short story dealing with<br />
+effects of near instantaneous transportation on a modern<br />
+technological society.  In addition, he is well known for his<br />
+collaborations with Jerry Pournelle, including The Mote in<br />
+God&#8217;s Eye and Lucifer&#8217;s Hammer.</p>
+
+<p><strong><em> zelazny.freenode.net</em></strong>
+ZELAZNY, ROGER JOSEPH [1937-1995].  Roger Zelazny was a<br />
+leading light in the New Wave of science fiction.  He began<br />
+writing in 1962.  Known for such works as This Immortal,<br />
+Lord of Light, The Dream Master and the Amber books,<br />
+Zelazny is best known for his idiomatic American<br />
+protagonists, embodying the mythological figures of the<br />
+Trickster and the Hero of a Thousand Faces.</p>
+
+<p><strong><em> brown.freenode.net</em></strong>
+BROWN, DAN [1964-]. Born in New Hampshire, USA, the son of a<br />
+math teacher at Phillips Exeter Academy, he studied at<br />
+Amherst College and later returned to teach English there.<br />
+His works include Digital Fortress, Angels and Demons and<br />
+the number one bestseller The Da Vinci Code. He is<br />
+currently living in New England with his wife, Blythe, an art<br />
+historian and painter who helped him write The Da Vinci<br />
+Code.</p>
+
+<p><strong><em> anthony.freenode.net</em></strong>
+ANTHONY, PIERS [1934-].  Author of many novels and short<br />
+stories, including his most famous Xanth series. A few of<br />
+his works have made it to the New York Times Best Seller<br />
+list, and he is widely regarded as one of the most well-known<br />
+science fiction/fantasy authors ever.</p>
+
+<p><strong><em> kubrick.freenode.net<br />
+verne.freenode.net<br />
+clarke.freenode.net<br />
+card.freenode.net</em></strong>
+CARD, ORSON SCOTT [1951-].  Born in Richland, Washington, Card grew up in<br />
+California, Arizona, and Utah.  He lived in Brazil for two years as an<br />
+unpaid missionary for the Mormon Church.  Author of the Ender and Alvin<br />
+Maker books, Card&#8217;s science fiction and fantasy work is strongly influenced<br />
+by his Mormon cultural background.  The first author to win the Hugo and<br />
+Nebula novel awards two years in a row, Card currently lives in Greensboro,<br />
+North Carolina, US.</p>
+
+<p><strong><em> hubbard.freenode.net</em></strong>
+Hubbard, Lafayette Ronald [1911 - 1986]. Was an american Sci-Fi writer,<br />
+perhaps more famed for devising Dianetics and Scientology.</p>
+
+<p><strong><em> asimov.freenode.net</em></strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Only my railgun]]></title>
+    <link href="http://octo.hsatac.net/2010/10/only-my-railgun/"/>
+    <updated>2010-10-26T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2010/10/only-my-railgun</id>
+    <content type="html"><![CDATA[<p>今天的Coding BGM是這首：Only my railgun
+<object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
+
+<p><!--more-->
+歌詞：<br />
+only my railgun</p>
+
+<p>發射！刻劃在心中的夢想　連未來都能不放在眼裡<br />
+極限什麼的無需去管　沒有意義！<br />
+用這個力量散發光芒　往那遙遠的願望邁進</p>
+
+<p>如果　唯一能做的　只有在已經走過的<br />
+這條路上回頭的話&#8230;現在在這裡就把一切都破壞掉</p>
+
+<p>沉沒在黑暗中的街道　人們到底能夠對抗到何時？<br />
+從這不斷加速的痛苦之中　一定能夠守護著某人</p>
+
+<p>Looking!<br />
+The blitz loop this planet to search way.<br />
+Only ma RAILGUN can shoot it!現在<br />
+那必然的預感　以光速<br />
+在身體中　來回奔馳</p>
+
+<p>抓住！如果是所期望的就別放過　盡自己所能綻放光芒<br />
+我相信喔　那一天的誓言<br />
+因為在這眼中的淚光　也會因此而化做力量</p>
+
+<p>假如躊躇不前　從那隱約感覺到的　傷感之中<br />
+說沒有任何猶豫　是騙人的</p>
+
+<p>空中飛舞的硬幣所描繪的　那放物線所決定的命運<br />
+在我的內心中　所擊出的答案今天也依舊奔馳著</p>
+
+<p>Sparkling!<br />
+The shiny lights awake true desire.<br />
+Only my RAILGUN can shoot it.絕對<br />
+毫無迷惘　貫徹到底<br />
+就算遍體鱗傷　也會繼續前進</p>
+
+<p>鎖定！凜然奪目的視線　將黑暗撕個粉碎<br />
+有什麼疑惑的話　通通吹走就好了<br />
+只要內心還在咆哮　任何一個人都不能夠阻撓我</p>
+
+<p>那飄渺虛幻的　無數的願望<br />
+在這兩手間　逐漸累積<br />
+從破碎的黑暗裡　窺見的是<br />
+無比沉重的　悲傷記憶</p>
+
+<p>就算逐漸失去光彩　就算被現實所動搖<br />
+還是　不想輸給絕望<br />
+只要我自己　還是我自己的一天<br />
+就抬頭挺胸的　引以為傲！</p>
+
+<p>Looking!<br />
+The blitz loop this planet to search way.<br />
+Only ma RAILGUN can shoot it!現在<br />
+那必然的預感　以光速<br />
+在身體中　來回奔馳</p>
+
+<p>發射！刻劃在心中的夢想　連未來都能不放在眼裡<br />
+極限什麼的無需去管　沒有意義！<br />
+用這個力量散發光芒　往那遙遠的願望邁進</p>
+
+<p>only my railgun<br />
+歌：fripSide</p>
+
+<p>☆<br />
+放て！ 心に 刻んだ 夢を<br />
+未来さえ置き去りにして<br />
+限界など知らない 意味無い<br />
+この能力が光散らす<br />
+その先に遥かな想いを<br />
+☆</p>
+
+<p>歩いてきた この道を<br />
+振り返ることしか<br />
+出来ないなら&#8230;<br />
+今ここで全てを壊せる<br />
+暗闇に堕ちる街並み<br />
+人はどこまで立ち向かえるの？<br />
+加速するその痛みから<br />
+誰かをきっと守れるよ</p>
+
+<p>★<br />
+Looking！<br />
+The blitz loop this planet to search way.<br />
+Only my RAILGUN can shoot it. 今すぐ<br />
+体中を光の速さで<br />
+駆け巡った 確かな予感<br />
+★</p>
+
+<p>掴め！望むものなら残さず<br />
+輝ける自分らしさで<br />
+信じてるよ あの日の誓いを<br />
+この瞳に光る涙<br />
+それさえも強さになるから</p>
+
+<p>立ち止まると 少しだけ<br />
+感じる切なさに<br />
+戸惑う事無いなんて<br />
+嘘はつかないよ</p>
+
+<p>宙に舞うコインが描く<br />
+放物線が決める運命<br />
+打ち出した答えが今日も<br />
+私の胸を駆け巡る</p>
+
+<p>Sparking！<br />
+The shiny lights awake true desire<br />
+Only my RAILGUN can shoot it.必ず<br />
+貫いてく 途惑うことなく<br />
+傷ついても 走り続ける</p>
+
+<p>狙え！ 凛と煌く視線は<br />
+狂い無く闇を切り裂く<br />
+迷いなんて 吹き飛ばせばいい<br />
+この心が叫ぶ限り<br />
+誰ひとり邪魔などさせない</p>
+
+<p>儚く舞う 無数の願いは<br />
+この両手に 積もってゆく<br />
+切り裂く闇に 見えてくるのは<br />
+重く深く 切ない記憶</p>
+
+<p>色褪せてく 現実に揺れる<br />
+絶望には 負けたくない<br />
+私が今 私であること<br />
+胸を張って 全て誇れる！</p>
+
+<p>repeat ★<br />
+repeat ☆</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac Os Server 輕鬆設定  Passenger (mod_rails)]]></title>
+    <link href="http://octo.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
+    <updated>2010-09-26T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
+    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://blog.hsatac.net/wp-content/uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://blog.hsatac.net/wp-content/uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[tm_syntax_highlighting + rails 3 + MacOs]]></title>
+    <link href="http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/"/>
+    <updated>2010-09-20T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos</id>
+    <content type="html"><![CDATA[<p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
+
+<p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
+
+<p><a title="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails">http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails</a></p>
+
+<p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="http://blog.hsatac.net/wp-content/uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+
+<p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
+
+<p>正常來說直接gem install ultraviolet就可以了，但我在我的mac上面碰到了一些問題，gem install無法正常安裝 oniguruma。</p>
+
+<p><!--more--></p>
+
+<p>2011/03/07更新：homebrew有oniguruma，直接brew install oniguruma
+<del datetime="2011-03-07T07:46:55+00:00">所以只好直接下載 <a href="http://www.geocities.jp/kosako3/oniguruma/" target="_blank">oniguruma</a> 下來一樣三步驟 ./configure;make;make install 後</del>再繼續安裝ultraviolet 就可以了。</p>
+
+<p>但如果直接用gem install tm_syntax_highlighting，安裝的版本非常奇怪，在rails 3 環境根本 run 不起來，generator 也沒有作用。去作者的 github 比對一下原始碼可以發現有許多修改都沒有放進去。好在 rails 3 的 Gemfile 可以指定git作為source了！但指定原作者的github為source，卻傳回錯誤訊息？</p>
+
+<p>稍微 google一下，發現有別人 release了 <a href="http://github.com/dasil003/tm_syntax_highlighting" target="_blank">for rails 3的此套件</a>，使用這個github來當source：
+<pre lang="ruby">gem 'tm_syntax_highlighting', :git=&gt;'http://github.com/dasil003/tm_syntax_highlighting.git'</pre>
+這樣就可以正常使用這個套件了，他的generator說明有點錯誤，直接下rails g syntax_css 就會把所有css檔案統統複製到public下面了，什麼list, all那些參數完全沒有作用。</p>
+
+<p>ultraviolet 支援的 syntax <a href="http://svn.textmate.org/trunk/Bundles/" target="_blank">列表在這</a></p>
+
+<p>使用時，傳:lang進去時記得要：
+<pre lang="ruby">str.downcase.gsub(" ","_")</pre></p>
 ]]></content>
   </entry>
   

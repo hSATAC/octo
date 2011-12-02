@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Transmission X Dropbox X Mac mini server = 動物機 - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="今天繼續 Mac mini server 的探索… 今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。 原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Transmission X Dropbox X Mac Mini Server = 動物機</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-27T00:00:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>今天繼續 Mac mini server 的探索…</p>
+
+<p>今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。</p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.34.14PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.34.14 PM" src="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.34.14PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.34.14 PM" width="260" height="170" /></a></p>
+
+<p>原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載，回家後就可以享受成果了。</p>
+
+<p>搜尋Mac Bt的結果，第一個就是<a href="http://www.transmissionbt.com/" target="_blank">Transmission</a>，他帶給了我大大的驚奇。</p>
+
+<p><!--more-->下載dmg安裝後打開，發現他居然內置了web介面！使用上也非常簡單，打勾選取就可以了，記得firewall要把9091 port打開。試用了一下相當滿意。</p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.33.28PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.33.28 PM" src="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.33.28PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.33.28 PM" width="260" height="252" /></a></p>
+
+<p>不過後來又逛了一下偏好設定，裡面有些功能，搭配dropbox會比使用web UI來的更好用！(其實是不想為server多開一個port…)</p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.42.07PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.42.07 PM" src="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.42.07PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.42.07 PM" width="260" height="201" /></a></p>
+
+<p>首先先把最下面的Audo add: Watch for torrent files in 打勾，並且設定在你的dropbox中的某個資料夾，例如我是設定在 Dropbox/bt種子/ 下面。這樣不管你是在辦公室還是其他電腦，只要把要抓的bt種子檔丟到這個目錄下，mac端dropbox同步後Transmission偵測到就會自動加入這個種子檔了！</p>
+
+<p>再來還有幾個設定要勾選，把Add window:下的Only when adding manually打勾，這樣偵測到新種子檔的時候就不會跳出確認視窗，而會自動加入並開始傳輸。</p>
+
+<p>還有一個很重要的設定，最上方的Default location記得改掉，原本預設是和種子同個目錄，如此一來你抓下來的東西就會統統同步到dropbox啦！記得改個設定，我改到Mac上的一個共享資料夾，這樣抓好後全家都可以直接存取到。Keep incomplete files in也記得調整，不然還沒下載完的暫存檔也是會都同步到dropbox。</p>
+
+<p>模擬使用情境：上班時認真蒐集資訊！看到一份重要的檔案要抓時怎麼辦呢？只要把種子檔丟進dropbox裡面的種子目錄，回家後抓好的檔案就在等著你啦！</p>
+
+<p>Transmission也有android端的軟體，有空時再來試試看。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-27T00:00:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/mac/'>Mac</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octo.hsatac.net/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/" data-via="hSATAC" data-counturl="http://octo.hsatac.net/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/" title="Previous Post: Mac mini server 心得&備忘">&laquo; Mac mini server 心得&備忘</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/" title="next Post: Mac mini server使用homebrew安裝PHP mcrypt套件">Mac mini server使用homebrew安裝PHP mcrypt套件 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

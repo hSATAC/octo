@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用phpMyAdmin之類的軟體，就會一直看到提示「缺少mcrypt」。 要如何使用homebrew來安裝mcrypt套件，配合內建的PHP呢？ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/page/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac Mini server使用homebrew安裝PHP Mcrypt套件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-28T00:00:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
+
+<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
+
+<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
+
+<p>將install區塊改成
+<pre lang="ruby">def install
+  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
+  system "make -j6"
+  system "make install"
+end</pre></p>
+
+<p>接著執行brew安裝mcrypt
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Transmission X Dropbox X Mac Mini Server = 動物機</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-27T00:00:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天繼續 Mac mini server 的探索…</p>
+
+<p>今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。</p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.34.14PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.34.14 PM" src="http://blog.hsatac.net/wp-content/uploads/2010/08/Screenshot20100826at11.34.14PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.34.14 PM" width="260" height="170" /></a></p>
+
+<p>原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載，回家後就可以享受成果了。</p>
+
+<p>搜尋Mac Bt的結果，第一個就是<a href="http://www.transmissionbt.com/" target="_blank">Transmission</a>，他帶給了我大大的驚奇。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/">Mac Mini Server 心得&備忘</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-24T00:00:00+08:00" pubdate data-updated="true">Aug 24<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>最近很熱門的Mac mini server我有幸也拿到了一台。</p>  <p><a href="http://blog.hsatac.net/wp-content/uploads/2010/08/20100817_112424_451.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2010-08-17_11-24-24_45" border="0" alt="2010-08-17_11-24-24_45" src="http://blog.hsatac.net/wp-content/uploads/2010/08/20100817_112424_45_thumb1.jpg" width="260" height="155" /></a> </p>  <p>之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。</p>  <p>我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。原本買這台Mac mini server就是為了替代原本的主機。再來就是想用textmate來開發程式，體驗一下MacOS傳說中的人性化介面，還有把Mac mini server當作家裡的多媒體中心，把音樂影片等等都丟上去。最後是把他當無線AP，讓家中網路無線化。</p>  <p>但是當Mac mini server來了以後，這些願景一個接著一個破滅了。</p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">倒數80天，我用aNobii記錄我的軍旅生活</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-13T00:00:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天是我入伍的第256天，也就是還有80天退伍。<br />
+很幸運的最後到了一個可以讓我有時間看書的地方，<br />
+而且也有圖書閱覽室可以借閱，<br />
+不然我應該會受不了&#8230;。</p>
+
+<p>新訓、憲訓看的書不算，到這邊後看的書我都用<a href="http://www.anobii.com">aNobii</a>記了下來，<br />
+總共到今天為止，一共有54本書、18003頁。</p>
+
+<p>破百後最難熬的三個月，一樣有書陪我渡過，<br />
+真是太幸福了:)</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Tiger 上班去</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-20T00:00:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>又到了 Tiger 上班的日子了…   <br />今天都沒有別的貓咪來，tiger有點寂寞…</p>  <p><a href="http://blog.hsatac.net/wp-content/uploads/2009/06/img-2562.jpg"><img title="IMG_2562" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2562" src="http://blog.hsatac.net/wp-content/uploads/2009/06/img-2562-thumb.jpg" width="260" border="0" /></a> </p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/%E5%8D%81%E6%AC%BE%E7%B7%9A%E4%B8%8A%E8%A8%98%E5%B8%B3%E8%A9%A6%E7%94%A8%E5%BF%83%E5%BE%97/">十款線上記帳試用心得</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-08T00:00:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>自從 Palm TX 停用以後就沒記帳了，<br />
+最近想來記一下帳，就想找找有沒有好用的線上記帳服務。<br />
+最後測試了十款國內外知名的服務。
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/06/%E5%8D%81%E6%AC%BE%E7%B7%9A%E4%B8%8A%E8%A8%98%E5%B8%B3%E8%A9%A6%E7%94%A8%E5%BF%83%E5%BE%97/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">使用 jQuery BlockUI 取代 Confirm()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-05T00:00:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天想用 jquery.blockUI 來實做一個 conform 來取代原有的 javascript confirm()<br />
+但卻碰到 blockUI 沒法回傳 boolean 的問題，<br />
+應該是在中途 block UI自己就 return 掉了</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/%E5%9B%9E%E5%88%B0%E8%A0%BB%E8%8D%92/">回到蠻荒</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-03T00:00:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>想像你回到蠻荒，那裡沒有火、沒有電、沒有輪子、沒有鐵器。<br />
+你知道有這些工具可以用，但是你卻沒辦法用的無力感。<br />
+我現在深深體會到了。</p>
+
+<p>我是不知道一個跨兩岸、包含4個程式設計師，一個版面設計師，<br />
+至少五個人以上同時在開發的團隊，有什麼資格不用 version control。<br />
+連最基本的 SVN 都不肯用。</p>
+
+<p>我的 code 已經被蓋兩次了，讓我有很深的無力感。<br />
+從一個習慣用 SVN, BugTracker的地方轉到一個完全不用的團隊，<br />
+這不是誰的錯，只是&#8230;為什麼有飛機了，我們還要在地上爬呢&#8230;？</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/%E6%9C%89-bug/">有 Bug!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-01T00:00:00+08:00" pubdate data-updated="true">Jun 1<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>現在的公司，有一件事讓我很不能適應。</p>
+
+<p>他們很喜歡說「有 Bug」。</p>
+
+<p>在這邊，他們會用 Bug 來統稱一切不合意的狀況，<br />
+諸如：這頁想要和另一頁調換、需求修改等等&#8230;統統叫做 Bug。<br />
+真正的 Bug 佔他們回報的 Bug 數量大概十分之一吧。</p>
+
+<p>基本上，我聽到「有 Bug」這句話會緊張，<br />
+當然不是因為我寫的程式不會有 Bug，難免都會有的。<br />
+但是當一直說有 Bug ，結果卻發現是需求大改，<br />
+而這些規則早已和企劃確認過無數次。</p>
+
+<p>這樣的狀況讓我很緊繃。</p>
+
+<p>真希望能夠修改歸修改、需求歸需求、Bug歸Bug&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
+PHP會自動轉換成空白，做了一點調查才知道，</p>
+
+<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
+照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
+但是PHP的urlencode和rawurlencode有些許不同，
+<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
+而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
+<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
+<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
+<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
+<div class="ii gt">目前解法大概是<br />
+1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
+2.或是在接可能有 + 號的地方再 urlencode 一次<br />
+3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

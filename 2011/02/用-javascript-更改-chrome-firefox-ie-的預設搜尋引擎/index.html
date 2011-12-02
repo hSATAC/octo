@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎 - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="首先根據 OpenSearch 的規格寫出自訂搜尋引擎的描述 xml 檔
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。 Web Search Use Example.com to search the Web. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T00:00:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
+
+<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
+
+<p><!--more--></p>
+
+<p><pre lang="xml">
+<?xml version="1.0" encoding="UTF-8"?>
+ <opensearchdescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <shortname>Web Search</shortname>
+   <description>Use Example.com to search the Web.</description>
+   <tags>example web</tags>
+   <contact>admin@example.com</contact>
+   <Url type="application/atom+xml"</opensearchdescription>
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=atom"/>
+   <Url type="application/rss+xml"
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=rss"/>
+   <Url type="text/html" 
+        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}"/>
+   <longname>Example.com Web Search</longname>
+   <image height="64" width="64" type="image/png">http://example.com/websearch.png</image>
+   <image height="16" width="16" type="image/vnd.microsoft.icon">http://example.com/websearch.ico</image>
+   <query role="example" searchterms="cat" />
+   <developer>Example.com Development Team</developer>
+   <attribution>
+     Search data Copyright 2005, Example.com, Inc., All Rights Reserved</attribution>
+   
+   <syndicationright>open</syndicationright>
+   <adultcontent>false</adultcontent>
+   <language>en-us</language>
+   <outputencoding>UTF-8</outputencoding>
+   <inputencoding>UTF-8</inputencoding>
+ 
+</pre></p>
+
+<p>接著使用 Javascript 讓瀏覽器安裝你的搜尋引擎：
+<pre lang="javascript">
+window.external.AddSearchProvider("http://your.search.description.xml");
+</pre></p>
+
+<p>實測 Chrome 9, Firefox 3.6+, IE9 都可以正常使用，其他瀏覽器和版本沒有試過。<br />
+Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用者自己去 Chrome 的選項改為預設。</p>
+
+<p>另外在搜尋建議這個部份， OpenSearch 官網給的範例是：
+<pre lang="xml">
+ <Url type="application/json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre></p>
+
+<p>不過 Firefox 吃不出來，要改成：
+<pre lang="xml">
+ <Url type="application/x-suggestions+json"
+      rel="suggestions"
+      template="http://example.com/suggest?q={searchTerms}" />
+</pre>
+這樣 Chrome 和 Firefox 都能解析了。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T00:00:00+08:00" pubdate data-updated="true">Feb 17<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/工作紀錄/'>工作紀錄</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octo.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" data-via="hSATAC" data-counturl="http://octo.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" title="Previous Post: Freenode伺服器名稱">&laquo; Freenode伺服器名稱</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/" title="next Post: Mac OSX Server 10.6 安裝 mysql2 gem">Mac OSX Server 10.6 安裝 mysql2 gem &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

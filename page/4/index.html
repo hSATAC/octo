@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，
+也想幫自己的主機設定一下，
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。 研究了一下，才發現原來 ssh 內建 sftp 了。
+那要怎樣使用 www-data 登入呢？ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/page/4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP With Www-data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
+也想幫自己的主機設定一下，<br />
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
+
+<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
+那要怎樣使用 www-data 登入呢？<br />
+一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
+
+<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
+那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
+用 scp 一連，果然順利登入了，非常方便。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/">Ruby Tuesday 五月場</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-21T00:00:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這周參加了五月場的 Ruby Tuesday，<br />
+之前在台中都沒機會參加，<br />
+好不容易現在搬回台北，一定要去一下的。</p>
+
+<p>這次兩個講題分別是 kevin 分享他們公司使用<br />
+flex + RoR 開發影音串流網站的心得。</p>
+
+<p>由於和之前在維格開發的網站概念很類似，<br />
+因此對這個主題特別有興趣，也提了一些問題。</p>
+
+<p>他們目前 beta 階段，scalibility 預估承載量是 100 channels * 50000 users.<br />
+也就是同時五百萬人上線觀看，<br />
+farm的規模目前是16台機器，<br />
+聽到這邊，回想起那時開發到需要一台 server run 影音轉碼+測 streaming<br />
+老闆連一台 server 都不肯買&#8230;最後做不出什麼東西也是剛好而已&#8230;。<br />
+順帶一提，kevin 他們的人員編制是 6 個 RD + 6 個設計，開發了三個月，<br />
+人力是我們的當時的 3 倍。</p>
+
+<p>ihower 介紹了自己開發的一些 helper ，感覺都很實用，<br />
+也提到了 http://ennerchi.com/projects/jrails 這個 RoR 的 jquery plugin，<br />
+之後有空都要試試。</p>
+
+<p>在 <a href="http://ihower.idv.tw/blog/archives/2821" target="_blank">ihower 的 blog</a> 可以抓到這次的 slides。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">貓貓日</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-17T00:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。</p>  <p>在這天大家可以帶自己的貓咪到公司上班，滿有趣的。</p>  <p><a href="http://blog.hsatac.net/wp-content/uploads/2009/05/img-2341.jpg"><img title="IMG_2341" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2341" src="http://blog.hsatac.net/wp-content/uploads/2009/05/img-2341-thumb.jpg" width="260" border="0" /></a> </p>  <p>超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。</p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/using-public-key-for-authentication/">Using Public Key for Authentication</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-17T00:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先產生 public 和 private keys:
+<pre lang="bash">ssh-keygen -t RSA</pre>
+輸入passphrase 即產生兩個 key<br />
+id_rsa為private key, id_rsa.pub 為 public key</p>
+
+<p>接著下載 puttygen 轉換成 putty 格式的 key，<br />
+以及 pageant 代理認證程式 [<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank">下載網址</a>]</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/using-public-key-for-authentication/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/khs-m451r/">KHS m451R</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-07T00:00:00+08:00" pubdate data-updated="true">May 7<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://blog.hsatac.net/wp-content/uploads/2009/05/09-mnhtn-011921.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="09_mnhtn_011921" src="http://blog.hsatac.net/wp-content/uploads/2009/05/09-mnhtn-011921-thumb.jpg" border="0" alt="09_mnhtn_011921" width="260" height="200" /></a></p>
+
+<p>一直都很想擁有一台小徑車，但是看來看去都沒有非常喜歡的。<br />
+最近看到 KHS m451R 新車款，頓時驚為天人。</p>
+
+<p>這是 KHS 日本線產品，台灣只有限量 25 台試賣，<br />
+不過我猜如果銷售不錯，之後台灣應該也買得到吧。</p>
+
+<p>不得不說KHS 對市場的敏銳度和反應真的很快，<br />
+現在這樣的車款在日本相當流行，</p>
+
+<p>有大車架的幾何，搭配451小徑輪，<br />
+想像中應該保持著小徑的靈敏和加速性，<br />
+但不會有不安定感，車架的幾何相當漂亮，<br />
+改進了以往 tkt-s 頭管不穩的缺點，<br />
+應該是騎起來很有趣味的一台車。(想像中)</p>
+
+<p>如果我現在手頭有閒錢應該會直接訂一台吧…。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/">延伸 MVC 的 v - 以 CodeIgniter 為例</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-18T00:00:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天在 CodeIgniter#irc.freenode.net 有位網友拋出了這篇文章討論
+<a href="http://alessandrovermeulen.me/2009/04/16/extending-the-v-in-mvc/" target="_blank">Extending the V in MVC</a></p>
+
+<p>稍微看了一下，其實概念和 Ruby on Rails 的架構一樣，<br />
+主要是引進了 partial 以及 layout 的概念。<br />
+(原文用 layout，但我認為用format應該比較洽當。)
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/04/my-workstation/">My Workstation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-18T00:00:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://blog.hsatac.net/wp-content/uploads/2009/04/img-2005.jpg"><img style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" title="IMG_2005" src="http://blog.hsatac.net/wp-content/uploads/2009/04/img-2005-thumb.jpg" border="0" alt="IMG_2005" width="260" height="200" /></a></p>
+
+<p>擱置許久的 ASUS m2 也找到地方放了，灌了 Ubuntu 現在快樂的跑著 Server…<br />
+發揮他最後的價值……。</p>
+
+<p>跑不動現在絢麗的 GUI OS，沒關係，純文字 Kernel 剛剛好。</p>
+
+<p>鍵盤早已損壞，許多鍵按不出來，不要緊，ssh 進去更方便。</p>
+
+<p>雖然我常常抱怨華碩品質&#8230;但是這台 m2 已經跟著我六年了，<br />
+扣掉鍵盤全毀不談&#8230;其實他還滿硬朗的嘛！</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/hack-into-aguf-big-buff-feature/">Hack Into AGUF: Big Buff Feature (Updated for 3.1)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-13T00:00:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I updated this article for WoW 3.1, AGUF r700 release.</p>
+
+<p>Before:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1ac52a7.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="before" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1b65f58.jpg" border="0" alt="before" width="208" height="112" /></a></p>
+
+<p>After:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1bdc5f2.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="after" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1c68782.jpg" border="0" alt="after" width="241" height="113" /></a></p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/03/hack-into-aguf-big-buff-feature/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/">夜暮</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-09T00:00:00+08:00" pubdate data-updated="true">Mar 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天要寫兩件很宅的事。<br />
+不過回歸魔獸以來，難得碰到值得寫的，還是紀錄一下。</p>
+
+<p>其一是經過兩個 CD 的拓荒，終於在 3/7 拿到夜暮頭銜。<br />
+魔獸這版確實是太簡單了。要打到最難的 10 人 1+3，<br />
+才讓我有以前信on推王的感覺，那美、海二空二的那種刺激度。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/03/%E5%A4%9C%E6%9A%AE/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/02/using-fckeditor-in-ci-17/">Using Fckeditor in CI 1.7</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
+
+<p>這個 fckeditor 移植也讓我搞了好幾個小時=  =b</p>
+
+<p>總之，要在CI 1.7中繼續使用 fckeditor (按照CI WIKI中提供的方法)，請做以下的更動。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/02/using-fckeditor-in-ci-17/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

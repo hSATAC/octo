@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Logitech G300 on ArchLinux - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="前陣子入手了 Logitech G300 這支滑鼠，相當優秀。
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。 不過在我的 ArchLinux 下這支 G300 使用不太正常
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。
+經過測試後， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Logitech G300 on ArchLinux</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。<!--more-->
+<pre lang="bash">xinput list</pre>
+應該可以看到各有一個 Logitech G300 的鍵盤和滑鼠，後面會有 id 例如 12
+<pre lang="bash">xinput list-props 12</pre>
+會看到類似
+<pre lang="bash">Device Enabled (132)</pre>
+再下
+<pre lang="bash">xinput set-prop 12 132 0</pre>
+就可以把這個裝置 disable 掉。</p>
+
+<p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
+所以我寫成 script 可以放在 xinitrc 裏面去自動執行
+<pre lang="bash">#!/bin/sh
+DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`</pre></p>
+
+<p>if xinput -list-props $DEVICE_ID | grep &#8220;Device Enabled&#8221; | grep &#8220;1$&#8221; &gt; /dev/null<br />
+then<br />
+    xinput set-int-prop $DEVICE_ID &#8220;Device Enabled&#8221; 8 0<br />
+fi
+接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
+在 /etc/pm/sleep.d/ 下<br />
+新增一個 script 讓他去執行上一段程式就可以了。
+<pre lang="bash">!/bin/sh
+# 90G300: suspend/wakeup Logitech G300 devices</pre></p>
+
+<p>case &#8220;$1&#8221; in<br />
+hibernate|suspend)<br />
+;;<br />
+thaw|resume)<br />
+/home/cat/.xinitrc.d/50-logitech-g300-mouse<br />
+;;<br />
+*) exit $NA<br />
+;;<br />
+esac</p>
+
+<p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/archlinux/'>Archlinux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux/" data-via="hSATAC" data-counturl="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/11/archlinux/" title="Previous Post: Archlinux 推廣">&laquo; Archlinux 推廣</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

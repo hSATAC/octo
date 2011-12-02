@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>tm_syntax_highlighting + rails 3 + MacOs - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="tm_syntax_highlighting是一個rails的syntax高亮plugin。 這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比 http://doblock.com/articles/a-whistle-stop-tour-of-syntax- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Tm_syntax_highlighting + Rails 3 + MacOs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-20T00:00:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
+
+<p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
+
+<p><a title="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails">http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails</a></p>
+
+<p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
+
+<p><a href="http://blog.hsatac.net/wp-content/uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="http://blog.hsatac.net/wp-content/uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+
+<p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
+
+<p>正常來說直接gem install ultraviolet就可以了，但我在我的mac上面碰到了一些問題，gem install無法正常安裝 oniguruma。</p>
+
+<p><!--more--></p>
+
+<p>2011/03/07更新：homebrew有oniguruma，直接brew install oniguruma
+<del datetime="2011-03-07T07:46:55+00:00">所以只好直接下載 <a href="http://www.geocities.jp/kosako3/oniguruma/" target="_blank">oniguruma</a> 下來一樣三步驟 ./configure;make;make install 後</del>再繼續安裝ultraviolet 就可以了。</p>
+
+<p>但如果直接用gem install tm_syntax_highlighting，安裝的版本非常奇怪，在rails 3 環境根本 run 不起來，generator 也沒有作用。去作者的 github 比對一下原始碼可以發現有許多修改都沒有放進去。好在 rails 3 的 Gemfile 可以指定git作為source了！但指定原作者的github為source，卻傳回錯誤訊息？</p>
+
+<p>稍微 google一下，發現有別人 release了 <a href="http://github.com/dasil003/tm_syntax_highlighting" target="_blank">for rails 3的此套件</a>，使用這個github來當source：
+<pre lang="ruby">gem 'tm_syntax_highlighting', :git=&gt;'http://github.com/dasil003/tm_syntax_highlighting.git'</pre>
+這樣就可以正常使用這個套件了，他的generator說明有點錯誤，直接下rails g syntax_css 就會把所有css檔案統統複製到public下面了，什麼list, all那些參數完全沒有作用。</p>
+
+<p>ultraviolet 支援的 syntax <a href="http://svn.textmate.org/trunk/Bundles/" target="_blank">列表在這</a></p>
+
+<p>使用時，傳:lang進去時記得要：
+<pre lang="ruby">str.downcase.gsub(" ","_")</pre></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-20T00:00:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/" data-via="hSATAC" data-counturl="http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/" title="Previous Post: Mac mini server使用homebrew安裝PHP mcrypt套件">&laquo; Mac mini server使用homebrew安裝PHP mcrypt套件</a>
+      
+      
+        <a class="basic-alignment right" href="/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/" title="next Post: Mac Os Server 輕鬆設定  Passenger (mod_rails)">Mac Os Server 輕鬆設定  Passenger (mod_rails) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

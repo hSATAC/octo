@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | hSATAC]]></title>
+  <link href="http://octo.hsatac.net/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://octo.hsatac.net/"/>
+  <updated>2011-12-02T14:49:48+08:00</updated>
+  <id>http://octo.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Redmine + Bundler 復活記]]></title>
+    <link href="http://octo.hsatac.net/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/"/>
+    <updated>2011-09-30T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2011/09/redmine-bundler-復活記</id>
+    <content type="html"><![CDATA[<p>老實說，不記得之前是動了什麼，總之我的佈署 apache + passenger + ree 環境<br />
+redmine 爆炸了。推測應該是 gem 的關係。<br />
+上網看了一下， rails 2.3 只支援 rubygems 1.7<br />
+就先把 rubygems downgrade 回來
+<pre lang="bash">gem update --system 1.7</pre></p>
+
+
+
+
+<p>和 tkalu, xdite, ihower, 以及小蟹詢問了各種可能的解決方案後<br />
+確定我應該是要用 bundler 來管理一下 redmine 的 gems</p>
+
+
+
+
+<p>根據 ihower 提供的資訊， redmine 有一個內建 bundler 的 fork 版<br />
+搜尋了一下找到了 https://www.chiliproject.org/<br />
+把他的 <a href="https://github.com/chiliproject/chiliproject/blob/unstable/Gemfile" target="_blank">Gemfile</a> 借過來一用</p>
+
+
+
+
+<p>再按照 <a href="http://gembundler.com/rails23.html" target="_blank">Bundler 官網上的 Rails 2 教學</a>
+來設定，果然成功把我的 redmine 救了回來！</p>
+
+
+
+
+<p>chiliproject 的 Gemfile 可能要稍加修改，例如他用 rails 2.3.14，可以改成 redmine 官網支援的 2.3.11<br />
+然後一些沒用到的 gem 例如 pg 可以移除。</p>
+
+]]></content>
+  </entry>
+  
+</feed>

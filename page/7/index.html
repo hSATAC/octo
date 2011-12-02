@@ -1,0 +1,593 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="&lt;script&gt;var keywords = Array(&nbsp; Array(&#8220;keyword&#8221;),)function replaceKeyword(objID) {&nbsp; var text = &#8220;&#8221;;&nbsp; if ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/page/7">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E6%90%9C%E5%B0%8B%E9%97%9C%E9%8D%B5%E5%AD%97%E8%AE%8A%E8%89%B2/">搜尋關鍵字變色</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-21T00:00:00+08:00" pubdate data-updated="true">Aug 21<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>&lt;script&gt;<br />var keywords = Array(<br />&nbsp; Array(&#8220;keyword&#8221;),<br />)<br /><br />function replaceKeyword(objID) {<br />&nbsp; var text = &#8220;&#8221;;<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; text = document.getElementById(objID).outerHTML;<br />&nbsp; } else {<br />&nbsp;&nbsp;&nbsp; text = document.body.innerHTML;<br />&nbsp; }<br />&nbsp; for (var i = 0; i &lt; keywords.length; i++) {<br />&nbsp;&nbsp;&nbsp; var re = new RegExp(keywords[i][0].replace(/\s+/, &#8220;&#92;s+&#8221;), &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp; var m = re.exec(text);<br />&nbsp;&nbsp;&nbsp; if (m != null) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var j = 0; j &lt; m.length; j++) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var reg = new RegExp(m[j], &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text = text.replace(reg, &#8220;&lt;span style=&#34;color:red;&#34;&gt;&#8221; + keywords[i][0] + &#8220;&lt;/span&gt;&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp; }<br />&nbsp; }<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; document.getElementById(objID).outerHTML = text;<br />&nbsp; } else {<br />&nbsp; &nbsp;&nbsp;&nbsp; document.body.innerHTML = text;<br />&nbsp; }<br />}<br /><br />&nbsp; $(document).ready(function(){<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; replaceKeyword();<br />&nbsp;&nbsp;&nbsp; <br /><br />&nbsp; });<br />&lt;/script&gt;</p>
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E8%B2%93%E7%9C%8B2008%E4%BA%AC%E5%A5%A7-%E5%BC%B5%E5%A8%9F%E5%A8%9F%E7%AE%AD%E7%A0%B4%E9%9F%93%E5%9C%8B%E7%A5%9E%E8%A9%B1/">貓看2008京奧 - 張娟娟箭破韓國神話</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-15T00:00:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>忘記是哪一年的世大運，看到朴成賢，<br />就開始注意到他這個小熊維尼人。<br /><br />韓國射箭選手的生命週期都很短，<br />往往幾年過去就退下戰線當教練了。<br />例如韓國男子射箭選手, <br />多項世界紀錄保持人Oh kyo moon<br />也是還年輕就跑去澳洲當教練了。<br /><br />朴成賢能在競爭激烈的韓國獨領風騷這麼多年<br />真的很不容易。<br /><br />這次原本期待能看到朴成賢打破過去韓國女子射箭選手沒有連霸奧運過的魔咒，<br />沒想到敗在張娟娟手下。<br /><br />不過張娟娟的表現也的確是不凡<br />連續砍下三位韓國頂尖射箭選手<br />這是多少射箭選手的夢啊<br />沒有人能否認他的冠軍地位<br /><br />他的壓力應該也很大吧<br />從過去的快樂張娟娟<br />到現在兩頰凹陷&#8230;應該吃了很多苦頭<br /><br />(相較之下，我相信朴成賢絕對有去整形=&nbsp;&nbsp; =<br />他難道不怕整形會影響定位嗎&#8230;.XD)</p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E8%B2%93%E7%9C%8B2008%E4%BA%AC%E5%A5%A7-%E5%BC%B5%E5%A8%9F%E5%A8%9F%E7%AE%AD%E7%A0%B4%E9%9F%93%E5%9C%8B%E7%A5%9E%E8%A9%B1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E7%99%BC%E4%BA%BA%E7%9C%81%E6%80%9D%E7%9A%84%E5%B0%8F%E6%95%85%E4%BA%8B/">發人省思的小故事</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-15T00:00:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>從前從前，有一個村落，座落在單車鄉中。<br />單車版的鄉民和樂融融，整天就是騎車聊天，過著幸福快樂的日子。<br /><br />有一天，其中一位鄉民，賴修文<br />突然想做一件能代表鄉民的衣服<br />於是就找了另一位鄉民，蛋m設計衣服<br />興沖沖的發起了團購<br /><br />但是賴修文是一個個性莽撞的人<br />雖然他很古道熱腸，但許多老一輩的鄉民<br />總覺得他做事不太穩當，擔心交給他會出事。<br /><br />可是總是要讓年輕人去闖蕩一番，<br />因此老鄉民也沒說什麼，只是在旁靜靜看著。<br /><br />隨著團購登記如火如荼的展開，<br />鄉民們發現怎麼團購方法、價格、廠商都一改再改<br />搞得大家一頭霧水。<br /><br />時間咻一下的就過去了，很多人在問：怎麼衣服還沒有消息呢？<br />在許多人的盼望之下，終於鄉民衣要開始正式製作了！<br /><br />而這時許多老鄉民們還是靜靜的在旁看著，看著&#8230;&#8230;。<br /><br />在大事快要底定的前一晚，發生了一件大事，打破了小鎮的寧靜。<br />原本的設計者：蛋m，只想要一件免費的衣服作為辛苦設計的報酬<br />沒想到賴修文卻主動問：「你要收多少設計費？有錢大家一起賺。」<br /><br />蛋m心想：「原來扣掉成本後還有剩這麼多錢，不拿白不拿，我就收點錢好了，可是要收多少呢&#8230;.？」<br />正當蛋m猶豫不決的時候，賴修文說了：「要多少，盡管說，我會向鄉民說明清楚。」<br />但其實賴修文的心理早就有個底了，他心想，加加減減，我想賺的數目扣掉後，大概還有4000元。<br />4000元再加上一件免費車衣應該夠了。沒關係，我講話講大方一點又不吃虧。<br />蛋m一時之間，也不曉得該怎麼開價，就隨便開了一件衣服抽20塊的方案。<br /><br />賴修文這一聽大驚啊！趕忙掐指一算，如果一件衣服你拿20元，那我還賺什麼？<br />但是大話說在前面，又不好意思反口。<br />他趕緊飛鴿傳書給所有訂購的鄉民，信上寫著：<br />「設計的蛋m突然說要多加錢，不然他不給我們設計圖稿。這種事到臨頭才說要加錢的手法令人心寒。」<br />試圖把錯都推給蛋m。<br /><br />事情暴發出來後，蛋m當然不堪受辱<br />趕忙把事情真相告訴大家。<br /><br />大家一聽，這一個亂啊。人多嘴雜的，更有許多老鄉民在旁冷笑。<br /><br />過了不久，賴修文貼出沒什麼內容的公告，被大家在上面塗鴉、丟雞蛋。<br />沒想到賴修文居然用橡皮擦把大家的意見擦掉了！<br />理由是「沒有購買的人沒有資格發表意見，不要來搗亂！」<br /><br />可是他卻忘了，雖然不是所有人都有購買，但這件衣服是代表所有單車鄉民的。<br />只要是鄉民，都有資格發表意見。<br /><br />在一片撻伐聲中，究竟單車鄉能不能回復以往的和平？<br />飽受波折的二代鄉民衣又能不能順利出生呢？<br /><br />&#8230;.(待續)</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E7%99%BC%E4%BA%BA%E7%9C%81%E6%80%9D%E7%9A%84%E5%B0%8F%E6%95%85%E4%BA%8B/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E8%AA%BF%E5%BC%93%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/">調弓注意事項</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-13T00:00:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>一樣也是從死海文書中發現的&#8230;<br /></p> <p>Brace Height Range:<br />Long riser + Medium limb = 8 1/2 - 9 1/4&#8221;<br /><br />String:<br />Hoyt does not recommend more than 50 or less than 10 twists in a string.<br /><br />Tiller:<br />We recommend you begin with 0-1/8&#8221; positive tiller.<br />(Bottom measurement 0-1/8&#8221; less than top measurement.)<br />If you find your sight moving up as you are drawing, increase the bottom<br />limb poundage slightly, or decrease the top limb&nbsp; poundage.<br />If the sight is moving down as you draw, make the opposite adjustments.<br />To adjust the tiller without affecting bow weight, adjust both the top and<br />the bottom weight/tiller adjustment bolts in equal but opposite directions.</p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E8%AA%BF%E5%BC%93%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E5%B0%8F%E8%B2%93%E8%A3%9D%E5%82%99%E4%B8%80%E8%A6%BD%E6%9C%AC/">小貓裝備一覽本</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-13T00:00:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>整理資料翻出來的&#8230;好久遠的紀錄啊&#8230;<br /></p> <p>Weapon:<br /> Arrow:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PC carbon arrow with curly vanes(light green)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;CT McKenney 210 with white vanes and beiter nock(transparent blue)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt;yellow vanes<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Easton A.C.E 620 with yellow vanes, pin nock(diamond blue)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt;white vanes, pin nock(white)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Easton A.C.E 570<br /> Recurve Bow:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Samick wooden bow 24 lbs.<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Samick wooden bow 30 lbs.<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Yamaha Recurve bow 34 lbs.(silver)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Sky 30 lbs.(black)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Hoyt Recurve bow 38 lbs.(camouflage)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Hoyt Matrix wiz Vector 40 lbs.(fade green)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt;M1 36 lbs.(68&quot; to 70&quot;)<br />Armor:<br /> Arm Guard:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; beiter arm guard(transparent purple)(cursed)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;beiter arm guard(transparent blue)<br /> Tab:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Angel Tab<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Angel Tab with Anchor Pad<br /> Quiver:<br /> Slings:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wrist-binded sling(white)(superlong)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;wrist-binded sling(blue)<br /> Chest Guard:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Cartel chest-guard(black)<br />&nbsp;&nbsp;&nbsp;&nbsp; -&gt;Shibuya chest-guard(black)<br /> Hat:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nike Hat(black)</p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E5%B0%8F%E8%B2%93%E8%A3%9D%E5%82%99%E4%B8%80%E8%A6%BD%E6%9C%AC/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E7%94%B7%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 男子團體</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-11T00:00:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>圖後補<br /><br />我對中華台北這次的陣容非常有信心<br /> 加上這次沒和南韓分在同一區，很有機會拿個銀或銅<br /><br />TPE vs USA<br />美國都老將出來&#8230;一堆熟面孔<br />不過穩穩的射還算輕鬆取勝<br /><br />TPE vs UKR<br />烏克蘭的射箭還滿強的&#8230;<br />這傢伙我記得在哪一年的世大運有看過<br />烏克蘭三個選手都有那個把拇指放到頸後的特殊動作<br />以前看到原本以為是那個選手特殊而已<br />沒想到這次烏克蘭代表隊三個都有<br />還滿特殊的<br /><br />到最後一波TPE還落後四分<br />但六箭追四分並不是沒有可能<br /><br />三箭過去剩落後兩分<br />這時第一棒大熊居然射個八分<br />幾乎就沒戲唱了<br />後面表現的也不好<br /><br />最後敗給了烏克蘭<br />相當的可惜<br /><br />其實是有機會，也有實力贏的<br />這次從男子和女子團體<br />可以看出中華台北選手在心理素質和抗壓力這方面比較弱<br />若不加強，很難與韓國以及列強競爭</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E7%94%B7%E5%AD%90%E5%9C%98%E9%AB%94/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E5%A5%B3%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 女子團體</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-11T00:00:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>好久沒射箭，以前也沒射的多好<br />這次就以外行人的眼光來看一些瑣碎的事吧XD<br /><br />本喵在排位賽比完後就大膽預測過<br />本屆奧運女子團體沒有得牌希望<br />果然如我所料<br /><br />其一，這次第三位選手Wei的表現不佳<br />其二，籤運不好，和韓國抽到同一邊<br /></p> <p>這次順便統計了一下各國使用弓箭廠牌</p> <p><br />JPN vs Columbia <br />206:199 JPN win<br />品牌：<br />JPN:Hoyt, Samick, W&amp;W<br />COL:沒記到</p> <p><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459664_48a038108453b.png"><img height="206" width="260" border="0" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459665_48a03811d8eed.png" alt="image" style="border: 0px none ;" /></a><br />日本這次代表隊最正的&#8230;<br /><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459668_48a0381480420.png"><img height="208" width="260" border="0" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459669_48a0381551cb1.png" alt="image" style="border: 0px none ;" /></a> <br />戴白手套&#8230;好萌&gt;///&lt;<br /><br /><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459671_48a03817ecfa2.png"><img height="208" width="260" border="0" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459672_48a03818b137f.png" alt="image" style="border: 0px none ;" /></a>&nbsp;<br />哥倫比亞隊的隊員，頭後綁緞帶、插兩隻箭筆、背上還帶著烏龜<br />有夠花俏<br /><br />ITA vs TPE<br />215:211 ITA win<br />品牌：<br />Italy: Hoyt, W&amp;W, Hoyt<br />TPE: Hoyt, Hoyt, Hoyt<br /><br />第一波Wei表現不好，連中紅圈<br />雖然第二第三波有拉回來，<br />但兩隊實力相差不大的情況下<br />只能飲恨<br /><br />兩位老將表現中規中矩，但還能更上一步<br />有一兩箭袁放不好，但還是能擠進黃圈<br />可見功底深厚。<br /><br /><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459675_48a0381bc0db1.png"><img height="209" width="260" border="0" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459676_48a0381cd61e6.png" alt="image" style="border: 0px none ;" /></a> <br />義大利眼鏡妹1&#8230;正<br />另一枚眼鏡妹也很正&#8230;忘記拍了<br />義大利隊的教練也很帥&gt; /// &lt;<br /><br /><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459679_48a0381f1a426.png"><img height="209" width="260" border="0" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/1218459680_48a03820ef6a9.png" alt="image" style="border: 0px none ;" /></a> <br />其實這忘記是那一隊腿上的刺青&#8230;<br /><br />CHN vs IND<br />211:206 CHN win<br />品牌：<br />CHN: Samick, Samick, Samick<br />IND: W&amp;W, W&amp;W, Samick<br /><br />大陸隊的實力本來就僅次南韓，排位又不錯的狀況下<br />這場是熱身的。<br /><br />大陸這次也是兩位老將搭配一位新人，<br />但相較於TPE的Wei, 大陸的新人這次表現非常的好！<br />甚至比兩位老將都還來的出色。</p> <p>箭都在黃圈，沒有失誤過，放箭速度很快<br />心理素質也很穩，喜怒不形於色<br />和快樂的張娟娟恰好是對比<br />射箭的神情有如女子的陳詩園</p> <p>相信這次賽後，他會成為大陸射箭界新一代的強手。<br />才21歲，真是前途無可限量。<br /><br />在轉播時，發現這次多了Arrow Speed&#8230;<br />覺得很沒意義。<br />射箭又不是比誰的箭快&#8230;<br />打這個出來有意義嗎？真奇怪&#8230;<br /><br /></p> <p>1/4 JPN vs GB </p><p>GB hoyt hoyt hoyt </p><p>JPN samick hoyt w&amp;w </p><p>196:201 </p><p>&nbsp; </p><p>France vs Poland </p><p>Pol:w&amp;w hoyt samick </p><p>FR:hoyt w&amp;w samick </p><p>FR wins 218:211<br /><br /> </p><p>kor vs ita </p><p>Kor samick samick samick </p><p>231:217<br />231分破世界紀錄<br /><br />最後KOR vs CHN<br /><br />沒啥好講了，兩隊不是在同一個水平上<br />大家來看女團不是來看誰贏的<br />而是來看南韓贏幾分的<br /><br />Park自2002年出道一直稱霸到現在<br />很想看他還能稱霸多久 </p><p>韓國射箭選手淘汰的很快<br />Park能夠獨領風騷這麼多年<br />也是一個異數</p> <p>印象中韓國還沒有一位女子射箭選手能夠<br />連續稱霸兩屆奧運<br />且看這次Park能不能完成他的霸業。</p> <p>ps.Park瘦好多，完全不像以前那個小熊維尼人&#8230;</p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E5%A5%B3%E5%AD%90%E5%9C%98%E9%AB%94/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/sugar-and-spice-and-everything-nice/">Sugar and Spice and Everything Nice</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-26T00:00:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p><em>What are little girls made of? <br /> Sugar and spice and everything nice</em></p><p><em><br /></em></p><p>-from a popular nursery rhyme dating from the early nineteenth century. </p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/07/sugar-and-spice-and-everything-nice/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/mt-new-server%E8%A8%AD%E5%AE%9A%E6%9A%AB%E8%A8%98/">Mt New Server設定暫記</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-23T00:00:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>[mysqld]<br />max_allowed_packet=128M<br />default-character-set=utf8<br />default-collation=utf8_general_ci<br />init-connect = &#8216;SET NAMES utf8&#8217;<br /><br />[client]<br />default-character-set=utf8<br /></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/07/mt-new-server%E8%A8%AD%E5%AE%9A%E6%9A%AB%E8%A8%98/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/07/%E5%AF%8C%E8%B6%B3%E7%9A%84%E4%B8%80%E5%A4%A9/">富足的一天</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-12T00:00:00+08:00" pubdate data-updated="true">Jul 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>距離上次買書(學校用書不算)，已經好幾年了。<br />之前因為一直搬家，因此養成了不買書的好習慣(?)<br />寧願在書店坐著看完/去圖書館抄寫下來/用照相機快速偷拍幾頁<br /><br />以前嫌書貴，又重。<br />搬家不便，因此盡量不買書。<br />但隨著物價飛漲，現在只覺得書好便宜啊&#8230;。<br />跟其他的東西比起來，書簡直是便宜到翻，<br />再加上那種心靈富足的感覺，真是c/p值高的消費品。<br /><br />昨天和老媽出去逛街，用刷卡買了三本書。<br />分別是Neil Gaimen的「美國眾神」、「好預兆」以及萬城目學的「鹿男」。(請見左下角書櫃)<br /><br />Neil Gaimen的兩本書是早就想看了，美國眾神更是在書店翻了一半。<br />而鹿男則是當天在那邊看到，被吸引的。<br /><br />順便試試耳聞許久的aNobii，還不太清楚要怎麼玩。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/07/%E5%AF%8C%E8%B6%B3%E7%9A%84%E4%B8%80%E5%A4%A9/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page/8/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page/6/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

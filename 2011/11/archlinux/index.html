@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Archlinux 推廣 - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。
+Why Arch?
+Archlinux 設計的理念是「簡單」、「正確」、「使用者至上」、「開放」、「自由」(參見 Arch 之道 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://octo.hsatac.net/2011/11/archlinux">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:octo.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Archlinux 推廣</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
+
+<p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。<!--more-->
+<h1>Why Arch?</h1>
+Archlinux 設計的理念是「簡單」、「正確」、「使用者至上」、「開放」、「自由」(參見 <a href="https://wiki.archlinux.org/index.php/The_Arch_Way_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">Arch 之道</a>)。</p>
+
+<p>他採取滾動式升級 (rolling release system)，不再有每次大版本升級的噩夢。<br />
+他的套件管理 pacman 相當優秀，更有社群貢獻的套件庫 AUR，安裝軟體簡單又不髒手。
+<a href="https://wiki.archlinux.org/" target="_blank">Archwiki</a> 應該是網路上資料最豐富最齊全的 linux wiki 了，不管什麼疑難雜症都可以在裏面找到。<br />
+Archlinux 安裝完是一個乾淨輕巧的系統，你可以依照自己的喜好打造自己的工作環境。
+<h1>Install</h1>
+一開始的安裝可以跟著這兩篇 wiki：
+<ul>
+	<li><a href="https://wiki.archlinux.org/index.php/Official_Installation_Guide" target="_blank">Official Installation Guide</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide" target="_blank">Beginner&#8217;s Guide</a></li>
+</ul>
+其實安裝很簡單，光碟插進去以後下一步就結束了，不過選項還是要稍微看一下。
+<h2>套件管理</h2>
+安裝完以後先把 pacman mirror 只留台灣站，做一次系統升級 sudo pacman -Syu<br />
+再想辦法安裝 AUR (Arch User Repositories) 輔助程式。<br />
+比較有名的是 Yaourt 不過已經停止開發了，我推薦使用 packer。<br />
+想辦法安裝 packer 以後，離成功就不遠啦！
+<div>
+<ul>
+	<li><a href="https://wiki.archlinux.org/index.php/Pacman_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">pacman 說明</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/AUR" target="_blank">AUR 說明</a></li>
+	<li><a href="https://wiki.archlinux.org/index.php/AUR_Helpers" target="_blank">AUR helper 說明</a></li>
+</ul>
+</div>
+<h2>桌面環境</h2>
+桌面環境有許多選擇，例如 gnome, kde, xfce4, lxde 等等，可以按自己的喜好做選擇。<br />
+安裝過程可以參考 archwiki，當然也有許多 Archlinux 分支出去，隨附 Desktop Environment 的發行版：<br />
+例如 kde 的 <a href="http://chakra-linux.org/about.html" target="_blank">Chakra</a> 、gnome 的 <a href="http://www.kahelos.org/" target="_blank">KahelOS</a> 、openbox 的 <a href="http://archbang.org/" target="_blank">Archbang</a> 等等，這裡有<a href="https://wiki.archlinux.org/index.php/Arch_Based_Distributions_(Active)" target="_blank">清單一覽</a>。<br />
+這些桌面發行版，除了簡化安裝流程外，通常也會針對桌面環境做設定和優化，想省時間的話不妨可以考慮。
+<h2>中文使用</h2>
+中文使用者的兩大問題不外乎就是字型和輸入法。<br />
+字型的部份可以參考<a href="http://imxie.net/2010/06/basic-lcd-font-config-on-archlinux.htm" target="_blank">這篇文章</a>來做設定。<br />
+我中文字型是選擇 Hiragino Sans GB ，從我的 Mac 上複製過來，效果非常好。<br />
+輸入法的部份大概就 scim, gcin, ibus 選一套，ibus 我用不太習慣，用了一陣子 scim ，發現不是很穩定，目前改用 gcin ，使用狀況良好。
+<h1>結語</h1>
+本來有很多踩到的雷想寫，後來想想都太瑣碎了。<br />
+玩 Arch 只要把握一個原則：查 wiki ，大概什麼問題都可以迎刃而解。<br />
+Linux DE 的原罪就是選擇太多，通常要自己試用、設定後才能符合自己的需求。<br />
+在這之中可能會有很多挫折，不過解決問題的過程也是一種喜悅。<br />
+只要肯花時間，絕對能把環境打造到你喜歡的樣子。<br />
+一起來享受 Arch 吧！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/archlinux/'>Archlinux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://octo.hsatac.net/2011/11/archlinux/" data-via="hSATAC" data-counturl="http://octo.hsatac.net/2011/11/archlinux/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/" title="Previous Post: Redmine + Bundler 復活記">&laquo; Redmine + Bundler 復活記</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/11/logitech-g300-on-archlinux/" title="next Post: Logitech G300 on ArchLinux">Logitech G300 on ArchLinux &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2011 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

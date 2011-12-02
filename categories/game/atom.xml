@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Game | hSATAC]]></title>
+  <link href="http://octo.hsatac.net/categories/game/atom.xml" rel="self"/>
+  <link href="http://octo.hsatac.net/"/>
+  <updated>2011-12-02T14:49:48+08:00</updated>
+  <id>http://octo.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hack into AGUF: Big Buff Feature (Updated for 3.1)]]></title>
+    <link href="http://octo.hsatac.net/2009/03/hack-into-aguf-big-buff-feature/"/>
+    <updated>2009-03-13T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2009/03/hack-into-aguf-big-buff-feature</id>
+    <content type="html"><![CDATA[<p>I updated this article for WoW 3.1, AGUF r700 release.</p>
+
+
+
+
+<p>Before:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1ac52a7.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="before" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1b65f58.jpg" border="0" alt="before" width="208" height="112" /></a></p>
+
+
+
+
+<p>After:
+<a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1bdc5f2.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="after" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1c68782.jpg" border="0" alt="after" width="241" height="113" /></a></p>
+
+
+
+
+<p><!--more--></p>
+
+
+
+
+<p>Recently I stop using Xperl instead of ag_unitframes, which is absolutly wonderful and nice-looking.</p>
+
+
+
+
+<p>But there is one thing that I love about Xperl and ag_unitframes couldnot satisfied my need: Big Buff Feature.</p>
+
+
+
+
+<p>Xperl can display the debuff that you cast in twice size, so I could easily manage my debuffs.</p>
+
+
+
+
+<p>I know there are so many Uis for this for instance, I use dotimer for my other needs. But I still want this feature.</p>
+
+
+
+
+<p>I went through the internet and found no solutions. But I did notice that there are people like me who wants this feature.</p>
+
+
+
+
+<p>So I decide to do it myself.</p>
+
+
+
+
+<p>Here are my steps:</p>
+
+
+
+
+<p>File:ag_UnitFrames\modules\auras\auras.lua</p>
+
+
+
+
+<p>1.add a function GetAuraScale()
+<pre lang="lua" line="1">
+--add GetAuraScale
+function plugin.GetAuraScale(self, frame)
+--error('test getaura scale')
+    local position, rows, columns, scale
+    
+    if frame and frame == self.debuffFrame then
+        position = plugin.db.profile.units[self.type].DebuffPos
+        rows = plugin.db.profile.units[self.type].DebuffRows
+        columns = plugin.db.profile.units[self.type].DebuffColumns  
+    else
+        position = plugin.db.profile.units[self.type].AuraPos
+        rows = plugin.db.profile.units[self.type].AuraRows
+        columns = plugin.db.profile.units[self.type].AuraColumns
+    end
+    local count = rows * columns
+    if frame.growAs then
+        position = frame.growAs
+    end</pre></p>
+
+
+
+
+<p> if position == "Below" or position == "Above" then<br />
+        if frame.autoScale then<br />
+            local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
+            scale = (self.frame:GetWidth() + offset)/(16*columns+(columns-1)*2)<br />
+        end<br />
+    elseif position == "Left" or position == "Right" then<br />
+        if frame.autoScale then<br />
+            local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
+            scale = (self.frame:GetHeight() + offset)/(16*rows+(rows-1)*2)<br />
+        end<br />
+    end<br />
+    if frame.auraScale then<br />
+        scale = frame.auraScale<br />
+    end<br />
+    if not scale or scale <= 0 then<br />
+        scale = 1<br />
+    end<br />
+    return scale<br />
+end<br />
+--end here
+
+2.modity function UpdateAuraFrame()</p>
+
+<p>a.find:
+<pre lang="lua" line="1">
+plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+local scale = plugin.GetAuraScale(self, frame)
+plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration, scale)
+</pre>
+b.find:
+<pre lang="lua" line="1">
+plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+local aura_name, aura_rank, aura_icon, aura_count, aura_debuffType,aura_duration, aura_expirationTime, aura_isMine, aura_isStealable =UnitAura(self.type, i,"HARMFUL")
+local scale = plugin.GetAuraScale(self, frame)
+if self.type == "target" and aura_isMine=="player" then
+    scale = scale * 2;
+end
+plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration, scale)
+</pre>
+3.modity function SetAura()</p>
+
+<p>a.find:
+<pre lang="lua" line="1">
+function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expirationTime, duration)
+</pre>
+modify to:
+<pre lang="lua" line="1">
+function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expirationTime, duration, scale)
+</pre>
+b.add these line at the begining of this function:
+<pre lang="lua" line="1">
+--start 就放大兩倍
+if scale then
+    buffFrame:SetScale(scale)
+end
+--end 
+</pre>
+附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://blog.hsatac.net/wp-content/uploads/2009/04/auras.lua">下載</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[夜暮]]></title>
+    <link href="http://octo.hsatac.net/2009/03/%E5%A4%9C%E6%9A%AE/"/>
+    <updated>2009-03-09T00:00:00+08:00</updated>
+    <id>http://octo.hsatac.net/2009/03/夜暮</id>
+    <content type="html"><![CDATA[<p>今天要寫兩件很宅的事。<br />
+不過回歸魔獸以來，難得碰到值得寫的，還是紀錄一下。</p>
+
+
+
+
+<p>其一是經過兩個 CD 的拓荒，終於在 3/7 拿到夜暮頭銜。<br />
+魔獸這版確實是太簡單了。要打到最難的 10 人 1+3，<br />
+才讓我有以前信on推王的感覺，那美、海二空二的那種刺激度。</p>
+
+
+
+
+<p><!--more--></p>
+
+
+
+
+<p>前兩個 CD 打3坦2補團，但到了二三龍時補的壓力太大，<br />
+於是這周改打2坦3補。<br />
+1+3每次要打時固定團成員都很不齊。<br />
+這次幾乎是半野團過的。歷經了近十個小時的磨合與換員。<br />
+最後的組合是：<br />
+DK坦 ,  DK坦, 神聖騎, 神聖騎, 樹D, 元素薩, 增強薩, 法師, DK, 暗牧</p>
+
+
+
+
+<p>打法是1DK坦龍王，1DK拉三龍和所有小怪，<br />
+硬殺1,2龍直到2龍死後才進門殺信徒。<br />
+由於有三補，暮光折磨的反暗傷由補D直接硬補上來。</p>
+
+
+
+
+<p>成功的那次2龍半血、3龍下來時有點混亂。<br />
+增薩被三龍噴死，暗牧也運氣不好被隕石砸死。<br />
+不過最後穩住三龍倒後就容易了。</p>
+
+
+
+
+<p>終於可以自豪的說這個patch全破了。</p>
+
+
+
+
+<p>另一件是換了了 UI ，調整過後，自己覺得很得意。</p>
+
+
+
+
+<p>原本是用米粒的 UI ，但因為螢幕不夠大，每次 raid 時<br />
+左側 Xperl 的團隊框架就佔掉一半的螢幕，非常擁擠。</p>
+
+
+
+
+<p>使用ag_unitframes加上bartender4以及sexymap，把整個介面大更新後，<br />
+現在清爽很多。不過Xperl頭像有一個ag沒有的優點，<br />
+就是他會把你放的buff &amp; debuff兩倍放大，監控起來很清楚。<br />
+ag_unitframes就沒辦法做這樣的設定了。現在監控要看dotimer，<br />
+還需要習慣一下。</p>
+
+
+
+
+<p><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49b51f28e5df0.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="WoWScrnShot_030909_135339" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49b51f29dad1f.jpg" border="0" alt="WoWScrnShot_030909_135339" width="260" height="170" /></a></p>
+
+
+
+
+<p><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49b51e9de9289.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="WoWScrnShot_030909_135040" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49b51e9ee8cef.jpg" border="0" alt="WoWScrnShot_030909_135040" width="260" height="170" /></a></p>
+
+]]></content>
+  </entry>
+  
+</feed>
