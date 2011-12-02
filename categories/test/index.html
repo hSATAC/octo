@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>hSATAC</title>
+  <title>Category: TEST - hSATAC</title>
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="{% assign index = true %} {% for post in paginator.posts %} {% assign content = post.content %} {% include article.html %} {% endfor %} {% if &hellip;">
+  <meta name="description" content="Category: TEST">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://octo.hsatac.net">
+  <link rel="canonical" href="http://octo.hsatac.netcategories/test">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -72,31 +72,97 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
-  {% assign index = true %}
-  {% for post in paginator.posts %}
-  {% assign content = post.content %}
-    <article>
-      {% include article.html %}
-    </article>
-  {% endfor %}
-  <div class="pagination">
-    {% if paginator.next_page %}
-      <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
-    {% endif %}
-    <a href="/blog/archives">Blog Archives</a>
-    {% if paginator.previous_page %}
-    <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-    {% endif %}
-  </div>
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Category: TEST</h1>
+    
+  </header>
+  
+  <div id="blog-archives" class="category">
+
+
+
+  
+  <h2>2011</h2>
+
+<article>
+  
+<h1><a href="/2011/12/test/">test</a></h1>
+<time datetime="2011-12-02T12:02:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>02</span> <span class='year'>2011</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/categories/test/'>TEST</a>, <a class='category' href='/categories/test/'>test</a>, <a class='category' href='/categories/測試/'>測試</a></span>
+</footer>
+
+
+</article>
+
 </div>
+
+  
+</article>
+
+</div>
+
 <aside class="sidebar">
-  {% if site.blog_index_asides.size %}
-    {% include_array blog_index_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2011/12/ce-shi-zhong-wen-title/">測試中文 title</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/12/test/">test</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
 </aside>
+
 
     </div>
   </div>
