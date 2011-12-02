@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Game | hSATAC]]></title>
   <link href="http://octo.hsatac.net/categories/game/atom.xml" rel="self"/>
   <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-02T16:00:35+08:00</updated>
+  <updated>2011-12-02T17:31:37+08:00</updated>
   <id>http://octo.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -167,7 +167,7 @@ if scale then
 end
 --end 
 </pre>
-附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://blog.hsatac.net/wp-content/uploads/2009/04/auras.lua">下載</a></p>
+附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://octo.hsatac.net/images/wp-uploads/2009/04/auras.lua">下載</a></p>
 
 ]]></content>
   </entry>

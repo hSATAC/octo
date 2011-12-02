@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | hSATAC]]></title>
   <link href="http://octo.hsatac.net/categories/php/atom.xml" rel="self"/>
   <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-02T16:00:35+08:00</updated>
+  <updated>2011-12-02T17:31:37+08:00</updated>
   <id>http://octo.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -19,7 +19,7 @@
     <updated>2011-06-11T00:00:00+08:00</updated>
     <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
     <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/wp-content/uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
 <!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
 
 
