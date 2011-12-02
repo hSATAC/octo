@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://hSATAC.github.com/octo/</loc>
+        <loc>http://octo.hsatac.net/</loc>
         <lastmod>2011-12-02T10:13:34+08:00</lastmod>
     </url>
     <url>
-        <loc>http://hSATAC.github.com/octo/blog/archives/</loc>
+        <loc>http://octo.hsatac.net/blog/archives/</loc>
         <lastmod>2011-12-02T10:13:34+08:00</lastmod>
     </url>
 </urlset>

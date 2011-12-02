@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://hSATAC.github.com/octo/atom.xml" rel="self"/>
-  <link href="http://hSATAC.github.com/octo/"/>
-  <updated>2011-12-02T10:31:17+08:00</updated>
-  <id>http://hSATAC.github.com/octo/</id>
+  <title><![CDATA[hSATAC]]></title>
+  <link href="http://octo.hsatac.net/atom.xml" rel="self"/>
+  <link href="http://octo.hsatac.net/"/>
+  <updated>2011-12-02T10:43:18+08:00</updated>
+  <id>http://octo.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
