@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 生活雜談 | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/生活雜談/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/生活雜談/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版]]></title>
-    <link href="http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/"/>
+    <link href="http://blog.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/"/>
     <updated>2011-02-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-歌詞-漢字假名拼音對照版</id>
+    <id>http://blog.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-歌詞-漢字假名拼音對照版</id>
     <content type="html"><![CDATA[<p>最近在迷這首...
 <iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/UcOb5dDKNqI" frameborder="0" allowfullscreen></iframe>
 <!--more-->
@@ -124,9 +124,9 @@
   
   <entry>
     <title type="html"><![CDATA[Freenode伺服器名稱]]></title>
-    <link href="http://octo.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
+    <link href="http://blog.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
     <updated>2011-01-25T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/01/freenode伺服器名稱</id>
+    <id>http://blog.hsatac.net/2011/01/freenode伺服器名稱</id>
     <content type="html"><![CDATA[<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
 當登入的時候會顯示作家的簡介，整理如下：</p>
 
@@ -318,9 +318,9 @@ perhaps more famed for devising Dianetics and Scientology.</p>
   
   <entry>
     <title type="html"><![CDATA[Only my railgun]]></title>
-    <link href="http://octo.hsatac.net/2010/10/only-my-railgun/"/>
+    <link href="http://blog.hsatac.net/2010/10/only-my-railgun/"/>
     <updated>2010-10-26T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/10/only-my-railgun</id>
+    <id>http://blog.hsatac.net/2010/10/only-my-railgun</id>
     <content type="html"><![CDATA[<p>今天的Coding BGM是這首：Only my railgun
 <object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
 
@@ -536,9 +536,9 @@ repeat ☆</p>
   
   <entry>
     <title type="html"><![CDATA[倒數80天，我用aNobii記錄我的軍旅生活]]></title>
-    <link href="http://octo.hsatac.net/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/"/>
+    <link href="http://blog.hsatac.net/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/"/>
     <updated>2010-03-13T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/03/倒數80天，我用anobii記錄我的軍旅生活</id>
+    <id>http://blog.hsatac.net/2010/03/倒數80天，我用anobii記錄我的軍旅生活</id>
     <content type="html"><![CDATA[<p>今天是我入伍的第256天，也就是還有80天退伍。<br />
 很幸運的最後到了一個可以讓我有時間看書的地方，<br />
 而且也有圖書閱覽室可以借閱，<br />
@@ -933,10 +933,10 @@ repeat ☆</p>
   
   <entry>
     <title type="html"><![CDATA[Tiger 上班去]]></title>
-    <link href="http://octo.hsatac.net/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/"/>
+    <link href="http://blog.hsatac.net/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/"/>
     <updated>2009-06-20T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2009/06/tiger-上班去</id>
-    <content type="html"><![CDATA[<p><p>又到了 Tiger 上班的日子了…   <br />今天都沒有別的貓咪來，tiger有點寂寞…</p>  <p><a href="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2562.jpg"><img title="IMG_2562" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2562" src="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2562-thumb.jpg" width="260" border="0" /></a> </p> <!--more-->  <p><a href="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2568.jpg"><img title="IMG_2568" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2568" src="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2568-thumb.jpg" width="200" border="0" /></a>     <br /><a href="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2570.jpg"><img title="IMG_2570" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2570" src="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2570-thumb.jpg" width="200" border="0" /></a>     <br />看我一掌踩扁你～～～</p>  <p>同場加映…新買的外出袋   <br /><a href="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2541.jpg"><img title="IMG_2541" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2541" src="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2541-thumb.jpg" width="260" border="0" /></a>     <br /><a href="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2546.jpg"><img title="IMG_2546" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2546" src="http://octo.hsatac.net/images/wp-uploads/2009/06/img-2546-thumb.jpg" width="200" border="0" /></a></p></p>
+    <id>http://blog.hsatac.net/2009/06/tiger-上班去</id>
+    <content type="html"><![CDATA[<p><p>又到了 Tiger 上班的日子了…   <br />今天都沒有別的貓咪來，tiger有點寂寞…</p>  <p><a href="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2562.jpg"><img title="IMG_2562" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2562" src="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2562-thumb.jpg" width="260" border="0" /></a> </p> <!--more-->  <p><a href="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2568.jpg"><img title="IMG_2568" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2568" src="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2568-thumb.jpg" width="200" border="0" /></a>     <br /><a href="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2570.jpg"><img title="IMG_2570" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2570" src="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2570-thumb.jpg" width="200" border="0" /></a>     <br />看我一掌踩扁你～～～</p>  <p>同場加映…新買的外出袋   <br /><a href="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2541.jpg"><img title="IMG_2541" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2541" src="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2541-thumb.jpg" width="260" border="0" /></a>     <br /><a href="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2546.jpg"><img title="IMG_2546" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="260" alt="IMG_2546" src="http://blog.hsatac.net/images/wp-uploads/2009/06/img-2546-thumb.jpg" width="200" border="0" /></a></p></p>
 
 ]]></content>
   </entry>

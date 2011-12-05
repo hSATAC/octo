@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Mac | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/mac/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/mac/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[整合 Redmine 和 git]]></title>
-    <link href="http://octo.hsatac.net/2011/04/redmine-git-integration/"/>
+    <link href="http://blog.hsatac.net/2011/04/redmine-git-integration/"/>
     <updated>2011-04-14T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/redmine-git-integration</id>
+    <id>http://blog.hsatac.net/2011/04/redmine-git-integration</id>
     <content type="html"><![CDATA[<p>其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已<br />
 不過一直報找不到專案，看了一下 error log  原來是找不到 git 執行檔<br />
 解法很簡單，原本 httpd.conf 設定的 ruby 要再包一層去 export path<br />
@@ -55,9 +55,9 @@ PassengerRuby /usr/local/bin/ruby_with_env
   
   <entry>
     <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
+    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
     <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
+    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
     <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of "php-gmp".</p>
 
 
@@ -130,29 +130,29 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
   
   <entry>
     <title type="html"><![CDATA[連猴子也會之：在 Mac mini server 上架設 WebDAV git server]]></title>
-    <link href="http://octo.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
+    <link href="http://blog.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
     <updated>2011-04-04T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/連猴子也會之：在-mac-mini-server-上架設-webdav-git-server</id>
+    <id>http://blog.hsatac.net/2011/04/連猴子也會之：在-mac-mini-server-上架設-webdav-git-server</id>
     <content type="html"><![CDATA[<p>因為我的 mac mini server 不想開著 ssh 一直給人掃，所以想設定 https 的 git server，試了一下真的超簡單的。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
 ▲首先打開你的 Server Admin 建立一個新 Site 例如 repo.hsatac.net
 <!--more--></p>
 
 
 
 
-<p><p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg"><img class="aligncenter size-full wp-image-371" title="螢幕快照 2011-04-04 下午1.48.24" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg" alt="" width="523" height="307" /></a></p>
+<p><p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg"><img class="aligncenter size-full wp-image-371" title="螢幕快照 2011-04-04 下午1.48.24" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg" alt="" width="523" height="307" /></a></p>
 ▲Option 的部份把 WebDAV 打勾，我們要用這個做認證，Folding Listing 也勾起來比較方便。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg"><img class="aligncenter size-full wp-image-372" title="螢幕快照 2011-04-04 下午1.49.02" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg" alt="" width="332" height="162" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg"><img class="aligncenter size-full wp-image-372" title="螢幕快照 2011-04-04 下午1.49.02" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg" alt="" width="332" height="162" /></a></p>
 ▲接著建立一個新的 Realm ，範例就用 project.git
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg"><img class="aligncenter size-full wp-image-373" title="螢幕快照 2011-04-04 下午1.49.51" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg" alt="" width="522" height="288" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg"><img class="aligncenter size-full wp-image-373" title="螢幕快照 2011-04-04 下午1.49.51" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg" alt="" width="522" height="288" /></a></p>
 ▲按+號把你的使用者拖過來，給他權限 Browse and Read/Write WebDAV，</p>
 
 
 
 
 <p>當然如果你要公開這個 repo 給別人讀取，可以把 everyone 的權限設成 Browse and Read
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg"><img class="aligncenter size-full wp-image-374" title="螢幕快照 2011-04-04 下午1.50.20" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg" alt="" width="521" height="310" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg"><img class="aligncenter size-full wp-image-374" title="螢幕快照 2011-04-04 下午1.50.20" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg" alt="" width="521" height="310" /></a></p>
 ▲最後在 Security 的部份 把 SSL 打勾並選你的憑證</p>
 
 
@@ -200,9 +200,9 @@ git push origin master --force -v</pre>
   
   <entry>
     <title type="html"><![CDATA[Mac OSX Server 10.6 安裝 mysql2 gem]]></title>
-    <link href="http://octo.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
+    <link href="http://blog.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
     <updated>2011-02-22T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
+    <id>http://blog.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
     <content type="html"><![CDATA[<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
 下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
 
@@ -245,10 +245,10 @@ env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/loca
   
   <entry>
     <title type="html"><![CDATA[Mac Os Server 輕鬆設定  Passenger (mod_rails)]]></title>
-    <link href="http://octo.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
+    <link href="http://blog.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
     <updated>2010-09-26T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
-    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://octo.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://octo.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
+    <id>http://blog.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
+    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
 
 ]]></content>
   </entry>

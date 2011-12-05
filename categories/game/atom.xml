@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Game | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/game/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/game/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hack into AGUF: Big Buff Feature (Updated for 3.1)]]></title>
-    <link href="http://octo.hsatac.net/2009/03/hack-into-aguf-big-buff-feature/"/>
+    <link href="http://blog.hsatac.net/2009/03/hack-into-aguf-big-buff-feature/"/>
     <updated>2009-03-13T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2009/03/hack-into-aguf-big-buff-feature</id>
+    <id>http://blog.hsatac.net/2009/03/hack-into-aguf-big-buff-feature</id>
     <content type="html"><![CDATA[<p>I updated this article for WoW 3.1, AGUF r700 release.</p>
 
 
@@ -167,16 +167,16 @@ if scale then
 end
 --end 
 </pre>
-附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://octo.hsatac.net/images/wp-uploads/2009/04/auras.lua">下載</a></p>
+附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://blog.hsatac.net/images/wp-uploads/2009/04/auras.lua">下載</a></p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[夜暮]]></title>
-    <link href="http://octo.hsatac.net/2009/03/%E5%A4%9C%E6%9A%AE/"/>
+    <link href="http://blog.hsatac.net/2009/03/%E5%A4%9C%E6%9A%AE/"/>
     <updated>2009-03-09T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2009/03/夜暮</id>
+    <id>http://blog.hsatac.net/2009/03/夜暮</id>
     <content type="html"><![CDATA[<p>今天要寫兩件很宅的事。<br />
 不過回歸魔獸以來，難得碰到值得寫的，還是紀錄一下。</p>
 

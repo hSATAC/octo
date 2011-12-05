@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: PHP | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/php/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/php/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,11 +15,11 @@
   
   <entry>
     <title type="html"><![CDATA[Better Array, Better PHP]]></title>
-    <link href="http://octo.hsatac.net/2011/06/better-array-better-php/"/>
+    <link href="http://blog.hsatac.net/2011/06/better-array-better-php/"/>
     <updated>2011-06-11T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
+    <id>http://blog.hsatac.net/2011/06/better-array-better-php</id>
     <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
 <!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
 
 
@@ -77,9 +77,9 @@ sudo apachectl restart</pre>
   
   <entry>
     <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
+    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
     <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
+    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
     <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of "php-gmp".</p>
 
 
@@ -152,9 +152,9 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
   
   <entry>
     <title type="html"><![CDATA[Mac mini server使用homebrew安裝PHP mcrypt套件]]></title>
-    <link href="http://octo.hsatac.net/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/"/>
+    <link href="http://blog.hsatac.net/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/"/>
     <updated>2010-08-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/08/mac-mini-server使用brew安装php-mcrypt套件</id>
+    <id>http://blog.hsatac.net/2010/08/mac-mini-server使用brew安装php-mcrypt套件</id>
     <content type="html"><![CDATA[<p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
 
 
@@ -207,9 +207,9 @@ end</pre></p>
   
   <entry>
     <title type="html"><![CDATA[PHP 自動 urldecode $_GET]]></title>
-    <link href="http://octo.hsatac.net/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/"/>
+    <link href="http://blog.hsatac.net/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/"/>
     <updated>2009-05-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2009/05/php-自動-urldecode-_get</id>
+    <id>http://blog.hsatac.net/2009/05/php-自動-urldecode-_get</id>
     <content type="html"><![CDATA[<p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
 PHP會自動轉換成空白，做了一點調查才知道，</p>
 
@@ -234,9 +234,9 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
   
   <entry>
     <title type="html"><![CDATA[延伸 MVC 的 V - 以 CodeIgniter 為例]]></title>
-    <link href="http://octo.hsatac.net/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/"/>
+    <link href="http://blog.hsatac.net/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/"/>
     <updated>2009-04-18T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2009/04/延伸-mvc-的-v-以-codeigniter-為例</id>
+    <id>http://blog.hsatac.net/2009/04/延伸-mvc-的-v-以-codeigniter-為例</id>
     <content type="html"><![CDATA[<p>今天在 CodeIgniter#irc.freenode.net 有位網友拋出了這篇文章討論
 <a href="http://alessandrovermeulen.me/2009/04/16/extending-the-v-in-mvc/" target="_blank">Extending the V in MVC</a></p>
 

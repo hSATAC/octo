@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 工作紀錄 | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/工作紀錄/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/工作紀錄/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[CloudAAA 雲端大亂鬥簡記]]></title>
-    <link href="http://octo.hsatac.net/2011/06/cloudaaa/"/>
+    <link href="http://blog.hsatac.net/2011/06/cloudaaa/"/>
     <updated>2011-06-23T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/cloudaaa</id>
+    <id>http://blog.hsatac.net/2011/06/cloudaaa</id>
     <content type="html"><![CDATA[<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
 借到了精誠資訊的大樓，相當棒的一個場地。<br />
 不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
@@ -44,7 +44,7 @@ Windows Azure 應該大家比較沒有接觸過，應該都很有興趣<br />
 然後展示了一下 WebMatrix 這套 IDE 搭配 Windows Azure 的佈署方式<br />
 整合的相當好的一個 IDE，感覺開發起來也很方便，習慣 .net 的用戶應該很容易能夠上手<br />
 WebMatrix 這套 IDE 是免費的，現場微軟也提供了一組 30 天 Windows Azure 試用序號
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://octo.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://blog.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
 使用 windows live 帳號登入 http://windowsazurepass.com/ 輸入 SSAPERUZAWT<br />
 然後 ericsk 上官大大有提到 SQL Azure 使用 MSSQL 的話可以做 scalibility<br />
 這點我還滿有興趣的，目前 GAE 和 aws 似乎都做不到<br />
@@ -90,9 +90,9 @@ http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
   
   <entry>
     <title type="html"><![CDATA[讓 Empathy 支援 P4-Context]]></title>
-    <link href="http://octo.hsatac.net/2011/06/empathy-p4-context/"/>
+    <link href="http://blog.hsatac.net/2011/06/empathy-p4-context/"/>
     <updated>2011-06-12T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/empathy-p4-context</id>
+    <id>http://blog.hsatac.net/2011/06/empathy-p4-context</id>
     <content type="html"><![CDATA[<p>這兩天灌了 Ubuntu 11.04 在玩<br />
 內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
 但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
@@ -136,11 +136,11 @@ http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
   
   <entry>
     <title type="html"><![CDATA[Better Array, Better PHP]]></title>
-    <link href="http://octo.hsatac.net/2011/06/better-array-better-php/"/>
+    <link href="http://blog.hsatac.net/2011/06/better-array-better-php/"/>
     <updated>2011-06-11T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
+    <id>http://blog.hsatac.net/2011/06/better-array-better-php</id>
     <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
 <!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
 
 
@@ -198,10 +198,10 @@ sudo apachectl restart</pre>
   
   <entry>
     <title type="html"><![CDATA[我的 vimrc for vim, win32 gvim, macvim]]></title>
-    <link href="http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
+    <link href="http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
     <updated>2011-05-18T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
-    <content type="html"><![CDATA[<p><a href="http://octo.hsatac.net/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://octo.hsatac.net/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
+    <id>http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
 
 
 
@@ -221,7 +221,7 @@ sudo apachectl restart</pre>
 
 
 
-<p><a href="http://octo.hsatac.net/images/wp-uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://octo.hsatac.net/images/wp-uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
 
 
 
@@ -306,10 +306,10 @@ taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant
   
   <entry>
     <title type="html"><![CDATA[Firefox4 x WebM x Apache]]></title>
-    <link href="http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
+    <link href="http://blog.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
     <updated>2011-04-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
-    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://octo.hsatac.net/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
+    <id>http://blog.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
+    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://blog.hsatac.net/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
 
 
 

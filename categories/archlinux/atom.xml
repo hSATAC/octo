@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Archlinux | hSATAC]]></title>
-  <link href="http://octo.hsatac.net/categories/archlinux/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/categories/archlinux/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Logitech G300 on ArchLinux]]></title>
-    <link href="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
+    <link href="http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
     <updated>2011-11-30T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
+    <id>http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
     <content type="html"><![CDATA[<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
 他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
 其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
@@ -82,9 +82,9 @@ esac</p>
   
   <entry>
     <title type="html"><![CDATA[Archlinux 推廣]]></title>
-    <link href="http://octo.hsatac.net/2011/11/archlinux/"/>
+    <link href="http://blog.hsatac.net/2011/11/archlinux/"/>
     <updated>2011-11-30T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/11/archlinux</id>
+    <id>http://blog.hsatac.net/2011/11/archlinux</id>
     <content type="html"><![CDATA[<p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
 
 

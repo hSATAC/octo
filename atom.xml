@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[hSATAC]]></title>
-  <link href="http://octo.hsatac.net/atom.xml" rel="self"/>
-  <link href="http://octo.hsatac.net/"/>
-  <updated>2011-12-05T16:18:52+08:00</updated>
-  <id>http://octo.hsatac.net/</id>
+  <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-05T16:22:36+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Logitech G300 on ArchLinux]]></title>
-    <link href="http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
+    <link href="http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
     <updated>2011-11-30T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
+    <id>http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
     <content type="html"><![CDATA[<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
 他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
 其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
@@ -66,9 +66,9 @@ esac</p>
   
   <entry>
     <title type="html"><![CDATA[Archlinux 推廣]]></title>
-    <link href="http://octo.hsatac.net/2011/11/archlinux/"/>
+    <link href="http://blog.hsatac.net/2011/11/archlinux/"/>
     <updated>2011-11-30T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/11/archlinux</id>
+    <id>http://blog.hsatac.net/2011/11/archlinux</id>
     <content type="html"><![CDATA[<p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
 
 <p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。<!--more-->
@@ -120,9 +120,9 @@ Linux DE 的原罪就是選擇太多，通常要自己試用、設定後才能�
   
   <entry>
     <title type="html"><![CDATA[Redmine + Bundler 復活記]]></title>
-    <link href="http://octo.hsatac.net/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/"/>
+    <link href="http://blog.hsatac.net/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/"/>
     <updated>2011-09-30T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/09/redmine-bundler-復活記</id>
+    <id>http://blog.hsatac.net/2011/09/redmine-bundler-復活記</id>
     <content type="html"><![CDATA[<p>老實說，不記得之前是動了什麼，總之我的佈署 apache + passenger + ree 環境<br />
 redmine 爆炸了。推測應該是 gem 的關係。<br />
 上網看了一下， rails 2.3 只支援 rubygems 1.7<br />
@@ -146,9 +146,9 @@ redmine 爆炸了。推測應該是 gem 的關係。<br />
   
   <entry>
     <title type="html"><![CDATA[Rake 0.9 爆炸解法]]></title>
-    <link href="http://octo.hsatac.net/2011/09/rake-0-9/"/>
+    <link href="http://blog.hsatac.net/2011/09/rake-0-9/"/>
     <updated>2011-09-20T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/09/rake-0-9</id>
+    <id>http://blog.hsatac.net/2011/09/rake-0-9</id>
     <content type="html"><![CDATA[<p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
 <pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
 /Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
@@ -201,9 +201,9 @@ stack level too deep</pre></p>
   
   <entry>
     <title type="html"><![CDATA[CloudAAA 雲端大亂鬥簡記]]></title>
-    <link href="http://octo.hsatac.net/2011/06/cloudaaa/"/>
+    <link href="http://blog.hsatac.net/2011/06/cloudaaa/"/>
     <updated>2011-06-23T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/cloudaaa</id>
+    <id>http://blog.hsatac.net/2011/06/cloudaaa</id>
     <content type="html"><![CDATA[<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
 借到了精誠資訊的大樓，相當棒的一個場地。<br />
 不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
@@ -224,7 +224,7 @@ Windows Azure 應該大家比較沒有接觸過，應該都很有興趣<br />
 然後展示了一下 WebMatrix 這套 IDE 搭配 Windows Azure 的佈署方式<br />
 整合的相當好的一個 IDE，感覺開發起來也很方便，習慣 .net 的用戶應該很容易能夠上手<br />
 WebMatrix 這套 IDE 是免費的，現場微軟也提供了一組 30 天 Windows Azure 試用序號
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://octo.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg"><img class="aligncenter size-full wp-image-468" title="3648187_0b55ff2678e6a623989d55396bba5631[1]" src="http://blog.hsatac.net/images/wp-uploads/2011/06/3648187_0b55ff2678e6a623989d55396bba56311.jpg" alt="" width="480" height="640" /></a></p>
 使用 windows live 帳號登入 http://windowsazurepass.com/ 輸入 SSAPERUZAWT<br />
 然後 ericsk 上官大大有提到 SQL Azure 使用 MSSQL 的話可以做 scalibility<br />
 這點我還滿有興趣的，目前 GAE 和 aws 似乎都做不到<br />
@@ -254,9 +254,9 @@ http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
   
   <entry>
     <title type="html"><![CDATA[讓 Empathy 支援 P4-Context]]></title>
-    <link href="http://octo.hsatac.net/2011/06/empathy-p4-context/"/>
+    <link href="http://blog.hsatac.net/2011/06/empathy-p4-context/"/>
     <updated>2011-06-12T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/empathy-p4-context</id>
+    <id>http://blog.hsatac.net/2011/06/empathy-p4-context</id>
     <content type="html"><![CDATA[<p>這兩天灌了 Ubuntu 11.04 在玩<br />
 內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
 但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
@@ -293,11 +293,11 @@ http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
   
   <entry>
     <title type="html"><![CDATA[Better Array, Better PHP]]></title>
-    <link href="http://octo.hsatac.net/2011/06/better-array-better-php/"/>
+    <link href="http://blog.hsatac.net/2011/06/better-array-better-php/"/>
     <updated>2011-06-11T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/06/better-array-better-php</id>
+    <id>http://blog.hsatac.net/2011/06/better-array-better-php</id>
     <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://octo.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
 <!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
 
 <p>不過我最想要的只有 array 這個語法，而且不想被作者的版本綁死，於是我決定下載他的程式碼來研究一下如何修改。結果發現，只要改一行，就可以擁有這個功能！</p>
@@ -333,10 +333,10 @@ sudo apachectl restart</pre>
   
   <entry>
     <title type="html"><![CDATA[我的 vimrc for vim, win32 gvim, macvim]]></title>
-    <link href="http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
+    <link href="http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
     <updated>2011-05-18T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
-    <content type="html"><![CDATA[<p><a href="http://octo.hsatac.net/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://octo.hsatac.net/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
+    <id>http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
 
 <p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。<!--more--></p>
 
@@ -344,7 +344,7 @@ sudo apachectl restart</pre>
 
 <p>主要用到的 plugin 是 Command-T, taglist 以及 omnicomplete 。</p>
 
-<p><a href="http://octo.hsatac.net/images/wp-uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://octo.hsatac.net/images/wp-uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
 
 <p>一開始我用 <a href="https://github.com/vgod/vimrc" target="_blank">vgod 的 vimrc</a> 來當範本修改，詳細設定可以參考<a href="https://github.com/hSATAC/vimrc" target="_blank">我的 vimrc </a></p>
 
@@ -395,10 +395,10 @@ taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant
   
   <entry>
     <title type="html"><![CDATA[Firefox4 x WebM x Apache]]></title>
-    <link href="http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
+    <link href="http://blog.hsatac.net/2011/04/firefox4-x-webm-x-apache/"/>
     <updated>2011-04-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
-    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://octo.hsatac.net/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
+    <id>http://blog.hsatac.net/2011/04/firefox4-x-webm-x-apache</id>
+    <content type="html"><![CDATA[<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="http://blog.hsatac.net/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
 
 <p>&nbsp;</p>
 
@@ -416,9 +416,9 @@ taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant
   
   <entry>
     <title type="html"><![CDATA[整合 Redmine 和 git]]></title>
-    <link href="http://octo.hsatac.net/2011/04/redmine-git-integration/"/>
+    <link href="http://blog.hsatac.net/2011/04/redmine-git-integration/"/>
     <updated>2011-04-14T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/redmine-git-integration</id>
+    <id>http://blog.hsatac.net/2011/04/redmine-git-integration</id>
     <content type="html"><![CDATA[<p>其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已<br />
 不過一直報找不到專案，看了一下 error log  原來是找不到 git 執行檔<br />
 解法很簡單，原本 httpd.conf 設定的 ruby 要再包一層去 export path<br />
@@ -446,9 +446,9 @@ PassengerRuby /usr/local/bin/ruby_with_env
   
   <entry>
     <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
+    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
     <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
+    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
     <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
 
 <p>But if you are a user of homebrew like me, you may need these tips.</p>
@@ -487,23 +487,23 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
   
   <entry>
     <title type="html"><![CDATA[連猴子也會之：在 Mac mini server 上架設 WebDAV git server]]></title>
-    <link href="http://octo.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
+    <link href="http://blog.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
     <updated>2011-04-04T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/04/連猴子也會之：在-mac-mini-server-上架設-webdav-git-server</id>
+    <id>http://blog.hsatac.net/2011/04/連猴子也會之：在-mac-mini-server-上架設-webdav-git-server</id>
     <content type="html"><![CDATA[<p>因為我的 mac mini server 不想開著 ssh 一直給人掃，所以想設定 https 的 git server，試了一下真的超簡單的。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
 ▲首先打開你的 Server Admin 建立一個新 Site 例如 repo.hsatac.net
 <!--more--></p>
 
-<p><p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg"><img class="aligncenter size-full wp-image-371" title="螢幕快照 2011-04-04 下午1.48.24" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg" alt="" width="523" height="307" /></a></p>
+<p><p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg"><img class="aligncenter size-full wp-image-371" title="螢幕快照 2011-04-04 下午1.48.24" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.48.24.jpg" alt="" width="523" height="307" /></a></p>
 ▲Option 的部份把 WebDAV 打勾，我們要用這個做認證，Folding Listing 也勾起來比較方便。
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg"><img class="aligncenter size-full wp-image-372" title="螢幕快照 2011-04-04 下午1.49.02" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg" alt="" width="332" height="162" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg"><img class="aligncenter size-full wp-image-372" title="螢幕快照 2011-04-04 下午1.49.02" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.02.jpg" alt="" width="332" height="162" /></a></p>
 ▲接著建立一個新的 Realm ，範例就用 project.git
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg"><img class="aligncenter size-full wp-image-373" title="螢幕快照 2011-04-04 下午1.49.51" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg" alt="" width="522" height="288" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg"><img class="aligncenter size-full wp-image-373" title="螢幕快照 2011-04-04 下午1.49.51" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.49.51.jpg" alt="" width="522" height="288" /></a></p>
 ▲按+號把你的使用者拖過來，給他權限 Browse and Read/Write WebDAV，</p>
 
 <p>當然如果你要公開這個 repo 給別人讀取，可以把 everyone 的權限設成 Browse and Read
-<p style="text-align: center;"><a href="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg"><img class="aligncenter size-full wp-image-374" title="螢幕快照 2011-04-04 下午1.50.20" src="http://octo.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg" alt="" width="521" height="310" /></a></p>
+<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg"><img class="aligncenter size-full wp-image-374" title="螢幕快照 2011-04-04 下午1.50.20" src="http://blog.hsatac.net/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.50.20.jpg" alt="" width="521" height="310" /></a></p>
 ▲最後在 Security 的部份 把 SSL 打勾並選你的憑證</p>
 
 <p>接著就來設定 remote repo 吧！<br />
@@ -538,9 +538,9 @@ git push origin master --force -v</pre>
   
   <entry>
     <title type="html"><![CDATA[Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版]]></title>
-    <link href="http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/"/>
+    <link href="http://blog.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/"/>
     <updated>2011-02-28T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-歌詞-漢字假名拼音對照版</id>
+    <id>http://blog.hsatac.net/2011/02/mahou-shoujo-madoka-magica-connect-claris-歌詞-漢字假名拼音對照版</id>
     <content type="html"><![CDATA[<p>最近在迷這首&#8230;
 <iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/UcOb5dDKNqI" frameborder="0" allowfullscreen></iframe>
 <!--more-->
@@ -646,9 +646,9 @@ git push origin master --force -v</pre>
   
   <entry>
     <title type="html"><![CDATA[用 Passenger(mod_rails) 部屬 Sinatra]]></title>
-    <link href="http://octo.hsatac.net/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/"/>
+    <link href="http://blog.hsatac.net/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/"/>
     <updated>2011-02-22T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/用-passengermod_rails-部屬-sinatra</id>
+    <id>http://blog.hsatac.net/2011/02/用-passengermod_rails-部屬-sinatra</id>
     <content type="html"><![CDATA[<p>最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。<br />
 寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。<br />
 部屬方面也很容易<br />
@@ -685,9 +685,9 @@ apache vhost的設法和 rails 的一樣即可
   
   <entry>
     <title type="html"><![CDATA[Mac OSX Server 10.6 安裝 mysql2 gem]]></title>
-    <link href="http://octo.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
+    <link href="http://blog.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
     <updated>2011-02-22T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
+    <id>http://blog.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
     <content type="html"><![CDATA[<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
 下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
 
@@ -717,9 +717,9 @@ env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/loca
   
   <entry>
     <title type="html"><![CDATA[用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎]]></title>
-    <link href="http://octo.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/"/>
+    <link href="http://blog.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/"/>
     <updated>2011-02-17T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/02/用-javascript-更改-chrome-firefox-ie-的預設搜尋引擎</id>
+    <id>http://blog.hsatac.net/2011/02/用-javascript-更改-chrome-firefox-ie-的預設搜尋引擎</id>
     <content type="html"><![CDATA[<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
 
 <p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
@@ -783,9 +783,9 @@ Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用�
   
   <entry>
     <title type="html"><![CDATA[Freenode伺服器名稱]]></title>
-    <link href="http://octo.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
+    <link href="http://blog.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
     <updated>2011-01-25T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2011/01/freenode伺服器名稱</id>
+    <id>http://blog.hsatac.net/2011/01/freenode伺服器名稱</id>
     <content type="html"><![CDATA[<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
 當登入的時候會顯示作家的簡介，整理如下：</p>
 
@@ -928,9 +928,9 @@ perhaps more famed for devising Dianetics and Scientology.</p>
   
   <entry>
     <title type="html"><![CDATA[Only my railgun]]></title>
-    <link href="http://octo.hsatac.net/2010/10/only-my-railgun/"/>
+    <link href="http://blog.hsatac.net/2010/10/only-my-railgun/"/>
     <updated>2010-10-26T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/10/only-my-railgun</id>
+    <id>http://blog.hsatac.net/2010/10/only-my-railgun</id>
     <content type="html"><![CDATA[<p>今天的Coding BGM是這首：Only my railgun
 <object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
 
@@ -1067,18 +1067,18 @@ repeat ☆</p>
   
   <entry>
     <title type="html"><![CDATA[Mac Os Server 輕鬆設定  Passenger (mod_rails)]]></title>
-    <link href="http://octo.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
+    <link href="http://blog.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
     <updated>2010-09-26T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
-    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://octo.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://octo.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
+    <id>http://blog.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
+    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[tm_syntax_highlighting + rails 3 + MacOs]]></title>
-    <link href="http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/"/>
+    <link href="http://blog.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/"/>
     <updated>2010-09-20T00:00:00+08:00</updated>
-    <id>http://octo.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos</id>
+    <id>http://blog.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos</id>
     <content type="html"><![CDATA[<p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
 
 <p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
@@ -1087,7 +1087,7 @@ repeat ☆</p>
 
 <p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
 
-<p><a href="http://octo.hsatac.net/images/wp-uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="http://octo.hsatac.net/images/wp-uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="http://blog.hsatac.net/images/wp-uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
 
 <p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
 
