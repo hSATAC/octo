@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2011-12-05T16:22:36+08:00</updated>
+  <updated>2011-12-05T16:45:19+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -38,27 +38,29 @@
 <p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
 所以我寫成 script 可以放在 xinitrc 裏面去自動執行
 <pre lang="bash">#!/bin/sh
-DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`</pre></p>
+DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`
 
-<p>if xinput -list-props $DEVICE_ID | grep &#8220;Device Enabled&#8221; | grep &#8220;1$&#8221; &gt; /dev/null<br />
-then<br />
-    xinput set-int-prop $DEVICE_ID &#8220;Device Enabled&#8221; 8 0<br />
+if xinput -list-props $DEVICE_ID | grep "Device Enabled" | grep "1$" &gt; /dev/null
+then
+    xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0
 fi
+</pre>
 接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
 在 /etc/pm/sleep.d/ 下<br />
 新增一個 script 讓他去執行上一段程式就可以了。
 <pre lang="bash">!/bin/sh
-# 90G300: suspend/wakeup Logitech G300 devices</pre></p>
+# 90G300: suspend/wakeup Logitech G300 devices
 
-<p>case &#8220;$1&#8221; in<br />
-hibernate|suspend)<br />
-;;<br />
-thaw|resume)<br />
-/home/cat/.xinitrc.d/50-logitech-g300-mouse<br />
-;;<br />
-*) exit $NA<br />
-;;<br />
-esac</p>
+case "$1" in
+hibernate|suspend)
+;;
+thaw|resume)
+/home/cat/.xinitrc.d/50-logitech-g300-mouse
+;;
+*) exit $NA
+;;
+esac
+</pre>
 
 <p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>
 ]]></content>
