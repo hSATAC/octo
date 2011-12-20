@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用phpMyAdmin之類的軟體，就會一直看到提示「缺少mcrypt」。 要如何使用homebrew來安裝mcrypt套件，配合內建的PHP呢？ &hellip;">
+  <meta name="description" content="tm_syntax_highlighting是一個rails的syntax高亮plugin。 這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比 http://doblock.com/articles/a-whistle-stop-tour-of-syntax- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -58,12 +58,14 @@
   <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
+  
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:blog.hsatac.net" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
@@ -74,6 +76,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/09/tm_syntax_highlighting-rails-3-macos/">Tm_syntax_highlighting + Rails 3 + MacOs</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-20T00:00:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
+
+<p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
+
+<p><a title="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails">http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails</a></p>
+
+<p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
+
+<p><a href="/images/wp-uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="/images/wp-uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+
+<p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
+
+<p>正常來說直接gem install ultraviolet就可以了，但我在我的mac上面碰到了一些問題，gem install無法正常安裝 oniguruma。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/09/tm_syntax_highlighting-rails-3-macos/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -487,56 +542,6 @@ end</pre></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
-PHP會自動轉換成空白，做了一點調查才知道，</p>
-
-<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
-照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
-但是PHP的urlencode和rawurlencode有些許不同，
-<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
-而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
-<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
-<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
-<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
-<div class="ii gt">目前解法大概是<br />
-1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
-2.或是在接可能有 + 號的地方再 urlencode 一次<br />
-3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -554,6 +559,10 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
       </li>
     
@@ -567,10 +576,6 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
     
       <li class="post">
         <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
       </li>
     
   </ul>
@@ -589,7 +594,7 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
   </script>
   <script src="/javascripts/twitter.js" type="text/javascript"> </script>
   
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
   
 </section>
 

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Prompt | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/prompt/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-20T16:24:42+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bash PS1 補滿]]></title>
+    <link href="http://blog.hsatac.net/2011/12/bash-ps1-fill/"/>
+    <updated>2011-12-20T16:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/12/bash-ps1-fill</id>
+    <content type="html"><![CDATA[<p>今天 Even Wu 在 facebook 上問了一個問題：他的 Bash PS1 要補滿 dash 到換行為止，感覺很有趣，稍微研究了一下。</p>
+
+<p>首先要取得 term 的寬度，這個很容易直接抓 <code>$COLUMNS</code> 就好。</p>
+
+<p>再來要抓原本 PS1 的長度，原本打算用 <code>$PWD</code> 去抓，不過 \w 碰到自己的家目錄會變 <code>~</code> 所以長度不對，這邊要自己處理一下：</p>
+
+<p>``` bash
+  if [ $HOME == $PWD ]
+  then</p>
+
+<pre><code>newPWD="~"
+</code></pre>
+
+<p>  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
+  then</p>
+
+<pre><code>newPWD="~${PWD:${#HOME}}"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>newPWD=$PWD
+</code></pre>
+
+<p>  fi
+```</p>
+
+<!--more-->
+
+
+<p>然後塞成跟原本 PS1 一樣的 temp 字串來算長度，最後把 term width 減去 temp 就可以抓到長度了，再作補滿的動作即可。</p>
+
+<p>最後結果如下：</p>
+
+<p><div><script src='https://gist.github.com/1500143.js?file='></script>
+<noscript><pre><code>function git_branch {
+ref=$(git symbolic-ref HEAD 2&gt; /dev/null) || return;
+echo &quot;(&quot;${ref#refs/heads/}&quot;) &quot;;
+}
+
+function git_since_last_commit {
+now=`date +%s`;
+last_commit=$(git log --pretty=format:%at -1 2&gt; /dev/null) || return;
+seconds_since_last_commit=$((now-last_commit));
+minutes_since_last_commit=$((seconds_since_last_commit/60));
+hours_since_last_commit=$((minutes_since_last_commit/60));
+minutes_since_last_commit=$((minutes_since_last_commit%60));
+
+echo &quot;${hours_since_last_commit}h${minutes_since_last_commit}m &quot;;
+}
+
+unset temp
+
+function prompt_command {
+
+  if [ $HOME == $PWD ]
+  then
+    newPWD=&quot;~&quot;
+  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
+  then
+    newPWD=&quot;~${PWD:${#HOME}}&quot;
+  else
+    newPWD=$PWD
+  fi
+
+  TERMWIDTH=${COLUMNS}
+
+  local temp=&quot;→ [ ${newPWD} ] $(git_branch)$(git_since_last_commit)&quot;
+  let fillsize=${TERMWIDTH}-${#temp}
+  if [ &quot;$fillsize&quot; -gt &quot;0&quot; ]
+  then
+    fill=&quot;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&quot;
+    fill=&quot;${fill:0:${fillsize}}&quot;
+  fi
+}
+
+PROMPT_COMMAND=prompt_command
+PS1=&quot;\[\033[1;31m\]→\[\033[0m\] \[\033[0;36m\][ \[\033[1;32m\]\${newPWD}\[\033[0;36m\] ] \[\033[0m\]\[\033[1;31m\]\$(git_branch)\[\033[0m\]\$(git_since_last_commit)\${fill}\n$ &quot;</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+</feed>

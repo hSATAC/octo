@@ -9,10 +9,9 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，
-也想幫自己的主機設定一下，
-不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。 研究了一下，才發現原來 ssh 內建 sftp 了。
-那要怎樣使用 www-data 登入呢？ &hellip;">
+  <meta name="description" content="最近碰到一個問題，當 url 內含+號 (plus sign)時
+PHP會自動轉換成空白，做了一點調查才知道， 似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING
+照理講根據RFC 1738 +號不是unsafe的，可以留著 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,12 +60,14 @@
   <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
+  
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
     <input type="hidden" name="q" value="site:blog.hsatac.net" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
+  
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
@@ -77,6 +78,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
+PHP會自動轉換成空白，做了一點調查才知道，</p>
+
+<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
+照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
+但是PHP的urlencode和rawurlencode有些許不同，
+<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
+而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
+<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
+<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
+<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
+<div class="ii gt">目前解法大概是<br />
+1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
+2.或是在接可能有 + 號的地方再 urlencode 一次<br />
+3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -505,51 +556,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/using-fckeditor-in-ci-17/">Using Fckeditor in CI 1.7</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
-
-<p>這個 fckeditor 移植也讓我搞了好幾個小時=  =b</p>
-
-<p>總之，要在CI 1.7中繼續使用 fckeditor (按照CI WIKI中提供的方法)，請做以下的更動。</p>
-
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/02/using-fckeditor-in-ci-17/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -567,6 +573,10 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
       </li>
     
@@ -580,10 +590,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
     
       <li class="post">
         <a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a>
       </li>
     
   </ul>
@@ -602,7 +608,7 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
   </script>
   <script src="/javascripts/twitter.js" type="text/javascript"> </script>
   
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @hSATAC</a>
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
   
 </section>
 
