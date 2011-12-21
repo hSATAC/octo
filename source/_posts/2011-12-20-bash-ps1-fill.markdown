@@ -12,10 +12,10 @@ categories: [Bash, Prompt, PS1]
 再來要抓原本 PS1 的長度，原本打算用 ```$PWD``` 去抓，不過 \w 碰到自己的家目錄會變 ```~``` 所以長度不對，這邊要自己處理一下：
 
 ``` bash
-  if [ $HOME == $PWD ]
+  if [ "$HOME" == "$PWD" ]
   then
     newPWD="~"
-  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
+  elif [ "$HOME" ==  "${PWD:0:${#HOME}}" ]
   then
     newPWD="~${PWD:${#HOME}}"
   else
