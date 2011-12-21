@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bash | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/bash/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2011-12-20T18:16:14+08:00</updated>
+  <updated>2011-12-21T10:59:44+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -25,13 +25,13 @@
 <p>再來要抓原本 PS1 的長度，原本打算用 <code>$PWD</code> 去抓，不過 \w 碰到自己的家目錄會變 <code>~</code> 所以長度不對，這邊要自己處理一下：</p>
 
 <p>``` bash
-  if [ $HOME == $PWD ]
+  if [ "$HOME" == "$PWD" ]
   then</p>
 
 <pre><code>newPWD="~"
 </code></pre>
 
-<p>  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
+<p>  elif [ "$HOME" ==  "${PWD:0:${#HOME}}" ]
   then</p>
 
 <pre><code>newPWD="~${PWD:${#HOME}}"

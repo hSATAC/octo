@@ -117,10 +117,10 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="nv">$HOME</span> <span class="o">==</span> <span class="nv">$PWD</span> <span class="o">]</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span> <span class="s2">&quot;$PWD&quot;</span> <span class="o">]</span>
 </span><span class='line'>  <span class="k">then</span>
 </span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~&quot;</span>
-</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="nv">$HOME</span> <span class="o">==</span>  <span class="k">${</span><span class="nv">PWD</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="k">${#</span><span class="nv">HOME</span><span class="k">}}</span> <span class="o">]</span>
+</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span>  <span class="s2">&quot;${PWD:0:${#HOME}}&quot;</span> <span class="o">]</span>
 </span><span class='line'>  <span class="k">then</span>
 </span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~${PWD:${#HOME}}&quot;</span>
 </span><span class='line'>  <span class="k">else</span>
