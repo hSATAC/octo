@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PHP | hSATAC]]></title>
+  <title><![CDATA[Category: php | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2011-12-21T10:59:44+08:00</updated>
+  <updated>2011-12-22T17:39:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -14,376 +14,35 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Better Array, Better PHP]]></title>
-    <link href="http://blog.hsatac.net/2011/06/better-array-better-php/"/>
-    <updated>2011-06-11T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/06/better-array-better-php</id>
-    <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
-<!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
-
-
-
-
-<p>不過我最想要的只有 array 這個語法，而且不想被作者的版本綁死，於是我決定下載他的程式碼來研究一下如何修改。結果發現，只要改一行，就可以擁有這個功能！</p>
-
-
-
-
-<p>以下紀錄一下我修改成功的過程，我開了一台乾淨的 Ubuntu 11.04 vm 出來測試。</p>
-
-
-
-
-<p>首先抓好 PHP 5.3.6 的原始碼生肉，找到 Zend/zend_language_parser.y 這個檔案：</p>
-
-
-
-
-<p>找到
-<pre lang="c">  |  T_ARRAY '(' array_pair_list ')' { $$ = $3; }</pre>
-這行，在下面多加一行
-<pre lang="c">  |  '[' array_pair_list ']'         { $$ = $2; }</pre>
-接著安裝一些必要的元件：
-<pre lang="bash">sudo apt-get install apache
-sudo apt-get install apache2-prefork-dev #要編譯成 libphp5.so 需要裝這個
-sudo apt-get install libxml2-dev
-sudo apt-get install re2c</pre>
-接著還要安裝 <a href="http://www.gnu.org/software/bison/" target="_blank">bison</a> ，apt-get 裝的 bison 版本太舊不合用，可以自己去抓 2.3 版來編譯</p>
-
-
-
-
-<p>bison 需要 m4, 所以編譯過程中有需要的話就 apt-get install m4 吧。</p>
-
-
-
-
-<p>以上準備工作都做好後，就可以開始編譯 PHP 啦。
-<pre lang="bash">./configure --prefix=/usr/local/lib/php5.3.6.infusion --with-apxs2=/usr/bin/apxs2
-make && sudo make install</pre>
-記得在 configure 的過程要注意有沒抓到 bison ，這是最重要的，如果沒抓到的話這個修改是不會有作用的。</p>
-
-
-
-
-<p>都編完以後趕快
-<pre lang="bash">a2enmod php5
-sudo apachectl restart</pre>
-來試試看有沒有成功吧！我編完以後，8245個測試都跑過了，應該是沒問題，enjoy it！</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
-    <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
-    <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of "php-gmp".</p>
-
-
-
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-
-
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn't work with PHP 5.3</p>
-
-
-
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-
-
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-
-
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-
-
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-
-
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-
-
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-
-
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-
-
-
-<p>And load it in your /private/etc/php.ini</p>
-
-
-
-
-<p>It's done!</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac mini server使用homebrew安裝PHP mcrypt套件]]></title>
-    <link href="http://blog.hsatac.net/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/"/>
-    <updated>2010-08-28T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2010/08/mac-mini-server使用brew安装php-mcrypt套件</id>
-    <content type="html"><![CDATA[<p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
-
-
-
-
-<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
-
-
-
-
-<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
-
-
-
-
-<p>將install區塊改成
-<pre lang="ruby">def install
-  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
-  system "make -j6"
-  system "make install"
-end</pre></p>
-
-
-
-
-<p>接著執行brew安裝mcrypt
-<!--more-->
-<pre lang="bash">$ sudo brew install mcrypt</pre>
-再來要去<a href="http://us.php.net/get/php-5.3.0.tar.gz/from/a/mirror" target="_blank">PHP網站</a>下載PHP最新的source code，我們只需編譯mcrypt這個套件就好。</p>
-
-
-
-
-<p>解壓縮後到ext/mcrypt下面執行 phpize 指令</p>
-
-
-
-
-<p>等結束後，執行
-<pre lang="bash">$ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --with-php-config=/Developer/SDKs/MacOSX10.6.sdk/usr/bin/php-config; make -j6;sudo make install</pre>
-會跳出一堆編譯訊息，編譯成功後，修改/etc/php.ini將enable_dl設成On，再加上extension=mcrypt.so重啟後就大功告成啦。</p>
-
-
-
-
-<p>以上步驟參考自 <a title="http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/" href="http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/">http://blog.rogeriopvl.com/archives/php-mcrypt-in-snow-leopard-with-homebrew/</a></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP 自動 urldecode $_GET]]></title>
-    <link href="http://blog.hsatac.net/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/"/>
-    <updated>2009-05-28T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2009/05/php-自動-urldecode-_get</id>
-    <content type="html"><![CDATA[<p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
-PHP會自動轉換成空白，做了一點調查才知道，</p>
-
-
-
-
-<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
-照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
-但是PHP的urlencode和rawurlencode有些許不同，
-<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
-而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
-<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
-<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 "historical reason"</div>
-<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
-<div class="ii gt">目前解法大概是<br />
-1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
-2.或是在接可能有 + 號的地方再 urlencode 一次<br />
-3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[延伸 MVC 的 V - 以 CodeIgniter 為例]]></title>
-    <link href="http://blog.hsatac.net/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/"/>
-    <updated>2009-04-18T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2009/04/延伸-mvc-的-v-以-codeigniter-為例</id>
-    <content type="html"><![CDATA[<p>今天在 CodeIgniter#irc.freenode.net 有位網友拋出了這篇文章討論
-<a href="http://alessandrovermeulen.me/2009/04/16/extending-the-v-in-mvc/" target="_blank">Extending the V in MVC</a></p>
-
-
-
-
-<p>稍微看了一下，其實概念和 Ruby on Rails 的架構一樣，<br />
-主要是引進了 partial 以及 layout 的概念。<br />
-(原文用 layout，但我認為用format應該比較洽當。)
-<!--more--></p>
-
-
-
-
-<p>partial 就是是部份樣板，增加 view 的可重用性，這沒什麼特殊的。<br />
-而 format 的部份則是比較有趣的部份，<br />
-controller 只要負責丟出資料，而用什麼格式 (layout, format) 來呈現，<br />
-則交給 view 來做，讓「資料」和「畫面」分割的更徹底。<br />
-以實例說明，就是同樣的 controller ，url 加個不同的副檔名，就會用不同的 view 去呈現資料，<br />
-例如：<br />
-http://blog.hsatac.net/1/format.html 就是一般網頁；<br />
-http://blog.hsatac.net/1/format.xml 是xml；<br />
-http://blog.hsatac.net/1/format.rss 則是rss</p>
-
-
-
-
-<p>概念雖非創新，但如此在 CodeIgniter 中實做出來，<br />
-也頗有可借鏡之處。</p>
-
-
-
-
-<p>這邊把該文的實做貼出，由於文章有段時間了，可能視不同 CI 版本需稍加調整。</p>
-
-
-
-
-<p>Controller:
-<pre lang="php" line="1">
- <?php
- /**
- * This function remaps the url and retrieves the desired extension
-from it. It then calls the appropiate controller method.
- *
- * @param string $aMethod
- */
- function _remap($aMethod) {
- $lParams = $this->uri->segment_array();
- array_shift($lParams);array_shift($lParams);</pre></p>
-
-<p> $lMethod = $aMethod;<br />
- $lLayout = ’xhtml’;<br />
- if (strpos($lMethod, ’.’) !== False)<br />
- list($lMethod, $lLayout) = explode(’.’, $lMethod);<br />
- $this->load->setLayout($lLayout);</p>
-
-<p> $lMethod = (empty($lMethod) ? ’index’ : $lMethod);<br />
- if (in_array($lMethod, get_class_methods(get_class($this)))) {<br />
- $this->load->setController(get_class($this), $lMethod);<br />
- call_user_func_array(array($this, $lMethod), $lParams);<br />
- }<br />
- else {<br />
- show_404($lMethod);<br />
- }<br />
- }<br />
-?>
+    <title type="html"><![CDATA[Vim runtime 不需存檔檢查 PHP 語法]]></title>
+    <link href="http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file/"/>
+    <updated>2011-12-22T17:29:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file</id>
+    <content type="html"><![CDATA[<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
+
+<p><div><script src='https://gist.github.com/1496197.js?file='></script>
+<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
+  if !exists('*PHPsynCHK')
+    function! PHPsynCHK()
+      ccl
+      let winnum = winnr()
+      let linenum = line('.')
+      let colnum = col('.')
+      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
+      silent cf .vimerr
+      cw
+      execute winnum . &quot;wincmd w&quot;
+      silent undo
+      silent cf
+      if 1 == len(getqflist())
+         call cursor(linenum, colnum)
+      endif
+    endfunction
+  endif
+</code></pre></noscript></div>
 </p>
 
-<p>Loader:
-<pre lang="php" line="1">
-<?php
- class MY_Loader extends CI_Loader {
- protected $layout;
- protected $controllerFunction;
- protected $controllerName;</pre></p>
-
-<p>public function partial($aPartial, $aData=array(), $aLayout=null) {<br />
- $lLayout = (is_null($aLayout) ? $this->layout : $aLayout);</p>
-
-<p> $lastItem = ’’;<br />
- $parts = array();<br />
- if (strpos($aPartial, ’/’) !== false) {<br />
- $parts = explode(’/’, $aPartial);</p>
-
-<p> $lastItem = array_pop($parts);<br />
- }<br />
- else {<br />
- $lastItem = $aPartial;<br />
- }</p>
-
-<p> if ($lastItem{0} !== ’_’) {<br />
- $lastItem = ’_’.$lastItem;<br />
- }<br />
- array_push($parts, $lastItem);</p>
-
-<p> $this->view(implode(’/’, $parts), $aData, $aLayout);<br />
- }</p>
-
-<p> public function setLayout($aLayout) {<br />
- if (is_dir(APPPATH.’/views/’.$aLayout)) {<br />
- $this->layout = $aLayout;<br />
- }<br />
- }</p>
-
-<p> /**<br />
- * @param string $aView<br />
- */<br />
- public function view($aView=null, $aData=array(), $aLayout=null) {<br />
- if (is_null($aView))<br />
- $aView = $this->controllerName.’/’.$this->controllerFunction;<br />
- $lLayout = (is_null($aLayout) ? $this->layout : $aLayout);<br />
- parent::view($lLayout.DIRECTORY_SEPARATOR.$aView, $aData);<br />
- }</p>
-
-<p> public function setController($aControllerName, $aControllerFunction) {<br />
- $this->controllerName = $aControllerName;<br />
- $this->controllerFunction = $aControllerFunction;<br />
- }<br />
- ?>
-</p>
-
-<p>接著就可以用不同的 view 來對應同一個 contoller 了<br />
-http://someurl/blog/category/5 => APPPATH/xhtml/blog/category
-<pre lang="php" line="1">
-<?php $this?>partial(’header’, $data); ?>
- <div id="content">
- <?php
- foreach ($posts as $post)
- $this->partial(’blog/shortsummary’, array(’post’ => $post));
- ?>
- </div>
- <?php $this?>partial(’footer’, $data); ?>
-</pre></p>
-
-<p>http://someurl/blog/category.rss/5 => APPPATH/views/rss/blog/summary.php
-<pre lang="php" line="1">
-<channel>
- <items>
- <?php</items></channel>
- foreach ($posts as $post)
- $this->partial(’blog/shortsummary’, array(’post’ => $post));
- ?>
- 
- 
-</pre></p>
-
+<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
 ]]></content>
   </entry>
   

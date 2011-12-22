@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2011-12-21T10:59:44+08:00</updated>
+  <updated>2011-12-22T17:39:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vim runtime 不需存檔檢查 PHP 語法]]></title>
+    <link href="http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file/"/>
+    <updated>2011-12-22T17:29:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file</id>
+    <content type="html"><![CDATA[<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
+
+<div><script src='https://gist.github.com/1496197.js?file='></script>
+<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
+  if !exists('*PHPsynCHK')
+    function! PHPsynCHK()
+      ccl
+      let winnum = winnr()
+      let linenum = line('.')
+      let colnum = col('.')
+      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
+      silent cf .vimerr
+      cw
+      execute winnum . &quot;wincmd w&quot;
+      silent undo
+      silent cf
+      if 1 == len(getqflist())
+         call cursor(linenum, colnum)
+      endif
+    endfunction
+  endif
+</code></pre></noscript></div>
+
+
+<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bash PS1 補滿]]></title>
@@ -1153,15 +1186,6 @@ Only my RAILGUN can shoot it.必ず<br />
 
 <p>repeat ★<br />
 repeat ☆</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac Os Server 輕鬆設定  Passenger (mod_rails)]]></title>
-    <link href="http://blog.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
-    <updated>2010-09-26T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
-    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
 ]]></content>
   </entry>
   
