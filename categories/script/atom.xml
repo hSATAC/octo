@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: script | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/script/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2011-12-29T16:09:46+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[用 scrpit 指令來紀錄輸出及輸入]]></title>
+    <link href="http://blog.hsatac.net/2011/12/record-terminal-using-script/"/>
+    <updated>2011-12-29T14:59:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/12/record-terminal-using-script</id>
+    <content type="html"><![CDATA[<p>假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 <code>cmd &gt; filename</code> 把輸出導向 log 檔，但如果是一連串的動作時就很不方便了。</p>
+
+<p>unix 系列內建一個指令叫 <code>script</code> ，他可以很方便的紀錄你每一個輸出和輸入。詳細用法可以參考 <code>man script</code> 。</p>
+
+<p>在這邊講兩個常用的方法，一個是 <code>script log.txt</code> 會把紀錄存到 log.txt, 用 <code>script -a log.txt</code> 就可以把新的 log append 到檔案後，不會蓋掉原本檔案。當你動作結束，想停止紀錄時，只要打 <code>exit</code> 就可以停止紀錄。</p>
+
+<p>另一個是 <code>script -C "ls -al" log.txt</code> 他會把你指定的指令存到 log.txt 中，這個用法的不需輸入 <code>exit</code> 。</p>
+
+<p>如果你的 .bash_profile 裏面有用到一些自訂的函數例如 git-autocompletion 之類，那你在使用 script 的時候可能會發現每下一個指令都告訴你 <code>command not found</code>。正確的解法是把你的 function 移到 .bashrc 中，在 .bash_profile 裏面去 source .bashrc 即可。</p>
+
+<p>最後說明一下 log 檔的觀看方式，因為 script 會把所有東西都紀錄下來，包括控制碼這些，所以可以用 <code>less -r log.txt</code> 或 <code>more log.txt</code> 來觀看。</p>
+
+<p>如果需要把 log 的控制碼去掉，可以參考下面這個 script:</p>
+
+<p>``` perl</p>
+
+<h1>!/usr/bin/env perl</h1>
+
+<p>while (&lt;>) {</p>
+
+<pre><code>s/ \e[ #%()*+\-.\/]. |
+   (?:\e\[|\x9b) [ -?]* [@-~] | # CSI ... Cmd
+   (?:\e\]|\x9d) .*? (?:\e\\|[\a\x9c]) | # OSC ... (ST|BEL)
+   (?:\e[P^_]|[\x90\x9e\x9f]) .*? (?:\e\\|\x9c) | # (DCS|PM|APC) ... ST
+   \e.|[\x80-\x9f] //xg;
+print;
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
