@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: centos | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/centos/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-01-05T14:59:43+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在 CentOs 5 上升級 Redis 2.4.5]]></title>
+    <link href="http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5/"/>
+    <updated>2012-01-05T13:51:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5</id>
+    <content type="html"><![CDATA[<p>CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
+
+<p>首先抓下最新穩定版解壓
+<code>
+wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
+tar zxvf redis-2.4.5.tar.gz
+cd redis-2.4.5
+make
+</code>
+跟原本的 redis 2.0 裝在同一個目錄
+<code>
+sudo make PREFIX=/usr install
+</code>
+再把新的 config 檔蓋過去
+<code>
+sudo cp redis.conf /etc/
+</code>
+為了讓原本的 init script 正常運作
+redis.conf 要稍微修改
+<code>
+daemonize yes
+...
+pidfile /var/run/redis/redis.pid
+</code>
+原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
+把 /usr/sbin/redis-server 覆蓋過去
+<code>
+sudo mv /usr/bin/redis-server /usr/sbin/
+</code></p>
+
+<p>大功告成。</p>
+]]></content>
+  </entry>
+  
+</feed>

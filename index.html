@@ -9,7 +9,12 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 cmd &gt; filename 把輸出導向 log 檔，但如果是一連串的動作時就很不方便了。 unix 系列內建一個指令叫 script ，他可以很方便的紀錄你每一個輸出和輸入。 &hellip;">
+  <meta name="description" content="CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 PHP-Resque 需求 Redis 2.2 以上，只好手動升級了。 首先抓下最新穩定版解壓 1
+2
+3
+4
+wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +81,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T13:51:00+08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
+
+<p>首先抓下最新穩定版解壓</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
+</span><span class='line'>tar zxvf redis-2.4.5.tar.gz
+</span><span class='line'>cd redis-2.4.5
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>跟原本的 redis 2.0 裝在同一個目錄</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make PREFIX=/usr install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再把新的 config 檔蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp redis.conf /etc/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了讓原本的 init script 正常運作
+redis.conf 要稍微修改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>daemonize yes
+</span><span class='line'>...
+</span><span class='line'>pidfile /var/run/redis/redis.pid</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
+把 /usr/sbin/redis-server 覆蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv /usr/bin/redis-server /usr/sbin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大功告成。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -588,47 +674,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/06/better-array-better-php/">Better Array, Better PHP</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-11T00:00:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/06/better-array-better-php/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -644,6 +689,10 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
+      </li>
+    
+      <li class="post">
         <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
       </li>
     
@@ -657,10 +706,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
     
       <li class="post">
         <a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/11/archlinux/">Archlinux 推廣</a>
       </li>
     
   </ul>
@@ -709,7 +754,7 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - hSATAC -
+  Copyright &copy; 2012 - hSATAC -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

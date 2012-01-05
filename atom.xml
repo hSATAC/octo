@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2011-12-29T16:09:46+08:00</updated>
+  <updated>2012-01-05T14:59:43+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在 CentOs 5 上升級 Redis 2.4.5]]></title>
+    <link href="http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5/"/>
+    <updated>2012-01-05T13:51:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5</id>
+    <content type="html"><![CDATA[<p>CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
+
+<p>首先抓下最新穩定版解壓</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
+</span><span class='line'>tar zxvf redis-2.4.5.tar.gz
+</span><span class='line'>cd redis-2.4.5
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>跟原本的 redis 2.0 裝在同一個目錄</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make PREFIX=/usr install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再把新的 config 檔蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp redis.conf /etc/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了讓原本的 init script 正常運作
+redis.conf 要稍微修改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>daemonize yes
+</span><span class='line'>...
+</span><span class='line'>pidfile /var/run/redis/redis.pid</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
+把 /usr/sbin/redis-server 覆蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv /usr/bin/redis-server /usr/sbin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大功告成。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用 scrpit 指令來紀錄輸出及輸入]]></title>
@@ -946,151 +1000,6 @@ Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用�
       template="http://example.com/suggest?q={searchTerms}" />
 </pre>
 這樣 Chrome 和 Firefox 都能解析了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Freenode伺服器名稱]]></title>
-    <link href="http://blog.hsatac.net/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/"/>
-    <updated>2011-01-25T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/01/freenode伺服器名稱</id>
-    <content type="html"><![CDATA[<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
-當登入的時候會顯示作家的簡介，整理如下：</p>
-
-<p><em><strong>roddenberry.freenode.ne</strong>t</em>
-RODDENBERRY, GENE (1921-1991). Born in Texas, USA,<br />
-Roddenberry worked as a pilot for the US Army and later<br />
-as a commercial pilot. He then went on to create the<br />
-Star Trek television series, among others.<!--more--></p>
-
-<p><em><strong> kornbluth.freenode.net</strong></em>
-KORNBLUTH, CYRIL M. [1923-1958].  Born in New York City and<br />
-an active member of the Futurians, Cyril Kornbluth sold his<br />
-first story professionally at age 15.  By the 1940&#8217;s his<br />
-stories appeared widely under several pennames, including<br />
-S.D. Gottesman and Cecil Corman.  He left his university<br />
-studies in Chicago to serve in the Army in Europe during<br />
-WWII, then returned to school and work in Chicago until he<br />
-began writing full-time in 1951.  The author of The Marching<br />
-Morons and the novels The Space Merchants (with Frederik<br />
-Pohl) and The Syndic, he&#8217;s best known for his biting social<br />
-satire and his collaborations with Pohl and with Judith<br />
-Merril.</p>
-
-<p><strong><em> orwell.freenode.net<br />
-calvino.freenode.net</em></strong>
-CALVINO, ITALO [1923-1985].  Born in Cuba, Italo Calvino grew<br />
-up in San Remo, Italy.  During World War II, he joined the<br />
-partisans during the German occupation and, after writing a<br />
-series of stories which drew on his experiences, he became a<br />
-journalist. His work included Mr. Palomar, Under the<br />
-Jaguar Sun, Cosmicomics and t zero.  Calvino made<br />
-important contributions to Italian literature in the middle<br />
-of the last century.</p>
-
-<p><strong><em> gibson.freenode.net</em></strong>
-GIBSON, WILLIAM (1948-) He is married with two children. In<br />
-the early 1980s he wrote Neuromancer, and with this novel he<br />
-helped establish a new kind of science fiction literature<br />
-called cyberpunk. William Gibson defined the word cyberspace,<br />
-and described virtual reality long before we saw the<br />
-similarities with todays Internet. He has won the Hugo Award,<br />
-Nebula Award and the Philipp K. Dick Award.</p>
-
-<p><strong><em>leguin.freenode.net</em></strong>
-URSULA K. LEGUIN (1929-)  The author of the Earthsea<br />
-trilogy, City of Illusions and The Dispossessed.</p>
-
-<p><strong><em> lem.freenode.net<br />
-wolfe.freenode.net<br />
-sendak.freenode.net</em></strong>
-SENDAK, MAURICE [1928-].  The author of Seven Little<br />
-Monsters and Where the Wild Things Are, Maurice Sendak was<br />
-born in Brooklyn, NY, US, to a family of poor Polish<br />
-immigrants who moved to the US before World War II.  He<br />
-became an illustrator while in high school.</p>
-
-<p><strong><em> jordan.freenode.net</em></strong>
-JORDAN, ROBERT (1948-2007).  Esteemed author of The Wheel of<br />
-Time, Lord of Chaos and A Crown of Swords.
-<strong><em> lindbohm.freenode.net</em></strong>
-Denis Lindbohm (1927-2005) was a Swedish author and one of the<br />
-founders of Swedish science fiction.
-<strong><em> holmes.freenode.net</em></strong>
-HOLMES, ROBERT (1928-1986). An English television scriptwriter,<br />
-most notably remembered for his work on the sci-fi series;<br />
-Doctor Who.
-<strong><em> barjavel.freenode.net</em></strong>
-BARJAVEL, RENE [1911-1985].  Born in Nyons, he was a<br />
-science-fiction author, a journalist and a critic. He is<br />
-credited with having written the first novel to introduce<br />
-the Grandfather Paradox in time travel, in his 1943 work<br />
-&#8216;Le Voyageur imprudent&#8217;.</p>
-
-<p><strong><em> bartol.freenode.net</em></strong>
-BARTOL, VLADIMIR [1903-1967].  Born in Trieste, Austria-<br />
-Hungary. He is the author of, among others, the novel<br />
-Alamut (published in 1938 in Slovenia).</p>
-
-<p><strong><em> pratchett.freenode.net</em></strong>
-PRATCHETT, TERRY (1948-).  Born in Buckinghamshire, England,<br />
-Pratchett is the famous author of the Discworld series of<br />
-novels and, more recently, an active Alzheimer&#8217;s Disease awareness<br />
-campaigner.</p>
-
-<p><strong><em> niven.freenode.net</em></strong>
-NIVEN, LAWRENCE VAN COTT [1938-].  Architect of Known Space,<br />
-the setting of Protector, World of Ptaavs and the<br />
-Ringworld series.  Author of &#8220;Flash Crowd&#8221;, a canonical<br />
-sociological hard science fiction short story dealing with<br />
-effects of near instantaneous transportation on a modern<br />
-technological society.  In addition, he is well known for his<br />
-collaborations with Jerry Pournelle, including The Mote in<br />
-God&#8217;s Eye and Lucifer&#8217;s Hammer.</p>
-
-<p><strong><em> zelazny.freenode.net</em></strong>
-ZELAZNY, ROGER JOSEPH [1937-1995].  Roger Zelazny was a<br />
-leading light in the New Wave of science fiction.  He began<br />
-writing in 1962.  Known for such works as This Immortal,<br />
-Lord of Light, The Dream Master and the Amber books,<br />
-Zelazny is best known for his idiomatic American<br />
-protagonists, embodying the mythological figures of the<br />
-Trickster and the Hero of a Thousand Faces.</p>
-
-<p><strong><em> brown.freenode.net</em></strong>
-BROWN, DAN [1964-]. Born in New Hampshire, USA, the son of a<br />
-math teacher at Phillips Exeter Academy, he studied at<br />
-Amherst College and later returned to teach English there.<br />
-His works include Digital Fortress, Angels and Demons and<br />
-the number one bestseller The Da Vinci Code. He is<br />
-currently living in New England with his wife, Blythe, an art<br />
-historian and painter who helped him write The Da Vinci<br />
-Code.</p>
-
-<p><strong><em> anthony.freenode.net</em></strong>
-ANTHONY, PIERS [1934-].  Author of many novels and short<br />
-stories, including his most famous Xanth series. A few of<br />
-his works have made it to the New York Times Best Seller<br />
-list, and he is widely regarded as one of the most well-known<br />
-science fiction/fantasy authors ever.</p>
-
-<p><strong><em> kubrick.freenode.net<br />
-verne.freenode.net<br />
-clarke.freenode.net<br />
-card.freenode.net</em></strong>
-CARD, ORSON SCOTT [1951-].  Born in Richland, Washington, Card grew up in<br />
-California, Arizona, and Utah.  He lived in Brazil for two years as an<br />
-unpaid missionary for the Mormon Church.  Author of the Ender and Alvin<br />
-Maker books, Card&#8217;s science fiction and fantasy work is strongly influenced<br />
-by his Mormon cultural background.  The first author to win the Hugo and<br />
-Nebula novel awards two years in a row, Card currently lives in Greensboro,<br />
-North Carolina, US.</p>
-
-<p><strong><em> hubbard.freenode.net</em></strong>
-Hubbard, Lafayette Ronald [1911 - 1986]. Was an american Sci-Fi writer,<br />
-perhaps more famed for devising Dianetics and Scientology.</p>
-
-<p><strong><em> asimov.freenode.net</em></strong></p>
 ]]></content>
   </entry>
   
