@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-05T14:59:43+08:00</updated>
+  <updated>2012-01-13T14:17:57+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Redmine migration from Trac 0.12]]></title>
+    <link href="http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12/"/>
+    <updated>2012-01-13T14:03:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12</id>
+    <content type="html"><![CDATA[<p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
+
+<ul>
+<li><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_install_Redmine_on_CentOS_5">Install Redmine on CentOS 5</a>
+
+<ul>
+<li>Install Ruby</li>
+<li>Install rubygem</li>
+<li>Install passenger
+
+<ul>
+<li>/etc/conf.d/ruby.conf</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11/ext/apache2/mod_passenger.so
+</span><span class='line'>PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11
+</span><span class='line'>PassengerRuby /usr/bin/ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>* /etc/httpd/conf.d/redmine.conf
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   &lt;VirtualHost *:80&gt;
+</span><span class='line'>      ServerName redmine.miiicasa.com 
+</span><span class='line'>      DocumentRoot /home/m/share/htdocs/redmine/public
+</span><span class='line'>      &lt;Directory /home/m/share/htdocs/redmine/public&gt;
+</span><span class='line'>         AllowOverride all    
+</span><span class='line'>         Options -MultiViews    
+</span><span class='line'>      &lt;/Directory&gt;
+</span><span class='line'>   &lt;/VirtualHost&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<ul>
+<li>Get Redmine source from <a href="https://github.com/miiicasa/redmine">miiiCasa github repo</a> (bundler integrated and migrate_from_trac.rake modified)</li>
+<li>install bundler and bundle install</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install bundler
+</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Setup mysql database and user</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create database redmine character set utf8;
+</span><span class='line'>create user 'redmine'@'localhost' identified by 'my_password';
+</span><span class='line'>grant all privileges on redmine.* to 'redmine'@'localhost';</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>cp config/database.yml.example config/database.yml and modify it based on previous settings.</li>
+<li>cp config/configure.yml.example config/configure.yml and modify it.</li>
+<li>Generate the session store</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake generate_session_store</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Migrate the database models</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake db:migrate</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Load default data</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake redmine:load_default_data</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Migrate from trac
+
+<ul>
+<li>install sqlite3-ruby</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install sqlite3-ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>migrate from trac</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake redmine:migrate_from_trac
+</span><span class='line'>...
+</span><span class='line'>Are you sure you want to continue ? [y/N] y                     
+</span><span class='line'>
+</span><span class='line'>Trac directory []: /var/www/trac/miiicasa
+</span><span class='line'>Trac database adapter (sqlite, sqlite3, mysql, postgresql) [sqlite3]:
+</span><span class='line'>Trac database encoding [UTF-8]: 
+</span><span class='line'>Target project identifier []: miiicasa</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>git clone https://github.com/xfalcons/migrate-trac-to-redmine.git
+Follow the instruction.</p></li>
+<li><p>Setup Redmine</p>
+
+<ul>
+<li>Make all users admin:</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ RAILS_ENV=production ./script/console
+</span><span class='line'>..
+</span><span class='line'>for u in User.all
+</span><span class='line'>  u.admin = true
+</span><span class='line'>  u.save
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Login and setup scm path</li>
+<li>Load git repo from script (prevent timeout)</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby script/runner "Repository.fetch_changesets" -e production</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  This action could take a very long time (maybe 1 day) and it got no progress bar nor any output. If you want to check where it went, try:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ps axww | grep git | grep -v grep</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  You&#8217;ll see it&#8217;s parsing git log.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP-Resque 簡介]]></title>
+    <link href="http://blog.hsatac.net/2012/01/php-resque-introduction/"/>
+    <updated>2012-01-06T15:14:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/01/php-resque-introduction</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/defunkt/resque">Resque</a> 是 github 基於 Redis 開發的 background job 系統。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 CentOs 5 上升級 Redis 2.4.5]]></title>
@@ -902,104 +1104,6 @@ apache vhost的設法和 rails 的一樣即可
   
 
 </pre></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac OSX Server 10.6 安裝 mysql2 gem]]></title>
-    <link href="http://blog.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
-    <updated>2011-02-22T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
-    <content type="html"><![CDATA[<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
-下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
-
-<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
-<pre lang="bash">
-EBuilding native extensions.  This could take a while...
-ERROR:  Error installing mysql2:
-    ERROR: Failed to build gem native extension.</pre></p>
-
-<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
-checking for rb_thread_blocking_region()&#8230; no<br />
-checking for mysql.h&#8230; no<br />
-checking for mysql/mysql.h&#8230; no<br />
-&#8212;&#8211;<br />
-mysql.h is missing.  please check your installation of mysql and try again.<br />
-&#8212;&#8211;
-</p>
-
-<p>請下：
-<pre lang="bash">
-env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
-</pre></p>
-
-<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎]]></title>
-    <link href="http://blog.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/"/>
-    <updated>2011-02-17T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/02/用-javascript-更改-chrome-firefox-ie-的預設搜尋引擎</id>
-    <content type="html"><![CDATA[<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
-
-<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
-如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
-
-<p><!--more--></p>
-
-<p><pre lang="xml">
-<?xml version="1.0" encoding="UTF-8"?>
- <opensearchdescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
-   <shortname>Web Search</shortname>
-   <description>Use Example.com to search the Web.</description>
-   <tags>example web</tags>
-   <contact>admin@example.com</contact>
-   <Url type="application/atom+xml"</opensearchdescription>
-        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=atom"/>
-   <Url type="application/rss+xml"
-        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}&amp;format=rss"/>
-   <Url type="text/html" 
-        template="http://example.com/?q={searchTerms}&amp;pw={startPage?}"/>
-   <longname>Example.com Web Search</longname>
-   <image height="64" width="64" type="image/png">http://example.com/websearch.png</image>
-   <image height="16" width="16" type="image/vnd.microsoft.icon">http://example.com/websearch.ico</image>
-   <query role="example" searchterms="cat" />
-   <developer>Example.com Development Team</developer>
-   <attribution>
-     Search data Copyright 2005, Example.com, Inc., All Rights Reserved</attribution>
-   
-   <syndicationright>open</syndicationright>
-   <adultcontent>false</adultcontent>
-   <language>en-us</language>
-   <outputencoding>UTF-8</outputencoding>
-   <inputencoding>UTF-8</inputencoding>
- 
-</pre></p>
-
-<p>接著使用 Javascript 讓瀏覽器安裝你的搜尋引擎：
-<pre lang="javascript">
-window.external.AddSearchProvider("http://your.search.description.xml");
-</pre></p>
-
-<p>實測 Chrome 9, Firefox 3.6+, IE9 都可以正常使用，其他瀏覽器和版本沒有試過。<br />
-Chrome 安裝的時候沒有勾選為預設的這個選項，所以要請使用者自己去 Chrome 的選項改為預設。</p>
-
-<p>另外在搜尋建議這個部份， OpenSearch 官網給的範例是：
-<pre lang="xml">
- <Url type="application/json"
-      rel="suggestions"
-      template="http://example.com/suggest?q={searchTerms}" />
-</pre></p>
-
-<p>不過 Firefox 吃不出來，要改成：
-<pre lang="xml">
- <Url type="application/x-suggestions+json"
-      rel="suggestions"
-      template="http://example.com/suggest?q={searchTerms}" />
-</pre>
-這樣 Chrome 和 Firefox 都能解析了。</p>
 ]]></content>
   </entry>
   

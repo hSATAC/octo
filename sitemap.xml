@@ -477,11 +477,19 @@
         <lastmod>2012-01-05T14:34:12+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.hsatac.net/2012/01/php-resque-introduction/</loc>
+        <lastmod>2012-01-10T17:00:21+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12/</loc>
+        <lastmod>2012-01-13T14:16:48+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.hsatac.net/</loc>
-        <lastmod>2012-01-05T14:34:12+08:00</lastmod>
+        <lastmod>2012-01-13T14:16:48+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/blog/archives/</loc>
-        <lastmod>2012-01-05T14:34:12+08:00</lastmod>
+        <lastmod>2012-01-13T14:16:48+08:00</lastmod>
     </url>
 </urlset>
