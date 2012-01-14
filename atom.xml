@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-13T20:26:06+08:00</updated>
+  <updated>2012-01-14T19:10:32+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -203,15 +203,6 @@ Follow the instruction.</p></li>
 
 
 <p>  You&#8217;ll see it&#8217;s parsing git log.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP-Resque 簡介]]></title>
-    <link href="http://blog.hsatac.net/2012/01/php-resque-introduction/"/>
-    <updated>2012-01-06T15:14:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/01/php-resque-introduction</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/defunkt/resque">Resque</a> 是 github 基於 Redis 開發的 background job 系統。</p>
 ]]></content>
   </entry>
   
@@ -1104,6 +1095,38 @@ apache vhost的設法和 rails 的一樣即可
   
 
 </pre></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OSX Server 10.6 安裝 mysql2 gem]]></title>
+    <link href="http://blog.hsatac.net/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/"/>
+    <updated>2011-02-22T00:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/02/mac-osx-server-10-6-安裝-mysql2-gem</id>
+    <content type="html"><![CDATA[<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
+下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
+
+<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
+<pre lang="bash">
+EBuilding native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+    ERROR: Failed to build gem native extension.</pre></p>
+
+<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
+checking for rb_thread_blocking_region()&#8230; no<br />
+checking for mysql.h&#8230; no<br />
+checking for mysql/mysql.h&#8230; no<br />
+&#8212;&#8211;<br />
+mysql.h is missing.  please check your installation of mysql and try again.<br />
+&#8212;&#8211;
+</p>
+
+<p>請下：
+<pre lang="bash">
+env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+</pre></p>
+
+<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
 ]]></content>
   </entry>
   
