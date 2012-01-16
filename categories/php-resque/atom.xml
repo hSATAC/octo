@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP-Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/php-resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-16T19:00:34+08:00</updated>
+  <updated>2012-01-16T19:47:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -21,6 +21,14 @@
     <content type="html"><![CDATA[<p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
 
 <p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<h2>設計</h2>
+
+<p>Resque 的設計有兩個角色： Job 和 Worker。 每個 Job 都是定義成類別，新增 Job 的時候會將 Job 的類別和相關參數 json_encode 後儲存到不同的 queue 裡面，而 Worker(s) 則會依序從 redis 讀取 Job 出來執行。</p>
+
+<p>執行的時候並不是這個 Worker 本身去執行，而是會 fork 一個 process 來執行。這樣設計是為了避免時間一長， Worker 的記憶體管理不良導致卡死的狀況。</p>
+
+<p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
 
 <p>以下先來介紹如何使用 PHP-Resque：</p>
 
@@ -175,13 +183,21 @@ Resque::enqueue('default', 'My_Job', $args);
 
 <h2>監控</h2>
 
+<h3>resque-web</h3>
+
 <p>前面有提到可以直接使用 resque-web 來監控 PHP-Resque 的狀態，相當建議使用，非常清楚易懂，要看 Redis 相關的數據也可以看，不用進 redis-cli 自己打指令。</p>
 
 <p>安裝方法：<code>gem install resque</code></p>
 
 <p>執行：<code>resque-web -p 3000</code> 即可運行在 3000 port。</p>
 
+<p>首頁有 live reload 按鈕可以按， debug 時非常方便。</p>
+
 <p>screenshot: <img src="/images/wp-uploads/2012/01/resque-web.jpg"></p>
+
+<h3>Supervisord</h3>
+
+<p>在專案的 extra 目錄下另有 resque.monit 檔案，這是供 <a href="http://supervisord.org/">Supervisord</a> 使用的設定檔。他會在 worker 吃掉 300MB 以上的記憶體，或者是跑了 10 次輪迴後砍掉重開。可以參考看看。</p>
 
 <h2>部屬</h2>
 
@@ -199,7 +215,7 @@ Resque::enqueue('default', 'My_Job', $args);
 
 <h2>結語</h2>
 
-<p>Resque 真的是一個很棒很輕巧的設計，感謝有人把它 porting 到 PHP 。如果使用上有什麼問題歡迎與我討論研究。</p>
+<p>Resque 真的是一個很棒很輕巧的設計，感謝有人把它 porting 到 PHP 。希望越來越多人來使用，一起來發展維護 PHP-Resque。</p>
 ]]></content>
   </entry>
   
