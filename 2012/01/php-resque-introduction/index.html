@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>PHP-Resque 簡介 - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="Resque 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看原作者的 Blog PHP-Resque 是把 Resque porting 到 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.hsatac.net/2012/01/php-resque-introduction">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">PHP-Resque 簡介</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+
+<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<p>以下先來介紹如何使用 PHP-Resque：</p>
+
+<h2>安裝 PHP-Resque</h2>
+
+<p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+<h2>環境變數</h2>
+
+<p>PHP-Resque 支援的環境變數有：</p>
+
+<ul>
+<li><p>QUEUE - 這個是必要的，會決定 worker 要執行什麼任務，重要的在前，例如 <code>QUEUE=notify,mail,log</code> 。也可以設定為 <code>QUEUE=*</code> 表示執行所有任務。</p></li>
+<li><p>APP_INCLUDE - 這也可以說是必要的，因為 Resque 的 Job 都是寫成物件，那 worker 執行的時候當然要把物件的檔案引入進來。可以設成 <code>APP_INCLUDE=require.php</code> 再在 require.php 中引入所有 Job 的 Class 檔案即可。</p></li>
+<li><p>COUNT - 設定 worker 數量，預設是1 <code>COUNT=5</code> 。</p></li>
+<li><p>REDIS_BACKEND - 設定 Redis 的 ip, port。如果沒設定，預設是連 <code>localhost:6379</code> 。</p></li>
+<li><p>LOGGING, VERBOSE - 設定 log， <code>VERBOSE=1</code> 即可。</p></li>
+<li><p>VVERBOSE - 比較詳細的 log， <code>VVERBOSE=1</code> debug 的時候可以開出來看。</p></li>
+<li><p>INTERVAL - worker 檢查 queue 的間隔，預設是五秒 <code>INTERVAL=5</code> 。</p></li>
+<li><p>PIDFILE - 如果你是開單 worker，可以指定 PIDFILE 把 pid 寫入，例如 <code>PIDFILE=/var/run/resque.pid</code> 。</p></li>
+</ul>
+
+
+<p>有一個 Resque 支援，但 PHP-Resque 沒有的參數叫 <code>BACKGROUND</code> 可以把 resque 丟到背景執行。不過這個其實不太重要，有需要的話自己加個 <code>php resque.php &amp;</code> 就可以了。</p>
+
+<p>所以，你的指令最後可能會變這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>QUEUE=* APP_INCLUDE=require.php COUNT=5 VVERBOSE=1 php resque.php</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果覺得太長，可以寫一支啟動 script 來輔助你，我有寫一支可供參考：</p>
+
+<div><script src='https://gist.github.com/1619972.js?file='></script>
+<noscript><pre><code>#!/bin/bash
+export APP_INCLUDE=resque/require.php
+export QUEUE=*
+export COUNT=1
+export VVERBOSE=1 # for debugging
+export REDIS_BACKEND=localhost:6379
+. /etc/rc.d/init.d/functions
+
+start() {
+    /usr/bin/php ../lib/sdk/php-resque/resque.php
+}
+
+stop() {
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -15
+}
+kill() {
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -9
+}
+case &quot;$1&quot; in
+    start)
+         number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
+        if [ $number -gt 0 ]
+        then
+          echo &quot;php-resque is running. ($number workers)&quot;
+          echo &quot;You may wanna stop them before you start.&quot;
+          start
+        else
+          start
+        fi
+    ;;
+
+    stop)
+        stop
+    ;;
+
+    kill)
+        kill
+    ;;
+
+    status)
+        number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
+        if [ $number -gt 0 ]
+        then
+          echo &quot;php-resque is running. ($number workers)&quot;
+        else
+          echo &quot;php-resque is not running.&quot;
+        fi
+    ;;
+
+    *)
+        echo -n &quot;Usage: $0 {start|stop|status}&quot;
+esac
+</code></pre></noscript></div>
+
+
+<h2>使用 PHP-Resque</h2>
+
+<p>把檔案抓下來以後一定想先試驗看看的，確定你的 redis-server 都有正常啟動後，在 demo 資料夾下面有幾個檔案可以先試驗看看。</p>
+
+<p>切到 demo 目錄後，執行 <code>VVERBOSE=1 QUEUE=* php resque.php</code> 應該會看到 resque 已經開始執行了。</p>
+
+<p>執行 <code>php queue.php PHP_Job</code> 、 <code>php queue.php Bad_PHP_Job</code> 、 <code>php queue.php Long_PHP_Job</code> 、 <code>php queue.php PHP_Error_Job</code> 可以把工作丟進 queue 裡面，看看執行的結果。</p>
+
+<p>後面帶的名稱其實就是 Job class 的名稱，所以 PHP-Resque 在執行時也要把相關的 class 檔案設定在 APP_INCLUDE 引入才行。</p>
+
+<p>Job 的 class 很簡單，大概長這樣：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">My_Job</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">perform</span><span class="p">()</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Work work work</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">args</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>只要定義 perform 方法， Worker 就會把 Job new 出來以後執行 perform 。</p>
+
+<p>當然，也可以定義 <code>setUp()</code> 和 <code>tearDown()</code> 方法，前者會在 <code>perform()</code> 執行前執行，後者會在 <code>perform()</code> 執行後執行。</p>
+
+<p>將 Job 塞入 queue 的方式是：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="k">require_once</span> <span class="s1">&#39;lib/Resque.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Resque</span><span class="o">::</span><span class="na">setBackend</span><span class="p">(</span><span class="s1">&#39;localhost:6379&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$args</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Chris&#39;</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'><span class="nx">Resque</span><span class="o">::</span><span class="na">enqueue</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;My_Job&#39;</span><span class="p">,</span> <span class="nv">$args</span><span class="p">);</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中第一個參數 <code>default</code> 就是你的 queue 名稱，例如你可以設定 notify, mail, image 之類，至於為什麼要這樣設計，在後面的篇幅再敘述。</p>
+
+<p>PHP-Resque 的使用方法大致就是這樣，接下來講一些其他的小細節。</p>
+
+<h2>Hooks</h2>
+
+<p>PHP-Resque 可以定義 Event Hooks 讓你能在相對應的事件發生時執行你想要的動作。支援的事件有很多，請各位自行參考原專案的 README。在專案目錄下的 extra 目錄下有 sample.plugin.php 可以看 Event hook 的範例寫法。</p>
+
+<p>有一點需要注意的是，很直覺我們會把這隻 sample.plugin.php 丟到 APP_INCLUDE 變數中，這樣沒錯，但要注意跟 enqueue 有關的 event 並不是由 worker 來觸發，因此你在新增 Job 的那段程式也需要引入 sample.plugin.php 才能觸發到 <code>AFTERENQUEUE</code> 。</p>
+
+<h2>監控</h2>
+
+<p>前面有提到可以直接使用 resque-web 來監控 PHP-Resque 的狀態，相當建議使用，非常清楚易懂，要看 Redis 相關的數據也可以看，不用進 redis-cli 自己打指令。</p>
+
+<p>安裝方法：<code>gem install resque</code></p>
+
+<p>執行：<code>resque-web -p 3000</code> 即可運行在 3000 port。</p>
+
+<p>screenshot: <img src="/images/wp-uploads/2012/01/resque-web.jpg"></p>
+
+<h2>部屬</h2>
+
+<p>之前提到可以除了預設的 default 以外，還可以設定不同的 queue，為什麼要這樣做呢？除了執行優先權外，(撈 queue 時會按你給 worker 的設定，在前面 queue 的會先撈，就會先執行到) 還有多伺服器部屬的原因。</p>
+
+<p>假如今天你有個 queue 專門要處理使用者圖片的東西，當然一般圖片會有自己的伺服器。於是在你的主 web 伺服器上你就可以執行 <code>QUEUE=notify,mail</code> 而在圖片伺服器上就可以執行 <code>QUEUE=images</code> 的 worker。</p>
+
+<h2>已知問題</h2>
+
+<p>首先，PHP-Resque 使用的是 <a href="https://github.com/jdp/redisent">Redisent</a> 這套 Redis interface。但因為和另一套 php module <a href="http://code.google.com/p/phpredis/">phpredis</a> 同樣都定義了 RedisException 這個類別，所以會衝突，必須把 phpredis 移除才能使用。</p>
+
+<p>再來，在部屬時常常 REDIS_BACKEND 是設到別台機器的，而且一般我們都會開不只一個 worker ，這時候有一個已知 issue 就是有時 lpop 拉回來的 Job 錯誤，是一個陣列，導致噴出 json_decode 的錯誤，而且這個 Job 就不會執行，會 missing 。 (see <a href="https://github.com/chrisboulton/php-resque/issues/32">#32</a>)</p>
+
+<p>目前還不清楚確實問題所在，不過有一個 workaround 的解法是，不要用 <code>COUNT=5</code> 去開，而是設 <code>COUNT=1</code> 然後執行 5 次，就不會有這個問題產生。</p>
+
+<h2>結語</h2>
+
+<p>Resque 真的是一個很棒很輕巧的設計，感謝有人把它 porting 到 PHP 。如果使用上有什麼問題歡迎與我討論研究。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2012/01/php-resque-introduction/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2012/01/php-resque-introduction/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/upgrade-redis245-on-centos5/" title="Previous Post: 在 CentOs 5 上升級 Redis 2.4.5">&laquo; 在 CentOs 5 上升級 Redis 2.4.5</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/01/redmine-migrate-from-trac-0-dot-12/" title="next Post: Redmine migration from Trac 0.12">Redmine migration from Trac 0.12 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2012/01/php-resque-introduction/';
+        var disqus_url = 'http://blog.hsatac.net/2012/01/php-resque-introduction/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -9,8 +9,8 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content=" 首先根據 OpenSearch 的規格寫出自訂搜尋引擎的描述 xml 檔
-如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。 ">
+  <meta name="description" content="想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走
+下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/">Mac OSX Server 10.6 安裝 Mysql2 Gem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-22T00:00:00+08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
+下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
+
+<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
+<pre lang="bash">
+EBuilding native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+    ERROR: Failed to build gem native extension.</pre></p>
+
+<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
+checking for rb_thread_blocking_region()&#8230; no<br />
+checking for mysql.h&#8230; no<br />
+checking for mysql/mysql.h&#8230; no<br />
+&#8212;&#8211;<br />
+mysql.h is missing.  please check your installation of mysql and try again.<br />
+&#8212;&#8211;
+</p>
+
+<p>請下：
+<pre lang="bash">
+env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+</pre></p>
+
+<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -493,45 +552,6 @@ end</pre></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Tiger 上班去</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-20T00:00:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p>又到了 Tiger 上班的日子了…   <br />今天都沒有別的貓咪來，tiger有點寂寞…</p>  <p><a href="/images/wp-uploads/2009/06/img-2562.jpg"><img title="IMG_2562" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2562" src="/images/wp-uploads/2009/06/img-2562-thumb.jpg" width="260" border="0" /></a> </p> </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -553,6 +573,10 @@ end</pre></p>
       </li>
     
       <li class="post">
+        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
       </li>
     
@@ -562,10 +586,6 @@ end</pre></p>
     
       <li class="post">
         <a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a>
       </li>
     
   </ul>
