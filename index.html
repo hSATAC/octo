@@ -205,6 +205,8 @@ Install rubygem &hellip;">
 
 <p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
 
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
 <p>以下先來介紹如何使用 PHP-Resque：</p>
 
 <h2>安裝 PHP-Resque</h2>

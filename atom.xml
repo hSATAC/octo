@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-16T20:15:42+08:00</updated>
+  <updated>2012-01-16T21:46:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -223,6 +223,8 @@ Follow the instruction.</p></li>
 
 <p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
 
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
 <p>以下先來介紹如何使用 PHP-Resque：</p>
 
 <h2>安裝 PHP-Resque</h2>
@@ -353,6 +355,8 @@ esac
 
 <p>當然，也可以定義 <code>setUp()</code> 和 <code>tearDown()</code> 方法，前者會在 <code>perform()</code> 執行前執行，後者會在 <code>perform()</code> 執行後執行。</p>
 
+<p>需要注意的是，Job exit 後都視為正常執行，如果要讓他判斷失敗丟到 fail queue 中的話，需要 throw exception。</p>
+
 <p>將 Job 塞入 queue 的方式是：</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -380,6 +384,8 @@ esac
 
 <p>其中第一個參數 <code>default</code> 就是你的 queue 名稱，例如你可以設定 notify, mail, image 之類，至於為什麼要這樣設計，在後面的篇幅再敘述。</p>
 
+<p>值得一提的是，在原 ruby 版 rescue 每個 Job 屬於哪個 queue 是直接定義在 class 中的，PHP 版則是 enqueue 時才傳入，不知道為什麼要這樣設計，可能會導致一些意料之外的結果，需要注意。</p>
+
 <p>PHP-Resque 的使用方法大致就是這樣，接下來講一些其他的小細節。</p>
 
 <h2>Hooks</h2>
@@ -405,6 +411,38 @@ esac
 <h3>Supervisord</h3>
 
 <p>在專案的 extra 目錄下另有 resque.monit 檔案，這是供 <a href="http://supervisord.org/">Supervisord</a> 使用的設定檔。他會在 worker 吃掉 300MB 以上的記憶體，或者是跑了 10 次輪迴後砍掉重開。可以參考看看。</p>
+
+<h3>proctitle</h3>
+
+<p>如果你 <code>ps | grep resque</code> 只會看到 <code>php resuqe.php</code> 的訊息，還記得 Worker 會 fork 出一個 process 來執行 Job 嗎？這樣就有兩倍的 processes 但是你完全分不出來哪個是哪個。原本 ruby 版本的設計是可以輕易看出 Worker fork 了哪個 process 而被 fork 出來的正在執行什麼工作。</p>
+
+<p>Ruby 只要改 <code>$0</code> 就可以了， PHP 就沒這麼簡單了，要使用 <code>setproctitle</code> 。</p>
+
+<p>但是這要安裝 pecl 的 <code>proctitle</code> 模組才能使用。</p>
+
+<p>安裝方式：<code>pecl install proctitle channel://pecl.php.net/proctitle-0.1.1</code></p>
+
+<p>記得要去 php.ini 讀進 .so 的 extension 。</p>
+
+<p>完成後再執行 <code>ps -e -o pid,command | grep [r]esque</code> 時，就會從原本的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">10486 php resque.php</span>
+</span><span class='line'><span class="x">10487 php resque.php</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>變成好讀易懂的：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">10621 resque-1.0: Waiting for notify,mail,image,default</span>
+</span><span class='line'><span class="x">10622 resque-1.0: Forked 10632 at 2012-01-16 13:42:55</span>
+</span><span class='line'><span class="x">10632 resque-1.0: Processing default since 2012-01-16 13:42:55</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>佈署</h2>
 
