@@ -297,11 +297,13 @@ esac
 
 <p>在專案的 extra 目錄下另有 resque.monit 檔案，這是供 <a href="http://supervisord.org/">Supervisord</a> 使用的設定檔。他會在 worker 吃掉 300MB 以上的記憶體，或者是跑了 10 次輪迴後砍掉重開。可以參考看看。</p>
 
-<h2>部屬</h2>
+<h2>佈署</h2>
 
 <p>之前提到可以除了預設的 default 以外，還可以設定不同的 queue，為什麼要這樣做呢？除了執行優先權外，(撈 queue 時會按你給 worker 的設定，在前面 queue 的會先撈，就會先執行到) 還有多伺服器部屬的原因。</p>
 
 <p>假如今天你有個 queue 專門要處理使用者圖片的東西，當然一般圖片會有自己的伺服器。於是在你的主 web 伺服器上你就可以執行 <code>QUEUE=notify,mail</code> 而在圖片伺服器上就可以執行 <code>QUEUE=images</code> 的 worker。</p>
+
+<p>另外就是由於 Worker 啟動時已經將 <code>APP_INCLUDE</code> 的檔案都讀入，持續執行。因此如果有修改引入的 Job 或 hook plugin 等檔案的話，deploy 時要將 worker 停止，重新啟動才會讀入新的 <code>APP_INCLULDE</code> 檔案。</p>
 
 <h2>已知問題</h2>
 
