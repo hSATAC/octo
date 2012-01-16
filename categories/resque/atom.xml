@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-16T18:58:12+08:00</updated>
+  <updated>2012-01-16T19:00:34+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -27,6 +27,9 @@
 <h2>安裝 PHP-Resque</h2>
 
 <p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+<!-- more -->
+
 
 <h2>環境變數</h2>
 
