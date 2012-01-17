@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Youtube | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/youtube/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-17T21:12:40+08:00</updated>
+  <updated>2012-01-17T21:16:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -41,6 +41,10 @@
 
 <p>做了一番 survey 後發現 <a href="https://github.com/rg3/youtube-dl">youtube-dl</a> 這個工具實在非常好用。他是用 python 寫的一個 script ，只要丟網址給他就會幫你下載。更棒的是他連 <code>ffmpeg</code> 都接好了，加上參數就可以直接輸出成 mp3 檔案。</p>
 
+<p>抓取的指令是：</p>
+
+<p><code>youtube-dl -o "%(title)s.%(ext)s" -q --extract-audio --audio-format "mp3" "[youtube_url]"</code></p>
+
 <p>剩下的工作就只剩下讀取 Youtube 我的最愛，判斷加入的時間。想來應該很簡單，不過這部份卻卡了一兩個小時。</p>
 
 <p>原因是 <strong>Youtube 的 API 寫的太不清楚啦！！！</strong></p>
@@ -61,13 +65,15 @@
 
 <p><a href="https://github.com/hSATAC/youtube-favorite-to-google-music">https://github.com/hSATAC/youtube-favorite-to-google-music</a></p>
 
-<h4>附錄</h4>
+<h3>附錄</h3>
 
 <p>其實原本的需求是抓下來以後先存進 itunes 再上傳到 Google Music ，但是後來因為現在沒在用 itunes 所以簡化了。</p>
 
 <p>如果有這個需求的朋友可以參考 <a href="http://dougscripts.com/itunes/itinfo/folderaction01.php">Folder Actions and iTunes</a> (Mac Only)。</p>
 
 <p>對指定資料夾設定動作，當有新增音樂檔案到此資料夾的時候自動把檔案丟進 itunes 。再把 Google Music Manager 設定成自動上傳 itunes 新增的音樂即可。</p>
+
+<p>之後可能會加上轉好 mp3 後加上 ID3 TAG 的功能吧，不過那又是另外一個故事了(遠目)。</p>
 ]]></content>
   </entry>
   
