@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-16T21:46:07+08:00</updated>
+  <updated>2012-01-17T14:16:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -234,7 +234,7 @@ Resque::enqueue('default', 'My_Job', $args);
 
 <h2>佈署</h2>
 
-<p>之前提到可以除了預設的 default 以外，還可以設定不同的 queue，為什麼要這樣做呢？除了執行優先權外，(撈 queue 時會按你給 worker 的設定，在前面 queue 的會先撈，就會先執行到) 還有多伺服器部屬的原因。</p>
+<p>之前提到可以除了預設的 default 以外，還可以設定不同的 queue，為什麼要這樣做呢？除了執行優先權外，(撈 queue 時會按你給 worker 的設定，在前面 queue 的會先撈，就會先執行到) 還有多伺服器佈署的原因。</p>
 
 <p>假如今天你有個 queue 專門要處理使用者圖片的東西，當然一般圖片會有自己的伺服器。於是在你的主 web 伺服器上你就可以執行 <code>QUEUE=notify,mail</code> 而在圖片伺服器上就可以執行 <code>QUEUE=images</code> 的 worker。</p>
 
