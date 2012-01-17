@@ -9,8 +9,10 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走
-下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間 &hellip;">
+  <meta name="description" content="最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。
+寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。
+部屬方面也很容易
+在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +79,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/">用 Passenger(mod_rails) 部屬 Sinatra</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-22T00:00:00+08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。<br />
+寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。<br />
+部屬方面也很容易<br />
+在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾<br />
+config.ru 檔案內容為
+<pre lang="ruby">
+require 'project'</pre></p>
+
+<p>root_dir = File.dirname(__FILE__)</p>
+
+<p>set :environment, ENV[&#8216;RACK_ENV&#8217;].to_sym<br />
+set :root,        root_dir<br />
+set :app_file,    File.join(root_dir, &#8216;project.rb&#8217;)<br />
+disable :run</p>
+
+<p>run Sinatra::Application</p>
+
+<p>
+把 project 替換成你的專案名稱<br />
+apache vhost的設法和 rails 的一樣即可
+<pre lang="bash">
+<VirtualHost *:80>
+  ServerName project.hsatac.net
+  DocumentRoot "/project/public"
+  RackEnv production
+  <Directory "/project/public">
+    Order allow,deny
+    Allow from all
+  
+
+</pre></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -502,56 +570,6 @@ end</pre></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">倒數80天，我用aNobii記錄我的軍旅生活</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-13T00:00:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天是我入伍的第256天，也就是還有80天退伍。<br />
-很幸運的最後到了一個可以讓我有時間看書的地方，<br />
-而且也有圖書閱覽室可以借閱，<br />
-不然我應該會受不了&#8230;。</p>
-
-<p>新訓、憲訓看的書不算，到這邊後看的書我都用<a href="http://www.anobii.com">aNobii</a>記了下來，<br />
-總共到今天為止，一共有54本書、18003頁。</p>
-
-<p>破百後最難熬的三個月，一樣有書陪我渡過，<br />
-真是太幸福了:)</p>
-
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -569,6 +587,10 @@ end</pre></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
       </li>
     
@@ -582,10 +604,6 @@ end</pre></p>
     
       <li class="post">
         <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a>
       </li>
     
   </ul>

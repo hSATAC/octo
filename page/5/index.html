@@ -9,10 +9,11 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="一直都很想擁有一台小徑車，但是看來看去都沒有非常喜歡的。
-最近看到 KHS m451R 新車款，頓時驚為天人。 這是 KHS 日本線產品，台灣只有限量 25 台試賣，
-不過我猜如果銷售不錯，之後台灣應該也買得到吧。 不得不說KHS 對市場的敏銳度和反應真的很快，
-現在這樣的車款在日本相當流行， &hellip;">
+  <meta name="description" content="首先產生 public 和 private keys:
+ssh-keygen -t RSA
+輸入passphrase 即產生兩個 key
+id_rsa為private key, id_rsa.pub 為 public key 接著下載 puttygen 轉換成 putty 格式的 key，
+以及 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/using-public-key-for-authentication/">Using Public Key for Authentication</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-17T00:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>首先產生 public 和 private keys:
+<pre lang="bash">ssh-keygen -t RSA</pre>
+輸入passphrase 即產生兩個 key<br />
+id_rsa為private key, id_rsa.pub 為 public key</p>
+
+<p>接著下載 puttygen 轉換成 putty 格式的 key，<br />
+以及 pageant 代理認證程式 [<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" target="_blank">下載網址</a>]</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/using-public-key-for-authentication/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -621,74 +669,6 @@ Now it’s done!</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/">PHP Framework執行效能</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-19T00:00:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近在玩 RoR&#8230;突然想到執行效能的問題<br />
-上網找了一些<a href="http://www.avnetlabs.com/php/php-framework-comparison-benchmarks" target="_blank">資料</a></p>
-
-<p>常用的三套 PHP Framework - CakePHP, Zend, CodeIginter<br />
-Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
-
-<p>雖然當初我選擇 CI 主要不是為了效能的因素<br />
-而是著眼在輕量和架構上&#8230;</p>
-
-<p>eAccelerator我沒在用就不管了&#8230;<br />
-其他 framework 在打開 APC Cache 後效能明顯提昇<br />
-好像是說 APC Cache 在 PHP 6 會成為內建 mod 之一？印象中&#8230;</p>
-
-<p>現在對版本都很不敏感&#8230;<br />
-一方面是懶&#8230;<span style="text-decoration: line-through;">(人老了&#8230;)
-</span>另一方面是很多在 maintain 的專案都還在用穩定的舊版本&#8230;<br />
-而新開發的當然也沿用&#8230;不會去給自己找麻煩&#8230;</p>
-
-<p>再者是以前吃過這種虧太多了&#8230;<br />
-看到覺得不錯的新技術就一頭栽進去&#8230;<br />
-結果發現這技術被淘汰 / 做不起來&#8230;</p>
-
-<p>所以現在都寧願觀望好一陣子，等穩定、社群和資源都夠多後再進場<br />
-像 RoR 也是兩年前就想摸了，不過到最近才動手</p>
-
-<p><span style="text-decoration: line-through;">(這真的和老一點關係都沒有</span>)</p>
-
-<p>扯遠了&#8230;RoR 的效能略遜 CodeIginter 一些 (在單 Mongrel 的情況)<br />
-不過以人為出發點的語言效能能到這樣，我覺得不錯。<br />
-應該還有一些可以提昇效能的方法</p>
-
-<p>不過等以後碰到效能瓶頸時再研究吧<br />
-先把 RoR 摸熟點再說。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -706,6 +686,10 @@ Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
       </li>
     
@@ -719,10 +703,6 @@ Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
     
       <li class="post">
         <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a>
       </li>
     
   </ul>

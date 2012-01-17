@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Youtube 加入我的最愛後自動抓檔上傳至 Google Music - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。 這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>cAtAsh</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T19:33:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
+
+<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
+
+<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
+
+<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
+
+<!--more-->
+
+
+<p>想法很簡單，大概分為四部分：</p>
+
+<ul>
+<li><p>讀取 Youtube 我的最愛</p></li>
+<li><p>抓到有新增就取得資訊下載影片</p></li>
+<li><p>透過 <code>ffmpeg</code> 之類轉為 mp3</p></li>
+<li><p>透過 Google Music Manager 上傳</p></li>
+</ul>
+
+
+<p>做了一番 survey 後發現 <a href="https://github.com/rg3/youtube-dl">youtube-dl</a> 這個工具實在非常好用。他是用 python 寫的一個 script ，只要丟網址給他就會幫你下載。更棒的是他連 <code>ffmpeg</code> 都接好了，加上參數就可以直接輸出成 mp3 檔案。</p>
+
+<p>剩下的工作就只剩下讀取 Youtube 我的最愛，判斷加入的時間。想來應該很簡單，不過這部份卻卡了一兩個小時。</p>
+
+<p>原因是 <strong>Youtube 的 API 寫的太不清楚啦！！！</strong></p>
+
+<p>根據 <a href="http://code.google.com/intl/zh-TW/apis/youtube/2.0/developers_guide_protocol_favorites.html#Retrieving_favorite_videos">GData Youtube API</a> ：</p>
+
+<blockquote><p>The <code>&lt;published&gt;</code> tag in a favorite videos feed entry identifies the time that the video was marked as a favorite and not the time that the video was published.</p></blockquote>
+
+<p>用 <code>&lt;published&gt;</code> 這個欄位就可以取得這筆影片新增到我的最愛的時間，這樣就可以用來判斷是否是新加入的項目。</p>
+
+<p>但是他從頭到尾沒有提到 <strong>這個 API 要用 v=2 來連這個欄位才會有效</strong> 這件事。如果沒有指定 version ，這個欄位出來的值是影片上傳時間，卡在這邊超久的啊。</p>
+
+<p>總之用一個檔案來記錄上次抓取的時間，就可以達成原本的目的了。</p>
+
+<p>記得最後把 Google Music Manager 設定成這個目錄，這樣轉好的 mp3 就會自動上傳到 Google Music 啦。</p>
+
+<p>所有的程式碼在這裡。</p>
+
+<p><a href="https://github.com/hSATAC/youtube-favorite-to-google-music">https://github.com/hSATAC/youtube-favorite-to-google-music</a></p>
+
+<h4>附錄</h4>
+
+<p>其實原本的需求是抓下來以後先存進 itunes 再上傳到 Google Music ，但是後來因為現在沒在用 itunes 所以簡化了。</p>
+
+<p>如果有這個需求的朋友可以參考 <a href="http://dougscripts.com/itunes/itinfo/folderaction01.php">Folder Actions and iTunes</a> (Mac Only)。</p>
+
+<p>對指定資料夾設定動作，當有新增音樂檔案到此資料夾的時候自動把檔案丟進 itunes 。再把 Google Music Manager 設定成自動上傳 itunes 新增的音樂即可。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T19:33:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/01/redmine-migrate-from-trac-0-dot-12/" title="Previous Post: Redmine migration from Trac 0.12">&laquo; Redmine migration from Trac 0.12</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music/';
+        var disqus_url = 'http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
