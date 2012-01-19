@@ -28,6 +28,16 @@
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  jQuery.noConflict();
+  jQuery(document).ready(function() {
+      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
 
   
   <script type="text/javascript">
@@ -167,6 +177,10 @@
 <aside class="sidebar">
   
     <section>
+  <h1>About Me</h1>
+  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
+</section>
+<section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
