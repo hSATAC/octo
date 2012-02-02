@@ -9,11 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="首先產生 public 和 private keys:
-ssh-keygen -t RSA
-輸入passphrase 即產生兩個 key
-id_rsa為private key, id_rsa.pub 為 public key 接著下載 puttygen 轉換成 putty 格式的 key，
-以及 &hellip;">
+  <meta name="description" content="到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。 在這天大家可以帶自己的貓咪到公司上班，滿有趣的。 超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +86,45 @@ id_rsa為private key, id_rsa.pub 為 public key 接著下載 puttygen 轉換成 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">貓貓日</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-17T00:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。</p>  <p>在這天大家可以帶自己的貓咪到公司上班，滿有趣的。</p>  <p><a href="/images/wp-uploads/2009/05/img-2341.jpg"><img title="IMG_2341" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2341" src="/images/wp-uploads/2009/05/img-2341-thumb.jpg" width="260" border="0" /></a> </p>  <p>超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。</p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -595,90 +630,6 @@ tar -zcvf $2.tar.gz $2</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/">CodeIgniter 1.7 Session Bug Within Object Storage</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-02T00:00:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I don’t know whether it’s a bug or what.<br />
-I would store a object in session sometimes, like this.
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">session</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">set_userdata</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_name'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$object</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-before 1.7, it worked just fine. But when I trying to upgrade my application to CI 1.7, it came wrong.</p>
-
-<p>It will cause error messages like this:
-<blockquote>A PHP Error was encountered</blockquote></p>
-
-<p>Severity: 4096</p>
-
-<p>Message: Object of class stdClass could not be converted to string</p>
-
-<p>Filename: libraries/Session.php</p>
-
-<p>Line Number: 715
-When I digged into 1.7 Session library, I found the problem.
-<blockquote>Fixed a bug in the Session class that was disallowing slashes in the serialized array.</blockquote>
-There are some new functions in Session library.</p>
-
-<p>GOTO line 683 and line 714,
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-When $val is a object, it came wrong, just replace this line with
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #007700;">if(!</span><span style="color: #0000bb;">is_object</span><span style="color: #007700;">(</span><span style="color: #0000bb;">$val</span><span style="color: #007700;">)) </span><span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-For those who got the same problem, this is my solution.<br />
-Hope there will be a hotfix soon.</p>
-
-<p>I also made my own hotfix for this problem.</p>
-
-<p>I made a session_fix library extends the original Session library,<br />
-only overrides these two functions.</p>
-
-<p>Get my code from <a href="http://www.hsatac.net/Session_fix.phps">here</a>
-and put it into /system/application/libraries/Session_fix.php</p>
-
-<p>Load this library with a CI 1.7 new feature:
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">load</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">library</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_fix'</span><span style="color: #007700;">, </span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'session'</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-Now it’s done!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -706,6 +657,10 @@ Now it’s done!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
       </li>
     
@@ -719,10 +674,6 @@ Now it’s done!</p>
     
       <li class="post">
         <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
       </li>
     
   </ul>

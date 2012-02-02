@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-01-19T19:41:34+08:00</updated>
+  <updated>2012-02-02T15:09:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,88 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP-Resque Auto Scale Workers]]></title>
+    <link href="http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers/"/>
+    <updated>2012-02-02T14:56:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It's a total waste to create numbers of workers when there's not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+
+<p>Also, is solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
+
+<p>Here's my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+
+<h2>Introduction</h2>
+
+<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
+
+<!-- more -->
+
+
+<h2>Design</h2>
+
+<h3>Expected Behavior</h3>
+
+<ul>
+<li><p>Trigger <code>afterEnqueue</code> to check the total job number of this queue.</p></li>
+<li><p>If the number larger than <code>15</code> than check the total number of workers involved in this queue.</p></li>
+<li><p>If the worker number is not enough, create one or more workers.</p>
+
+<ul>
+<li><p>If there are more than one server, divided the number equally to each server.</p></li>
+<li><p>In the mean time, try to create workers that deal the same queues on each server.</p></li>
+</ul>
+</li>
+<li><p>Trigger <code>beforeFork</code> to check the total job number and worker number, close the useless ones.</p></li>
+</ul>
+
+
+<h3>Number of Jobs and Workers</h3>
+
+<ul>
+<li><p>1~15 jobs => 1 worker</p></li>
+<li><p>16~25 jobs => 2 workers</p></li>
+<li><p>26~40 jobs => 3 workers</p></li>
+<li><p>41~60 jobs => 4 workers</p></li>
+<li><p>60+ jobs => 5 workers</p></li>
+</ul>
+
+
+<h2>Usage</h2>
+
+<ul>
+<li>You need to add the queue type as a member static variable to your Job class. Like this:</li>
+</ul>
+
+
+<p>```php
+&lt;?php
+class PHP_Job
+{</p>
+
+<pre><code>static public $queue = "default";
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<ul>
+<li><p>Require <code>plugin.php</code> both in your resque init script and enqueue part.</p></li>
+<li><p>Change the setting and code in <code>plugin.php</code> based on your need.</p></li>
+<li><p>Start only one worker via your resque init script.</p></li>
+<li><p>Now it's auto-scalable.</p></li>
+</ul>
+
+
+<h2>Disclaimer</h2>
+
+<p>For now it's all experimental design.</p>
+
+<p>All numbers and codes are not from production enviroments nor runned benchmarks. It's just a prototype for now, but it does what it says.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PHP-Resque 簡介]]></title>

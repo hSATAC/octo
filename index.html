@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。 這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android &hellip;">
+  <meta name="description" content="PHP-Resque is an amazing PHP port of Resque. After playing it for a while, an idea crossed my mind: It&#8217;s a total waste to create numbers of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-02T14:56:00+08:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&#8217;s a total waste to create numbers of workers when there&#8217;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+
+<p>Also, is solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
+
+<p>Here&#8217;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+
+<h2>Introduction</h2>
+
+<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/02/php-resque-auto-scale-workers/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -645,59 +694,6 @@ redis.conf 要稍微修改</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-30T00:00:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>老實說，不記得之前是動了什麼，總之我的佈署 apache + passenger + ree 環境<br />
-redmine 爆炸了。推測應該是 gem 的關係。<br />
-上網看了一下， rails 2.3 只支援 rubygems 1.7<br />
-就先把 rubygems downgrade 回來
-<pre lang="bash">gem update --system 1.7</pre></p>
-
-<p>和 tkalu, xdite, ihower, 以及小蟹詢問了各種可能的解決方案後<br />
-確定我應該是要用 bundler 來管理一下 redmine 的 gems</p>
-
-<p>根據 ihower 提供的資訊， redmine 有一個內建 bundler 的 fork 版<br />
-搜尋了一下找到了 https://www.chiliproject.org/<br />
-把他的 <a href="https://github.com/chiliproject/chiliproject/blob/unstable/Gemfile" target="_blank">Gemfile</a> 借過來一用</p>
-
-<p>再按照 <a href="http://gembundler.com/rails23.html" target="_blank">Bundler 官網上的 Rails 2 教學</a>
-來設定，果然成功把我的 redmine 救了回來！</p>
-
-<p>chiliproject 的 Gemfile 可能要稍加修改，例如他用 rails 2.3.14，可以改成 redmine 官網支援的 2.3.11<br />
-然後一些沒用到的 gem 例如 pg 可以移除。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -723,6 +719,10 @@ redmine 爆炸了。推測應該是 gem 的關係。<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
       </li>
     
@@ -736,10 +736,6 @@ redmine 爆炸了。推測應該是 gem 的關係。<br />
     
       <li class="post">
         <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2011/12/record-terminal-using-script/">用 scrpit 指令來紀錄輸出及輸入</a>
       </li>
     
   </ul>
