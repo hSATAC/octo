@@ -8,7 +8,7 @@ categories: [PHP, PHP-Resque, Resque]
 
 [PHP-Resque](https://github.com/chrisboulton/php-resque) is an amazing PHP port of [Resque](http://github.com/defunkt/resque/). After playing it for a while, an idea crossed my mind: It's a total waste to create numbers of workers when there's not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.
 
-Also, is solved [issue #32 of PHP-Resque](https://github.com/chrisboulton/php-resque/issues/32).
+Also, it solved [issue #32 of PHP-Resque](https://github.com/chrisboulton/php-resque/issues/32).
 
 Here's my code: [PHP-Resque Auto Scale](https://github.com/hSATAC/php-resque-auto-scale)
 
