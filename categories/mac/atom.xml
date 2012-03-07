@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Mac | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-03-01T16:47:45+08:00</updated>
+  <updated>2012-03-07T10:19:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode 4.3 publish ipa for testflight]]></title>
+    <link href="http://blog.hsatac.net/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/"/>
+    <updated>2012-03-07T10:05:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/03/xcode-4-dot-3-publish-ipa-for-testflight</id>
+    <content type="html"><![CDATA[<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
+
+<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
+
+<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
+
+<p>Xcode 4.3 的 entitlement 換地方了。</p>
+
+<ul>
+<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
+<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
+<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
+</ul>
+
+
+<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
+
+<p>```
+<key>com.apple.developer.ubiquity-container-identifiers</key>
+ <array></p>
+
+<pre><code> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
+</code></pre>
+
+<p> </array>
+ <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+ <string>$(TeamIdentifierPrefix).*</string>
+```</p>
+
+<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[整合 Redmine 和 git]]></title>
@@ -239,16 +277,6 @@ env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/loca
 
 
 <p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mac Os Server 輕鬆設定  Passenger (mod_rails)]]></title>
-    <link href="http://blog.hsatac.net/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/"/>
-    <updated>2010-09-26T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2010/09/mac-os-server-輕鬆設定-passenger-mod_rails</id>
-    <content type="html"><![CDATA[<p><p>如果你用 Mac Os Server + Passenger，你一定也碰過這個問題，自己加上的 apache2 設定和Mac Os Server 的 Server Admin 軟體常常衝突，不是爆 exception 就是把你寫的 conf 改得亂七八糟。雖然自己改 conf 後重開 apache 是可以 run ，但是每次開啟 Server Admin 看到錯誤訊息就很不爽…。</p>  <p>今天發現了這個小程式，大大改變了這個情況！<a href="http://www.fngtps.com/2008/06/putting-the-pane-back-into-deployment" target="_blank">passengerpane</a> | <a href="http://github.com/alloy/passengerpane" target="_blank">github</a></p>  <p><a href="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="Screen shot 2010-09-26 at 6.45.45 PM" border="0" alt="Screen shot 2010-09-26 at 6.45.45 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/09/Screenshot20100926at6.45.45PM_thumb.png" width="260" height="196" /></a> </p> <!--more-->  <p>顧名思義，他會在你的 System Pref 裡面多裝一個 Passenger 的設定 Panel ，只要簡單的點選就可以幫你設定好 Passenger + Apache2。重點是他的設定檔會和原本預設的 sites 分開，這樣就不會搞亂 Server Admin 的設定了。</p>  <p>我的環境是 Mac Os X Server 10.6.4, apache2 是 Mac 內建的，passenger是 REE 自帶，雖然 passengerpane 上顯示 32bit, 但我在 64bit 的 Mac os server 上跑也沒問題。他建議的 “stable” 1.0 版我反而裝不起來，但使用 github 裡面的 1.3 版，就非常順利，為設定所苦的人一定要試試！</p></p>
 
 ]]></content>
   </entry>

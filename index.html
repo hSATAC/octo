@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="PHP-Resque is an amazing PHP port of Resque. After playing it for a while, an idea crossed my mind: It&#8217;s a total waste to create numbers of &hellip;">
+  <meta name="description" content="這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。 按照 testflight 的教學上傳 ipa 檔，一直出現 mismatched-ubiquitykvstore-identifier-value 的錯誤，但是憑證已經確認多次，肯定沒有問題。 翻了一下應該是 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 Publish Ipa for Testflight</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T10:05:00+08:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
+
+<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
+
+<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
+
+<p>Xcode 4.3 的 entitlement 換地方了。</p>
+
+<ul>
+<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
+<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
+<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
+</ul>
+
+
+<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
+</span><span class='line'> &lt;array&gt;
+</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
+</span><span class='line'> &lt;/array&gt;
+</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
+</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -653,47 +720,6 @@ redis.conf 要稍微修改</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/11/archlinux/">Archlinux 推廣</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
-
-<p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/11/archlinux/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -719,6 +745,10 @@ redis.conf 要稍微修改</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
       </li>
     
@@ -732,10 +762,6 @@ redis.conf 要稍微修改</p>
     
       <li class="post">
         <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a>
       </li>
     
   </ul>
