@@ -29,3 +29,18 @@ Xcode 4.3 的 entitlement 換地方了。
 ```
 
 再做 Archive, Share 成 ipa 檔上傳就可以了。
+
+*2012/04/42 補充*
+
+用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。
+
+也就是：
+
+```
+<key>com.apple.developer.ubiquity-container-identifiers</key>
+ <array>
+     <string>$(TeamIdentifierPrefix)com.yourcompany.coolapp</string>
+ </array>
+ <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+ <string>$(TeamIdentifierPrefix)com.yourcompany.coolapp</string>
+```
