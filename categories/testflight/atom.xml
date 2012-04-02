@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testflight | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/testflight/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-03-07T10:19:18+08:00</updated>
+  <updated>2012-04-02T11:27:25+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -48,6 +48,24 @@
 ```</p>
 
 <p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+
+<p><em>2012/04/42 補充</em></p>
+
+<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
+
+<p>也就是：</p>
+
+<p>```
+<key>com.apple.developer.ubiquity-container-identifiers</key>
+ <array></p>
+
+<pre><code> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
+</code></pre>
+
+<p> </array>
+ <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+ <string>$(TeamIdentifierPrefix)com.yourcompany.coolapp</string>
+```</p>
 ]]></content>
   </entry>
   

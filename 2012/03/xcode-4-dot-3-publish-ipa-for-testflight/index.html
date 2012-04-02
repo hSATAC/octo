@@ -144,6 +144,26 @@
 
 
 <p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+
+<p><em>2012/04/42 補充</em></p>
+
+<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
+
+<p>也就是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
+</span><span class='line'> &lt;array&gt;
+</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
+</span><span class='line'> &lt;/array&gt;
+</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
+</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
