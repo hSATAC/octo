@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="忘記是哪一年的世大運，看到朴成賢，就開始注意到他這個小熊維尼人。韓國射箭選手的生命週期都很短，往往幾年過去就退下戰線當教練了。例如韓國男子射箭選手, 多項世界紀錄保持人Oh kyo moon也是還年輕就跑去澳洲當教練了。朴成賢能在競爭激烈的韓國獨領風騷這麼多年真的很不容易。 &hellip;">
+  <meta name="description" content="&lt;script&gt;var keywords = Array(&nbsp; Array(&#8220;keyword&#8221;),)function replaceKeyword(objID) {&nbsp; var text = &#8220;&#8221;;&nbsp; if ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/%E6%90%9C%E5%B0%8B%E9%97%9C%E9%8D%B5%E5%AD%97%E8%AE%8A%E8%89%B2/">搜尋關鍵字變色</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-21T00:00:00+08:00" pubdate data-updated="true">Aug 21<span>st</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>&lt;script&gt;<br />var keywords = Array(<br />&nbsp; Array(&#8220;keyword&#8221;),<br />)<br /><br />function replaceKeyword(objID) {<br />&nbsp; var text = &#8220;&#8221;;<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; text = document.getElementById(objID).outerHTML;<br />&nbsp; } else {<br />&nbsp;&nbsp;&nbsp; text = document.body.innerHTML;<br />&nbsp; }<br />&nbsp; for (var i = 0; i &lt; keywords.length; i++) {<br />&nbsp;&nbsp;&nbsp; var re = new RegExp(keywords[i][0].replace(/\s+/, &#8220;&#92;s+&#8221;), &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp; var m = re.exec(text);<br />&nbsp;&nbsp;&nbsp; if (m != null) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var j = 0; j &lt; m.length; j++) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var reg = new RegExp(m[j], &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text = text.replace(reg, &#8220;&lt;span style=&#34;color:red;&#34;&gt;&#8221; + keywords[i][0] + &#8220;&lt;/span&gt;&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp; }<br />&nbsp; }<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; document.getElementById(objID).outerHTML = text;<br />&nbsp; } else {<br />&nbsp; &nbsp;&nbsp;&nbsp; document.body.innerHTML = text;<br />&nbsp; }<br />}<br /><br />&nbsp; $(document).ready(function(){<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; replaceKeyword();<br />&nbsp;&nbsp;&nbsp; <br /><br />&nbsp; });<br />&lt;/script&gt;</p>
+</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -438,45 +475,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/07/%E5%AE%89%E8%A3%9D%E8%88%87%E8%A8%AD%E5%AE%9Aapc/">安裝與設定APC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-07-10T00:00:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>安裝與設定APC<br />&#8212;&#8212;&#8212;&#8211;<br />linux:<br />可至<a href="http://pecl.php.net/package/APC">PECL下載APC</a><br /><br />下載APC後<br /><br /># tar xvzf APC-<st1:chsdate w:st="on" year="1899" month="12" day="30" islunardate="False" isrocdate="False">2.0.3</st1:chsdate>.tgz 解壓縮<br /># cd APC-<st1:chsdate w:st="on" year="1899" month="12" day="30" islunardate="False" isrocdate="False">2.0.3</st1:chsdate><br /># /usr/bin/phpize<br /># ./configure &#8211;enable-apc<br /># make<br /># make install <br /><br />windows:<br />可在<a href="http://pecl4win.php.net/list.php">PECL4Win下載編譯好的dll</a><br />請選擇適當版本自行丟到php include目錄中<br />&#8212;&#8212;&#8212;-<br /><br />接著更改php.ini設定<br /><br />貼上<br />linux:<br />extension = apc.so<br /><br />win:<br />extension = apc.dll<br /><br />apc.shm_segments=1<br />apc.optimization=0<br />apc.shm_size=128<br />apc.ttl=7200<br />apc.user_ttl=7200<br />apc.num_files_hint=1024<br />apc.mmap_file_mask=/tmp/apc.XXXXXX<br />apc.enable_cli=1<br />apc.rfc1867 = on<br /><br />重開apache2ctl graceful後，就安裝好了。<br />可至phpinfo.php檢查是否有正確啟動<br />或用壓縮檔中的apc.php查看apc資訊</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2008/07/%E5%AE%89%E8%A3%9D%E8%88%87%E8%A8%AD%E5%AE%9Aapc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -504,6 +502,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
       </li>
     
@@ -517,10 +519,6 @@
     
       <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
       </li>
     
   </ul>

@@ -9,8 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="因為我的 mac mini server 不想開著 ssh 一直給人掃，所以想設定 https 的 git server，試了一下真的超簡單的。 ▲首先打開你的 Server Admin 建立一個新 Site 例如 repo.hsatac.net
-">
+  <meta name="description" content="If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;. But if you are a user of homebrew like me, you may need these &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +86,74 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/">How to Enable Php Gmp on Mac OS X Without Macports</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-07T00:00:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
+
+<p>But if you are a user of homebrew like me, you may need these tips.</p>
+
+<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
+
+<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
+<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
+sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
+to
+<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
+sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
+
+<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
+
+<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
+
+<p>Extract the source code and go to phpsource/ext/gmp/</p>
+
+<p>run
+<pre lang="bash">
+phpize
+./configure
+MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
+</pre></p>
+
+<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
+
+<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
+
+<p>And load it in your /private/etc/php.ini</p>
+
+<p>It&#8217;s done!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -520,59 +587,6 @@ Star Trek television series, among others.</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac Mini server使用homebrew安裝PHP Mcrypt套件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-28T00:00:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
-
-<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
-
-<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
-
-<p>將install區塊改成
-<pre lang="ruby">def install
-  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
-  system "make -j6"
-  system "make install"
-end</pre></p>
-
-<p>接著執行brew安裝mcrypt
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -600,6 +614,10 @@ end</pre></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
       </li>
     
@@ -613,10 +631,6 @@ end</pre></p>
     
       <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
       </li>
     
   </ul>

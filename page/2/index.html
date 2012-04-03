@@ -9,7 +9,11 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content=" 一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。">
+  <meta name="description" content="前陣子入手了 Logitech G300 這支滑鼠，相當優秀。
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。 不過在我的 ArchLinux 下這支 G300 使用不太正常
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。
+經過測試後， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +90,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" pubdate data-updated="true">Nov 30<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2011/11/logitech-g300-on-archlinux/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -542,74 +592,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/">How to Enable Php Gmp on Mac OS X Without Macports</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-07T00:00:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-<p>And load it in your /private/etc/php.ini</p>
-
-<p>It&#8217;s done!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -637,6 +619,10 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
       </li>
     
@@ -650,10 +636,6 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
     
       <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
       </li>
     
   </ul>

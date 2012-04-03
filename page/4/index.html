@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="今天繼續 Mac mini server 的探索… 今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。 原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載 &hellip;">
+  <meta name="description" content="Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用phpMyAdmin之類的軟體，就會一直看到提示「缺少mcrypt」。 要如何使用homebrew來安裝mcrypt套件，配合內建的PHP呢？ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac Mini server使用homebrew安裝PHP Mcrypt套件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-28T00:00:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
+
+<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
+
+<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
+
+<p>將install區塊改成
+<pre lang="ruby">def install
+  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
+  system "make -j6"
+  system "make install"
+end</pre></p>
+
+<p>接著執行brew安裝mcrypt
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -496,52 +549,6 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP With Www-data</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
-也想幫自己的主機設定一下，<br />
-不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
-
-<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
-那要怎樣使用 www-data 登入呢？<br />
-一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
-
-<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
-那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
-用 scp 一連，果然順利登入了，非常方便。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -569,6 +576,10 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
       </li>
     
@@ -582,10 +593,6 @@ PHP會自動轉換成空白，做了一點調查才知道，</p>
     
       <li class="post">
         <a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a>
       </li>
     
   </ul>

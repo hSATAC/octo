@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-04-02T11:27:25+08:00</updated>
+  <updated>2012-04-03T23:06:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[把 Git 中的目錄搬到另一個 Git 並保留 commit]]></title>
+    <link href="http://blog.hsatac.net/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/"/>
+    <updated>2012-04-03T21:43:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history</id>
+    <content type="html"><![CDATA[<p>今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。</p>
+
+<p>原本以為這個需求無法達成，不過做了點研究以後發現是可行的，甚至 B repository 是已存在的 repository 也可以做到！</p>
+
+<p>先說獨立出新的 repository 這個狀況，很簡單，先 git clone 出一個乾淨的 A repository 然後 <code>git remote rm origin</code> 不要 track remote。</p>
+
+<p>接著在 git 根目錄下 <code>git filter-branch --subdirectory-filter &lt;目錄&gt; -- --all</code> 你就會看到這個目錄以外的東西都不見了，而且相關的 commit log 還在。</p>
+
+<p>如果是要獨立出一個新的 repository 做到這邊就可以結束了。</p>
+
+<p>接著講要把檔案和 commit log 匯到已存在的 B repository：接續上一步，用 <code>mkdir &lt;你要的目錄&gt;; mv * &lt;你要的目錄&gt;</code> 把抽出來的檔案都移到你預想要放的目錄 <code>git add .; git commit</code> 後 <code>cd ..</code> 再用 git clone 把 B repository clone 出來，切到 B repository 的目錄，用 add local repository as remote 的方式 <code>git remote add repoA ../&lt;A repo 的目錄&gt;</code> 然後 <code>git pull repoA master</code> 就完成了。</p>
+
+<p>參考：<a href="http://gbayer.com/development/moving-files-from-one-git-repository-to-another-preserving-history/">Moving Files from one Git Repository to Another, Preserving History</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xcode 4.3 publish ipa for testflight]]></title>
@@ -1325,47 +1346,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
 </pre></p>
 
 <p>大功告成！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
-    <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
-    <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-<p>And load it in your /private/etc/php.ini</p>
-
-<p>It&#8217;s done!</p>
 ]]></content>
   </entry>
   
