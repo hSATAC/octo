@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-04-04T00:06:13+08:00</updated>
+  <updated>2012-04-04T10:52:47+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -20,7 +20,27 @@
     <id>http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file</id>
     <content type="html"><![CDATA[<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
 
-<p>{% gist 1496197 %}</p>
+<p><div><script src='https://gist.github.com/1496197.js?file='></script>
+<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
+  if !exists('*PHPsynCHK')
+    function! PHPsynCHK()
+      ccl
+      let winnum = winnr()
+      let linenum = line('.')
+      let colnum = col('.')
+      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
+      silent cf .vimerr
+      cw
+      execute winnum . &quot;wincmd w&quot;
+      silent undo
+      silent cf
+      if 1 == len(getqflist())
+         call cursor(linenum, colnum)
+      endif
+    endfunction
+  endif
+</code></pre></noscript></div>
+</p>
 
 <p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
 ]]></content>

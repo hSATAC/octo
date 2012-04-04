@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Prompt | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/prompt/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-04-04T00:06:13+08:00</updated>
+  <updated>2012-04-04T10:52:47+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -52,7 +52,51 @@
 
 <p>最後結果如下：</p>
 
-<p>{% gist 1500143 %}</p>
+<p><div><script src='https://gist.github.com/1500143.js?file='></script>
+<noscript><pre><code>function git_branch {
+ref=$(git symbolic-ref HEAD 2&gt; /dev/null) || return;
+echo &quot;(&quot;${ref#refs/heads/}&quot;) &quot;;
+}
+
+function git_since_last_commit {
+now=`date +%s`;
+last_commit=$(git log --pretty=format:%at -1 2&gt; /dev/null) || return;
+seconds_since_last_commit=$((now-last_commit));
+minutes_since_last_commit=$((seconds_since_last_commit/60));
+hours_since_last_commit=$((minutes_since_last_commit/60));
+minutes_since_last_commit=$((minutes_since_last_commit%60));
+
+echo &quot;${hours_since_last_commit}h${minutes_since_last_commit}m &quot;;
+}
+
+unset temp
+
+function prompt_command {
+
+  if [ $HOME == $PWD ]
+  then
+    newPWD=&quot;~&quot;
+  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
+  then
+    newPWD=&quot;~${PWD:${#HOME}}&quot;
+  else
+    newPWD=$PWD
+  fi
+
+  TERMWIDTH=${COLUMNS}
+
+  local temp=&quot;→ [ ${newPWD} ] $(git_branch)$(git_since_last_commit)&quot;
+  let fillsize=${TERMWIDTH}-${#temp}
+  if [ &quot;$fillsize&quot; -gt &quot;0&quot; ]
+  then
+    fill=&quot;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&quot;
+    fill=&quot;${fill:0:${fillsize}}&quot;
+  fi
+}
+
+PROMPT_COMMAND=prompt_command
+PS1=&quot;\[\033[1;31m\]→\[\033[0m\] \[\033[0;36m\][ \[\033[1;32m\]\${newPWD}\[\033[0;36m\] ] \[\033[0m\]\[\033[1;31m\]\$(git_branch)\[\033[0m\]\$(git_since_last_commit)\${fill}\n$ &quot;</code></pre></noscript></div>
+</p>
 ]]></content>
   </entry>
   
