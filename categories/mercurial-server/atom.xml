@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mercurial-server | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/mercurial-server/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-04-13T11:32:14+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在 CentOS 5 上安裝 Python26, hg, mercurial-server]]></title>
+    <link href="http://blog.hsatac.net/2012/04/python26-hg-mercurial-server-on-centos-5/"/>
+    <updated>2012-04-13T10:41:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/04/python26-hg-mercurial-server-on-centos-5</id>
+    <content type="html"><![CDATA[<p>筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。</p>
+
+<p>CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 python 2.4，因此套件庫裡面的 hg 就不合用了。</p>
+
+<h2>安裝 Python 2.6 + hg</h2>
+
+<ul>
+<li>先 <code>sudo yum install python26 python26-devel</code> 從 epel 安裝 python 2.6</li>
+<li>抓下最新的 hg source <code>wget http://mercurial.selenic.com/release/mercurial-2.1.2.tar.gz</code> 解壓後不要急著 make，先修改一下 Makefile</li>
+<li>line 9 的 PYTHON 改成 <code>PYTHON=python26</code> 讓他抓 python 2.6</li>
+<li><p>doc 的部份應該是缺 docutils 所以會出錯，不需要 doc 直接砍掉：line 33 改為 <code>all: build</code>, line 53 改為 <code>install: install-bin</code></p></li>
+<li><p>接著就可以 <code>make all &amp;&amp; su -c "make install" &amp;&amp; hg version</code></p></li>
+</ul>
+
+
+<h2>安裝 mercurial-server</h2>
+
+<ul>
+<li>抓下最新 mercurial-server 原始碼解壓</li>
+<li>一樣先修改 Makefile， doc 的部份一樣移除： line 53 改為 <code>installfiles: install pythoninstall</code></li>
+<li>CentOS 的 useradd 不支援 <code>--system</code>，把 <code>--system</code> 改成 <code>-r</code>。如果 repositories 的 path 想改可以順便修改 <code>--home</code> 的值。</li>
+<li>修改完後 <code>sudo make setup-useradd</code> 就安裝好了</li>
+</ul>
+
+
+<h2>設定 mercurial-server</h2>
+
+<ul>
+<li>先把自己的 public key 放到 <code>/etc/mercurial-server/keys/root/</code> 下，接著要改用 hgadmin 這個 repo 來設定</li>
+<li>check out hgadmin 這個 repo <code>hg clone ssh://hg@localhost/hgadmin</code></li>
+<li>把 <code>/etc/mercurial-server/keys</code> 和 <code>etc/mercurial-server/access.conf</code> 複製過來。</li>
+<li>add, commit 後 push，以後就可以用這個 repo 來管理使用者和權限了。</li>
+<li>原本的 <code>/etc/mercurial-server/access.conf</code> 和 <code>/etc/mercurial-server/keys</code> 就可以刪除了。</li>
+</ul>
+
+
+<h3>Redmine + hg</h3>
+
+<p>順便講一下 Redmine 和 hg 搭配，如果設定好後在 repositories 分頁一直 404，看 log 顯示 <code>hg: error during getting info: hg exited with non-zero status: 255</code> 的話，多半是檔案權限問題。</p>
+
+<p>可以修改 <code>redmine/config/environment.rb</code> 打開 <code>config.log_level = :debug</code> 看更詳細的 log</p>
+
+<p>應該可以看到實際執行的 hg 指令，用 redmine user 去執行看看就能抓出問題所在。</p>
+]]></content>
+  </entry>
+  
+</feed>
