@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。 CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 &hellip;">
+  <meta name="description" content="最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。 首先修改 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/05/ssh-vm-with-virsh-console/">Ssh Vm With Virsh Console</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T16:29:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
+
+<p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
+
+<p>例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
+</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
+</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
+</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -694,66 +746,6 @@ redis.conf 要稍微修改</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim Runtime 不需存檔檢查 PHP 語法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-22T17:29:00+08:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
-
-<div><script src='https://gist.github.com/1496197.js?file='></script>
-<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
-  if !exists('*PHPsynCHK')
-    function! PHPsynCHK()
-      ccl
-      let winnum = winnr()
-      let linenum = line('.')
-      let colnum = col('.')
-      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
-      silent cf .vimerr
-      cw
-      execute winnum . &quot;wincmd w&quot;
-      silent undo
-      silent cf
-      if 1 == len(getqflist())
-         call cursor(linenum, colnum)
-      endif
-    endfunction
-  endif
-</code></pre></noscript></div>
-
-
-<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -779,6 +771,10 @@ redis.conf 要稍微修改</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, hg, mercurial-server</a>
       </li>
     
@@ -792,10 +788,6 @@ redis.conf 要稍微修改</p>
     
       <li class="post">
         <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
       </li>
     
   </ul>

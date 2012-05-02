@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="今天 Even Wu 在 facebook 上問了一個問題：他的 Bash PS1 要補滿 dash 到換行為止，感覺很有趣，稍微研究了一下。 首先要取得 term 的寬度，這個很容易直接抓 $COLUMNS 就好。 再來要抓原本 PS1 的長度，原本打算用 $PWD 去抓，不過 \w &hellip;">
+  <meta name="description" content="之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。 set errorformat=%m\ in\ %f\ on\ line\ %l if !exists('*PHPsynCHK') function! PHPsynCHK() ccl &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim Runtime 不需存檔檢查 PHP 語法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T17:29:00+08:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
+
+<div><script src='https://gist.github.com/1496197.js?file='></script>
+<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
+  if !exists('*PHPsynCHK')
+    function! PHPsynCHK()
+      ccl
+      let winnum = winnr()
+      let linenum = line('.')
+      let colnum = col('.')
+      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
+      silent cf .vimerr
+      cw
+      execute winnum . &quot;wincmd w&quot;
+      silent undo
+      silent cf
+      if 1 == len(getqflist())
+         call cursor(linenum, colnum)
+      endif
+    endfunction
+  endif
+</code></pre></noscript></div>
+
+
+<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -549,54 +609,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/firefox4-x-webm-x-apache/">Firefox4 X WebM X Apache</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-28T00:00:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
-
-<p>&nbsp;</p>
-
-<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
-
-<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
-
-<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
-<pre lang="bash">video/webm webm</pre>
-至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧&#8230;</p>
-
-<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -624,6 +636,10 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, hg, mercurial-server</a>
       </li>
     
@@ -637,10 +653,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
     
       <li class="post">
         <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a>
       </li>
     
   </ul>
