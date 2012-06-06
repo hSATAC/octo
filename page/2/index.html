@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。 set errorformat=%m\ in\ %f\ on\ line\ %l if !exists('*PHPsynCHK') function! PHPsynCHK() ccl &hellip;">
+  <meta name="description" content="假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 cmd &gt; filename 把輸出導向 log 檔，但如果是一連串的動作時就很不方便了。 unix 系列內建一個指令叫 script ，他可以很方便的紀錄你每一個輸出和輸入。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/12/record-terminal-using-script/">用 Scrpit 指令來紀錄輸出及輸入</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-29T14:59:00+08:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 <code>cmd &gt; filename</code> 把輸出導向 log 檔，但如果是一連串的動作時就很不方便了。</p>
+
+<p>unix 系列內建一個指令叫 <code>script</code> ，他可以很方便的紀錄你每一個輸出和輸入。詳細用法可以參考 <code>man script</code> 。</p>
+
+<p>在這邊講兩個常用的方法，一個是 <code>script log.txt</code> 會把紀錄存到 log.txt, 用 <code>script -a log.txt</code> 就可以把新的 log append 到檔案後，不會蓋掉原本檔案。當你動作結束，想停止紀錄時，只要打 <code>exit</code> 就可以停止紀錄。</p>
+
+<p>另一個是 <code>script -C "ls -al" log.txt</code> 他會把你指定的指令存到 log.txt 中，這個用法的不需輸入 <code>exit</code> 。</p>
+
+<p>如果你的 .bash_profile 裏面有用到一些自訂的函數例如 git-autocompletion 之類，那你在使用 script 的時候可能會發現每下一個指令都告訴你 <code>command not found</code>。正確的解法是把你的 function 移到 .bashrc 中，在 .bash_profile 裏面去 source .bashrc 即可。</p>
+
+<p>最後說明一下 log 檔的觀看方式，因為 script 會把所有東西都紀錄下來，包括控制碼這些，所以可以用 <code>less -r log.txt</code> 或 <code>more log.txt</code> 來觀看。</p>
+
+<p>如果需要把 log 的控制碼去掉，可以參考下面這個 script:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#!/usr/bin/env perl</span>
+</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="o">&lt;&gt;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="sr">s/ \e[ #%()*+\-.\/]. |</span>
+</span><span class='line'><span class="sr">       (?:\e\[|\x9b) [ -?]* [@-~] | # CSI ... Cmd</span>
+</span><span class='line'><span class="sr">       (?:\e\]|\x9d) .*? (?:\e\\|[\a\x9c]) | # OSC ... (ST|BEL)</span>
+</span><span class='line'><span class="sr">       (?:\e[P^_]|[\x90\x9e\x9f]) .*? (?:\e\\|\x9c) | # (DCS|PM|APC) ... ST</span>
+</span><span class='line'><span class="sr">       \e.|[\x80-\x9f] //xg</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -568,47 +639,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/">我的 Vimrc for Vim, Win32 Gvim, Macvim</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-18T00:00:00+08:00" pubdate data-updated="true">May 18<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
-
-<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -636,6 +666,10 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
       </li>
     
@@ -649,10 +683,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
     
       <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
       </li>
     
   </ul>

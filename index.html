@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。 首先修改 &hellip;">
+  <meta name="description" content="最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,6 +86,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-06T14:44:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
+
+<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 http://checkip.dyndns.com 來抓取自己 ip 再更新 route 53 的 A record 。</p>
+
+<p>不過 ec2 的 public dns 有一個特性，從外面解會解到 public ip ，但是從裡面解會解到 private ip ，同一個 availability zone 用 private ip 互連是不多收費的。</p>
+
+<p>如果設 A record 使用 public 連線，就沒有這個優勢了，所以我改用 CNAME 指到 ec2 的 public dns。然後原本取得 ip 的部分也改用 aws 取 meta-data 就可以了。</p>
+
+<p>具體作法，可以開一個 subdomain 例如 ec2.hsatac.net ，然後把這個 subdomain delegate 給我們的 route 53 來解析。在 DNS 的部分新增一筆 NS  <code>ec2.hsatac.net</code> 然後 server 設定為 route 53 給的那幾組即可。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -675,77 +724,6 @@ redis.conf 要稍微修改</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/12/record-terminal-using-script/">用 Scrpit 指令來紀錄輸出及輸入</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T14:59:00+08:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 <code>cmd &gt; filename</code> 把輸出導向 log 檔，但如果是一連串的動作時就很不方便了。</p>
-
-<p>unix 系列內建一個指令叫 <code>script</code> ，他可以很方便的紀錄你每一個輸出和輸入。詳細用法可以參考 <code>man script</code> 。</p>
-
-<p>在這邊講兩個常用的方法，一個是 <code>script log.txt</code> 會把紀錄存到 log.txt, 用 <code>script -a log.txt</code> 就可以把新的 log append 到檔案後，不會蓋掉原本檔案。當你動作結束，想停止紀錄時，只要打 <code>exit</code> 就可以停止紀錄。</p>
-
-<p>另一個是 <code>script -C "ls -al" log.txt</code> 他會把你指定的指令存到 log.txt 中，這個用法的不需輸入 <code>exit</code> 。</p>
-
-<p>如果你的 .bash_profile 裏面有用到一些自訂的函數例如 git-autocompletion 之類，那你在使用 script 的時候可能會發現每下一個指令都告訴你 <code>command not found</code>。正確的解法是把你的 function 移到 .bashrc 中，在 .bash_profile 裏面去 source .bashrc 即可。</p>
-
-<p>最後說明一下 log 檔的觀看方式，因為 script 會把所有東西都紀錄下來，包括控制碼這些，所以可以用 <code>less -r log.txt</code> 或 <code>more log.txt</code> 來觀看。</p>
-
-<p>如果需要把 log 的控制碼去掉，可以參考下面這個 script:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="c1">#!/usr/bin/env perl</span>
-</span><span class='line'><span class="k">while</span> <span class="p">(</span><span class="o">&lt;&gt;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="sr">s/ \e[ #%()*+\-.\/]. |</span>
-</span><span class='line'><span class="sr">       (?:\e\[|\x9b) [ -?]* [@-~] | # CSI ... Cmd</span>
-</span><span class='line'><span class="sr">       (?:\e\]|\x9d) .*? (?:\e\\|[\a\x9c]) | # OSC ... (ST|BEL)</span>
-</span><span class='line'><span class="sr">       (?:\e[P^_]|[\x90\x9e\x9f]) .*? (?:\e\\|\x9c) | # (DCS|PM|APC) ... ST</span>
-</span><span class='line'><span class="sr">       \e.|[\x80-\x9f] //xg</span><span class="p">;</span>
-</span><span class='line'>    <span class="k">print</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -771,6 +749,10 @@ redis.conf 要稍微修改</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
       </li>
     
@@ -784,10 +766,6 @@ redis.conf 要稍微修改</p>
     
       <li class="post">
         <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a>
       </li>
     
   </ul>

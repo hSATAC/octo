@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-05-19T13:15:18+08:00</updated>
+  <updated>2012-06-06T16:47:54+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[利用 route 53 設定 ec2 動態 DNS]]></title>
+    <link href="http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/"/>
+    <updated>2012-06-06T14:44:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53</id>
+    <content type="html"><![CDATA[<p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
+
+<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 http://checkip.dyndns.com 來抓取自己 ip 再更新 route 53 的 A record 。</p>
+
+<p>不過 ec2 的 public dns 有一個特性，從外面解會解到 public ip ，但是從裡面解會解到 private ip ，同一個 availability zone 用 private ip 互連是不多收費的。</p>
+
+<p>如果設 A record 使用 public 連線，就沒有這個優勢了，所以我改用 CNAME 指到 ec2 的 public dns。然後原本取得 ip 的部分也改用 aws 取 meta-data 就可以了。</p>
+
+<p>具體作法，可以開一個 subdomain 例如 ec2.hsatac.net ，然後把這個 subdomain delegate 給我們的 route 53 來解析。在 DNS 的部分新增一筆 NS  <code>ec2.hsatac.net</code> 然後 server 設定為 route 53 給的那幾組即可。</p>
+
+<!-- more -->
+
+
+<p>修改過後的 script 如下：</p>
+
+<div><script src='https://gist.github.com/2880516.js?file='></script>
+<noscript><pre><code>#!/bin/sh
+
+# Setup dynamic dns on Route 53 for aws ec2 (CNAME)
+#
+# Modified from Johan Lindh's script
+#
+# Script requirements:
+#
+#  wget
+#  grep
+#  sed
+#  dig
+#  cut
+#  openssl
+#  base64
+#
+# Most if not all of these come standard on *nix distros.
+#
+
+# The domain and host name to update
+# and the desired TTL of the record
+Domain=your.domain.net
+Hostname=`hostname`
+NewTTL=600
+
+# The Amazon Route 53 zone ID for the domain
+# and the Amazon ID and SecretKey. Remember to
+# ensure that this file can't be read by
+# unauthorized people!
+ZoneID=Z1234567890
+AmazonID=A1234567890
+SecretKey=GR$WYTJ%Y$@GY%J$%GY@H
+
+# Enter the URL used to check extern IP
+CheckIPURL='http://169.254.169.254/latest/meta-data/public-hostname'
+
+# Enter some static text that immediately preceeds the current IP in the HTML output
+# Note that you'll probably need to look at the actual HTML code to find this
+CheckIPText='Current IP Address:'
+
+###############################################################
+# You should not need to change anything beyond this point
+###############################################################
+
+# Find an authoritative AWS R53 nameserver so we get a clean TTL
+AuthServer=$(dig NS $Domain | grep -v ';' | grep -m 1 awsdns | grep $Domain | cut -f 6)
+if [ &quot;$AuthServer&quot; = &quot;&quot; ]; then
+  echo The domain $Domain has no authoritative Amazon Route 53 name servers
+  exit 1
+fi
+
+# Get the record and extract its parts
+Record=$(dig @$AuthServer A $Hostname.$Domain | grep -v &quot;;&quot; | grep &quot;$Hostname\.$Domain&quot;)
+OldType=$( echo $Record | cut -d ' ' -f 4 )
+OldTTL=$( echo $Record | cut -d ' ' -f 2 )
+OldIP=$( echo $Record | cut -d ' ' -f 5 | sed s/.$//)
+
+# Make sure it is an A record (could be CNAME)
+if [ &quot;$Record&quot; != &quot;&quot; -a &quot;$OldType&quot; != &quot;CNAME&quot; ]; then
+  echo $Hostname.$Domain has a $OldType record, expected 'CNAME'
+  exit 1
+fi
+
+# Retrieve the current IP
+CurrentIP=$(wget &quot;$CheckIPURL&quot; -o /dev/null -O /dev/stdout)
+
+# Changeset preamble
+Changeset=&quot;&quot;
+Changeset=$Changeset&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;&quot;
+Changeset=$Changeset&quot;&lt;ChangeResourceRecordSetsRequest xmlns=\&quot;https://route53.amazonaws.com/doc/2010-10-01/\&quot;&gt;&quot;
+Changeset=$Changeset&quot;&lt;ChangeBatch&gt;&lt;Comment&gt;Update $Hostname.$Domain&lt;/Comment&gt;&lt;Changes&gt;&quot;
+
+if [ &quot;$OldIP&quot; != &quot;&quot; ]; then
+  # Add a DELETE request to the changeset
+  Changeset=$Changeset&quot;&lt;Change&gt;&quot;
+  Changeset=$Changeset&quot;&lt;Action&gt;DELETE&lt;/Action&gt;&quot;
+  Changeset=$Changeset&quot;&lt;ResourceRecordSet&gt;&quot;
+  Changeset=$Changeset&quot;&lt;Name&gt;$Hostname.$Domain.&lt;/Name&gt;&quot;
+  Changeset=$Changeset&quot;&lt;Type&gt;CNAME&lt;/Type&gt;&quot;
+  Changeset=$Changeset&quot;&lt;TTL&gt;$OldTTL&lt;/TTL&gt;&quot;
+  Changeset=$Changeset&quot;&lt;ResourceRecords&gt;&quot;
+  Changeset=$Changeset&quot;&lt;ResourceRecord&gt;&quot;
+  Changeset=$Changeset&quot;&lt;Value&gt;$OldIP&lt;/Value&gt;&quot;
+  Changeset=$Changeset&quot;&lt;/ResourceRecord&gt;&quot;
+  Changeset=$Changeset&quot;&lt;/ResourceRecords&gt;&quot;
+  Changeset=$Changeset&quot;&lt;/ResourceRecordSet&gt;&quot;
+  Changeset=$Changeset&quot;&lt;/Change&gt;&quot;
+fi
+
+# Add CREATE request to the changeset
+Changeset=$Changeset&quot;&lt;Change&gt;&quot;
+Changeset=$Changeset&quot;&lt;Action&gt;CREATE&lt;/Action&gt;&quot;
+Changeset=$Changeset&quot;&lt;ResourceRecordSet&gt;&quot;
+Changeset=$Changeset&quot;&lt;Name&gt;$Hostname.$Domain.&lt;/Name&gt;&quot;
+Changeset=$Changeset&quot;&lt;Type&gt;CNAME&lt;/Type&gt;&quot;
+Changeset=$Changeset&quot;&lt;TTL&gt;$NewTTL&lt;/TTL&gt;&quot;
+Changeset=$Changeset&quot;&lt;ResourceRecords&gt;&quot;
+Changeset=$Changeset&quot;&lt;ResourceRecord&gt;&quot;
+Changeset=$Changeset&quot;&lt;Value&gt;$CurrentIP&lt;/Value&gt;&quot;
+Changeset=$Changeset&quot;&lt;/ResourceRecord&gt;&quot;
+Changeset=$Changeset&quot;&lt;/ResourceRecords&gt;&quot;
+Changeset=$Changeset&quot;&lt;/ResourceRecordSet&gt;&quot;
+Changeset=$Changeset&quot;&lt;/Change&gt;&quot;
+
+# Close the changeset
+Changeset=$Changeset&quot;&lt;/Changes&gt;&quot;
+Changeset=$Changeset&quot;&lt;/ChangeBatch&gt;&quot;
+Changeset=$Changeset&quot;&lt;/ChangeResourceRecordSetsRequest&gt;&quot;
+
+if [ &quot;$OldIP&quot; != &quot;$CurrentIP&quot; ]; then
+  # Get the date at the Amazon servers
+  CurrentDate=$(wget -q -S https://route53.amazonaws.com/date -O /dev/null 2&gt;&amp;1 | grep Date | sed 's/.*Date: //')
+
+  # Calculate the SHA1 hash and required headers
+  Signature=$(echo -n $CurrentDate | openssl dgst -binary -sha1 -hmac $SecretKey | base64)
+  DateHeader=&quot;Date: &quot;$CurrentDate
+  AuthHeader=&quot;X-Amzn-Authorization: AWS3-HTTPS AWSAccessKeyId=$AmazonID,Algorithm=HmacSHA1,Signature=$Signature&quot;
+
+  # Submit request
+  Result=$(wget -nv --header=&quot;$DateHeader&quot; --header=&quot;$AuthHeader&quot; --header=&quot;Content-Type: text/xml; charset=UTF-8&quot; --post-data=&quot;$Changeset&quot; -O /dev/stdout -o /dev/stdout https://route53.amazonaws.com/2010-10-01/hostedzone/$ZoneID/rrset)
+
+  if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
+    echo &quot;Failed to update $Hostname.$Domain: &quot;$Result
+  fi
+fi</code></pre></noscript></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ssh vm with virsh console]]></title>
@@ -1309,68 +1459,6 @@ make && sudo make install</pre>
 <pre lang="bash">a2enmod php5
 sudo apachectl restart</pre>
 來試試看有沒有成功吧！我編完以後，8245個測試都跑過了，應該是沒問題，enjoy it！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的 vimrc for vim, win32 gvim, macvim]]></title>
-    <link href="http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim/"/>
-    <updated>2011-05-18T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/05/my-vimrc-for-vim-win32-gvim-macvim</id>
-    <content type="html"><![CDATA[<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
-
-<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。<!--more--></p>
-
-<p>先說明一下我的工作環境，我有一台 Mac mini server，平常會用 pietty 連上去改 code；有一台 Macbook Air ，使用 MacVim 開發，家中和公司使用的是 Win 7 64bit，使用放在 dropbox 的 portable gvim。</p>
-
-<p>主要用到的 plugin 是 Command-T, taglist 以及 omnicomplete 。</p>
-
-<p><a href="http://blog.hsatac.net/images/wp-uploads/2011/05/vim.png"><img class="aligncenter size-large wp-image-415" title="vim" src="http://blog.hsatac.net/images/wp-uploads/2011/05/vim-1024x605.png" alt="" width="368" height="218" /></a></p>
-
-<p>一開始我用 <a href="https://github.com/vgod/vimrc" target="_blank">vgod 的 vimrc</a> 來當範本修改，詳細設定可以參考<a href="https://github.com/hSATAC/vimrc" target="_blank">我的 vimrc </a></p>
-
-<p>主要的困難點大概有幾個：
-<h2>Command-T</h2>
-在 MacVim 上， Command-T 使用相當簡單，裝好以後直接執行
-<pre lang="bash">ruby extconf.rb
-make</pre>
-之後就可以使用了。<br />
-但純文字模式下的 vim 就沒這麼簡單了，我在 mac server 上重編的 +ruby vim 無論如何都沒辦法把編譯好的 plugin 載入。<br />
-後來只好折衷直接使用 macvim 內置的 vim ，他在你的 MacVim.app/Contents/MacOS/Vim 。</p>
-
-<p>這個檔案不管是複製或是 ln -s 到其他 path 執行，都會報錯，最後是用
-<pre lang="bash">alias vim='PATH/MacVim.app/Contents/MacOS/Vim'</pre>
-來解決。</p>
-
-<p>不過這個用法有一個需要注意的地方，就是在 vim 中我們判斷 MacVim 一般會用
-<pre lang="vim">has("gui_macvim")</pre>
-來判斷，但用 MacVim 自帶的 Vim，這個判斷會成立。</p>
-
-<p>因此要改用
-<pre lang="vim">has("gui_macvim") && has("gui_running")</pre>
-Windows 的部份比較麻煩，你要先安裝 <a href="http://rubyinstaller.org/downloads/" target="_blank">Ruby 和 DevKit</a> 才能編譯這個 plugin。</p>
-
-<p>編譯：
-<pre lang="bash">C:\Ruby192\DevKit\devkitvars.bat
-cd yourvimfiles\plugins\ruby\command-t
-ruby extconf.rb
-make
-make install</pre>
-然後因為現在官網的 gvim 7.3.46 版只支援 ruby 1.9.1，要抓最新的 trunk code 下來編譯成 +ruby。</p>
-
-<p>這個動作在 windows 實在不是很容易，所以這邊提供了<a href="http://dl.dropbox.com/u/7919509/gvim73.zip" target="_blank">編譯好的版本</a>。
-<h2>taglist</h2>
-taglist 需要 <a href="http://ctags.sourceforge.net/" target="_blank">Exuberant Ctags</a></p>
-
-<p>這個部份 windows 平台反而單純，直接下載編譯好的執行檔丟到 vim 目錄下就好。</p>
-
-<p>Mac 自帶的 ctags 不相容，所以需要抓新的來編。</p>
-
-<p>我是直接用
-<pre lang="bash">brew install ctags</pre>
-讓各平台的 plugin 都能正常運作以後，最後就是設定一些快速鍵和 fix term 的問題，這邊就是個人偏好了，詳情可以直接看我的 <a href="https://github.com/hSATAC/vimrc" target="_blank">vimrc github</a></p>
-
-<p>最後，如上所述，這份 vimrc 主要是在 mac 和 windows 使用，沒有在其他作業系統測試過。</p>
 ]]></content>
   </entry>
   

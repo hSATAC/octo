@@ -388,7 +388,7 @@
         <loc>
             http://blog.hsatac.net/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/
         </loc>
-        <lastmod>2011-12-06T11:18:50+08:00</lastmod>
+        <lastmod>2012-05-02T15:34:02+08:00</lastmod>
     </url>
     <url>
         <loc>
@@ -511,11 +511,15 @@
         <lastmod>2012-05-02T16:41:51+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/</loc>
+        <lastmod>2012-06-06T16:41:11+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.hsatac.net/blog/archives/</loc>
-        <lastmod>2012-05-02T16:41:51+08:00</lastmod>
+        <lastmod>2012-06-06T16:41:11+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/</loc>
-        <lastmod>2012-05-02T16:41:51+08:00</lastmod>
+        <lastmod>2012-06-06T16:41:11+08:00</lastmod>
     </url>
 </urlset>
