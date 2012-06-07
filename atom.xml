@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-06-06T16:47:54+08:00</updated>
+  <updated>2012-06-07T11:53:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[動態產生 ec2 的 hosts 檔案]]></title>
+    <link href="http://blog.hsatac.net/2012/06/generate-aws-ec2-hosts-file/"/>
+    <updated>2012-06-07T11:43:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/06/generate-aws-ec2-hosts-file</id>
+    <content type="html"><![CDATA[<p>這個議題類似上一篇 <a href="http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a> ，同樣也是要解決主機名稱對應浮動 ip 的問題。</p>
+
+<p>雖然現在用完整域名已經可以對應到 ip ，但是還是有很多時候我們的主機需要知道主機名稱和 ip 的對應。</p>
+
+<p>這個問題大概也是可以用 hosts 或 dns 來解決，不過由於我已經把 yp nis 架設起來，其他機器可以直接吃 nis 伺服器的 hosts 檔案，所以決定用 hosts 這個方式來處理。</p>
+
+<p>概念很簡單，利用 ec2 api sdk 抓取正在運行的主機列表，一一寫入 /etc/hosts 後再重新 make yp 的資料庫。</p>
+
+<p>設個排程每個小時跑一下或開新機器時手動執行一下即可。</p>
+
+<p>script 如下：</p>
+
+<div><script src='https://gist.github.com/2881131.js?file='></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+# coding: utf-8
+require 'rubygems'
+require 'aws-sdk'
+
+config = {:access_key_id =&gt; '',
+          :secret_access_key =&gt; ''}
+AWS.config(config)
+ec2 = AWS::EC2.new
+ec2 = ec2.regions['ap-northeast-1']
+
+hosts = []
+hosts &lt;&lt; &quot;127.0.0.1\tlocalhost localhost.localdomain&quot;
+ec2.instances.each do |instance|
+  next unless instance.status == :running
+  tags = instance.tags.to_h
+  hosts &lt;&lt; &quot;#{instance.private_ip_address}\t#{tags[&quot;Name&quot;]}&quot;
+end
+
+`cp -p /etc/hosts /etc/hosts.bak`
+open(&quot;/etc/hosts.new&quot;, &quot;w&quot;) {|f| f.write hosts.join(&quot;\n&quot;)+&quot;\n&quot;}
+is_same = system(&quot;diff -q /etc/hosts.new /etc/hosts &gt; /dev/null 2&gt;/dev/null&quot;)
+unless is_same
+  `cp -p /etc/hosts.new /etc/hosts`
+end</code></pre></noscript></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[利用 route 53 設定 ec2 動態 DNS]]></title>
@@ -1419,46 +1466,6 @@ http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
 存檔後重新啟動 empathy 就可以了！</p>
 
 <p>ps. 請自行注意 python 縮排</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Better Array, Better PHP]]></title>
-    <link href="http://blog.hsatac.net/2011/06/better-array-better-php/"/>
-    <updated>2011-06-11T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/06/better-array-better-php</id>
-    <content type="html"><![CDATA[<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="http://blog.hsatac.net/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
-<!--more-->昨天剛好看到鐵神分享的這篇 <a href="http://www.xarg.org/2011/06/php-hacking/" target="_blank">PHP Hacking</a> ，作者把 PHP 修改了許多小地方，除了上述的新 array 語法外，還有許多新增函式和效能調校，感覺真的很不錯。</p>
-
-<p>不過我最想要的只有 array 這個語法，而且不想被作者的版本綁死，於是我決定下載他的程式碼來研究一下如何修改。結果發現，只要改一行，就可以擁有這個功能！</p>
-
-<p>以下紀錄一下我修改成功的過程，我開了一台乾淨的 Ubuntu 11.04 vm 出來測試。</p>
-
-<p>首先抓好 PHP 5.3.6 的原始碼生肉，找到 Zend/zend_language_parser.y 這個檔案：</p>
-
-<p>找到
-<pre lang="c">  |  T_ARRAY '(' array_pair_list ')' { $$ = $3; }</pre>
-這行，在下面多加一行
-<pre lang="c">  |  '[' array_pair_list ']'         { $$ = $2; }</pre>
-接著安裝一些必要的元件：
-<pre lang="bash">sudo apt-get install apache
-sudo apt-get install apache2-prefork-dev #要編譯成 libphp5.so 需要裝這個
-sudo apt-get install libxml2-dev
-sudo apt-get install re2c</pre>
-接著還要安裝 <a href="http://www.gnu.org/software/bison/" target="_blank">bison</a> ，apt-get 裝的 bison 版本太舊不合用，可以自己去抓 2.3 版來編譯</p>
-
-<p>bison 需要 m4, 所以編譯過程中有需要的話就 apt-get install m4 吧。</p>
-
-<p>以上準備工作都做好後，就可以開始編譯 PHP 啦。
-<pre lang="bash">./configure --prefix=/usr/local/lib/php5.3.6.infusion --with-apxs2=/usr/bin/apxs2
-make && sudo make install</pre>
-記得在 configure 的過程要注意有沒抓到 bison ，這是最重要的，如果沒抓到的話這個修改是不會有作用的。</p>
-
-<p>都編完以後趕快
-<pre lang="bash">a2enmod php5
-sudo apachectl restart</pre>
-來試試看有沒有成功吧！我編完以後，8245個測試都跑過了，應該是沒問題，enjoy it！</p>
 ]]></content>
   </entry>
   

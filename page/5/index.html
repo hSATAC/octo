@@ -9,11 +9,9 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="想像你回到蠻荒，那裡沒有火、沒有電、沒有輪子、沒有鐵器。
-你知道有這些工具可以用，但是你卻沒辦法用的無力感。
-我現在深深體會到了。 我是不知道一個跨兩岸、包含4個程式設計師，一個版面設計師，
-至少五個人以上同時在開發的團隊，有什麼資格不用 version control。
-連最基本的 SVN &hellip;">
+  <meta name="description" content="今天想用 jquery.blockUI 來實做一個 conform 來取代原有的 javascript confirm()
+但卻碰到 blockUI 沒法回傳 boolean 的問題，
+應該是在中途 block UI自己就 return 掉了 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +88,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">使用 jQuery BlockUI 取代 Confirm()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-06-05T00:00:00+08:00" pubdate data-updated="true">Jun 5<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天想用 jquery.blockUI 來實做一個 conform 來取代原有的 javascript confirm()<br />
+但卻碰到 blockUI 沒法回傳 boolean 的問題，<br />
+應該是在中途 block UI自己就 return 掉了</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -526,52 +567,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/my-workstation/">My Workstation</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-18T00:00:00+08:00" pubdate data-updated="true">Apr 18<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="/images/wp-uploads/2009/04/img-2005.jpg"><img style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" title="IMG_2005" src="/images/wp-uploads/2009/04/img-2005-thumb.jpg" border="0" alt="IMG_2005" width="260" height="200" /></a></p>
-
-<p>擱置許久的 ASUS m2 也找到地方放了，灌了 Ubuntu 現在快樂的跑著 Server…<br />
-發揮他最後的價值……。</p>
-
-<p>跑不動現在絢麗的 GUI OS，沒關係，純文字 Kernel 剛剛好。</p>
-
-<p>鍵盤早已損壞，許多鍵按不出來，不要緊，ssh 進去更方便。</p>
-
-<p>雖然我常常抱怨華碩品質&#8230;但是這台 m2 已經跟著我六年了，<br />
-扣掉鍵盤全毀不談&#8230;其實他還滿硬朗的嘛！</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -599,6 +594,10 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
       </li>
     
@@ -612,10 +611,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
     
       <li class="post">
         <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a>
       </li>
     
   </ul>
