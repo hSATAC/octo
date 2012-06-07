@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ec2 | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ec2/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-06-07T11:53:17+08:00</updated>
+  <updated>2012-06-07T15:58:30+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用 ec2 的 Name tag 設定 hostname]]></title>
+    <link href="http://blog.hsatac.net/2012/06/set-ec2-hostname-from-name-tag/"/>
+    <updated>2012-06-07T15:50:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/06/set-ec2-hostname-from-name-tag</id>
+    <content type="html"><![CDATA[<p>如果 hostname 每一台都要自己一一指定相當麻煩，寫了一個小 script 放在開機時執行，抓取 instance-id 後取得 Name tag 再設定成 hostname。</p>
+
+<p><div><script src='https://gist.github.com/2887240.js?file='></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'rubygems'
+require 'aws-sdk'
+
+instance_id = `wget &quot;http://169.254.169.254/latest/meta-data/instance-id&quot; -o /dev/null -O /dev/stdout`
+config = {:access_key_id =&gt; '',
+          :secret_access_key =&gt; ''}
+AWS.config(config)
+ec2 = AWS::EC2.new
+ec2 = ec2.regions['ap-northeast-1']
+hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
+`hostname #{hostname}`</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[動態產生 ec2 的 hosts 檔案]]></title>

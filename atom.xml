@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-06-07T11:53:17+08:00</updated>
+  <updated>2012-06-07T15:58:30+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用 ec2 的 Name tag 設定 hostname]]></title>
+    <link href="http://blog.hsatac.net/2012/06/set-ec2-hostname-from-name-tag/"/>
+    <updated>2012-06-07T15:50:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/06/set-ec2-hostname-from-name-tag</id>
+    <content type="html"><![CDATA[<p>如果 hostname 每一台都要自己一一指定相當麻煩，寫了一個小 script 放在開機時執行，抓取 instance-id 後取得 Name tag 再設定成 hostname。</p>
+
+<div><script src='https://gist.github.com/2887240.js?file='></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'rubygems'
+require 'aws-sdk'
+
+instance_id = `wget &quot;http://169.254.169.254/latest/meta-data/instance-id&quot; -o /dev/null -O /dev/stdout`
+config = {:access_key_id =&gt; '',
+          :secret_access_key =&gt; ''}
+AWS.config(config)
+ec2 = AWS::EC2.new
+ec2 = ec2.regions['ap-northeast-1']
+hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
+`hostname #{hostname}`</code></pre></noscript></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[動態產生 ec2 的 hosts 檔案]]></title>
@@ -1427,45 +1451,6 @@ GO 感覺滿吸引人的</p>
 <p>我提供的 GO 相關文章：<br />
 剛好 Hack News 那邊同時跳出來XD<br />
 http://blog.kowalczyk.info/article/Go-vs-Python-for-a-simple-web-server.html</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[讓 Empathy 支援 P4-Context]]></title>
-    <link href="http://blog.hsatac.net/2011/06/empathy-p4-context/"/>
-    <updated>2011-06-12T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/06/empathy-p4-context</id>
-    <content type="html"><![CDATA[<p>這兩天灌了 Ubuntu 11.04 在玩<br />
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
-但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
-最直接的影響就是 m群看不到是誰在說話。<br />
-看了一下發現他底層是用 python-papyon 這套 msn lib<br />
-於是就可以直接動手修改啦！</p>
-
-<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
-找到 387 行：
-<pre lang="python" line="387">        if message_type == 'text/plain':
-            msg = ConversationMessage(unicode(message.body, message_encoding),
-                    TextFormat.parse(message_formatting),
-                    self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-<!--more-->
-將這段改成：
-<pre lang="python" line="387">       if message_type == 'text/plain':
-            try:
-                msg = ConversationMessage(unicode("["+message.get_header('P4-Context')+"]"+message.body, message_encoding),
-                        TextFormat.parse(message_formatting),
-                        self.__last_received_msn_objects)
-            except KeyError:
-                msg = ConversationMessage(unicode(message.body, message_encoding),
-                        TextFormat.parse(message_formatting),
-                        self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-存檔後重新啟動 empathy 就可以了！</p>
-
-<p>ps. 請自行注意 python 縮排</p>
 ]]></content>
   </entry>
   

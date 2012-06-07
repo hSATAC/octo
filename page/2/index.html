@@ -9,12 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="CentOS 5 上的 Redis 套件只有到 2.0
-最近用一套 PHP-Resque 需求 Redis 2.2 以上，只好手動升級了。 首先抓下最新穩定版解壓 1
-2
-3
-4
-wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz &hellip;">
+  <meta name="description" content="Resque 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看原作者的 Blog PHP-Resque 是把 Resque porting 到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -91,6 +86,65 @@ wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+
+<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<h2>設計</h2>
+
+<p>Resque 的設計有兩個角色： Job 和 Worker。 每個 Job 都是定義成類別，新增 Job 的時候會將 Job 的類別和相關參數 json_encode 後儲存到不同的 queue 裡面，而 Worker(s) 則會依序從 redis 讀取 Job 出來執行。</p>
+
+<p>執行的時候並不是這個 Worker 本身去執行，而是會 fork 一個 process 來執行。這樣設計是為了避免時間一長， Worker 的記憶體管理不良導致卡死的狀況。</p>
+
+<p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
+
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
+<p>以下先來介紹如何使用 PHP-Resque：</p>
+
+<h2>安裝 PHP-Resque</h2>
+
+<p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/php-resque-introduction/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -630,60 +684,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/06/empathy-p4-context/">讓 Empathy 支援 P4-Context</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-12T00:00:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這兩天灌了 Ubuntu 11.04 在玩<br />
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
-但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
-最直接的影響就是 m群看不到是誰在說話。<br />
-看了一下發現他底層是用 python-papyon 這套 msn lib<br />
-於是就可以直接動手修改啦！</p>
-
-<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
-找到 387 行：
-<pre lang="python" line="387">        if message_type == 'text/plain':
-            msg = ConversationMessage(unicode(message.body, message_encoding),
-                    TextFormat.parse(message_formatting),
-                    self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/06/empathy-p4-context/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -711,6 +711,10 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/06/set-ec2-hostname-from-name-tag/">用 ec2 的 Name tag 設定 hostname</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a>
       </li>
     
@@ -724,10 +728,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
     
       <li class="post">
         <a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, hg, mercurial-server</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a>
       </li>
     
   </ul>
