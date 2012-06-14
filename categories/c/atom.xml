@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/c/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-06-14T11:10:41+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[php openssl_pkey_get_details implement in c]]></title>
+    <link href="http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c/"/>
+    <updated>2012-06-14T10:49:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c</id>
+    <content type="html"><![CDATA[<p>It's easy to generate a RSA keypair in PHP, just like this:</p>
+
+<p>```
+&lt;?php
+// Create the keypair
+$res=openssl_pkey_new();</p>
+
+<p>// Get private key
+openssl_pkey_export($res, $privkey);</p>
+
+<p>// Get public key
+$pubkey=openssl_pkey_get_details($res);
+$pubkey=$pubkey["key"];
+?>
+```</p>
+
+<p>But when it comes to C, it's not that simple.</p>
+
+<p>You might want to use <code>RSA_generate_key</code> and then <code>PEM_write_RSAPublicKey</code>, but in fact, the output format of PHP's <code>openssl_pkey_get_details</code> is not a RSA public key.</p>
+
+<p>If you want to get the same result in C, you have to convert your RSA keypair into EVP keypair.</p>
+
+<!--more-->
+
+
+<p>Here's my sample script:</p>
+
+<p><div><script src='https://gist.github.com/2909583.js?file='></script>
+<noscript><pre><code>/*
+example of c equivalent to php
+&lt;?php
+// Create the keypair
+$res=openssl_pkey_new();
+
+// Get private key
+openssl_pkey_export($res, $privkey);
+
+// Get public key
+$pubkey=openssl_pkey_get_details($res);
+$pubkey=$pubkey[&quot;key&quot;];
+?&gt;
+*/
+#include&lt;stdio.h&gt;
+#include&lt;openssl/rsa.h&gt;
+#include&lt;openssl/evp.h&gt;
+
+EVP_PKEY *pubkey_a,*privkey_a;
+
+generate_keys ()
+{
+  RSA *rsa, *pub_rsa, *priv_rsa;
+  int len;
+  unsigned char *buf, *p;
+
+  rsa = RSA_generate_key (1024, RSA_F4, NULL, (char *) stdout);
+
+  buf = (char *) malloc (2048);
+
+  p = buf;
+
+  len = i2d_RSAPublicKey (rsa, &amp;p);
+  len += i2d_RSAPrivateKey (rsa, &amp;p);
+
+  RSA_free (rsa);
+
+  p = buf;
+  pub_rsa = d2i_RSAPublicKey (NULL, &amp;p, (long) len);
+  len -= (p - buf);
+  priv_rsa = d2i_RSAPrivateKey (NULL, &amp;p, (long) len);
+
+  if ((pub_rsa == NULL) || (priv_rsa == NULL))
+    ERR_print_errors_fp (stderr);
+
+
+  pubkey_a = EVP_PKEY_new ();
+  privkey_a = EVP_PKEY_new ();
+
+  EVP_PKEY_set1_RSA (pubkey_a, pub_rsa);
+  EVP_PKEY_set1_RSA (privkey_a, priv_rsa);
+
+  RSA_free (pub_rsa);
+  RSA_free (priv_rsa);
+
+}
+
+main()
+{   
+
+  EVP_PKEY *pubkey,*privkey;
+
+  generate_keys ();
+
+  pubkey=pubkey_a;
+  privkey=privkey_a;
+
+  PEM_write_PUBKEY(stdout, pubkey);
+  return 0;
+ 
+}</code></pre></noscript></div>
+</p>
+
+<p>You can test it by folloing commands:
+<code>gcc -o key key.c -lssl &amp;&amp; ./key</code></p>
+]]></content>
+  </entry>
+  
+</feed>
