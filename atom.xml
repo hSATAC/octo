@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-06-14T11:10:41+08:00</updated>
+  <updated>2012-07-17T15:21:28+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -1169,7 +1169,7 @@ redis.conf 要稍微修改</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[用 scrpit 指令來紀錄輸出及輸入]]></title>
+    <title type="html"><![CDATA[用 script 指令來紀錄輸出及輸入]]></title>
     <link href="http://blog.hsatac.net/2011/12/record-terminal-using-script/"/>
     <updated>2011-12-29T14:59:00+08:00</updated>
     <id>http://blog.hsatac.net/2011/12/record-terminal-using-script</id>
