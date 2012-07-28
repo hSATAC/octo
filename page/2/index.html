@@ -9,8 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="This article will demostrate a near perfect redmine migration from trac 0.12 step by step. Install Redmine on CentOS 5 Install Ruby
-Install rubygem &hellip;">
+  <meta name="description" content="這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。 這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +86,53 @@ Install rubygem &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T19:33:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
+
+<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
+
+<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
+
+<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/youtube-favorite-add-google-music/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -652,75 +698,6 @@ redmine 爆炸了。推測應該是 gem 的關係。<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-20T00:00:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
-<pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:6: warning: already initialized constant BUILD
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:3: warning: already initialized constant NUMBERS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:9: warning: already initialized constant VERSION
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:26: warning: already initialized constant RAKEVERSION
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/early_time.rb:17: warning: already initialized constant EARLY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/alt_system.rb:32: warning: already initialized constant WINDOWS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/application.rb:28: warning: already initialized constant DEFAULT_RAKEFILES
-WARNING: Possible conflict with Rake extension: String#ext already exists
-WARNING: Possible conflict with Rake extension: String#pathmap already exists
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/task_arguments.rb:73: warning: already initialized constant EMPTY_TASK_ARGS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/invocation_chain.rb:49: warning: already initialized constant EMPTY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:10: warning: already initialized constant RUBY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:84: warning: already initialized constant LN_SUPPORTED
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/dsl_definition.rb:143: warning: already initialized constant Commands
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:44: warning: already initialized constant ARRAY_METHODS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:47: warning: already initialized constant MUST_DEFINE
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:51: warning: already initialized constant MUST_NOT_DEFINE
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:55: warning: already initialized constant SPECIAL_RETURN
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:61: warning: already initialized constant DELEGATING_METHODS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:364: warning: already initialized constant DEFAULT_IGNORE_PATTERNS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:370: warning: already initialized constant DEFAULT_IGNORE_PROCS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:64: warning: already initialized constant FileList
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:65: warning: already initialized constant RakeFileUtils
-rake aborted!
-stack level too deep</pre></p>
-
-<p>(See full trace by running task with &#8211;trace)
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/09/rake-0-9/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -748,6 +725,10 @@ stack level too deep</pre></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">php openssl_pkey_get_details implement in c</a>
       </li>
     
@@ -761,10 +742,6 @@ stack level too deep</pre></p>
     
       <li class="post">
         <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
       </li>
     
   </ul>

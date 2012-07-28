@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>在 Mac 環境使用 homebrew 安裝 python + easy_install - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="今天傳說中的 python 達人 / vim之神 Tiberius 大大 在公司主講了 python 基本教學，讓大家眼界都開了不少。 回家想在 mac 上安裝 python 卻發現有些問題。 使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  jQuery.noConflict();
+  jQuery(document).ready(function() {
+      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">在 Mac 環境使用 Homebrew 安裝 Python + Easy_install</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T00:00:00+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><p style="text-align: center;"><img class="size-full wp-image-317 aligncenter" title="python-logo-glassy[1]" src="/images/wp-uploads/2011/03/python-logo-glassy1.png" alt="" width="286" height="364" /></p>
+今天傳說中的 python 達人 / vim之神 <a href="http://tib.tw/frame.htm" target="_blank">Tiberius 大大</a> 在公司主講了 python 基本教學，讓大家眼界都開了不少。</p>
+
+<p>回家想在 mac 上安裝 python 卻發現有些問題。</p>
+
+<p>使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install (2.6) 失效，因此要稍微做一點處理：</p>
+
+<p><!--more-->
+<pre lang="bash">brew install python</pre>
+之後若執行 easy_install ，會出現如下的錯誤：
+<pre>python version 2.6.1 can't run ./easy_install.  Try the alternative(s):</pre></p>
+
+<p>Run &#8220;man python&#8221; for more information about multiple version support in<br />
+Mac OS X.
+這時只要去 <a href="http://pypi.python.org/pypi/setuptools" target="_blank">setup-tools</a> 的網站下載<a href="http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg#md5=fe1f997bc722265116870bc7919059ea" target="_blank">版本符合的安裝檔</a>之後執行安裝：
+<pre lang="bash">sh setuptools-0.6c11-py2.7.egg</pre>
+就會把 easy_install 安裝在 homebrew 的 Celler 裡面了。<br />
+還沒結束呢！要在 .profile 裡面把 Celler 的 python bin 路徑加上去：
+<pre lang="bash">export PATH=`brew --prefix python`/bin:$PATH</pre>
+這樣就可以正常使用了！</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T00:00:00+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/python/'>Python</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/" title="Previous Post: Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版">&laquo; Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/" title="next Post: 連猴子也會之：在 Mac mini server 上架設 WebDAV git server">連猴子也會之：在 Mac mini server 上架設 WebDAV git server &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
+  <span>
+    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
+    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
+    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
+    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
+  </span>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">php openssl_pkey_get_details implement in c</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/set-ec2-hostname-from-name-tag/">用 ec2 的 Name tag 設定 hostname</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/';
+        var disqus_url = 'http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

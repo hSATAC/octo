@@ -9,11 +9,8 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="這次 CloudAAA 活動是由 CloudTW 與 Taipei-GTUG 合辦
-借到了精誠資訊的大樓，相當棒的一個場地。
-不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意
-食物飲水也很精美充足，真的是沒什麼好挑剔的。 一開始 Hank Lin 主講 aws 的部份
-Hank &hellip;">
+  <meta name="description" content="由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -90,6 +87,75 @@ Hank &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-09-20T00:00:00+08:00" pubdate data-updated="true">Sep 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
+<pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:6: warning: already initialized constant BUILD
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:3: warning: already initialized constant NUMBERS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:9: warning: already initialized constant VERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:26: warning: already initialized constant RAKEVERSION
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/early_time.rb:17: warning: already initialized constant EARLY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/alt_system.rb:32: warning: already initialized constant WINDOWS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/application.rb:28: warning: already initialized constant DEFAULT_RAKEFILES
+WARNING: Possible conflict with Rake extension: String#ext already exists
+WARNING: Possible conflict with Rake extension: String#pathmap already exists
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/task_arguments.rb:73: warning: already initialized constant EMPTY_TASK_ARGS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/invocation_chain.rb:49: warning: already initialized constant EMPTY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:10: warning: already initialized constant RUBY
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:84: warning: already initialized constant LN_SUPPORTED
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/dsl_definition.rb:143: warning: already initialized constant Commands
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:44: warning: already initialized constant ARRAY_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:47: warning: already initialized constant MUST_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:51: warning: already initialized constant MUST_NOT_DEFINE
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:55: warning: already initialized constant SPECIAL_RETURN
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:61: warning: already initialized constant DELEGATING_METHODS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:364: warning: already initialized constant DEFAULT_IGNORE_PATTERNS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:370: warning: already initialized constant DEFAULT_IGNORE_PROCS
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:64: warning: already initialized constant FileList
+/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:65: warning: already initialized constant RakeFileUtils
+rake aborted!
+stack level too deep</pre></p>
+
+<p>(See full trace by running task with &#8211;trace)
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2011/09/rake-0-9/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -498,7 +564,7 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/">Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版</a></h1>
+      <h1 class="entry-title"><a href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/">在 Mac 環境使用 Homebrew 安裝 Python + Easy_install</a></h1>
     
     
       <p class="meta">
@@ -514,87 +580,26 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
   
 
 
-<time datetime="2011-02-28T00:00:00+08:00" pubdate data-updated="true">Feb 28<span>th</span>, 2011</time>
+<time datetime="2011-03-22T00:00:00+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>最近在迷這首&#8230;
-<iframe title="YouTube video player" width="480" height="390" src="http://www.youtube.com/embed/UcOb5dDKNqI" frameborder="0" allowfullscreen></iframe>
-</div>
+  <div class="entry-content"><p><p style="text-align: center;"><img class="size-full wp-image-317 aligncenter" title="python-logo-glassy[1]" src="/images/wp-uploads/2011/03/python-logo-glassy1.png" alt="" width="286" height="364" /></p>
+今天傳說中的 python 達人 / vim之神 <a href="http://tib.tw/frame.htm" target="_blank">Tiberius 大大</a> 在公司主講了 python 基本教學，讓大家眼界都開了不少。</p>
+
+<p>回家想在 mac 上安裝 python 卻發現有些問題。</p>
+
+<p>使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install (2.6) 失效，因此要稍微做一點處理：</p>
+
+<p></div>
   
   
     <footer>
-      <a rel="full-article" href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/">Read on &rarr;</a>
+      <a rel="full-article" href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/">Read on &rarr;</a>
     </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/">用 Passenger(mod_rails) 部屬 Sinatra</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-22T00:00:00+08:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。<br />
-寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。<br />
-部屬方面也很容易<br />
-在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾<br />
-config.ru 檔案內容為
-<pre lang="ruby">
-require 'project'</pre></p>
-
-<p>root_dir = File.dirname(__FILE__)</p>
-
-<p>set :environment, ENV[&#8216;RACK_ENV&#8217;].to_sym<br />
-set :root,        root_dir<br />
-set :app_file,    File.join(root_dir, &#8216;project.rb&#8217;)<br />
-disable :run</p>
-
-<p>run Sinatra::Application</p>
-
-<p>
-把 project 替換成你的專案名稱<br />
-apache vhost的設法和 rails 的一樣即可
-<pre lang="bash">
-<VirtualHost *:80>
-  ServerName project.hsatac.net
-  DocumentRoot "/project/public"
-  RackEnv production
-  <Directory "/project/public">
-    Order allow,deny
-    Allow from all
-  
-
-</pre></p>
-</div>
-  
   
 
 
@@ -627,6 +632,10 @@ apache vhost的設法和 rails 的一樣即可
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">php openssl_pkey_get_details implement in c</a>
       </li>
     
@@ -640,10 +649,6 @@ apache vhost的設法和 rails 的一樣即可
     
       <li class="post">
         <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
       </li>
     
   </ul>

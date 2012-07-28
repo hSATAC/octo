@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-07-17T15:21:28+08:00</updated>
+  <updated>2012-07-28T20:35:50+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git 救回已刪除的檔案]]></title>
+    <link href="http://blog.hsatac.net/2012/07/git-restore-removed-files/"/>
+    <updated>2012-07-28T20:30:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/07/git-restore-removed-files</id>
+    <content type="html"><![CDATA[<p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
+
+<p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[把 Git 中的目錄搬到另一個 Git 並保留 commit]]></title>

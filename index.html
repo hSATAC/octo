@@ -9,20 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="It&#8217;s easy to generate a RSA keypair in PHP, just like this: 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-&lt;?php
-// Create the keypair
-$res=openssl_pkey_new(); // &hellip;">
+  <meta name="description" content="在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +86,44 @@ $res=openssl_pkey_new(); // &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-28T20:30:00+08:00" pubdate data-updated="true">Jul 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
+
+<p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -659,53 +684,6 @@ end</code></pre></noscript></div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-17T19:33:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
-
-<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
-
-<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
-
-<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/01/youtube-favorite-add-google-music/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -731,6 +709,10 @@ end</code></pre></noscript></div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">php openssl_pkey_get_details implement in c</a>
       </li>
     
@@ -744,10 +726,6 @@ end</code></pre></noscript></div>
     
       <li class="post">
         <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a>
       </li>
     
   </ul>
