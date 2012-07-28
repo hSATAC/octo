@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "用 scrpit 指令來紀錄輸出及輸入"
+title: "用 script 指令來紀錄輸出及輸入"
 date: 2011-12-29 14:59
 comments: true
 categories: [linux,script]
