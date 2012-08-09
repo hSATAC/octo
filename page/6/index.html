@@ -9,9 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="最近碰到一個問題，當 url 內含+號 (plus sign)時
-PHP會自動轉換成空白，做了一點調查才知道， 似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING
-照理講根據RFC 1738 +號不是unsafe的，可以留著 &hellip;">
+  <meta name="description" content="到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。 在這天大家可以帶自己的貓咪到公司上班，滿有趣的。 超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,196 +86,6 @@ PHP會自動轉換成空白，做了一點調查才知道， 似乎 PHP 5 之後
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
-PHP會自動轉換成空白，做了一點調查才知道，</p>
-
-<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
-照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
-但是PHP的urlencode和rawurlencode有些許不同，
-<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
-而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
-<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
-<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
-<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
-<div class="ii gt">目前解法大概是<br />
-1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
-2.或是在接可能有 + 號的地方再 urlencode 一次<br />
-3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/%E4%BD%BF%E7%94%A8-www-data-%E4%BE%86/">使用 Www-data 來</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP With Www-data</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
-也想幫自己的主機設定一下，<br />
-不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
-
-<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
-那要怎樣使用 www-data 登入呢？<br />
-一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
-
-<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
-那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
-用 scp 一連，果然順利登入了，非常方便。</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/">Ruby Tuesday 五月場</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-21T00:00:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這周參加了五月場的 Ruby Tuesday，<br />
-之前在台中都沒機會參加，<br />
-好不容易現在搬回台北，一定要去一下的。</p>
-
-<p>這次兩個講題分別是 kevin 分享他們公司使用<br />
-flex + RoR 開發影音串流網站的心得。</p>
-
-<p>由於和之前在維格開發的網站概念很類似，<br />
-因此對這個主題特別有興趣，也提了一些問題。</p>
-
-<p>他們目前 beta 階段，scalibility 預估承載量是 100 channels * 50000 users.<br />
-也就是同時五百萬人上線觀看，<br />
-farm的規模目前是16台機器，<br />
-聽到這邊，回想起那時開發到需要一台 server run 影音轉碼+測 streaming<br />
-老闆連一台 server 都不肯買&#8230;最後做不出什麼東西也是剛好而已&#8230;。<br />
-順帶一提，kevin 他們的人員編制是 6 個 RD + 6 個設計，開發了三個月，<br />
-人力是我們的當時的 3 倍。</p>
-
-<p>ihower 介紹了自己開發的一些 helper ，感覺都很實用，<br />
-也提到了 http://ennerchi.com/projects/jrails 這個 RoR 的 jquery plugin，<br />
-之後有空都要試試。</p>
-
-<p>在 <a href="http://ihower.idv.tw/blog/archives/2821" target="_blank">ihower 的 blog</a> 可以抓到這次的 slides。</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -551,6 +359,272 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
     <footer>
       <a rel="full-article" href="/2009/03/hack-into-aguf-big-buff-feature/">Read on &rarr;</a>
     </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/">夜暮</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-09T00:00:00+08:00" pubdate data-updated="true">Mar 9<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天要寫兩件很宅的事。<br />
+不過回歸魔獸以來，難得碰到值得寫的，還是紀錄一下。</p>
+
+<p>其一是經過兩個 CD 的拓荒，終於在 3/7 拿到夜暮頭銜。<br />
+魔獸這版確實是太簡單了。要打到最難的 10 人 1+3，<br />
+才讓我有以前信on推王的感覺，那美、海二空二的那種刺激度。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/03/%E5%A4%9C%E6%9A%AE/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/02/using-fckeditor-in-ci-17/">Using Fckeditor in CI 1.7</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
+
+<p>這個 fckeditor 移植也讓我搞了好幾個小時=  =b</p>
+
+<p>總之，要在CI 1.7中繼續使用 fckeditor (按照CI WIKI中提供的方法)，請做以下的更動。</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/02/using-fckeditor-in-ci-17/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/02/scream/">Scream!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p><strong>Lyrics to Scream</strong> :<br />
+The day a door is closed<br />
+The echoes fill your soul<br />
+They won&#8217;t say which way to go<br />
+Just trust your heart<br />
+<br />
+To find you&#8217;re here for<br />
+Open another door<br />
+But i&#8217;m not sure anymore<br />
+It&#8217;s just so hard<br />
+<br />
+Voices in my head<br />
+Tell me they know best<br />
+Got me on the edge<br />
+they&#8217;re pushin&#8217;, pushin&#8217;,<br />
+they&#8217;re pushin&#8217;<br />
+I know they&#8217;ve got a plan<br />
+But the balls in my hands<br />
+This time its man-to-man,<br />
+I&#8217;m driving, fighting inside<br />
+<br />
+A world that&#8217;s upside down<br />
+Spinning faster<br />
+What do I do now? Without you<br />
+<br />
+I don&#8217;t know, where to go, what&#8217;s the right team?<br />
+I want my own thing. So bad I&#8217;m gonna Scream!<br />
+I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
+I want my own dream. So bad I&#8217;m gonna Scream!<br />
+<br />
+I&#8217;m kickin&#8217; down the walls<br />
+I gotta make &#8216;em fall<br />
+Just break through them all<br />
+I&#8217;m punchin&#8217;, crashin&#8217;, I&#8217;m gonna<br />
+Fight to find myself<br />
+Me and no one else<br />
+Which way? I can&#8217;t tell,<br />
+I&#8217;m searchin&#8217;, searchin&#8217;, can&#8217;t find the<br />
+Road that I should take<br />
+I should! turn right or left is<br />
+It&#8217;s like nothing works without you<br />
+<br />
+I don&#8217;t know, where to go, what&#8217;s the right team?<br />
+I want my own thing. So bad I&#8217;m gonna Scream!<br />
+I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
+I want my own dream. So bad I&#8217;m gonna Scream!<br />
+<br />
+Yeah, the clock&#8217;s running down,<br />
+hear the crowd gettin&#8217; loud!<br />
+I&#8217;m consumed by the sound!<br />
+Is it her? Is it love?<br />
+Can the music ever be enough?<br />
+Gotta work it out, gotta work it out!<br />
+You can do it, you can do it!<br />
+<br />
+I don&#8217;t know, where to go, what&#8217;s the right team?<br />
+I want my own thing. So bad I&#8217;m gonna Scream!<br />
+I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
+I want my own dream. So bad I&#8217;m gonna Scream!<br />
+<br />
+I don&#8217;t know, where to go, what&#8217;s the right team?<br />
+I want my own thing. I want my own thing!<br />
+I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
+I want my own dream. So bad I&#8217;m gonna Scream!</p>
+</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/">PHP 打包下載最新的 Svn Repos</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-12T00:00:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近有個需求，是要能透過一個簡單的網頁介面<br />
+把svn repos打包下載</p>
+
+<p>首先先把 www-data 加入 svn user group 讓 php可以使用 svn
+<pre>groupadd svn
+chgrp svn repos/ -Rchmod g+sw repos -R</pre>
+<pre>再來就是單純的執行 svn export; tar 以後下載</pre>
+<pre>不過在執行的時候中文檔名會有問題會出現錯誤訊息</pre>
+svn: Can&#8217;t convert string from &#8216;UTF-8&#8217; to native encoding:</p>
+
+<p>若使用 php 的 shell_exec 要寫在同一行</p>
+
+<p>shell_exec(&#8216;LANG=zhTW.utf8; svn export&#8230;.&#8217;);</p>
+
+<p>若分兩個函式執行會變成兩個不同的 thread</p>
+
+<p>不過寫個 bash script 再讓 php 去執行應該會是比較好的方式。</p>
+
+<p>最後，tar完下載後，由於windows平台下 rar 處理 big5 檔名會有問題</p>
+
+<p>因此使用 convmv 這套來處理一下檔名編碼的問題</p>
+
+<p>apt-get install convmv</p>
+
+<p>最後再寫個 html 介面來處理一些選項和下載就可以了</p>
+
+<p>bash 大概長這樣</p>
+
+<p>#svnpackager [svnserver] [repos name]<br />
+rm -rf $2<br />
+rm $2.tar.gz</p>
+
+<p>export LANG=zh_TW.utf8;<br />
+svn export &#8211;force svn://$1/$2<br />
+convmv -f UTF-8 -t BIG5 -r &#8211;notest $2<br />
+tar -zcvf $2.tar.gz $2</p>
+
+<p>rm -rf $2</p>
+
+<p>稍微紀錄一下</p>
+</div>
+  
   
 
 

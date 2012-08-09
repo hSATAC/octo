@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用phpMyAdmin之類的軟體，就會一直看到提示「缺少mcrypt」。 要如何使用homebrew來安裝mcrypt套件，配合內建的PHP呢？ &hellip;">
+  <meta name="description" content="最近很熱門的Mac mini server我有幸也拿到了一台。 之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。 我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。原本買這台Mac mini &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -86,108 +86,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac Mini server使用homebrew安裝PHP Mcrypt套件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-28T00:00:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
-
-<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
-
-<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
-
-<p>將install區塊改成
-<pre lang="ruby">def install
-  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
-  system "make -j6"
-  system "make install"
-end</pre></p>
-
-<p>接著執行brew安裝mcrypt
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Transmission X Dropbox X Mac Mini Server = 動物機</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-27T00:00:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天繼續 Mac mini server 的探索…</p>
-
-<p>今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。</p>
-
-<p><a href="/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.34.14 PM" src="/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.34.14 PM" width="260" height="170" /></a></p>
-
-<p>原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載，回家後就可以享受成果了。</p>
-
-<p>搜尋Mac Bt的結果，第一個就是<a href="http://www.transmissionbt.com/" target="_blank">Transmission</a>，他帶給了我大大的驚奇。</p>
-
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
   
   
     <article>
@@ -272,50 +170,6 @@ end</pre></p>
   
     <footer>
       <a rel="full-article" href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/07/2069t-%E5%AE%9C%E8%98%AD%E9%87%91%E5%85%AD%E7%B5%90-11-%E5%A4%A9%E6%96%B0%E6%89%8B%E6%9D%91%E5%BF%83%E5%BE%97/">2069T 宜蘭金六結 11 天新手村心得</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-07-13T00:00:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>&#19968;&#38283;&#22987;&#30331;&#20837;&#26032;&#25163;&#26449;&#65292;&#30070;&#28982;&#26159;&#20808;&#36984;&#35282;&#33394;&#22806;&#35264;&#36896;&#22411;&#65292;&#19981;&#36942;&#25105;&#20497;&#21083;&#20986;&#29983;&#65292;&#31561;&#32026;&#36996;&#19981;&#22816;&#65292;&#21482;&#33021;&#36984;&#24179;&#38957;&#36896;&#22411; ( &#25031;&#35242;&#20551;&#21069;&#26371;&#36914;&#21270;&#25104;&#40179;&#26792;&#38957;&#36896;&#22411; )&#12290;</p>
-
-<p>&#26377;&#20154;&#35498;&#26368;&#22909;&#36914;&#21435;&#20043;&#21069;&#20808;&#29702;&#19981;&#28982;&#26371;&#30171;&#65292;&#25105;&#30340;&#32147;&#39511;&#26159;&#19981;&#38656;&#35201;&#12290;&#37329;&#20845;&#32080;&#29702;&#39662;&#37096;&#33879;&#21517;&#30340; S.H.E &#29702;&#39662;&#19977;&#22823;&#23352;&#30340;&#38651;&#21205;&#25512;&#21098;&#21448;&#21033;&#21448;&#24555;&#65292;&#29702;&#19968;&#27425;&#25165;30&#22810;&#20803;&#65292;&#19981;&#24517;&#33258;&#24049;&#22810;&#33457;&#37666;&#12290;</p>
-
-<p>&#20877;&#20358;&#23601;&#26159;&#38936;&#21462;&#35037;&#20633;&#20102;&#65292;&#26032;&#25163;&#21253;&#35041;&#38754;&#25033;&#26377;&#30433;&#26377;&#65306;&#32129;&#33151;&#65292;&#37628;&#30420;&#28023;&#32191;&#65292;&#20839;&#35122;&#20839;&#34915;&#35178;&#23376;&#31561;&#31561;&#65292;&#37117;&#29992;&#19968;&#38283;&#22987;&#25552;&#20379;&#30340;&#26032;&#25163;&#35037;&#23601;&#21487;&#20197;&#20102;&#12290;
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/07/2069t-%E5%AE%9C%E8%98%AD%E9%87%91%E5%85%AD%E7%B5%90-11-%E5%A4%A9%E6%96%B0%E6%89%8B%E6%9D%91%E5%BF%83%E5%BE%97/">Read on &rarr;</a>
     </footer>
   
 
@@ -536,6 +390,160 @@ end</pre></p>
 <p>這樣的狀況讓我很緊繃。</p>
 
 <p>真希望能夠修改歸修改、需求歸需求、Bug歸Bug&#8230;</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
+PHP會自動轉換成空白，做了一點調查才知道，</p>
+
+<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
+照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
+但是PHP的urlencode和rawurlencode有些許不同，
+<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
+而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
+<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
+<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
+<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
+<div class="ii gt">目前解法大概是<br />
+1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
+2.或是在接可能有 + 號的地方再 urlencode 一次<br />
+3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP With Www-data</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
+也想幫自己的主機設定一下，<br />
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
+
+<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
+那要怎樣使用 www-data 登入呢？<br />
+一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
+
+<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
+那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
+用 scp 一連，果然順利登入了，非常方便。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/">Ruby Tuesday 五月場</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-21T00:00:00+08:00" pubdate data-updated="true">May 21<span>st</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這周參加了五月場的 Ruby Tuesday，<br />
+之前在台中都沒機會參加，<br />
+好不容易現在搬回台北，一定要去一下的。</p>
+
+<p>這次兩個講題分別是 kevin 分享他們公司使用<br />
+flex + RoR 開發影音串流網站的心得。</p>
+
+<p>由於和之前在維格開發的網站概念很類似，<br />
+因此對這個主題特別有興趣，也提了一些問題。</p>
+
+<p>他們目前 beta 階段，scalibility 預估承載量是 100 channels * 50000 users.<br />
+也就是同時五百萬人上線觀看，<br />
+farm的規模目前是16台機器，<br />
+聽到這邊，回想起那時開發到需要一台 server run 影音轉碼+測 streaming<br />
+老闆連一台 server 都不肯買&#8230;最後做不出什麼東西也是剛好而已&#8230;。<br />
+順帶一提，kevin 他們的人員編制是 6 個 RD + 6 個設計，開發了三個月，<br />
+人力是我們的當時的 3 倍。</p>
+
+<p>ihower 介紹了自己開發的一些 helper ，感覺都很實用，<br />
+也提到了 http://ennerchi.com/projects/jrails 這個 RoR 的 jquery plugin，<br />
+之後有空都要試試。</p>
+
+<p>在 <a href="http://ihower.idv.tw/blog/archives/2821" target="_blank">ihower 的 blog</a> 可以抓到這次的 slides。</p>
 </div>
   
   
