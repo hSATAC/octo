@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-08-09T12:18:15+08:00</updated>
+  <updated>2012-08-09T14:33:14+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -21,9 +21,9 @@
     <content type="html"><![CDATA[<p>常在開發或測試階段會有更換 http request host 的需求。
 簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 port 都需要轉，那就需要其他方式了。</p>
 
-<p>一般在 windows 上是推薦 <a href="www.fiddler2.com">fiddler 2</a> 這套軟體，非常好用。可以參考 <a href="http://blog.xuite.net/vexed/tech/62341108">vexed 的文章</a>。</p>
+<p>一般在 windows 上是推薦 <a href="http://www.fiddler2.com">fiddler 2</a> 這套軟體，非常好用。可以參考 <a href="http://blog.xuite.net/vexed/tech/62341108">vexed 的文章</a>。</p>
 
-<p>不過在其他平台，可以使用 <a href="mitmproxy.org">mitmproxy</a> 這套軟體，他是 CUI 介面，操作上沒有 fiddler 那樣直覺，但稍微看一下說明即可上手。</p>
+<p>不過在其他平台，可以使用 <a href="http://mitmproxy.org">mitmproxy</a> 這套軟體，他是 CUI 介面，操作上沒有 fiddler 那樣直覺，但稍微看一下說明即可上手。</p>
 
 <p>mitmproxy 提供許多 API 讓使用者自訂需求，都使用 Python 來編寫。不過關於 script 的 document 較少，可以參考<a href="http://mitmproxy.org//doc/scripts.html">官方說明</a>有簡單的範例，或者使用 <code>pydoc libmproxy.flow.Request</code> 這樣的指令來查閱，再不然就只能直接看<a href="https://github.com/cortesi/mitmproxy/">原始碼</a>了。</p>
 
