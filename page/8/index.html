@@ -9,7 +9,10 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="尋尋覓覓，終於在民生社區這邊找到了理想的居所。我的條件還滿多的，首先預算希望低於一萬再來希望是套房，雅房的話要看其他房客。住起來舒服，希望有冷氣冰箱電視機。洗衣機、飲水機這些最好也是有。離公司近，所以鎖定內湖和松山區。因為要搬車上下樓，若沒有電梯希望在三樓以下。我的東西滿多，希望空間大，若是雅房， &hellip;">
+  <meta name="description" content="今天幫客戶弄的活動網站https一直出問題firefox都跑的好好的但ie7卻會一直出現安全性警告的提示而且沒有順利出現上鎖的圖案
+debug後，發現網頁裡面有一些外連的東西會導致這個狀況
+首先我的jquery是load google api改成本機的版本就可以了
+再來首頁有個flash&lt; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,8 +21,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.hsatac.net/page/8">
-  <link href="/favicon.ico" rel="icon">
+  <link rel="canonical" href="http://blog.hsatac.net/page/8/">
+  <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -86,6 +89,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/10/ie7-vs-https/">Ie7 vs Https</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-09T00:00:00+08:00" pubdate data-updated="true">Oct 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>今天幫客戶弄的活動網站https一直出問題<br />firefox都跑的好好的<br />但ie7卻會一直出現安全性警告的提示<br />而且沒有順利出現上鎖的圖案</p>
+<p>debug後，發現網頁裡面有一些外連的東西<br />會導致這個狀況</p>
+<p>首先我的jquery是load google api<br />改成本機的版本就可以了</p>
+<p>再來首頁有個flash<br />&lt;object&gt;&lt;/object&gt;<br />裡面的網址刪除就可以了</p>
+<p>&lt;embed&gt;倒是不受影響&#8230;</p>
+</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -424,43 +468,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/%E8%BF%91%E6%B3%81/">近況</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-27T00:00:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p>最近單車部份都沒什麼進度<br />其實有跟大明買了Sigma 1606L有線碼表含迴轉速套件<br />也買了鐵弗龍煞車線和編織外管重新走了後煞車線<br />整個後煞車變得很利，再也沒有黏膩的手感<br />另外之前的車內褲也扁了<br />買了舊款的Pearl Izumi 3D車褲<br /><br />上回騎車的時候，有稍微抓回踩踏的感覺<br />把意識放在大腿上，不要放在膝蓋上<br />感覺會比較好<br /> <br />不過最近真的比較少騎車&#8230;<br />真該努力振奮一下<br />自己一個人騎好寂寞啊&#8230;</p>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -488,6 +495,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/">使用 mitmproxy 替換 request host 和 port</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
       </li>
     
@@ -501,10 +512,6 @@
     
       <li class="post">
         <a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
       </li>
     
   </ul>

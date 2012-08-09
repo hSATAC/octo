@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="最近在迷這首&#8230; ">
+  <meta name="description" content="今天傳說中的 python 達人 / vim之神 Tiberius 大大 在公司主講了 python 基本教學，讓大家眼界都開了不少。 回家想在 mac 上安裝 python 卻發現有些問題。 使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,8 +18,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.hsatac.net/page/4">
-  <link href="/favicon.ico" rel="icon">
+  <link rel="canonical" href="http://blog.hsatac.net/page/4/">
+  <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
@@ -86,6 +86,52 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/">在 Mac 環境使用 Homebrew 安裝 Python + Easy_install</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-03-22T00:00:00+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p style="text-align: center;"><img class="size-full wp-image-317 aligncenter" title="python-logo-glassy[1]" src="/images/wp-uploads/2011/03/python-logo-glassy1.png" alt="" width="286" height="364" /></p>
+今天傳說中的 python 達人 / vim之神 <a href="http://tib.tw/frame.htm" target="_blank">Tiberius 大大</a> 在公司主講了 python 基本教學，讓大家眼界都開了不少。</p>
+
+<p>回家想在 mac 上安裝 python 卻發現有些問題。</p>
+
+<p>使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install (2.6) 失效，因此要稍微做一點處理：</p>
+
+<p></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -520,59 +566,6 @@ Star Trek television series, among others.</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac Mini server使用homebrew安裝PHP Mcrypt套件</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-28T00:00:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Mac mini server内建的PHP, Apache開啟相當容易，打勾重啟就可以使用了，但缺少了許多套件，如果你也有用<a href="http://www.phpmyadmin.net/" target="_blank">phpMyAdmin</a>之類的軟體，就會一直看到提示「缺少mcrypt」。</p>
-
-<p>要如何使用<a href="http://mxcl.github.com/homebrew/" target="_blank">homebrew</a>來安裝mcrypt套件，配合內建的PHP呢？</p>
-
-<p>首先先修改一下homebrew的mcrypt安裝檔 /usr/local/Library/Formula/mcrypt.rb</p>
-
-<p>將install區塊改成
-<pre lang="ruby">def install
-  system "MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' ./configure --disable-dependency-tracking --prefix=#{prefix} --mandir=#{man}"
-  system "make -j6"
-  system "make install"
-end</pre></p>
-
-<p>接著執行brew安裝mcrypt
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -600,6 +593,10 @@ end</pre></p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/">使用 mitmproxy 替換 request host 和 port</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
       </li>
     
@@ -613,10 +610,6 @@ end</pre></p>
     
       <li class="post">
         <a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a>
       </li>
     
   </ul>
