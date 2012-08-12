@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "php openssl_pkey_get_details implement in c"
+title: "PHP openssl_pkey_get_details implement in c"
 date: 2012-06-14 10:49
 comments: true
 categories: [C, PHP, openssl]
