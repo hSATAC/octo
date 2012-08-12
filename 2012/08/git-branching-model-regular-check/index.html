@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Mac - hSATAC</title>
+  <title>自動檢查 git branch 是否 merge 過 - hSATAC</title>
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="Category: Mac">
+  <meta name="description" content="按照一般 Git branching model 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 merge 進主幹、不再需要可以刪除；或者哪些 branches 沒有 merge 進主幹但已經放棄不用。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.hsatac.netcategories/mac/">
+  <link rel="canonical" href="http://blog.hsatac.net/2012/08/git-branching-model-regular-check/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,168 +85,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Mac</h1>
+    
+      <h1 class="entry-title">自動檢查 Git Branch 是否 Merge 過</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:28:00+08:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>按照一般 <a href="http://nvie.com/posts/a-successful-git-branching-model/">Git branching model</a> 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 merge 進主幹、不再需要可以刪除；或者哪些 branches 沒有 merge 進主幹但已經放棄不用。這時就需要一些自動化的 script 幫助管理。</p>
 
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a></h1>
-<time datetime="2012-03-07T10:05:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>07</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<p>本來是想全部用 bash 寫，不過功力不夠，最後還是偷懶用 ruby 了。</p>
+
+<p>這個 script 會先檢查哪些 branches 已經 merge 過，如果沒有特殊理由就可以刪除了。也可以把刪除的動作寫在 script 讓他自動化，不過我這邊選擇保留一些手動的彈性。</p>
+
+<p>再來是檢查哪些 branches 已經開很久了(開超過一個月)，卻又沒有 merge 進主幹，這時管理者可以看一下這些 branches 是否已經不再使用，可以刪除。</p>
+
+<div><script src='https://gist.github.com/3246217.js?file='></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'rubygems'
+require 'active_support'
+
+merged = `cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch --merged master | grep -v master`
+not_merged_cmd = 'cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch | grep -v master | grep -v support | grep -v qa'
+for line in merged.split(&quot;\n&quot;)
+  not_merged_cmd += '| grep -v ' + line
+end
+puts &quot;This is a regular check of miiiCasa.git branches\n&quot;
+puts &quot;List below are branches already been merged into [master]:&quot;
+puts &quot;Please check if they are still needed, grb delete them otherwise.\n&quot;
+puts merged
+
+puts &quot;\n--------------------\n\n&quot;
+
+puts 'List below are branches order than 1 month and have NOT been merged into [master]:'
+puts &quot;Please check if they are abandoned or forgotten.&quot;
+not_merged = `#{not_merged_cmd}`
+for line in not_merged
+  date =  /\S+_([0-9]+)_/.match(line)[1]
+  puts line if 1.month.ago &gt; Date.parse(date)
+end</code></pre></noscript></div>
 
 
+<p>我們團隊對於 branch 命名有規定，中間一定是八位數字的日期，例如 feature_20120812_sthcool 以便分辨這個 branch 的開創時間。如果沒有這樣的命名規定的話，也可以透過下面這樣的 script 來找出最後 active 的時間。</p>
 
-  
-  <h2>2011</h2>
-
-<article>
-  
-<h1><a href="/2011/04/redmine-git-integration/">整合 Redmine 和 git</a></h1>
-<time datetime="2011-04-14T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>14</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/">How to enable php gmp on Mac OS X without macports</a></h1>
-<time datetime="2011-04-07T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>07</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/">連猴子也會之：在 Mac mini server 上架設 WebDAV git server</a></h1>
-<time datetime="2011-04-04T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>04</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/">Mac OSX Server 10.6 安裝 mysql2 gem</a></h1>
-<time datetime="2011-02-22T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>22</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2010</h2>
-
-<article>
-  
-<h1><a href="/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/">Mac Os Server 輕鬆設定  Passenger (mod_rails)</a></h1>
-<time datetime="2010-09-26T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>26</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/09/tm_syntax_highlighting-rails-3-macos/">tm_syntax_highlighting + rails 3 + MacOs</a></h1>
-<time datetime="2010-09-20T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac mini server使用homebrew安裝PHP mcrypt套件</a></h1>
-<time datetime="2010-08-28T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>28</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Transmission X Dropbox X Mac mini server = 動物機</a></h1>
-<time datetime="2010-08-27T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/">Mac mini server 心得&備忘</a></h1>
-<time datetime="2010-08-24T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>24</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for k in `git branch|perl -pe s/^..//`;do echo -e `git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1`\\t$k;done|sort -r</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:28:00+08:00" pubdate data-updated="true">Aug 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/git/'>Git</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2012/08/git-branching-model-regular-check/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2012/08/git-branching-model-regular-check/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" title="Previous Post: 使用 mitmproxy 替換 request host 和 port">&laquo; 使用 mitmproxy 替換 request host 和 port</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -349,7 +317,10 @@
       var disqus_shortname = 'hsatac';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2012/08/git-branching-model-regular-check/';
+        var disqus_url = 'http://blog.hsatac.net/2012/08/git-branching-model-regular-check/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

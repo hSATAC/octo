@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-08-09T21:39:34+08:00</updated>
+  <updated>2012-08-12T12:55:45+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[自動檢查 git branch 是否 merge 過]]></title>
+    <link href="http://blog.hsatac.net/2012/08/git-branching-model-regular-check/"/>
+    <updated>2012-08-12T12:28:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/08/git-branching-model-regular-check</id>
+    <content type="html"><![CDATA[<p>按照一般 <a href="http://nvie.com/posts/a-successful-git-branching-model/">Git branching model</a> 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 merge 進主幹、不再需要可以刪除；或者哪些 branches 沒有 merge 進主幹但已經放棄不用。這時就需要一些自動化的 script 幫助管理。</p>
+
+<!--more-->
+
+
+<p>本來是想全部用 bash 寫，不過功力不夠，最後還是偷懶用 ruby 了。</p>
+
+<p>這個 script 會先檢查哪些 branches 已經 merge 過，如果沒有特殊理由就可以刪除了。也可以把刪除的動作寫在 script 讓他自動化，不過我這邊選擇保留一些手動的彈性。</p>
+
+<p>再來是檢查哪些 branches 已經開很久了(開超過一個月)，卻又沒有 merge 進主幹，這時管理者可以看一下這些 branches 是否已經不再使用，可以刪除。</p>
+
+<p><div><script src='https://gist.github.com/3246217.js?file='></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+require 'rubygems'
+require 'active_support'
+
+merged = `cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch --merged master | grep -v master`
+not_merged_cmd = 'cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch | grep -v master | grep -v support | grep -v qa'
+for line in merged.split(&quot;\n&quot;)
+  not_merged_cmd += '| grep -v ' + line
+end
+puts &quot;This is a regular check of miiiCasa.git branches\n&quot;
+puts &quot;List below are branches already been merged into [master]:&quot;
+puts &quot;Please check if they are still needed, grb delete them otherwise.\n&quot;
+puts merged
+
+puts &quot;\n--------------------\n\n&quot;
+
+puts 'List below are branches order than 1 month and have NOT been merged into [master]:'
+puts &quot;Please check if they are abandoned or forgotten.&quot;
+not_merged = `#{not_merged_cmd}`
+for line in not_merged
+  date =  /\S+_([0-9]+)_/.match(line)[1]
+  puts line if 1.month.ago &gt; Date.parse(date)
+end</code></pre></noscript></div>
+</p>
+
+<p>我們團隊對於 branch 命名有規定，中間一定是八位數字的日期，例如 feature_20120812_sthcool 以便分辨這個 branch 的開創時間。如果沒有這樣的命名規定的話，也可以透過下面這樣的 script 來找出最後 active 的時間。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for k in &lt;code>git branch|perl -pe s/^..//&lt;/code>;do echo -e &lt;code>git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1&lt;/code>\t$k;done|sort -r</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Git 救回已刪除的檔案]]></title>
