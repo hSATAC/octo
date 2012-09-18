@@ -28,6 +28,11 @@ categories: [golang, IDE, editor]
 
 ![golangide](/images/golang_ides/golangide.png)
 
+[goeclipse](http://code.google.com/p/goclipse/)
+Golang 的 Eclipse plugin…Eclipse 現在完全是個萬能 editor.
+
+![goeclipse](/images/golang_ides/goeclipse.png)
+
 [zeus](http://www.zeusedit.com/go.html) 是一個 windows 的 programming editor，也提供了深度支援開發 golang。
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/CZ5Yl0KnbKs" frameborder="0" allowfullscreen></iframe>
