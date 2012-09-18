@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IDE | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ide/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-09-19T01:14:57+08:00</updated>
+  <updated>2012-09-19T01:38:13+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -42,6 +42,11 @@
 <p>再來介紹一個大陸開發的 <a href="http://code.google.com/p/golangide/">golangide</a> 相當優秀，也是跨三平台版本。安裝就可以使用了，不需要多餘的設定。</p>
 
 <p><img src="/images/golang_ides/golangide.png" alt="golangide" /></p>
+
+<p><a href="http://code.google.com/p/goclipse/">goeclipse</a>
+Golang 的 Eclipse plugin…Eclipse 現在完全是個萬能 editor.</p>
+
+<p><img src="/images/golang_ides/goeclipse.png" alt="goeclipse" /></p>
 
 <p><a href="http://www.zeusedit.com/go.html">zeus</a> 是一個 windows 的 programming editor，也提供了深度支援開發 golang。</p>
 
