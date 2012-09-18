@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-08-12T13:41:48+08:00</updated>
+  <updated>2012-09-19T01:14:57+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[開發 Golang 的 IDEs]]></title>
+    <link href="http://blog.hsatac.net/2012/09/golang-ides/"/>
+    <updated>2012-09-19T00:34:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/09/golang-ides</id>
+    <content type="html"><![CDATA[<p>介紹一些開發 Golang 的 IDEs</p>
+
+<p>首先是我慣常使用的 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> 搭配  <a href="https://github.com/disposaboy/gosublime">gosublime</a> 外掛。</p>
+
+<p><img src="http://blog.hsatac.net/images/golang_ides/subl.png" alt="gosublime" /></p>
+
+<!--more-->
+
+
+<p>以及也是我慣用的 vim + <a href="https://github.com/nsf/gocode/">gocode</a></p>
+
+<p>在 <code>$GOROOT/misc/vim</code> 下已經有提供給 vim 使用的 syntax, indent, plugin 等，全部複製到 <code>~/.vim</code> 下面即可。如果不知道 go 安裝的位置可以使用 <code>go env</code> 來查詢。</p>
+
+<p>按 gocode 的說明安裝完成後就可以在 vim 裡面使用 golang 的 autocompletion 了。</p>
+
+<p><img src="http://blog.hsatac.net/images/golang_ides/vim.png" alt="vim + gocode" /></p>
+
+<p>提了 vim 也不得不提 emacs. Emacs 一樣使用 <code>$GOROOT/misc/emacs</code> 下提供的檔案以及搭配 gocode 做自動完成。</p>
+
+<p><img src="http://blog.hsatac.net/images/golang_ides/emacs.png" alt="emacs + gocode" /></p>
+
+<p>再來介紹一個大陸開發的 <a href="http://code.google.com/p/golangide/">golangide</a> 相當優秀，也是跨三平台版本。安裝就可以使用了，不需要多餘的設定。</p>
+
+<p><img src="http://blog.hsatac.net/images/golang_ides/golangide.png" alt="golangide" /></p>
+
+<p><a href="http://www.zeusedit.com/go.html">zeus</a> 是一個 windows 的 programming editor，也提供了深度支援開發 golang。</p>
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/CZ5Yl0KnbKs" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/84i7H-E0YUM" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Zeus 整合的相當好，包括 debugger, build manager, package manager 都有提供，比較有完整 IDE 的感覺。但完整版是要付費購買的。不管如何，選擇一個喜歡，順手合自己意的才是最重要的。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[自動檢查 git branch 是否 merge 過]]></title>
@@ -1422,59 +1466,6 @@ PS1=&quot;\[\033[1;31m\]→\[\033[0m\] \[\033[0;36m\][ \[\033[1;32m\]\${newPWD}\
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Logitech G300 on ArchLinux]]></title>
-    <link href="http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
-    <updated>2011-11-30T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
-    <content type="html"><![CDATA[<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
-他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
-其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
-
-<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
-當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
-經過測試後，判斷是他送出的 keyboard 訊號問題<br />
-只要把 keyboard disable 掉就可以了。<!--more-->
-<pre lang="bash">xinput list</pre>
-應該可以看到各有一個 Logitech G300 的鍵盤和滑鼠，後面會有 id 例如 12
-<pre lang="bash">xinput list-props 12</pre>
-會看到類似
-<pre lang="bash">Device Enabled (132)</pre>
-再下
-<pre lang="bash">xinput set-prop 12 132 0</pre>
-就可以把這個裝置 disable 掉。</p>
-
-<p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
-所以我寫成 script 可以放在 xinitrc 裏面去自動執行
-<pre lang="bash">#!/bin/sh
-DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`
-
-if xinput -list-props $DEVICE_ID | grep "Device Enabled" | grep "1$" &gt; /dev/null
-then
-    xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0
-fi
-</pre>
-接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
-在 /etc/pm/sleep.d/ 下<br />
-新增一個 script 讓他去執行上一段程式就可以了。
-<pre lang="bash">!/bin/sh
-# 90G300: suspend/wakeup Logitech G300 devices
-
-case "$1" in
-hibernate|suspend)
-;;
-thaw|resume)
-/home/cat/.xinitrc.d/50-logitech-g300-mouse
-;;
-*) exit $NA
-;;
-esac
-</pre>
-
-<p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>
 ]]></content>
   </entry>
   
