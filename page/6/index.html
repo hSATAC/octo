@@ -9,10 +9,9 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，
-也想幫自己的主機設定一下，
-不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。 研究了一下，才發現原來 ssh 內建 sftp 了。
-那要怎樣使用 www-data 登入呢？ &hellip;">
+  <meta name="description" content="最近碰到一個問題，當 url 內含+號 (plus sign)時
+PHP會自動轉換成空白，做了一點調查才知道， 似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING
+照理講根據RFC 1738 +號不是unsafe的，可以留著 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +88,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 Urldecode $_GET</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-28T00:00:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近碰到一個問題，當 url 內含+號 (plus sign)時<br />
+PHP會自動轉換成空白，做了一點調查才知道，</p>
+
+<p>似乎 PHP 5 之後 PHP會自動 urldecode QUERY_STRING<br />
+照理講根據RFC 1738 +號不是unsafe的，可以留著<br />
+但是PHP的urlencode和rawurlencode有些許不同，
+<div id=":1a" class="ii gt">rawurlencode是根據RFC 1738所以加號不會處理掉<br />
+而 PHP 自己的 urlencode 會把空白 (space) 轉成 + 號 (plus sign)</div>
+<div class="ii gt">然後到 PHP 這邊自己會 urldecode 出來 + 號就變成空白了。至於</div>
+<div class="ii gt">為什麼會這樣，PHP網站也語焉不詳，只說了一句 &#8220;historical reason&#8221;</div>
+<div class="ii gt">事實上似乎 ASP 和 JAVA 也是這樣處理 urlencode 的</div>
+<div class="ii gt">目前解法大概是<br />
+1.可能會有 + 號的地方用 urlencode 包一下(有用 base64_encode 的地方)<br />
+2.或是在接可能有 + 號的地方再 urlencode 一次<br />
+3.有的framework不使用$_GET 而自己去 parse query_string</div></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -517,51 +566,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/using-fckeditor-in-ci-17/">Using Fckeditor in CI 1.7</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
-
-<p>這個 fckeditor 移植也讓我搞了好幾個小時=  =b</p>
-
-<p>總之，要在CI 1.7中繼續使用 fckeditor (按照CI WIKI中提供的方法)，請做以下的更動。</p>
-
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/02/using-fckeditor-in-ci-17/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -589,6 +593,10 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/09/the-4-hours-body/">身體調校聖經</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/09/golang-ides/">開發 Golang 的 IDEs</a>
       </li>
     
@@ -604,15 +612,11 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
         <a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">PHP openssl_pkey_get_details implement in c</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/golang' style='font-size: 103.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 103.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 103.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/mac' style='font-size: 130.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 103.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 103.0%'>mitmproxy</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 136.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/golang' style='font-size: 103.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 103.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 103.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/mac' style='font-size: 130.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 103.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 103.0%'>mitmproxy</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 136.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>

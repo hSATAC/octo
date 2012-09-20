@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-09-19T01:38:13+08:00</updated>
+  <updated>2012-09-21T00:57:53+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[身體調校聖經]]></title>
+    <link href="http://blog.hsatac.net/2012/09/the-4-hours-body/"/>
+    <updated>2012-09-20T23:23:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/09/the-4-hours-body</id>
+    <content type="html"><![CDATA[<p><img src="http://blog.hsatac.net/images/the_4_hours_body/cover.jpg" alt="cover" /></p>
+
+<blockquote><p>⋯⋯《身體調校聖經》所提供的，是對人類重建身體的全新探索，全盤收錄幾百位優異運動員、幾十位醫師，以及幾千小時讓人目瞪口呆的個人實驗智慧；從奧林匹克訓練中心到地下實驗室，從矽谷到南非，作者提摩西．費里斯念茲在茲的改變人生問題是：</p><p>　　對所有關於身體的事情，如何以最小的改變來創造最大的成果？⋯⋯</p></blockquote>
+
+
+<p>前陣子很紅的《<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010541859">身體調校聖經</a>》，看了許多人的心得和推薦以後覺得很有意思，也買了一本。</p>
+
+<p>我的故事很平常，跟大多數人一樣，入伍時有著健康的好身材，退伍就業沒多久就因為天天坐在電腦前缺乏運動而發胖。從 70 kg 暴增到 90 kg。一直都有要減重的念頭，卻遲遲沒有實行。直到看了這本書。</p>
+
+<!--more-->
+
+
+<p>我覺得這本書給了我兩個很重要的觀念：一個是書中所提的「原宿時刻」。故事不在這邊細說，留給各位買書後自行閱讀。我就和故事的主角一樣，突然領悟到，在生命中我一直對最重要的資產——身體視而不見。下意識去忽略他。我知道我需要減重，我知道我要吃得健康，我知道我要維持運動。可是我總是什麼都不去做，就這樣等著看會不會有什麼神奇的事情發生。我每天在寫程式，學習新技術。不斷磨練自己，不斷改進自己的產品、開發流程。因為我知道每天都進步一點，持久下來就會很可觀。可是對自己身體的態度，我卻偏偏是我最瞧不起的那種人。意識到這點以後，要做改變一點都不困難了。</p>
+
+<p>第二個我覺得很棒的觀點是：「測量」。</p>
+
+<p>我從沒想過自己的身體也可以當玩具。我每個月都在買新玩具，沉迷於新玩具帶給我的刺激。但是陪伴我最久，離我最近的身體我居然沒想過要好好去研究他。書中提供了許多測量的方式和計畫，只要有了測量和資料，我就可以分析方法是否有效，要如何改變或是繼續加強。就跟我們平時在優化程式、調校伺服器一樣。這不正是我們最擅長的嗎？</p>
+
+<p>除了帶給我這兩點觀念外，書裡也充滿了許多有用的知識和各種你沒想過/沒聽過的調校方法。真的很值得買一本，偶爾隨手翻翻都好，會有意想不到的收穫。</p>
+
+<p>最後附上我按書中提供的方法，選擇比較適合我生活型態的減重方式，運行一個月以來的成果。</p>
+
+<p>我使用的是「低醣減脂法」。不吃米麥糖奶和水果，只吃菜肉蛋豆；不喝飲料，只喝開水或黑咖啡/無糖茶。每天早上起床一小時內一定吃早餐並且補充蛋白質。每週六是作弊日，可以盡情吃任何想吃的東西。</p>
+
+<p>洗澡時洗冷水澡，並且固定時間測量自己的體重/體脂肪/腰圍等等。</p>
+
+<p>從 8/21 實行到今天結束剛好 30 天整。我的成果：腰圍由 101 cm 縮減到 93 cm；體重從 92.3 kg 減輕到  kg。後面附的是我體重曲線圖。</p>
+
+<p><img src="http://blog.hsatac.net/images/the_4_hours_body/weight.png" alt="weight" /></p>
+
+<p>還沒達到我的理想體重，因此我的減重還會再繼續下去。以前減重帶給我的只有節制和痛苦。但現在我和我自己的身體玩的不亦樂乎，再也不是一件令人難以忍受的事了。我對自己身體的探索，還會再繼續下去。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[開發 Golang 的 IDEs]]></title>
@@ -1382,95 +1421,6 @@ redis.conf 要稍微修改</p>
 
 
 <p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bash PS1 補滿]]></title>
-    <link href="http://blog.hsatac.net/2011/12/bash-ps1-fill/"/>
-    <updated>2011-12-20T16:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/12/bash-ps1-fill</id>
-    <content type="html"><![CDATA[<p>今天 Even Wu 在 facebook 上問了一個問題：他的 Bash PS1 要補滿 dash 到換行為止，感覺很有趣，稍微研究了一下。</p>
-
-<p>首先要取得 term 的寬度，這個很容易直接抓 <code>$COLUMNS</code> 就好。</p>
-
-<p>再來要抓原本 PS1 的長度，原本打算用 <code>$PWD</code> 去抓，不過 \w 碰到自己的家目錄會變 <code>~</code> 所以長度不對，這邊要自己處理一下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span> <span class="s2">&quot;$PWD&quot;</span> <span class="o">]</span>
-</span><span class='line'>  <span class="k">then</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~&quot;</span>
-</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span>  <span class="s2">&quot;${PWD:0:${#HOME}}&quot;</span> <span class="o">]</span>
-</span><span class='line'>  <span class="k">then</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~${PWD:${#HOME}}&quot;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="nv">$PWD</span>
-</span><span class='line'>  <span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>然後塞成跟原本 PS1 一樣的 temp 字串來算長度，最後把 term width 減去 temp 就可以抓到長度了，再作補滿的動作即可。</p>
-
-<p>最後結果如下：</p>
-
-<div><script src='https://gist.github.com/1500143.js?file='></script>
-<noscript><pre><code>function git_branch {
-ref=$(git symbolic-ref HEAD 2&gt; /dev/null) || return;
-echo &quot;(&quot;${ref#refs/heads/}&quot;) &quot;;
-}
-
-function git_since_last_commit {
-now=`date +%s`;
-last_commit=$(git log --pretty=format:%at -1 2&gt; /dev/null) || return;
-seconds_since_last_commit=$((now-last_commit));
-minutes_since_last_commit=$((seconds_since_last_commit/60));
-hours_since_last_commit=$((minutes_since_last_commit/60));
-minutes_since_last_commit=$((minutes_since_last_commit%60));
-
-echo &quot;${hours_since_last_commit}h${minutes_since_last_commit}m &quot;;
-}
-
-unset temp
-
-function prompt_command {
-
-  if [ $HOME == $PWD ]
-  then
-    newPWD=&quot;~&quot;
-  elif [ $HOME ==  ${PWD:0:${#HOME}} ]
-  then
-    newPWD=&quot;~${PWD:${#HOME}}&quot;
-  else
-    newPWD=$PWD
-  fi
-
-  TERMWIDTH=${COLUMNS}
-
-  local temp=&quot;→ [ ${newPWD} ] $(git_branch)$(git_since_last_commit)&quot;
-  let fillsize=${TERMWIDTH}-${#temp}
-  if [ &quot;$fillsize&quot; -gt &quot;0&quot; ]
-  then
-    fill=&quot;----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------&quot;
-    fill=&quot;${fill:0:${fillsize}}&quot;
-  fi
-}
-
-PROMPT_COMMAND=prompt_command
-PS1=&quot;\[\033[1;31m\]→\[\033[0m\] \[\033[0;36m\][ \[\033[1;32m\]\${newPWD}\[\033[0;36m\] ] \[\033[0m\]\[\033[1;31m\]\$(git_branch)\[\033[0m\]\$(git_since_last_commit)\${fill}\n$ &quot;</code></pre></noscript></div>
-
-
-
 ]]></content>
   </entry>
   
