@@ -28,6 +28,7 @@ debug後，發現網頁裡面有一些外連的東西會導致這個狀況
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -60,10 +61,17 @@ debug後，發現網頁裡面有一些外連的東西會導致這個狀況
 
 <body   >
   <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">ash.cat</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
   <h1><a href="/">hSATAC</a></h1>
   
     <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
   
+  <div class="clear"></div>
 </hgroup>
 
 </header>
@@ -92,7 +100,9 @@ debug後，發現網頁裡面有一些外連的東西會導致這個狀況
   
   <header>
     
-      <h1 class="entry-title">Ie7 vs Https</h1>
+      
+        <h1 class="entry-title">Ie7 vs Https</h1>
+      
     
     
       <p class="meta">
@@ -170,10 +180,10 @@ debug後，發現網頁裡面有一些外連的東西會導致這個狀況
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2008/09/%E6%90%AC%E6%96%B0%E5%AE%B6/" title="Previous Post: 搬新家">&laquo; 搬新家</a>
+        <a class="basic-alignment left articlenav" href="/2008/09/%E6%90%AC%E6%96%B0%E5%AE%B6/" title="Previous Post: 搬新家">&laquo; 搬新家</a>
       
       
-        <a class="basic-alignment right" href="/2008/10/bug-%E4%B8%80%E7%89%9B%E8%BB%8A/" title="Next Post: Bug 一牛車">Bug 一牛車 &raquo;</a>
+        <a class="basic-alignment right articlenav" href="/2008/10/bug-%E4%B8%80%E7%89%9B%E8%BB%8A/" title="Next Post: Bug 一牛車">Bug 一牛車 &raquo;</a>
       
     </p>
   </footer>
@@ -276,7 +286,7 @@ debug後，發現網頁裡面有一些外連的東西會導致這個狀況
   </div>
   <footer role="contentinfo"><p>
   Copyright &copy; 2012 - hSATAC -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>

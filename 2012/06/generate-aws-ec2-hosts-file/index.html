@@ -25,6 +25,7 @@
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -57,10 +58,17 @@
 
 <body   >
   <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">ash.cat</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
   <h1><a href="/">hSATAC</a></h1>
   
     <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
   
+  <div class="clear"></div>
 </hgroup>
 
 </header>
@@ -89,7 +97,9 @@
   
   <header>
     
-      <h1 class="entry-title">動態產生 Ec2 的 Hosts 檔案</h1>
+      
+        <h1 class="entry-title">動態產生 Ec2 的 Hosts 檔案</h1>
+      
     
     
       <p class="meta">
@@ -200,10 +210,10 @@ end</code></pre></noscript></div>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/" title="Previous Post: 利用 route 53 設定 ec2 動態 DNS">&laquo; 利用 route 53 設定 ec2 動態 DNS</a>
+        <a class="basic-alignment left articlenav" href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/" title="Previous Post: 利用 route 53 設定 ec2 動態 DNS">&laquo; 利用 route 53 設定 ec2 動態 DNS</a>
       
       
-        <a class="basic-alignment right" href="/2012/06/set-ec2-hostname-from-name-tag/" title="Next Post: 用 ec2 的 Name tag 設定 hostname">用 ec2 的 Name tag 設定 hostname &raquo;</a>
+        <a class="basic-alignment right articlenav" href="/2012/06/set-ec2-hostname-from-name-tag/" title="Next Post: 用 ec2 的 Name tag 設定 hostname">用 ec2 的 Name tag 設定 hostname &raquo;</a>
       
     </p>
   </footer>
@@ -306,7 +316,7 @@ end</code></pre></noscript></div>
   </div>
   <footer role="contentinfo"><p>
   Copyright &copy; 2012 - hSATAC -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
 </footer>
