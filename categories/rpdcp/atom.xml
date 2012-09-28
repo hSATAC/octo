@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rpdcp | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/rpdcp/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-09-28T14:03:18+08:00</updated>
+  <updated>2012-09-28T14:19:44+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -23,12 +23,12 @@
 <!--more-->
 
 
-<h2>Mosh</h2>
+<h2>1. Mosh</h2>
 
 <h3>說明</h3>
 
 <p>不會斷線的 ssh
-http://mosh.mit.edu/</p>
+<a href="http://mosh.mit.edu/">http://mosh.mit.edu/</a></p>
 
 <h3>安裝</h3>
 
@@ -44,21 +44,24 @@ http://mosh.mit.edu/</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mosh ash_wu@devm1.corp.miiicasa.com
-</span><span class='line'>mosh hsatac.net -- screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mosh ash_wu@myserver.com
+</span><span class='line'>mosh myserver.com -- screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h2>Mitmproxy</h2>
+<h2>2. Mitmproxy</h2>
 
 <h3>說明</h3>
 
-<p>middleman proxy 可用來 debug , fiddler 的 *nix 版
-http://mitmproxy.org</p>
+<p>middleman proxy 可用來 debug , fiddler 的 *nix 版</p>
+
+<p><a href="http://mitmproxy.org">http://mitmproxy.org</a></p>
 
 <h3>安裝</h3>
 
-<p>使用 python 套件管理 pip 安裝
-有 https 需求的話則需要安裝他的憑證
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>使用 python 套件管理 pip 安裝</p>
+
+<p>有 https 需求的話則需要安裝他的憑證</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>pip install mitmproxy</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>使用</h3>
@@ -70,12 +73,13 @@ http://mitmproxy.org</p>
 
 <h3>擴充</h3>
 
-<p>mitmproxy 提供許多 hook 可以自訂擴充，以 python 編寫即可。可參考我的文章
-http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/
+<p>mitmproxy 提供許多 hook 可以自訂擴充，以 python 編寫即可。可參考我的文章</p>
+
+<p><a href="http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/">http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/</a>
 <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>mitmproxy -s test.py</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h2>pdsh/pdcp/rpdcp</h2>
+<h2>3. pdsh/pdcp/rpdcp</h2>
 
 <h3>說明</h3>
 
@@ -96,34 +100,40 @@ http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>pdsh -w web[01-10],static[7,9-10] ls
-</span><span class='line'>pdcp -w ash_wu@devm[1-2].corp.miiicasa.com test.py /home/ash_wu/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</span><span class='line'>pdcp -w ash_wu@dmyserver[1-2].com test.py /home/ash_wu/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h2>htop</h2>
+<h2>4. htop</h2>
 
 <h3>說明</h3>
 
-<p>better top. 可以直接看 process tree, 直接砍掉
-http://htop.sourceforge.net/</p>
+<p>better top. 可以直接看 process tree, 直接砍掉</p>
 
-<h2>goaccess</h2>
+<p><a href="http://htop.sourceforge.net/">http://htop.sourceforge.net/</a></p>
 
-<p>看 apache/nginx log
-http://goaccess.prosoftcorp.com/</p>
+<h2>5. goaccess</h2>
+
+<p>看 apache/nginx log</p>
+
+<p><a href="http://goaccess.prosoftcorp.com/">http://goaccess.prosoftcorp.com/</a></p>
 
 <h3>使用</h3>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>goaccess &lt;apache_access_log or nginx_access_log></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<h2>ack, ag</h2>
+<h2>6. ack, ag</h2>
 
 <h3>說明</h3>
 
-<p>Ack - Better than grep
-Ag - Better than Ack
-比 grep 更方便好用
-http://betterthangrep.com/
-https://github.com/ggreer/the_silver_searcher</p>
+<p>Ack - Better than grep</p>
+
+<p>Ag - Better than Ack</p>
+
+<p>比 grep 更方便好用</p>
+
+<p><a href="http://betterthangrep.com/">http://betterthangrep.com/</a></p>
+
+<p><a href="https://github.com/ggreer/the_silver_searcher">https://github.com/ggreer/the_silver_searcher</a></p>
 
 <h3>安裝</h3>
 
@@ -134,29 +144,36 @@ https://github.com/ggreer/the_silver_searcher</p>
 
 <h3>同場加映</h3>
 
-<p>ack.vim https://github.com/mileszs/ack.vim
-ag.vim https://github.com/epmatsw/ag.vim</p>
+<p>ack.vim</p>
 
-<h2>tig</h2>
+<p><a href="https://github.com/mileszs/ack.vim">https://github.com/mileszs/ack.vim</a></p>
 
-<p>git CUI client
-https://github.com/jonas/tig</p>
+<p>ag.vim</p>
 
-<h2>bashmarks</h2>
+<p><a href="https://github.com/epmatsw/ag.vim">https://github.com/epmatsw/ag.vim</a></p>
+
+<h2>7. tig</h2>
+
+<p>git CUI client</p>
+
+<p><a href="https://github.com/jonas/tig">https://github.com/jonas/tig</a></p>
+
+<h2>8. bashmarks</h2>
 
 <h3>說明</h3>
 
-<p>快速在目錄間切換
-https://github.com/huyng/bashmarks</p>
+<p>快速在目錄間切換</p>
+
+<p><a href="https://github.com/huyng/bashmarks">https://github.com/huyng/bashmarks</a></p>
 
 <h3>安裝</h3>
 
-<ul>
-<li>git clone git://github.com/huyng/bashmarks.git</li>
-<li>make install</li>
-<li>source ~/.local/bin/bashmarks.sh from within your ~.bash_profile or ~/.bashrc file</li>
-</ul>
-
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/huyng/bashmarks.git
+</span><span class='line'>make install
+</span><span class='line'>source ~/.local/bin/bashmarks.sh from within your ~.bash_profile or ~/.bashrc file</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>使用</h3>
 
