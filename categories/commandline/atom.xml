@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: commandline | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/commandline/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-09-28T14:03:18+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[8 款我最近常用的 command line 工具]]></title>
+    <link href="http://blog.hsatac.net/2012/09/8-command-line-tools-i-have-been-using-lately/"/>
+    <updated>2012-09-28T13:45:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/09/8-command-line-tools-i-have-been-using-lately</id>
+    <content type="html"><![CDATA[<p>介紹八款我最近常用的 command line 工具，對開發很有幫助。</p>
+
+<!--more-->
+
+
+<h2>Mosh</h2>
+
+<h3>說明</h3>
+
+<p>不會斷線的 ssh
+http://mosh.mit.edu/</p>
+
+<h3>安裝</h3>
+
+<p>client 和 server 都需要安裝
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>packer mosh (Archlinux)
+</span><span class='line'>yum install mosh (Centos)
+</span><span class='line'>brew install mobile-shell (MacOS)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>使用</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mosh ash_wu@devm1.corp.miiicasa.com
+</span><span class='line'>mosh hsatac.net -- screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Mitmproxy</h2>
+
+<h3>說明</h3>
+
+<p>middleman proxy 可用來 debug , fiddler 的 *nix 版
+http://mitmproxy.org</p>
+
+<h3>安裝</h3>
+
+<p>使用 python 套件管理 pip 安裝
+有 https 需求的話則需要安裝他的憑證
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pip install mitmproxy</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>使用</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mitmproxy
+</span><span class='line'>mitmdump</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>擴充</h3>
+
+<p>mitmproxy 提供許多 hook 可以自訂擴充，以 python 編寫即可。可參考我的文章
+http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mitmproxy -s test.py</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>pdsh/pdcp/rpdcp</h2>
+
+<h3>說明</h3>
+
+<p>一次大量對許多機器下指令/複製檔案</p>
+
+<h3>安裝</h3>
+
+<p>要使用 pdcp 的話 client 和 server 都要裝
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>packer pdsh (Archlinux)
+</span><span class='line'>yum install pdsh (Centos)
+</span><span class='line'>brew install pdsh (MacOS)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>使用</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pdsh -w web[01-10],static[7,9-10] ls
+</span><span class='line'>pdcp -w ash_wu@devm[1-2].corp.miiicasa.com test.py /home/ash_wu/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>htop</h2>
+
+<h3>說明</h3>
+
+<p>better top. 可以直接看 process tree, 直接砍掉
+http://htop.sourceforge.net/</p>
+
+<h2>goaccess</h2>
+
+<p>看 apache/nginx log
+http://goaccess.prosoftcorp.com/</p>
+
+<h3>使用</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>goaccess &lt;apache_access_log or nginx_access_log></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>ack, ag</h2>
+
+<h3>說明</h3>
+
+<p>Ack - Better than grep
+Ag - Better than Ack
+比 grep 更方便好用
+http://betterthangrep.com/
+https://github.com/ggreer/the_silver_searcher</p>
+
+<h3>安裝</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>packer the_silver_searcher
+</span><span class='line'>brew install the_silver_searcher</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>同場加映</h3>
+
+<p>ack.vim https://github.com/mileszs/ack.vim
+ag.vim https://github.com/epmatsw/ag.vim</p>
+
+<h2>tig</h2>
+
+<p>git CUI client
+https://github.com/jonas/tig</p>
+
+<h2>bashmarks</h2>
+
+<h3>說明</h3>
+
+<p>快速在目錄間切換
+https://github.com/huyng/bashmarks</p>
+
+<h3>安裝</h3>
+
+<ul>
+<li>git clone git://github.com/huyng/bashmarks.git</li>
+<li>make install</li>
+<li>source ~/.local/bin/bashmarks.sh from within your ~.bash_profile or ~/.bashrc file</li>
+</ul>
+
+
+<h3>使用</h3>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>s &lt;bookmark_name> - Saves the current directory as "bookmark_name"
+</span><span class='line'>g &lt;bookmark_name> - Goes (cd) to the directory associated with "bookmark_name"
+</span><span class='line'>p &lt;bookmark_name> - Prints the directory associated with "bookmark_name"
+</span><span class='line'>d &lt;bookmark_name> - Deletes the bookmark
+</span><span class='line'>l                 - Lists all available bookmarks</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>
