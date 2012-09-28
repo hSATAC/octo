@@ -3,7 +3,7 @@
 # ----------------------- #
 
 url: http://blog.hsatac.net
-title: hSATAC 
+title: hSATAC
 subtitle: ">> ('cat' + 'ash').reverse #=> \"hsatac\"" 
 author: hSATAC
 simple_search: http://google.com/search
