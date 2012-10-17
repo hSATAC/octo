@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hg | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/hg/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-09-30T13:30:20+08:00</updated>
+  <updated>2012-10-17T10:47:27+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[同步 git 和 hg 的 repository]]></title>
+    <link href="http://blog.hsatac.net/2012/10/sync-git-with-hg/"/>
+    <updated>2012-10-17T10:20:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/10/sync-git-with-hg</id>
+    <content type="html"><![CDATA[<p>最近在玩 go，編輯器主要是使用 vim 搭配 <a href="https://github.com/nsf/gocode">gocode</a>。我習慣用 <a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> 來管理我的 vim 套件，不過 go 官方附的 vim syntax plugin 和 gocode 提供的 autocompletion plugin 目錄結構都無法直接當成 git submodule 引入我的 vim 設定中。</p>
+
+<p>由於我個人潔癖作祟，不想再用 copy 的方式來管理我的 vim plugins，所以我決定自己把這兩份 plugin 抽出來獨立成各自的 git repositories，就可以當成 git submodule 引用了。</p>
+
+<!--more-->
+
+
+<p>gocode 的部分很容易，他原本就是 git，只要參考我之前的文章「<a href="http://blog.hsatac.net/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a>」就可以了。不過 go 的部分就沒這麼簡單了。go 的原始碼 host 在 google code 上，採用 hg，因此要想辦法先把他由 hg 轉換成 git 才行。</p>
+
+<p>一開始使用的是 <a href="http://hg-git.github.com/">hg-git</a> 這套，不過在 gexport 這個過程非常緩慢，不知道是這個套件本身有問題還是 go 的 hg repository 太大了。試了兩天之後只好放棄，改用 <a href="http://offbytwo.com/git-hg/">git-hg</a> 這套。這套一樣也是使用 python 寫的，不過效率上就挺不錯的。使用上也很方便，直接 <code>git-hg clone https://code.google.com/p/go/</code> 出來就是 git 的目錄了。</p>
+
+<p>值得一提的是，使用 homebrew 安裝 git-hg 時，由於 git-hg 有 require <a href="http://repo.or.cz/w/fast-export.git">fast-export</a> 這個 submodule，但 homebrew 安裝下來的 fast-export 居然不是最新的，導致無法使用。後來自己到 <code>/usr/local/Cellar/git-hg/HEAD</code> 把 fast-export 這個目錄移除，再 clone 一份新的 fast-export 就可以正常使用了。</p>
+
+<p>我不想弄亂這個目錄，所以我是在 local 端再 clone 一次這個使用 git-hg clone 下來的 repository，再來作 <code>git filter-branch</code> 的動作。另外這個 repository 也順便丟到 github 上當作一個 go 的 git mirror 給有需要的人使用。</p>
+
+<p>產出三個 repositories:</p>
+
+<ul>
+<li><p><a href="https://github.com/golangtw/go.vim">https://github.com/golangtw/go.vim</a> go 的 syntax plugin</p></li>
+<li><p><a href="https://github.com/golangtw/gocode.vim">https://github.com/golangtw/gocode.vim</a> gocode 的 autocomplete plugin</p></li>
+<li><p><a href="https://github.com/golangtw/go">https://github.com/golangtw/go</a> go 的 git mirror</p></li>
+</ul>
+
+
+<p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
+
+<p><div><script src='https://gist.github.com/3903435.js?file='></script>
+<noscript><pre><code>#!/bin/sh
+
+# do gocode first
+cd /Users/cat/golang.tw/gocode
+git pull
+git filter-branch -f --subdirectory-filter vim -- --all
+git push pathogen master
+git fetch
+git reset --hard origin/master
+
+# do git-hg sync go
+cd /Users/cat/golang.tw/go.git
+git-hg pull
+git push origin master
+
+# do go.vim
+
+cd /Users/cat/golang.tw/go.vim
+git pull
+git filter-branch -f --subdirectory-filter misc/vim -- --all
+git push github master
+git fetch
+git reset --hard origin/master
+</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 CentOS 5 上安裝 Python26, hg, mercurial-server]]></title>
