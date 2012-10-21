@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: logo | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/logo/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-10-21T11:26:35+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[關於我的 Logo]]></title>
+    <link href="http://blog.hsatac.net/2012/10/about-my-logo/"/>
+    <updated>2012-10-21T11:07:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/10/about-my-logo</id>
+    <content type="html"><![CDATA[<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
+
+<p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
+
+<!--more-->
+
+
+<p>這個 Logo 是大學時代一個朋友傳給我的，一看就非常喜歡，比較熟的朋友大概都看得出來，完全能代表我這個人(笑)。所以馬上就拿來當 Logo 使用，一用就用到現在。</p>
+
+<p>不過因為我朋友在網路掃圖掃太凶，他已經不記得這張圖是在哪裡取得，更不用說知道作者了，我一直很想知道這張圖的 license 獲得到原作者的授權，但始終無法找到，這件事就一直掛在我心上。</p>
+
+<p>還好沒過多久，Google 推出了兇惡的「以圖找圖」功能，馬上就用這個功能下去找......沒想到不知道是當初作者網站還沒建立起來、還是還沒索引到，又或者是那時以圖找圖搜尋技術還沒成熟，仍然是無功而返。</p>
+
+<p>時光又過了一兩年，有一天我又突然想起這件事，再試著找看看，沒想到這時很精準的就找到了作者的網站。</p>
+
+<p>作者是日本的 64CAT64 ，他的<a href="http://www.loftwork.com/portfolios/mushi/profile">網站</a>有許多他的作品。</p>
+
+<p>找到作者後馬上寫 email 和他聯繫，解釋了一下我很喜歡這張圖，也用這張圖作為我的代表 Logo 許多年，想得知這張圖的 license ，看是否需要購買還是怎樣。</p>
+
+<p>作者人非常好，只要我沒有拿來營利，他允許我免費使用他這張圖片，他也很高興我喜歡他的圖，只要我找個地方註記圖片作者的 URL 即可。所以後來我在 Blog footer 就加上了作者網站連結。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-10-21T00:19:33+08:00</updated>
+  <updated>2012-10-21T11:26:35+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[關於我的 Logo]]></title>
+    <link href="http://blog.hsatac.net/2012/10/about-my-logo/"/>
+    <updated>2012-10-21T11:07:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/10/about-my-logo</id>
+    <content type="html"><![CDATA[<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
+
+<p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
+
+<!--more-->
+
+
+<p>這個 Logo 是大學時代一個朋友傳給我的，一看就非常喜歡，比較熟的朋友大概都看得出來，完全能代表我這個人(笑)。所以馬上就拿來當 Logo 使用，一用就用到現在。</p>
+
+<p>不過因為我朋友在網路掃圖掃太凶，他已經不記得這張圖是在哪裡取得，更不用說知道作者了，我一直很想知道這張圖的 license 獲得到原作者的授權，但始終無法找到，這件事就一直掛在我心上。</p>
+
+<p>還好沒過多久，Google 推出了兇惡的「以圖找圖」功能，馬上就用這個功能下去找&#8230;&#8230;沒想到不知道是當初作者網站還沒建立起來、還是還沒索引到，又或者是那時以圖找圖搜尋技術還沒成熟，仍然是無功而返。</p>
+
+<p>時光又過了一兩年，有一天我又突然想起這件事，再試著找看看，沒想到這時很精準的就找到了作者的網站。</p>
+
+<p>作者是日本的 64CAT64 ，他的<a href="http://www.loftwork.com/portfolios/mushi/profile">網站</a>有許多他的作品。</p>
+
+<p>找到作者後馬上寫 email 和他聯繫，解釋了一下我很喜歡這張圖，也用這張圖作為我的代表 Logo 許多年，想得知這張圖的 license ，看是否需要購買還是怎樣。</p>
+
+<p>作者人非常好，只要我沒有拿來營利，他允許我免費使用他這張圖片，他也很高興我喜歡他的圖，只要我找個地方註記圖片作者的 URL 即可。所以後來我在 Blog footer 就加上了作者網站連結。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[同步 git 和 hg 的 repository]]></title>
@@ -1543,60 +1571,6 @@ esac
 <h2>結語</h2>
 
 <p>Resque 真的是一個很棒很輕巧的設計，感謝有人把它 porting 到 PHP 。希望越來越多人來使用，一起來發展維護 PHP-Resque。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在 CentOs 5 上升級 Redis 2.4.5]]></title>
-    <link href="http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5/"/>
-    <updated>2012-01-05T13:51:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/01/upgrade-redis245-on-centos5</id>
-    <content type="html"><![CDATA[<p>CentOS 5 上的 Redis 套件只有到 2.0
-最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
-
-<p>首先抓下最新穩定版解壓</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
-</span><span class='line'>tar zxvf redis-2.4.5.tar.gz
-</span><span class='line'>cd redis-2.4.5
-</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
-
-
-<p>跟原本的 redis 2.0 裝在同一個目錄</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make PREFIX=/usr install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再把新的 config 檔蓋過去</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp redis.conf /etc/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>為了讓原本的 init script 正常運作
-redis.conf 要稍微修改</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>daemonize yes
-</span><span class='line'>...
-</span><span class='line'>pidfile /var/run/redis/redis.pid</span></code></pre></td></tr></table></div></figure>
-
-
-<p>原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
-把 /usr/sbin/redis-server 覆蓋過去</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv /usr/bin/redis-server /usr/sbin/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>大功告成。</p>
 ]]></content>
   </entry>
   
