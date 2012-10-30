@@ -9,12 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="CentOS 5 上的 Redis 套件只有到 2.0
-最近用一套 PHP-Resque 需求 Redis 2.2 以上，只好手動升級了。 首先抓下最新穩定版解壓 1
-2
-3
-4
-wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz &hellip;">
+  <meta name="description" content="Resque 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看原作者的 Blog PHP-Resque 是把 Resque porting 到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,6 +94,67 @@ wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+
+<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<h2>設計</h2>
+
+<p>Resque 的設計有兩個角色： Job 和 Worker。 每個 Job 都是定義成類別，新增 Job 的時候會將 Job 的類別和相關參數 json_encode 後儲存到不同的 queue 裡面，而 Worker(s) 則會依序從 redis 讀取 Job 出來執行。</p>
+
+<p>執行的時候並不是這個 Worker 本身去執行，而是會 fork 一個 process 來執行。這樣設計是為了避免時間一長， Worker 的記憶體管理不良導致卡死的狀況。</p>
+
+<p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
+
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
+<p>以下先來介紹如何使用 PHP-Resque：</p>
+
+<h2>安裝 PHP-Resque</h2>
+
+<p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/01/php-resque-introduction/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -656,62 +712,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2011/06/empathy-p4-context/">讓 Empathy 支援 P4-Context</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-12T00:00:00+08:00" pubdate data-updated="true">Jun 12<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這兩天灌了 Ubuntu 11.04 在玩<br />
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
-但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
-最直接的影響就是 m群看不到是誰在說話。<br />
-看了一下發現他底層是用 python-papyon 這套 msn lib<br />
-於是就可以直接動手修改啦！</p>
-
-<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
-找到 387 行：
-<pre lang="python" line="387">        if message_type == 'text/plain':
-            msg = ConversationMessage(unicode(message.body, message_encoding),
-                    TextFormat.parse(message_formatting),
-                    self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/06/empathy-p4-context/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -739,6 +739,10 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/10/obj-c-unit-test-with-asynchronous-request/">Obj-C 單元測試非同步連線</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/10/about-my-logo/">關於我的 Logo</a>
       </li>
     
@@ -754,15 +758,11 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
         <a href="/2012/09/the-4-hours-body/">身體調校聖經</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/09/golang-ides/">開發 Golang 的 IDEs</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 103.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 130.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 136.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 130.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 136.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
