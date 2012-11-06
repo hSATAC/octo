@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2012-10-30T13:43:55+08:00</updated>
+  <updated>2012-11-06T13:47:35+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,139 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP array 相加與 array_merge]]></title>
+    <link href="http://blog.hsatac.net/2012/11/php-array-plus-array-versus-array-merge/"/>
+    <updated>2012-11-06T13:17:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/11/php-array-plus-array-versus-array-merge</id>
+    <content type="html"><![CDATA[<p>今天跟聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。</p>
+
+<p>在 PHP 中 <code>array + array</code> 與 <code>array_merge</code> 的行為是不一樣的，陣列相加的效能會比 <code>array_merge</code> 來的好，但換來的代價是可能不是你預期的行為以及資料流失。</p>
+
+<p>PHP 的陣列可以有 key 也可以沒有 key，也可以兩者混合。不過所謂的沒有 key ，其實他還是有 key ，只是是自動編上去的 int 流水號 key 例如 0,1,2,3&#8230;不管是哪一種，在陣列相加以及 <code>array_merge</code> 的行為都不一樣。</p>
+
+<p>先講一下 <code>array_merge</code> 的行為，<code>array_merge($a, $b)</code> 的話，如果 <code>$a</code> 和 <code>$b</code> 裡面有 key 相同的元素，則會<strong>後蓋前</strong>也就是 <code>$b</code> 的值會蓋掉 <code>$a</code> 的值。那如果是沒有 key (流水號 key)的值，則會以附加在尾端 (append) 的方式合併上去，而所有流水號 key 的 index 則會重排。</p>
+
+<!--more-->
+
+
+<p>底下是一個簡單的例子：</p>
+
+<figure class='code'><figcaption><span>array_merge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nv">$arr_a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$arr_b</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nb">array_merge</span><span class="p">(</span><span class="nv">$arr_a</span><span class="p">,</span> <span class="nv">$arr_b</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果為：</p>
+
+<figure class='code'><figcaption><span>array_merge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">array(5) {</span>
+</span><span class='line'><span class="x">  [&quot;a&quot;]=&gt;</span>
+</span><span class='line'><span class="x">  int(1)</span>
+</span><span class='line'><span class="x">  [&quot;b&quot;]=&gt;</span>
+</span><span class='line'><span class="x">  int(1)</span>
+</span><span class='line'><span class="x">  [0]=&gt;</span>
+</span><span class='line'><span class="x">  int(3)</span>
+</span><span class='line'><span class="x">  [1]=&gt;</span>
+</span><span class='line'><span class="x">  int(4)</span>
+</span><span class='line'><span class="x">  [2]=&gt;</span>
+</span><span class='line'><span class="x">  int(5)</span>
+</span><span class='line'><span class="x">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>那如果是 <code>array + array</code> 的狀況，在有 key 的值的部分是相反的<strong>前蓋後</strong>，而沒有 key(流水號 key)的部分也會<strong>前蓋後</strong>，流水號 index 不會重排。我們用同樣的例子來觀察：</p>
+
+<figure class='code'><figcaption><span>array_merge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="nv">$arr_a</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$arr_b</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nv">$arr_a</span> <span class="o">+</span> <span class="nv">$arr_b</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果為：</p>
+
+<figure class='code'><figcaption><span>array_merge</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="x">array(4) {</span>
+</span><span class='line'><span class="x">  [&quot;a&quot;]=&gt;</span>
+</span><span class='line'><span class="x">  int(1)</span>
+</span><span class='line'><span class="x">  [&quot;b&quot;]=&gt;</span>
+</span><span class='line'><span class="x">  int(2)</span>
+</span><span class='line'><span class="x">  [1]=&gt;</span>
+</span><span class='line'><span class="x">  int(3)</span>
+</span><span class='line'><span class="x">  [0]=&gt;</span>
+</span><span class='line'><span class="x">  int(4)</span>
+</span><span class='line'><span class="x">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>由此可知 <code>array + array</code> 和 <code>array_merge</code> 的行為是完全不一樣的，而大多數的情況陣列相加不會是我們想要的結果。請根據使用狀況謹慎選擇。</p>
+
+<p>我只有在一個地方使用過陣列相加，在處理使用者設定的部分，系統有一個預設的設定陣列，使用者也會有使用者自訂的設定陣列，而使用者可能只設了其中幾項，這時把這兩個陣列相加，就可以組合出一個完整的使用者設定陣列，使用者沒設定的部分就由預設值陣列填補。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="cp">&lt;?php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="k">static</span> <span class="k">protected</span> <span class="k">function</span> <span class="nf">_fillWithDefault</span><span class="p">(</span><span class="nv">$settings</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nb">settype</span><span class="p">(</span><span class="nv">$settings</span><span class="p">,</span> <span class="s2">&quot;array&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="nv">$defaults</span> <span class="o">=</span> <span class="nx">self</span><span class="o">::</span><span class="na">getDefault</span><span class="p">();</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">foreach</span><span class="p">(</span><span class="nv">$settings</span> <span class="k">as</span> <span class="nv">$key</span><span class="o">=&gt;</span><span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="nv">$key</span><span class="p">,</span> <span class="nv">$defaults</span><span class="p">))</span> <span class="nb">unset</span><span class="p">(</span><span class="nv">$settings</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  
+</span><span class='line'>  <span class="k">return</span> <span class="nv">$settings</span> <span class="o">+</span> <span class="nv">$defaults</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>當然這個 case 寫成 <code>array_merge($defaults, $settings)</code> 也是可以達到一樣的效果，不過當時我覺得陣列相加效能較好，語意上也不會造成混淆，所以就採用這個寫法。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Obj-C 單元測試非同步連線]]></title>
@@ -1157,199 +1290,6 @@ fi</code></pre></noscript></div>
 <p>對指定資料夾設定動作，當有新增音樂檔案到此資料夾的時候自動把檔案丟進 itunes 。再把 Google Music Manager 設定成自動上傳 itunes 新增的音樂即可。</p>
 
 <p>之後可能會加上轉好 mp3 後加上 ID3 TAG 的功能吧，不過那又是另外一個故事了(遠目)。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Redmine migration from Trac 0.12]]></title>
-    <link href="http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12/"/>
-    <updated>2012-01-13T14:03:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12</id>
-    <content type="html"><![CDATA[<p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
-
-<ul>
-<li><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_install_Redmine_on_CentOS_5">Install Redmine on CentOS 5</a>
-
-<ul>
-<li>Install Ruby</li>
-<li>Install rubygem</li>
-<li>Install passenger
-
-<ul>
-<li>/etc/conf.d/ruby.conf</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11/ext/apache2/mod_passenger.so
-</span><span class='line'>PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11
-</span><span class='line'>PassengerRuby /usr/bin/ruby</span></code></pre></td></tr></table></div></figure>
-
-
-<pre><code>* /etc/httpd/conf.d/redmine.conf
-</code></pre>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   &lt;VirtualHost *:80&gt;
-</span><span class='line'>      ServerName redmine.miiicasa.com 
-</span><span class='line'>      DocumentRoot /home/m/share/htdocs/redmine/public
-</span><span class='line'>      &lt;Directory /home/m/share/htdocs/redmine/public&gt;
-</span><span class='line'>         AllowOverride all    
-</span><span class='line'>         Options -MultiViews    
-</span><span class='line'>      &lt;/Directory&gt;
-</span><span class='line'>   &lt;/VirtualHost&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<ul>
-<li>Get Redmine source from <a href="https://github.com/miiicasa/redmine">miiiCasa github repo</a> (bundler integrated and migrate_from_trac.rake modified)</li>
-<li>install bundler and bundle install</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install bundler
-</span><span class='line'>bundle install</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Setup mysql database and user</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>create database redmine character set utf8;
-</span><span class='line'>create user 'redmine'@'localhost' identified by 'my_password';
-</span><span class='line'>grant all privileges on redmine.* to 'redmine'@'localhost';</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>cp config/database.yml.example config/database.yml and modify it based on previous settings.</li>
-<li>cp config/configure.yml.example config/configure.yml and modify it.</li>
-<li>Generate the session store</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake generate_session_store</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Migrate the database models</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake db:migrate</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Load default data</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake redmine:load_default_data</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Migrate from trac
-
-<ul>
-<li>install sqlite3-ruby</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo gem install sqlite3-ruby</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>migrate from trac</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>RAILS_ENV=production bundle exec rake redmine:migrate_from_trac
-</span><span class='line'>...
-</span><span class='line'>Are you sure you want to continue ? [y/N] y                     
-</span><span class='line'>
-</span><span class='line'>Trac directory []: /var/www/trac/miiicasa
-</span><span class='line'>Trac database adapter (sqlite, sqlite3, mysql, postgresql) [sqlite3]:
-</span><span class='line'>Trac database encoding [UTF-8]: 
-</span><span class='line'>Target project identifier []: miiicasa</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>git clone https://github.com/xfalcons/migrate-trac-to-redmine.git
-Follow the instruction.</p></li>
-<li><p>Setup Redmine</p>
-
-<ul>
-<li>Make all users admin:</li>
-</ul>
-</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ RAILS_ENV=production ./script/console
-</span><span class='line'>..
-</span><span class='line'>for u in User.all
-</span><span class='line'>  u.admin = true
-</span><span class='line'>  u.save
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Login and setup scm path</li>
-<li>Load git repo from script (prevent timeout)</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ruby script/runner "Repository.fetch_changesets" -e production</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  This action could take a very long time (maybe 1 day) and it got no progress bar nor any output. If you want to check where it went, try:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ps axww | grep git | grep -v grep</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  You&#8217;ll see it&#8217;s parsing git log.</p>
 ]]></content>
   </entry>
   
