@@ -6,7 +6,7 @@ comments: true
 categories: [PHP]
 ---
 
-今天跟聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。
+今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。
 
 在 PHP 中 `array + array` 與 `array_merge` 的行為是不一樣的，陣列相加的效能會比 `array_merge` 來的好，但換來的代價是可能不是你預期的行為以及資料流失。
 
@@ -41,7 +41,7 @@ array(5) {
 
 那如果是 `array + array` 的狀況，在有 key 的值的部分是相反的**前蓋後**，而沒有 key(流水號 key)的部分也會**前蓋後**，流水號 index 不會重排。我們用同樣的例子來觀察：
 
-``` php array_merge
+``` php array + array
 <?php
 $arr_a = array('a'=>1, 'b'=>2, 1=>3);
 $arr_b = array('b'=>1, 4, 5);
