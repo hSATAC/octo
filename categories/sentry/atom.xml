@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sentry | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/sentry/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2012-11-13T12:00:07+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sentry 簡介投影片]]></title>
+    <link href="http://blog.hsatac.net/2012/11/sentry-introduction-slides/"/>
+    <updated>2012-11-13T11:53:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/11/sentry-introduction-slides</id>
+    <content type="html"><![CDATA[<script async class="speakerdeck-embed" data-id="509a1faa3a7976000202bd2c" data-ratio="1.2994923857868" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
+  
+</feed>
