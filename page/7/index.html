@@ -9,11 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="首先產生 public 和 private keys:
-ssh-keygen -t RSA
-輸入passphrase 即產生兩個 key
-id_rsa為private key, id_rsa.pub 為 public key 接著下載 puttygen 轉換成 putty 格式的 key，
-以及 &hellip;">
+  <meta name="description" content="到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。 在這天大家可以帶自己的貓咪到公司上班，滿有趣的。 超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -98,6 +94,47 @@ id_rsa為private key, id_rsa.pub 為 public key 接著下載 puttygen 轉換成 
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">貓貓日</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-17T00:00:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><p>到新公司上班剛好滿一週，正巧碰到每兩個禮拜一次的「貓貓日」。</p>  <p>在這天大家可以帶自己的貓咪到公司上班，滿有趣的。</p>  <p><a href="/images/wp-uploads/2009/05/img-2341.jpg"><img title="IMG_2341" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2341" src="/images/wp-uploads/2009/05/img-2341-thumb.jpg" width="260" border="0" /></a> </p>  <p>超大隻棕色美短…很凶悍的一隻貓，只能隔著玻璃做第一類接觸。</p> </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -621,92 +658,6 @@ tar -zcvf $2.tar.gz $2</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/">CodeIgniter 1.7 Session Bug Within Object Storage</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-02T00:00:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I don’t know whether it’s a bug or what.<br />
-I would store a object in session sometimes, like this.
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">session</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">set_userdata</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_name'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$object</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-before 1.7, it worked just fine. But when I trying to upgrade my application to CI 1.7, it came wrong.</p>
-
-<p>It will cause error messages like this:
-<blockquote>A PHP Error was encountered</blockquote></p>
-
-<p>Severity: 4096</p>
-
-<p>Message: Object of class stdClass could not be converted to string</p>
-
-<p>Filename: libraries/Session.php</p>
-
-<p>Line Number: 715
-When I digged into 1.7 Session library, I found the problem.
-<blockquote>Fixed a bug in the Session class that was disallowing slashes in the serialized array.</blockquote>
-There are some new functions in Session library.</p>
-
-<p>GOTO line 683 and line 714,
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-When $val is a object, it came wrong, just replace this line with
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #007700;">if(!</span><span style="color: #0000bb;">is_object</span><span style="color: #007700;">(</span><span style="color: #0000bb;">$val</span><span style="color: #007700;">)) </span><span style="color: #0000bb;">$data[$key] </span><span style="color: #007700;">= </span><span style="color: #0000bb;">str_replace</span><span style="color: #007700;">(</span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'\\'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$val</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-For those who got the same problem, this is my solution.<br />
-Hope there will be a hotfix soon.</p>
-
-<p>I also made my own hotfix for this problem.</p>
-
-<p>I made a session_fix library extends the original Session library,<br />
-only overrides these two functions.</p>
-
-<p>Get my code from <a href="http://www.hsatac.net/Session_fix.phps">here</a>
-and put it into /system/application/libraries/Session_fix.php</p>
-
-<p>Load this library with a CI 1.7 new feature:
-<div class="codeblock"><code><span style="color: #000000;">
-<span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">load</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">library</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_fix'</span><span style="color: #007700;">, </span><span style="color: #dd0000;">''</span><span style="color: #007700;">, </span><span style="color: #dd0000;">'session'</span><span style="color: #007700;">); </span>
-</span>
-</code></div>
-Now it’s done!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -734,6 +685,10 @@ Now it’s done!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/">2010 MBP 升級 SSD 與 Fusion Drive</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/11/sentry-introduction-slides/">Sentry 簡介投影片</a>
       </li>
     
@@ -749,15 +704,11 @@ Now it’s done!</p>
         <a href="/2012/10/about-my-logo/">關於我的 Logo</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/10/sync-git-with-hg/">同步 git 和 hg 的 repository</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 130.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 106.0%'>Ruby</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
