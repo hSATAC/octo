@@ -1,0 +1,69 @@
+---
+layout: post
+title: "RubyConf.tw 2012 流水帳"
+date: 2012-12-09 13:04
+comments: true
+categories: [Ruby, Rubyconf]
+---
+
+今年的 Ruby Conf Taiwan 2012 實在太精彩，太感動了，一定要寫下來紀錄一下。
+
+### 前夜祭
+
+首先是經過 ihower 三年的邀請，今年終於邀請到 Ruby 之父 Matz 來到台灣。由於 Matz 提早到台灣，所以在 Ruby Conf 的前一天晚上也臨時加開了 Matz 見面會，能有這個近距離和大師接觸，聊天，提問的機會實在非常難得。不過也許是這時候大家把問題都問的差不多了，結果隔天 Matz 的 keynote 反而沒什麼人提問(笑)。
+
+![matz and I](/images/rubyconftw2012/matz_and_i.jpg)
+<!--more-->
+### Day 1
+
+這次場地不是在老地方中研院，而是在天母農訓中心國際會議廳，大家應該都是第一次來這個地方。場地設備算 OK ，不過沒有有線網路可用，然後剛好無線網路又悲劇了，後來大家好像都是靠自己的 3G 上網。午餐也是在這邊有 buffet 可以吃，非常好吃！一般訂便當完全無法相提並論。不過座位稍微矮小狹窄了一點，我這個身高的人坐一整天其實膝蓋很痛⋯⋯。
+
+這個廳比中研院的大廳小，比中研院的小廳大。其實我覺得這樣的配置挺不錯的，不會離講者太遠，互動性比較高，也不會太擁擠。
+
+一早就是 Matz 的 Keynote，同時講了三個主題，非常豐富；接下來是來自新加坡的 Wei Lu 分享 Pair Programming ，台風非常穩健。最令人驚喜的是 Jserv 的 mruby talk！從為什麼他們選擇 mruby 到 ARM 優化的細節，最後 live demo，連 Matz 在台下都聽得連連點頭。
+
+<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+> 「聽到這種 mruby 的資訊真是意料之外」
+
+下午 godfat 關於 concurrency application servers 的 talk 也很精彩，從實務出發，由淺入深。
+
+這次與會的外國來賓和講者比例非常高，所以很多中文議程講者都臨時決定改用英文分享。其實我是覺得滿好的，身為一個國際性的研討會，盡可能照顧到所有人，讓外國來賓比較有參與感。
+
+結果第一天的議程除了 godfat 以外全部都用英文演說了，恭喜 godfat 得到「Day 1 唯一中文講者」的成就 XD
+
+### Party
+
+晚上參加了 official party，表定到晚上 12 點，因為我不太喝酒，本來想說去 social 一下就回家了。沒想到真的喝到 12 點才走(爆)
+
+這個場合真的很好，可以很輕鬆的跟新朋友老朋友、各國來賓輕鬆的對談。跟好久不見的 dreamslab ben update 了一下近況；跟 jserv 聊了一下他的新公司；也跟慕凡交換了一下遊戲界甘苦談。
+
+席間我問 Matz：「您去過許多 ruby conf, 這是第一次來 ruby conf taiwan ，您覺得怎麼樣？」
+
+他回答，ruby conf taiwan 規模雖然小，但是質量水準很高，他相當驚訝。又問明年他是否願意再來，他說只要我們有邀請，他就會再來。
+
+能讓 Matz 如此肯定，ihower 跟慕凡辦的真的是太優秀了。
+
+### Day 2
+
+Day 2 是我原本就期待許久的議程，主要是 dlackty 的 devOps toolbox 會提到 chef，緊接著 thegiive 會介紹 puppet，這兩套工具我 survey 了一陣子，無法決定要用哪套，剛好來聽聽看心得。在兩位 Session 結束後也分別向兩位請教了一些 devOps 上的疑惑。
+
+早上 Gosuke Miyashita 的 talk 也講了很多有趣的東西，例如他們的 [anti fork bomb patch](https://github.com/paperboy-sqale/sqale-patches) 和 [SSH router 實作](https://github.com/mizzy/openssh-script-auth)，讓我對 paperboy & co. 這家陌生的日本公司有很深刻的印象。
+
+下午 josephku 的 RubyMotion 也講的很精彩。 RubyMotion 也是我關注很久的技術，可以用 ruby 語法寫 iOS 對我這種被逼上梁山的 iOS 開發者來說有很大的吸引力。但是他的資料一直非常少，很訝異 josephku 能掌握並分享這樣一個新穎的技術，QA 時我也提問了兩個問題。會後本想找 josephku 認識一下，但緣鏗一面，希望日後有機會。
+
+### End
+
+這次 Ruby Conf Taiwan 2012 的 Session 質量非常高，高到連外國來賓都很訝異。
+
+<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+> 「不過, 讓我談到最佳化之類的議題、被認真地問最佳化核心部份的問題 conference 似乎非常久沒遇過了, 台灣真厲害。」
+
+我覺得這次議程篩選和安排的相當好，各領域的主題都有，展現了 Ruby 的多種可能性；深度也夠，不僅是聽眾收穫豐碩，講者們也能有互動。例如第一天 mruby 的幾位講者和來賓 jserv, matz, 高橋彼此會後也都能有交流。
+
+聽 ihower 說這次篩選主題非常嚴格，有許多 sponser 的投稿都沒能入選，我覺得這樣非常好，贊助歸贊助，會給他們廣告的空間，不過維持大會的水準才是第一要務。
+
+不誇張，這次 Ruby Conf Taiwan 2012 真的是我參加到目前為止台灣研討會裡最棒的一場，感謝 ihower 和慕凡以及所有工作人員的努力！
