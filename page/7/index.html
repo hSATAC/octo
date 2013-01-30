@@ -9,11 +9,10 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="這周參加了五月場的 Ruby Tuesday，
-之前在台中都沒機會參加，
-好不容易現在搬回台北，一定要去一下的。 這次兩個講題分別是 kevin 分享他們公司使用
-flex + RoR 開發影音串流網站的心得。 由於和之前在維格開發的網站概念很類似，
-因此對這個主題特別有興趣，也提了一些問題。 &hellip;">
+  <meta name="description" content="之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，
+也想幫自己的主機設定一下，
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。 研究了一下，才發現原來 ssh 內建 sftp 了。
+那要怎樣使用 www-data 登入呢？ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -98,6 +97,54 @@ flex + RoR 開發影音串流網站的心得。 由於和之前在維格開發�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP With Www-data</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-22T00:00:00+08:00" pubdate data-updated="true">May 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前 ubuntu 上沒灌 ftpd, 最近習慣 scp 以後，<br />
+也想幫自己的主機設定一下，<br />
+不然之前改一些小檔案都要 ssh 進來 vim 完後還要 chown 十分瑣碎。</p>
+
+<p>研究了一下，才發現原來 ssh 內建 sftp 了。<br />
+那要怎樣使用 www-data 登入呢？<br />
+一開始本想設定群組和有效群組，但後來覺得實在太麻煩。</p>
+
+<p>觀察了一下 www-data 的資料，他的 home 目錄是設在 /var/www<br />
+那就直接 mkdir 一個 .ssh 然後把 authorized_keys 丟進去，<br />
+用 scp 一連，果然順利登入了，非常方便。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -543,108 +590,6 @@ id_rsa為private key, id_rsa.pub 為 public key</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/02/scream/">Scream!</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p><strong>Lyrics to Scream</strong> :<br />
-The day a door is closed<br />
-The echoes fill your soul<br />
-They won&#8217;t say which way to go<br />
-Just trust your heart<br />
-<br />
-To find you&#8217;re here for<br />
-Open another door<br />
-But i&#8217;m not sure anymore<br />
-It&#8217;s just so hard<br />
-<br />
-Voices in my head<br />
-Tell me they know best<br />
-Got me on the edge<br />
-they&#8217;re pushin&#8217;, pushin&#8217;,<br />
-they&#8217;re pushin&#8217;<br />
-I know they&#8217;ve got a plan<br />
-But the balls in my hands<br />
-This time its man-to-man,<br />
-I&#8217;m driving, fighting inside<br />
-<br />
-A world that&#8217;s upside down<br />
-Spinning faster<br />
-What do I do now? Without you<br />
-<br />
-I don&#8217;t know, where to go, what&#8217;s the right team?<br />
-I want my own thing. So bad I&#8217;m gonna Scream!<br />
-I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
-I want my own dream. So bad I&#8217;m gonna Scream!<br />
-<br />
-I&#8217;m kickin&#8217; down the walls<br />
-I gotta make &#8216;em fall<br />
-Just break through them all<br />
-I&#8217;m punchin&#8217;, crashin&#8217;, I&#8217;m gonna<br />
-Fight to find myself<br />
-Me and no one else<br />
-Which way? I can&#8217;t tell,<br />
-I&#8217;m searchin&#8217;, searchin&#8217;, can&#8217;t find the<br />
-Road that I should take<br />
-I should! turn right or left is<br />
-It&#8217;s like nothing works without you<br />
-<br />
-I don&#8217;t know, where to go, what&#8217;s the right team?<br />
-I want my own thing. So bad I&#8217;m gonna Scream!<br />
-I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
-I want my own dream. So bad I&#8217;m gonna Scream!<br />
-<br />
-Yeah, the clock&#8217;s running down,<br />
-hear the crowd gettin&#8217; loud!<br />
-I&#8217;m consumed by the sound!<br />
-Is it her? Is it love?<br />
-Can the music ever be enough?<br />
-Gotta work it out, gotta work it out!<br />
-You can do it, you can do it!<br />
-<br />
-I don&#8217;t know, where to go, what&#8217;s the right team?<br />
-I want my own thing. So bad I&#8217;m gonna Scream!<br />
-I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
-I want my own dream. So bad I&#8217;m gonna Scream!<br />
-<br />
-I don&#8217;t know, where to go, what&#8217;s the right team?<br />
-I want my own thing. I want my own thing!<br />
-I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
-I want my own dream. So bad I&#8217;m gonna Scream!</p>
-</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -672,6 +617,10 @@ I want my own dream. So bad I&#8217;m gonna Scream!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/01/trace-rubygems-require-slow/">追蹤 Rubygems require 緩慢紀錄</a>
+      </li>
+    
+      <li class="post">
         <a href="/2012/12/ruby-conf-taiwan-2012/">RubyConf.tw 2012 流水帳</a>
       </li>
     
@@ -687,15 +636,11 @@ I want my own dream. So bad I&#8217;m gonna Scream!</p>
         <a href="/2012/11/php-array-plus-array-versus-array-merge/">PHP array 相加與 array_merge</a>
       </li>
     
-      <li class="post">
-        <a href="/2012/10/obj-c-unit-test-with-asynchronous-request/">Obj-C 單元測試非同步連線</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 109.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 103.0%'>Rubyconf</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 106.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 109.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 109.0%'>Git</a> <a href='/categories/git' style='font-size: 103.0%'>git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 121.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 112.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 103.0%'>Rubyconf</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
@@ -742,7 +687,7 @@ I want my own dream. So bad I&#8217;m gonna Scream!</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - hSATAC -
+  Copyright &copy; 2013 - hSATAC -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
 </p>
 
