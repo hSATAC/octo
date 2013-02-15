@@ -1,0 +1,49 @@
+---
+layout: post
+title: "RWBY"
+date: 2013-02-15 17:54
+comments: true
+categories: [RWBY]
+---
+
+RWBY 第二部預告片 "White" 終於推出！
+
+之前看完第一部 "Red" 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 "White" 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…
+
+下一部 "Black" 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑...
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
+<!--more-->
+
+{% blockquote %}
+Mirror, tell me something.
+Tell me who's the loneliest of all.
+
+Mirror, tell me something.
+Tell me who's the loneliest of all.
+
+Mirror, locked inside of me.
+Tell me can a heart be turned to stone?
+
+Mirror mirror what's behind you?
+Save me from the things I see!
+I can keep it from the world,
+why wont you let me hide from me?
+
+Mirror, mirror,
+tell me something.
+Who's the loneliest of all?
+
+I am the loneliest of all.
+{% endblockquote %}
+
+第一部 "Red"
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/pYW2GmHB5xs" frameborder="0" allowfullscreen></iframe>
+
+{% blockquote %}
+Red like roses fills my dreams and brings me to the place you rest
+White is cold and always yearning burdened by a royal test
+Black the beast descends from shadows
+Yellow beauty burns gold
+{% endblockquote %}
