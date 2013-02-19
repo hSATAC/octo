@@ -10,7 +10,7 @@ categories: [Archlinux, puppet]
 
 ## Install Archlinux
 
-由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用方便的第三方快速安裝 script，安裝完成後再使用 puppet bootstrap 環境
+由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 [@helmuthdu](https://twitter.com/helmuthdu) 的快速安裝 script [AUI](https://github.com/helmuthdu/aui)，安裝完成後再使用 puppet bootstrap 環境
 
 * 放入 CD 選擇 x64_64 開機
 * 執行 `curl hsatac.net/getaui | sh`
