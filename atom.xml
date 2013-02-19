@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-15T18:08:21+08:00</updated>
+  <updated>2013-02-19T17:57:21+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Puppet 快速佈署 Archlinux]]></title>
+    <link href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/"/>
+    <updated>2013-02-19T17:51:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet</id>
+    <content type="html"><![CDATA[<p>筆記一下安裝步驟&#8230;。</p>
+
+<h2>Install Archlinux</h2>
+
+<p>由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用方便的第三方快速安裝 script，安裝完成後再使用 puppet bootstrap 環境</p>
+
+<ul>
+<li>放入 CD 選擇 x64_64 開機</li>
+<li>執行 <code>curl hsatac.net/getaui | sh</code></li>
+<li>進入 helmuthdu-aui-xxxx 目錄</li>
+<li>執行 <code>./aui --ais</code> 進入安裝程式</li>
+<li>輸入 1-14 執行全部安裝步驟</li>
+</ul>
+
+
+<p>ps. 如遇特定機種無法使用 grub2 可改用 syslinux bootloader</p>
+
+<h2>Reboot</h2>
+
+<p>安裝完成重開機後後首先設定讓網路能通
+可參考<a href="https://wiki.archlinux.org/index.php/Network_Configuration">官方wiki</a></p>
+
+<p>如欲使用 dhcp 可執行 <code>systemctl start dhcpcd</code>
+<code>systemctl enable dhcpcd</code> 開機自動執行</p>
+
+<ul>
+<li>回到 helmuthdu-aui-xxx 目錄</li>
+<li>執行 <code>./aui</code> 繼續安裝</li>
+<li>新增使用者步驟必須執行，因後續步驟需用 sudo</li>
+<li>AUR helper 選擇 yaourt
+(Yaourt 和 packer 大同小異，但因 puppet 使用 yaourt 所以改用。)</li>
+<li>後面的 setup 可跳過，或者裝 Basic Setup 即可，這邊都是 桌面環境相關</li>
+<li>設定 /etc/resolv.conf</li>
+</ul>
+
+
+<h2>使用 puppet</h2>
+
+<p>puppet 可使用 master-agent 架構或者單機(solo) 安裝，詳見 puppet wiki</p>
+
+<ul>
+<li><code>yaourt puppet</code> 安裝 puppet</li>
+<li>在 /etc/hosts 設定 puppet master hostname 並在 /etc/puppet/puppet.conf [agent] 區塊設定 <code>server = xxx</code> (hostname 要跟 master hostname 一樣不然憑證不會過)</li>
+<li>run <code>puppet agent --test</code> 會出現沒有憑證訊息</li>
+<li>回到 puppet master 執行 <code>puppet cert list</code> 會看到待簽署的憑證</li>
+<li>執行 <code>puppet cert sign [hostname]</code> 簽署</li>
+<li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
+<li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RWBY]]></title>
@@ -1202,31 +1260,6 @@ if [ &quot;$OldIP&quot; != &quot;$CurrentIP&quot; ]; then
   fi
 fi</code></pre></noscript></div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ssh vm with virsh console]]></title>
-    <link href="http://blog.hsatac.net/2012/05/ssh-vm-with-virsh-console/"/>
-    <updated>2012-05-02T16:29:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/05/ssh-vm-with-virsh-console</id>
-    <content type="html"><![CDATA[<p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
-
-<p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
-
-<p>例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
-</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
-</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
-</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure>
-
-
-<p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
 ]]></content>
   </entry>
   
