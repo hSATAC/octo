@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>淡水行，犯太歲。 - hSATAC</title>
+  <title>ArchLinux 使用 Puppet 注意事項 - hSATAC</title>
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="七點多下班到家八點吃點東西看到文章想說好久沒騎車，跟團騎一下從深坑出發時想說才10多公里就到台大半小時應該能到沒想到路不熟 迷路了一下遲到了十幾二十分鐘 讓大家久等迷迷茫茫跟著大家騎不知不覺就看到紅色拱形的橋難道這就是傳說中的關渡大橋嗎中途腳賤 停紅綠燈時沒脫卡摔了一下，果然出來騎， &hellip;">
+  <meta name="description" content="想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。 systemctl 路徑 Arch 在之前的改版已經把 /bin/systemctl 移到 /usr/bin/systemctl 下，但 Puppet 還是抓 /usr/systemctl 導致找不到 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.hsatac.net/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/">
+  <link rel="canonical" href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -98,7 +98,7 @@
   <header>
     
       
-        <h1 class="entry-title">淡水行，犯太歲。</h1>
+        <h1 class="entry-title">ArchLinux 使用 Puppet 注意事項</h1>
       
     
     
@@ -115,15 +115,74 @@
   
 
 
-<time datetime="2008-08-30T00:00:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2008</time>
+<time datetime="2013-02-21T14:12:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><p>七點多下班到家八點<br />吃點東西看到文章<br />想說好久沒騎車，跟團騎一下<br /><br />從深坑出發時想說才10多公里就到台大<br />半小時應該能到<br />沒想到路不熟 迷路了一下<br />遲到了十幾二十分鐘 讓大家久等<br /><br />迷迷茫茫跟著大家騎<br />不知不覺就看到紅色拱形的橋<br />難道這就是傳說中的關渡大橋嗎<br /><br />中途腳賤 停紅綠燈時沒脫卡<br />摔了一下，果然出來騎，遲早要摔的<br /><br />在淡水捷運站喝飲料聊天<br />這時我已經超想睡啦XD<br />平常這時候就已經睡了<br />更何況昨天晚上很晚睡，沒睡好<br />(熟的人應該知道為什麼XD)<br /><br /><br />跟上大家踏上歸途，<br />今天出門沒帶風鏡真是錯誤的決定<br />下坡時風把眼睛吹乾<br />隱形眼鏡就這樣隨風而逝&#8230;<br />還好是日拋的<br /><br />不過那邊還在荒涼的地段<br />大家四面一人佔一角保護我慢慢騎<br />真是太感動了<br /><br />終於看到便利商店<br />領了錢以後搭計程車回家<br />靠著大家的幫忙，我終於能順利到家&#8230;<br /><br /><br /><br />故事還沒完呢<br />到家以後，下車只顧著搬車下來<br />把安全帽和其他東西忘在計程車上了 囧<br /><br />總里程：47公里   <br /><br />損失：<br />兩片日拋隱形眼鏡 25 x 2 = 50<br />計程車資&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 500<br />安全帽&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 900<br />頭巾&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100<br />CSC車隊版手套&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 700<br />香蕉一根&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 無價<br /><br />犯太歲的威力真是太猛了&#8230;&#8230;</p>
-</p>
+<div class="entry-content"><p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
+
+<h2>systemctl 路徑</h2>
+
+<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
+
+<h2>套件庫需更新到最新版</h2>
+
+<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
+
+<p>以上這兩個問題我有寫了一段 module</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># For Archlinux. This issue will be fixed in puppet 3.1
+</span><span class='line'>
+</span><span class='line'>class archfix {
+</span><span class='line'>    file {'/bin/systemctl':
+</span><span class='line'>        ensure => link,
+</span><span class='line'>        target => '/usr/bin/systemctl',
+</span><span class='line'>    }   
+</span><span class='line'>    exec {'pacman -Syy':
+</span><span class='line'>        path => ["/usr/bin"]
+</span><span class='line'>    }   
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {
+</span><span class='line'>    stage { 'pre': }
+</span><span class='line'>    class {
+</span><span class='line'>        "archfix": stage => "pre"; 
+</span><span class='line'>    }   
+</span><span class='line'>    Stage["pre"] -> Stage["main"]
+</span><span class='line'>
+</span><span class='line'>  # include other modules...
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Openrc &amp; Systemd</h2>
+
+<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
 </div>
 
 
@@ -146,12 +205,12 @@
   
 
 
-<time datetime="2008-08-30T00:00:00+08:00" pubdate data-updated="true">Aug 30<span>th</span>, 2008</time>
+<time datetime="2013-02-21T14:12:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/單車日誌/'>單車日誌</a>
+    <a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
   
 </span>
 
@@ -160,7 +219,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -173,10 +232,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/2008/08/%E8%BF%91%E6%B3%81/" title="Previous Post: 近況">&laquo; 近況</a>
+        <a class="basic-alignment left articlenav" href="/2013/02/bootstrap-archlinux-with-puppet/" title="Previous Post: 使用 Puppet 快速佈署 Archlinux">&laquo; 使用 Puppet 快速佈署 Archlinux</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/2008/08/%E8%87%A8%E7%95%8C%E9%BB%9E/" title="Next Post: 臨界點">臨界點 &raquo;</a>
       
     </p>
   </footer>
@@ -290,8 +347,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.hsatac.net/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/';
-        var disqus_url = 'http://blog.hsatac.net/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/';
+        var disqus_identifier = 'http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/';
+        var disqus_url = 'http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/';
         var disqus_script = 'embed.js';
       
     (function () {

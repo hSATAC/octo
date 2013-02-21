@@ -4,7 +4,7 @@
   <title><![CDATA[Category: puppet | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/puppet/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-19T19:17:02+08:00</updated>
+  <updated>2013-02-21T14:20:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ArchLinux 使用 Puppet 注意事項]]></title>
+    <link href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/"/>
+    <updated>2013-02-21T14:12:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/using-puppet-on-archlinux</id>
+    <content type="html"><![CDATA[<p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
+
+<h2>systemctl 路徑</h2>
+
+<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
+
+<h2>套件庫需更新到最新版</h2>
+
+<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
+
+<p>以上這兩個問題我有寫了一段 module</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>For Archlinux. This issue will be fixed in puppet 3.1&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>class archfix {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>file {'/bin/systemctl':
+</span><span class='line'>    ensure =&gt; link,
+</span><span class='line'>    target =&gt; '/usr/bin/systemctl',
+</span><span class='line'>}   
+</span><span class='line'>exec {'pacman -Syy':
+</span><span class='line'>    path =&gt; ["/usr/bin"]
+</span><span class='line'>}   
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>stage { 'pre': }
+</span><span class='line'>class {
+</span><span class='line'>    "archfix": stage =&gt; "pre"; 
+</span><span class='line'>}   
+</span><span class='line'>Stage["pre"] -&gt; Stage["main"]
+</span><span class='line'>
+</span><span class='line'># include other modules...
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Openrc &amp; Systemd</h2>
+
+<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 Puppet 快速佈署 Archlinux]]></title>

@@ -552,7 +552,7 @@
     </url>
     <url>
         <loc>http://blog.hsatac.net/2012/10/sync-git-with-hg/</loc>
-        <lastmod>2012-10-17T10:45:49+08:00</lastmod>
+        <lastmod>2013-02-21T14:16:45+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/2012/10/about-my-logo/</loc>
@@ -590,14 +590,18 @@
     </url>
     <url>
         <loc>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/</loc>
-        <lastmod>2013-02-19T19:02:20+08:00</lastmod>
+        <lastmod>2013-02-21T14:11:59+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/</loc>
+        <lastmod>2013-02-21T14:19:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/blog/archives/</loc>
-        <lastmod>2013-02-19T19:02:20+08:00</lastmod>
+        <lastmod>2013-02-21T14:19:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/</loc>
-        <lastmod>2013-02-19T19:02:20+08:00</lastmod>
+        <lastmod>2013-02-21T14:19:05+08:00</lastmod>
     </url>
 </urlset>
