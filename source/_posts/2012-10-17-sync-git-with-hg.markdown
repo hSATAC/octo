@@ -3,7 +3,7 @@ layout: post
 title: "同步 git 和 hg 的 repository"
 date: 2012-10-17 10:20
 comments: true
-categories: [git, hg, mercurial, golang, go, gocode]
+categories: [Git, hg, mercurial, golang, go, gocode]
 ---
 最近在玩 go，編輯器主要是使用 vim 搭配 [gocode](https://github.com/nsf/gocode)。我習慣用 [pathogen.vim](https://github.com/tpope/vim-pathogen) 來管理我的 vim 套件，不過 go 官方附的 vim syntax plugin 和 gocode 提供的 autocompletion plugin 目錄結構都無法直接當成 git submodule 引入我的 vim 設定中。
 
