@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-21T14:20:07+08:00</updated>
+  <updated>2013-02-22T17:46:15+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,249 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Puppet 學習筆記]]></title>
+    <link href="http://blog.hsatac.net/2013/02/puppet-study-note/"/>
+    <updated>2013-02-22T11:38:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/puppet-study-note</id>
+    <content type="html"><![CDATA[<p>前陣子玩了 Puppet…把一些重點和資源紀錄在這邊…
+初學 Puppet 的話很建議看一遍<a href="http://docs.puppetlabs.com/learning/">官方教學</a>，雖然沒有很完整但整個 run 過基礎的概念會有。</p>
+
+<h2>Infrastructure as Code</h2>
+
+<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&#8230;？</p>
+
+<p>其實基本上是相通的…但概念層次上高了一層。寫 shell script 主要是加速重複性工作、減少人為疏失，但你也很難去 reuse 這些東西。</p>
+
+<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&#8230;。</p>
+
+<p>Code 就是文件， code 就是你的 infrastructure。不但好寫好讀好維護，更可直接拿來執行。</p>
+
+<!--more-->
+
+
+<h2>Resource</h2>
+
+<p>Puppet 中最重要的東西、以及最基本的基礎元件叫做 resource，例如 file, package, service 這三個就是最常用的 resource ，你可以透過 resource 來指定你的檔案狀態、套件安裝狀態、服務狀態等等。</p>
+
+<p>Resource 列表和用法可參考：<a href="http://docs.puppetlabs.com/references/latest/type.html">http://docs.puppetlabs.com/references/latest/type.html</a></p>
+
+<p>resource type 要注意大小寫，當作 metaparameters 的時候寫作 <code>Type[title]</code> Type 要大寫。</p>
+
+<h2>Dependencies</h2>
+
+<p>我們會撰寫 manifest 檔案來描述 resource，需要注意的是這些 resource 都是 sync 執行的，並不是順序執行，因此就會有相依性的問題產生。</p>
+
+<p>Puppet 提供了 before / require 關鍵字</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>file {'/tmp/test1':
+</span><span class='line'>      ensure  => present,
+</span><span class='line'>      content => "Hi.",
+</span><span class='line'>      before  => Notify['/tmp/test1 has already been synced.'],
+</span><span class='line'>      # (See what I meant about symbolic titles being a good idea?)
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    notify {'/tmp/test1 has already been synced.':}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也可以用 chaining 的寫法，以箭頭表示 <- 或 -> 都可以：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>file {'/tmp/test1':
+</span><span class='line'>      ensure  => present,
+</span><span class='line'>      content => "Hi.",
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    notify {'after':
+</span><span class='line'>      message => '/tmp/test1 has already been synced.',
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    File['/tmp/test1'] -> Notify['after']</span></code></pre></td></tr></table></div></figure>
+
+
+<p>另外有一組「觸發」的關鍵字叫 notify / subscribe ，可以用 &lt;~ 或 ~> 表示，當前面的 Resource 有更新，會通知後面的 resource 執行。</p>
+
+<p>還有一些狀況 Puppet 會自動處理 dependencies 。這叫 Autorequire。</p>
+
+<p>例如你定義了兩個目錄，其中一個目錄在另一個目錄之下，Puppet 很聰明會自動判斷他們的相依性。又例如你定義 user 和這個 user 的 ssh_authorized_key，Puppet 也會自動處理他們的順序。</p>
+
+<h2>Module</h2>
+
+<p>在 Puppet 裡面我們可以寫 class，而 module 就是可重用的 class。放在 modulepath 裡面。</p>
+
+<p>可使用 <code>puppet apply --configprint modulepath</code> 查看 modulepath 設定值。</p>
+
+<p><code>puppet apply --configprint all</code> 可看全部設定。</p>
+
+<p>Module 目錄有固定的格式</p>
+
+<ul>
+<li><p><code>/etc/puppet/module/{module_name}/manifests/init.pp</code> 這是 module 的 main file</p></li>
+<li><p><code>/etc/puppet/module/{module_name}/manifests/files</code> 使用 <code>puppet://</code> 來 serve file 的時候會抓這下面的檔案。例如 <code>puppet:///module/php/php.conf</code> 就是 <code>`/etc/puppet/module/php/files/php.conf</code>。</p></li>
+<li><p><code>/etc/puppet/module/{module_name}/templates/</code> module 若有使用 template 就要放在這。</p></li>
+</ul>
+
+
+<p>寫好 module 後想測試可執行 <code>puppet apply -e "include php"</code> 來測試，想看完整 debug 訊息可加上 <code>-vd</code> 參數 <code>puppet apply -e "include php" -vd</code></p>
+
+<p>除了自己寫的 module 以外也可以使用別人寫好的 module 來加快開發速度。</p>
+
+<p>關於 module 設計的一些基本概念可以參考這篇好文：<a href="http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php">Simple Puppet Module Structure Redux</a></p>
+
+<h3>Puppet Forge</h3>
+
+<p>Puppet 提供了一個 module 集中地 <a href="http://forge.puppetlabs.com/">Puppet Forge</a> 可以直接來此搜尋現成的 module。不過根據我的觀察這些 module 大多都是支援 debian/ubuntu 等主流 distro，若使用其他 distro 的可能要考慮自己寫或是 contribute 。</p>
+
+<p>不管怎樣，可以來這裡參考別人寫的 module 收穫會很多。</p>
+
+<p>安裝 Puppet module 可使用以下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>puppet module install puppetlabs-apache --version 0.0.2
+</span><span class='line'>puppet module list
+</span><span class='line'>puppet module search apache
+</span><span class='line'>puppet module uninstall puppetlabs-apache
+</span><span class='line'>puppet module upgrade puppetlabs-apache --version 0.0.3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>更詳細的說明可參考：<a href="http://docs.puppetlabs.com/puppet/latest/reference/modules_installing.html">Modules Installing</a></p>
+
+<h2>Defined Resource Types</h2>
+
+<p>我們可以定義自己的 resource type，透過 <code>define</code> 這個關鍵字。跟 class 用法基本上一樣，但是 define 不支援繼承。有點像是 marco 的功能，例如我們可以定義一個 developer 的 resource，把相關的東西都包在一起：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>define developer($user = $title, $uid, $ssh_key) {
+</span><span class='line'>        $key_seg = split($ssh_key, ' ')
+</span><span class='line'>        $ssh_key_title = $key_seg[2]
+</span><span class='line'>        $ssh_key_type  = $key_seg[0]
+</span><span class='line'>        $ssh_key_hash  = $key_seg[1]
+</span><span class='line'>        user {$user:
+</span><span class='line'>                ensure => present,
+</span><span class='line'>                managehome => true,
+</span><span class='line'>                groups => ['wheel', 'users'],
+</span><span class='line'>                uid => $uid,
+</span><span class='line'>        } ->
+</span><span class='line'>        ssh_authorized_key {"${user}_puppet_key":
+</span><span class='line'>                ensure => present,
+</span><span class='line'>                key => $ssh_key_hash,
+</span><span class='line'>                user => $user,
+</span><span class='line'>                type => $ssh_key_type,
+</span><span class='line'>                name => "${user}_puppet_key",
+</span><span class='line'>        } ->
+</span><span class='line'>        file {"/home/${user}":
+</span><span class='line'>                mode => 0755,
+</span><span class='line'>        } ->
+</span><span class='line'>        file {"/home/dev/${user}":
+</span><span class='line'>                ensure => link,
+</span><span class='line'>                target => '/home/$user',
+</span><span class='line'>        }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Functions</h2>
+
+<p>Puppet 提供了一些函數可運用，可透過 <code>puppet doc --reference function</code> 指令查看，或者至 <a href="http://docs.puppetlabs.com/references/latest/function.html%20function%20list">http://docs.puppetlabs.com/references/latest/function.html function list</a></p>
+
+<h2>Stage</h2>
+
+<p>有些狀況想讓不同 module 在不同的 stage 執行，就可以使用 stage 功能。</p>
+
+<p>預設所有 module 都是 default 在 <code>main</code> stage，所以可以定義其他的 stage 在 main 之前或之後即可。</p>
+
+<p>詳細參考 <a href="http://docs.puppetlabs.com/puppet/latest/reference/lang_run_stages.html">Puppet Run Stages</a></p>
+
+<h2>Puppet 目錄架構</h2>
+
+<ul>
+<li><p><code>/etc/puppet/puppet.conf</code> 主要設定檔，可參考<a href="http://docs.puppetlabs.com/guides/configuring.html">官方文件</a></p></li>
+<li><p><code>/etc/puppet/modules/</code> 放你寫的 modules</p></li>
+<li><p><code>/etc/puppet/manifests/site.pp</code> 放你的 node 描述檔，也就是你每台伺服器要怎樣定義寫在這。</p></li>
+</ul>
+
+
+<h2>Puppet 流程</h2>
+
+<p>Puppet 會把我們撰寫的 manifest 檔案 compile 起來並處理其中的 dependencies 後打成一包，再查詢目前系統的狀態後更改系統到我們定義的狀態，如圖示：</p>
+
+<p><img src="http://docs.puppetlabs.com/learning/images/manifest_to_defined_state_unified.png" alt="manifest to defined state" /></p>
+
+<h3>Master-Agent</h3>
+
+<p>Puppet 可以採用 Master-Agent 架構，一台 master 據說能承載 5000 個 agents。也可以單機跑，也就是類似所謂的 Chef solo。</p>
+
+<p>Master-Agent 的流程如下圖：</p>
+
+<p><img src="http://docs.puppetlabs.com/learning/images/manifest_to_defined_state_split.png" alt="master agent" /></p>
+
+<p>基本架構就是 master 上 run <code>puppetmaster</code> 服務， agent 上 run <code>puppetagent</code> 服務。</p>
+
+<p>也可以手動從 agent 觸發，執行 <code>puppet agent --test -vd</code>。</p>
+
+<h3>Masterless Puppet</h3>
+
+<p>想要使用 masterless puppet 非常容易，只要自己指定你的 modulepath 和你的 site.pp 即可。</p>
+
+<p><code>puppet apply --modulepath ./modules manifests/site.pp</code></p>
+
+<h2>其他參考資料</h2>
+
+<ul>
+<li><p><a href="http://docs.puppetlabs.com/guides/troubleshooting.html">Trouble Shooting</a> Puppet 使用上有問題可以先來這邊查查看。</p></li>
+<li><p><a href="http://www.puppetcookbook.com/">Puppet CookBook</a> 有許多實用案例</p></li>
+<li><p><a href="https://github.com/jordansissel/puppet-examples">Puppet Examples</a> 有很多東西直接看 code 是最快的&#8230;。</p></li>
+<li><p>關於 Archlinux 使用 Puppet 相關可參考我上兩篇文章：<a href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a>、<a href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ArchLinux 使用 Puppet 注意事項]]></title>
@@ -1131,53 +1374,6 @@ ec2 = AWS::EC2.new
 ec2 = ec2.regions['ap-northeast-1']
 hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
 `hostname #{hostname}`</code></pre></noscript></div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[動態產生 ec2 的 hosts 檔案]]></title>
-    <link href="http://blog.hsatac.net/2012/06/generate-aws-ec2-hosts-file/"/>
-    <updated>2012-06-07T11:43:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/06/generate-aws-ec2-hosts-file</id>
-    <content type="html"><![CDATA[<p>這個議題類似上一篇 <a href="http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a> ，同樣也是要解決主機名稱對應浮動 ip 的問題。</p>
-
-<p>雖然現在用完整域名已經可以對應到 ip ，但是還是有很多時候我們的主機需要知道主機名稱和 ip 的對應。</p>
-
-<p>這個問題大概也是可以用 hosts 或 dns 來解決，不過由於我已經把 yp nis 架設起來，其他機器可以直接吃 nis 伺服器的 hosts 檔案，所以決定用 hosts 這個方式來處理。</p>
-
-<p>概念很簡單，利用 ec2 api sdk 抓取正在運行的主機列表，一一寫入 /etc/hosts 後再重新 make yp 的資料庫。</p>
-
-<p>設個排程每個小時跑一下或開新機器時手動執行一下即可。</p>
-
-<p>script 如下：</p>
-
-<div><script src='https://gist.github.com/2881131.js?file='></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-# coding: utf-8
-require 'rubygems'
-require 'aws-sdk'
-
-config = {:access_key_id =&gt; '',
-          :secret_access_key =&gt; ''}
-AWS.config(config)
-ec2 = AWS::EC2.new
-ec2 = ec2.regions['ap-northeast-1']
-
-hosts = []
-hosts &lt;&lt; &quot;127.0.0.1\tlocalhost localhost.localdomain&quot;
-ec2.instances.each do |instance|
-  next unless instance.status == :running
-  tags = instance.tags.to_h
-  hosts &lt;&lt; &quot;#{instance.private_ip_address}\t#{tags[&quot;Name&quot;]}&quot;
-end
-
-`cp -p /etc/hosts /etc/hosts.bak`
-open(&quot;/etc/hosts.new&quot;, &quot;w&quot;) {|f| f.write hosts.join(&quot;\n&quot;)+&quot;\n&quot;}
-is_same = system(&quot;diff -q /etc/hosts.new /etc/hosts &gt; /dev/null 2&gt;/dev/null&quot;)
-unless is_same
-  `cp -p /etc/hosts.new /etc/hosts`
-end</code></pre></noscript></div>
 
 ]]></content>
   </entry>
