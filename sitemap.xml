@@ -601,11 +601,15 @@
         <lastmod>2013-02-22T17:45:24+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly/</loc>
+        <lastmod>2013-02-27T16:27:01+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.hsatac.net/blog/archives/</loc>
-        <lastmod>2013-02-22T17:45:24+08:00</lastmod>
+        <lastmod>2013-02-27T16:27:01+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/</loc>
-        <lastmod>2013-02-22T17:45:24+08:00</lastmod>
+        <lastmod>2013-02-27T16:27:01+08:00</lastmod>
     </url>
 </urlset>

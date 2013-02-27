@@ -4,7 +4,7 @@
   <title><![CDATA[Category: aws | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/aws/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-22T17:46:15+08:00</updated>
+  <updated>2013-02-27T16:30:24+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[無痛跨 region 轉移 AWS AMI]]></title>
+    <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly/"/>
+    <updated>2013-02-27T15:45:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly</id>
+    <content type="html"><![CDATA[<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
+
+<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，打兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已...。</p>
+
+<p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
+
+<!--more-->
+
+
+<p>整個過程很簡單，以下用圖示說明：</p>
+
+<p>先找出你 AMI 的 snapshot, 點選 <code>Copy Snapshot</code> 複製到你要的 region.</p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png" alt="1" /></a></p>
+
+<p>複製完成後，看一下原本的 AMI 資訊，注意 <code>Kernel ID</code> 這個欄位，把他記下來。</p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
+
+<p>接著我們要使用演算法優化的大絕招 - 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
+
+<p>接著再搜尋 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code> 並找出你要的 region，記住這個 AKI。</p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png" alt="4" /></a></p>
+
+<p>在已複製好的 snapshot 上右鍵點選 <code>Create Image from Snapshot</code></p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png" alt="5" /></a></p>
+
+<p>Kernel ID 選擇你剛剛查到的 AKI 就可以了！</p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
+
+<p>完全不需要什麼 rsync 啦！無痛跨 region 轉移就這麼簡單！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用 ec2 的 Name tag 設定 hostname]]></title>
