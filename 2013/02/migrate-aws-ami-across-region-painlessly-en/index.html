@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>RWBY - hSATAC</title>
+  <title>Migrate AWS AMI across region painlessly - hSATAC</title>
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="RWBY 第二部預告片 &#8220;White&#8221; 終於推出！ 之前看完第一部 &#8220;Red&#8221; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &#8220;White&#8221; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST &hellip;">
+  <meta name="description" content="Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&#8217;s a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.hsatac.net/2013/02/rwby/">
+  <link rel="canonical" href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -98,7 +98,7 @@
   <header>
     
       
-        <h1 class="entry-title">RWBY</h1>
+        <h1 class="entry-title">Migrate AWS AMI Across Region Painlessly</h1>
       
     
     
@@ -115,39 +115,49 @@
   
 
 
-<time datetime="2013-02-15T17:54:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
+<time datetime="2013-02-27T15:45:00+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>RWBY 第二部預告片 &#8220;White&#8221; 終於推出！</p>
+<div class="entry-content"><p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&#8217;s a little troublesome to migrate AWS AMI between regions.</p>
 
-<p>之前看完第一部 &#8220;Red&#8221; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &#8220;White&#8221; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&#8217;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&#8217;s a online tool that does these steps for you.</p>
 
-<p>下一部 &#8220;Black&#8221; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&#8230;</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
-
+<p>After some study, I found that it&#8217;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&#8217;t migrate AMI but we could do so just for some more steps.</p>
 
 <!--more-->
 
 
+<p>It&#8217;s really simple:</p>
 
+<p>Find the snapshot or your AMI, click <code>Copy Snapshot</code> to copy snapshot to your destinated region.</p>
 
-<blockquote><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, locked inside of me.<br/>Tell me can a heart be turned to stone?</p><p>Mirror mirror what&#8217;s behind you?<br/>Save me from the things I see!<br/>I can keep it from the world,<br/>why wont you let me hide from me?</p><p>Mirror, mirror,<br/>tell me something.<br/>Who&#8217;s the loneliest of all?</p><p>I am the loneliest of all.</p></blockquote>
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png" alt="1" /></a></p>
 
+<p>Check the <code>Kernel ID</code> field of your AMI.</p>
 
-<p>第一部 &#8220;Red&#8221;</p>
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/pYW2GmHB5xs" frameborder="0" allowfullscreen></iframe>
+<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&#8217;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
 
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
 
+<p>Search for <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code> and find the AKI for your destinated region.</p>
 
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png" alt="4" /></a></p>
 
-<blockquote><p>Red like roses fills my dreams and brings me to the place you rest<br/>White is cold and always yearning burdened by a royal test<br/>Black the beast descends from shadows<br/>Yellow beauty burns gold</p></blockquote>
+<p>Perform <code>Create Image from Snapshot</code> on your cloned snapshot.</p>
 
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png" alt="5" /></a></p>
+
+<p>Select the AKI you just got.</p>
+
+<p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
+
+<p>You don&#8217;t need to rsync anything. It&#8217;s just that easy!</p>
 </div>
 
 
@@ -170,12 +180,12 @@
   
 
 
-<time datetime="2013-02-15T17:54:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
+<time datetime="2013-02-27T15:45:00+08:00" pubdate data-updated="true">Feb 27<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/rwby/'>RWBY</a>
+    <a class='category' href='/categories/aws/'>aws</a>
   
 </span>
 
@@ -184,7 +194,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2013/02/rwby/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2013/02/rwby/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -197,10 +207,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left articlenav" href="/2013/01/trace-rubygems-require-slow/" title="Previous Post: 追蹤 Rubygems require 緩慢紀錄">&laquo; 追蹤 Rubygems require 緩慢紀錄</a>
+        <a class="basic-alignment left articlenav" href="/2013/02/migrate-aws-ami-across-region-painlessly/" title="Previous Post: 無痛跨 region 轉移 AWS AMI">&laquo; 無痛跨 region 轉移 AWS AMI</a>
       
-      
-        <a class="basic-alignment right articlenav" href="/2013/02/bootstrap-archlinux-with-puppet/" title="Next Post: 使用 Puppet 快速佈署 Archlinux">使用 Puppet 快速佈署 Archlinux &raquo;</a>
       
     </p>
   </footer>
@@ -314,8 +322,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.hsatac.net/2013/02/rwby/';
-        var disqus_url = 'http://blog.hsatac.net/2013/02/rwby/';
+        var disqus_identifier = 'http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/';
+        var disqus_url = 'http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/';
         var disqus_script = 'embed.js';
       
     (function () {

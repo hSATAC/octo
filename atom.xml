@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-27T16:30:24+08:00</updated>
+  <updated>2013-02-27T16:58:35+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -14,13 +14,57 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Migrate AWS AMI across region painlessly]]></title>
+    <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/"/>
+    <updated>2013-02-27T15:45:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en</id>
+    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&#8217;s a little troublesome to migrate AWS AMI between regions.</p>
+
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&#8217;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&#8217;s a online tool that does these steps for you.</p>
+
+<p>After some study, I found that it&#8217;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&#8217;t migrate AMI but we could do so just for some more steps.</p>
+
+<!--more-->
+
+
+<p>It&#8217;s really simple:</p>
+
+<p>Find the snapshot or your AMI, click <code>Copy Snapshot</code> to copy snapshot to your destinated region.</p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png" alt="1" /></a></p>
+
+<p>Check the <code>Kernel ID</code> field of your AMI.</p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
+
+<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&#8217;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
+
+<p>Search for <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code> and find the AKI for your destinated region.</p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png" alt="4" /></a></p>
+
+<p>Perform <code>Create Image from Snapshot</code> on your cloned snapshot.</p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png" alt="5" /></a></p>
+
+<p>Select the AKI you just got.</p>
+
+<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
+
+<p>You don&#8217;t need to rsync anything. It&#8217;s just that easy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[無痛跨 region 轉移 AWS AMI]]></title>
     <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly/"/>
     <updated>2013-02-27T15:45:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly</id>
     <content type="html"><![CDATA[<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
 
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，打兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&#8230;。</p>
+<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&#8230;。</p>
 
 <p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
 
@@ -1274,127 +1318,6 @@ end</code></pre></noscript></div>
     <content type="html"><![CDATA[<p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
 
 <p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP openssl_pkey_get_details implement in c]]></title>
-    <link href="http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c/"/>
-    <updated>2012-06-14T10:49:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c</id>
-    <content type="html"><![CDATA[<p>It&#8217;s easy to generate a RSA keypair in PHP, just like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>// Create the keypair
-</span><span class='line'>$res=openssl_pkey_new();
-</span><span class='line'>
-</span><span class='line'>// Get private key
-</span><span class='line'>openssl_pkey_export($res, $privkey);
-</span><span class='line'>
-</span><span class='line'>// Get public key
-</span><span class='line'>$pubkey=openssl_pkey_get_details($res);
-</span><span class='line'>$pubkey=$pubkey["key"];
-</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But when it comes to C, it&#8217;s not that simple.</p>
-
-<p>You might want to use <code>RSA_generate_key</code> and then <code>PEM_write_RSAPublicKey</code>, but in fact, the output format of PHP&#8217;s <code>openssl_pkey_get_details</code> is not a RSA public key.</p>
-
-<p>If you want to get the same result in C, you have to convert your RSA keypair into EVP keypair.</p>
-
-<!--more-->
-
-
-<p>Here&#8217;s my sample script:</p>
-
-<div><script src='https://gist.github.com/2909583.js?file='></script>
-<noscript><pre><code>/*
-example of c equivalent to php
-&lt;?php
-// Create the keypair
-$res=openssl_pkey_new();
-
-// Get private key
-openssl_pkey_export($res, $privkey);
-
-// Get public key
-$pubkey=openssl_pkey_get_details($res);
-$pubkey=$pubkey[&quot;key&quot;];
-?&gt;
-*/
-#include&lt;stdio.h&gt;
-#include&lt;openssl/rsa.h&gt;
-#include&lt;openssl/evp.h&gt;
-
-EVP_PKEY *pubkey_a,*privkey_a;
-
-generate_keys ()
-{
-  RSA *rsa, *pub_rsa, *priv_rsa;
-  int len;
-  unsigned char *buf, *p;
-
-  rsa = RSA_generate_key (1024, RSA_F4, NULL, (char *) stdout);
-
-  buf = (char *) malloc (2048);
-
-  p = buf;
-
-  len = i2d_RSAPublicKey (rsa, &amp;p);
-  len += i2d_RSAPrivateKey (rsa, &amp;p);
-
-  RSA_free (rsa);
-
-  p = buf;
-  pub_rsa = d2i_RSAPublicKey (NULL, &amp;p, (long) len);
-  len -= (p - buf);
-  priv_rsa = d2i_RSAPrivateKey (NULL, &amp;p, (long) len);
-
-  if ((pub_rsa == NULL) || (priv_rsa == NULL))
-    ERR_print_errors_fp (stderr);
-
-
-  pubkey_a = EVP_PKEY_new ();
-  privkey_a = EVP_PKEY_new ();
-
-  EVP_PKEY_set1_RSA (pubkey_a, pub_rsa);
-  EVP_PKEY_set1_RSA (privkey_a, priv_rsa);
-
-  RSA_free (pub_rsa);
-  RSA_free (priv_rsa);
-
-}
-
-main()
-{   
-
-  EVP_PKEY *pubkey,*privkey;
-
-  generate_keys ();
-
-  pubkey=pubkey_a;
-  privkey=privkey_a;
-
-  PEM_write_PUBKEY(stdout, pubkey);
-  return 0;
- 
-}</code></pre></noscript></div>
-
-
-<p>You can test it by folloing commands:
-<code>gcc -o key key.c -lssl &amp;&amp; ./key</code></p>
 ]]></content>
   </entry>
   
