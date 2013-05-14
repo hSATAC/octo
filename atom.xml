@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-02-27T16:58:35+08:00</updated>
+  <updated>2013-05-14T22:37:28+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Diff Puppet Chef]]></title>
+    <link href="http://blog.hsatac.net/2013/05/diff-puppet-chef/"/>
+    <updated>2013-05-14T22:29:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/05/diff-puppet-chef</id>
+    <content type="html"><![CDATA[<p>這次和 <a href="https://twitter.com/v1nc3ntlaw">@v1nc3ntlaw </a> 在 Ruby Tuesday 分享的 diff puppet chef 投影片</p>
+
+<script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Migrate AWS AMI across region painlessly]]></title>
@@ -1307,17 +1319,6 @@ end</code></pre></noscript></div>
 
 
 <p>開啟 mitmproxy 的時候帶參數 -s <code>mitmproxy -s mitmproxy.py</code> 或者進入 mitmproxy 後按快速鍵 s 輸入 mitmproxy.py 載入即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Git 救回已刪除的檔案]]></title>
-    <link href="http://blog.hsatac.net/2012/07/git-restore-removed-files/"/>
-    <updated>2012-07-28T20:30:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/07/git-restore-removed-files</id>
-    <content type="html"><![CDATA[<p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
-
-<p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
 ]]></content>
   </entry>
   
