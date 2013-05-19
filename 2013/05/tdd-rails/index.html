@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TDD Rails - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake 許多觀念和工具都是他帶給我的。 還記得幾年前剛聽到「測試」、「TDD」這些名詞的時候，那時我去 Ruby Tuesday 碰到人就會問一下：「你有在寫測試嗎？」@ihower 跟 @ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.hsatac.net/2013/05/tdd-rails/">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  jQuery.noConflict();
+  jQuery(document).ready(function() {
+      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">ash.cat</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">TDD Rails</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T19:23:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake 許多觀念和工具都是他帶給我的。</p>
+
+<p>還記得幾年前剛聽到「測試」、「TDD」這些名詞的時候，那時我去 Ruby Tuesday 碰到人就會問一下：「你有在寫測試嗎？」@ihower 跟 @xdite 應該都被我問過這個問題。那時雖然知道寫測試的好處，也大概試過 TDD 的手法，不過總感覺搔不到癢處；再加上那時待的公司也都沒有這個環境，就放置 Play 了。</p>
+
+<p>一直到跟 @ilake pair 過後才知道，問題不在「要不要寫測試」、而是「測試該怎麼寫」。</p>
+
+<!-- more -->
+
+
+<h3>Why TDD? Why Not?</h3>
+
+<p>我們一般對寫測試和 TDD 會有以下的迷思：</p>
+
+<ul>
+<li>TDD 違反人類思考的習慣</li>
+<li>寫測試會比較耗時間</li>
+<li>沒牽涉到金流等重大功能不需要寫測試</li>
+</ul>
+
+
+<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&#8230;&#8230;重複這個循環。</p>
+
+<p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
+
+<p><strong>寫測試會比較耗時間嗎？</strong>這邊應該分成整體開發時間和單元開發時間來看。先說整體開發時間，有寫測試可以讓整個 team 都放心改 code ，減低踩雷的機會。</p>
+
+<p>那單元測試時間呢？TDD 寫的 code 比較多，理論上應該會增加單元開發時間，不過只要使用對的工具和 work flow，其實單元開發時間不會增加多少，甚至還有可能更快。開發 Rails 可能寫一寫就要切到瀏覽器看一下行為，但是使用 TDD 我們可以一鍵直接測到我們想測的部份，不用花時間在切換、等待上面。等到整個 feature 開發完成再去瀏覽器做最後確認就好，反而增加了開發效率。</p>
+
+<p><strong>沒牽涉到金流等重大功能不需要寫測試？</strong>：當你享受過 TDD 帶來的好處時其實就不會再有這樣的想法了，不過寫測試的確還有其他的優點。我到 Faria 第一天就能直接上工解 issue 就是因為有測試當我的後盾。測試本身也就是 spec ，能清楚定義你程式的行為。碰到有 bug 的時候就直接寫一個這個 bug 的測試，修到他過了，以後就再也不會碰到那種「咦，這個 bug 不是我以前解過了嗎？怎麼又跑出來了？」的狀況。</p>
+
+<h3>Work Flow</h3>
+
+<p>前面說到只要使用對的工具和 work flow，就能享受到 TDD 的快感。相關的工具和 library 非常多，這邊直接講兩個重點：</p>
+
+<ol>
+<li>快速執行測試以及觀看測試結果(一鍵執行)</li>
+<li>跑測試本身的速度要快</li>
+</ol>
+
+
+<p>前陣子使用 Sublime Text 2 時，搭配 <a href="https://github.com/maltize/sublime-text-2-ruby-tests">Sublime Text 2 Ruby Tests</a> 這個 plugin，只要按 <code>cmd + shift + r</code> 就可以直接跑當前游標所在測試 <code>cmd + shift + t</code> 跑整個檔案 <code>cmd + shift + e</code> 跑上一次執行的測試。</p>
+
+<p>最近改回 vim 環境則是使用 @ilake 推薦的 <a href="https://github.com/jgdavey/vim-turbux">turbux</a> 和 <a href="https://github.com/jgdavey/tslime.vim">tslime</a> 一樣一鍵執行測試，並送到你選擇的 tmux windows 去執行。詳細的設定可以參考<a href="https://github.com/hSATAC/vimrc">我的 vimrc</a>。</p>
+
+<p>至於跑測試本身的速度要快這點，由於 Rails 環境要 boot 起來其實花的時間真的挺久的，可以使用 <a href="https://github.com/burke/zeus">Zeus</a> 或 <a href="https://github.com/jonleighton/spring">Spring</a> 來加速。</p>
+
+<p>其實以上這兩點都是為了一個目的，就是要「快速拿到你的 feedback」。當你有了這個環境，你寫好測試你就只要一直去 run 他 run 到你的實作通過測試為止。絕對比寫一寫切到瀏覽器看一下來的快速可靠。</p>
+
+<h3>結語</h3>
+
+<p>寫測試的好處真的百百種，說都說不完，而且現在寫測試應該也算是 programmer 的必備技能了。前陣子我發給 <a href="https://github.com/mroth/lolcommits">lolcommits</a> 的 pull request 也被要求補測試才收我的 patch。可預見不遠的將來，甚至是現在，寫測試將會是軟體開發中不可或缺的一個環節。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-19T19:23:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2013/05/tdd-rails/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2013/05/tdd-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2013/05/diff-puppet-chef/" title="Previous Post: Diff Puppet Chef">&laquo; Diff Puppet Chef</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
+  <span>
+    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
+    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
+    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
+    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
+  </span>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/05/tdd-rails/">TDD Rails</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/diff-puppet-chef/">Diff Puppet Chef</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/02/puppet-study-note/">Puppet 學習筆記</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 124.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 103.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 103.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+</section>
+<section>
+  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2013/05/tdd-rails/';
+        var disqus_url = 'http://blog.hsatac.net/2013/05/tdd-rails/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
