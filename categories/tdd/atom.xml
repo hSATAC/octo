@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/tdd/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-05-19T20:35:59+08:00</updated>
+  <updated>2013-05-19T20:54:10+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.hsatac.net/2013/05/tdd-rails/"/>
     <updated>2013-05-19T19:23:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/05/tdd-rails</id>
-    <content type="html"><![CDATA[<p>這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake 許多觀念和工具都是他帶給我的。</p>
+    <content type="html"><![CDATA[<p>這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake，許多觀念和工具都是他帶給我的。</p>
 
 <p>還記得幾年前剛聽到「測試」、「TDD」這些名詞的時候，那時我去 Ruby Tuesday 碰到人就會問一下：「你有在寫測試嗎？」@ihower 跟 @xdite 應該都被我問過這個問題。那時雖然知道寫測試的好處，也大概試過 TDD 的手法，不過總感覺搔不到癢處；再加上那時待的公司也都沒有這個環境，就放置 Play 了。</p>
 
@@ -42,7 +42,7 @@
 
 <p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
 
-<p><strong>寫測試會比較耗時間嗎？</strong>這邊應該分成整體開發時間和單元開發時間來看。先說整體開發時間，有寫測試可以讓整個 team 都放心改 code ，減低踩雷的機會。</p>
+<p><strong>寫測試會比較耗時間嗎？</strong>這邊應該分成整體開發時間和單元開發時間來看。先說整體開發時間，有寫測試可以讓整個 team 都放心改 code ，減低踩雷的機會。與其寫一寫發現之前寫的東西爆炸了再回頭修改，寫測試反而能降低整體開發的時間。</p>
 
 <p>那單元測試時間呢？TDD 寫的 code 比較多，理論上應該會增加單元開發時間，不過只要使用對的工具和 work flow，其實單元開發時間不會增加多少，甚至還有可能更快。開發 Rails 可能寫一寫就要切到瀏覽器看一下行為，但是使用 TDD 我們可以一鍵直接測到我們想測的部份，不用花時間在切換、等待上面。等到整個 feature 開發完成再去瀏覽器做最後確認就好，反而增加了開發效率。</p>
 
