@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rspec | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/rspec/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2013-06-30T20:35:31+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[hSATAC]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RSpec-Given 與 RSpec-Spies]]></title>
+    <link href="http://blog.hsatac.net/2013/06/rspec-given-rspec-spies/"/>
+    <updated>2013-06-30T17:53:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/06/rspec-given-rspec-spies</id>
+    <content type="html"><![CDATA[<h2>RSpec/Given</h2>
+
+<p><a href="https://github.com/jimweirich/rspec-given">rspec-given</a> 其實是這次去新加坡 <a href="http://www.reddotrubyconf.com/">RedDotRubyConf</a> 聽 rake 的作者 <a href="https://twitter.com/jimweirich">jimweirich</a> 介紹的。</p>
+
+<p>乍看之下只是一個 syntax sugar，但實際用起來非常有幫助，可以有效的協助你寫出乾淨漂亮的測試。</p>
+
+<p><a href="https://github.com/jimweirich/rspec-given">rspec-given</a> 提供了 <code>Given</code>, <code>Then</code>, <code>When</code> 三個關鍵字以及其他一些額外的功能。 <code>Given</code> 類似原本的 <code>let</code>，而 <code>it</code> 則拆成 <code>Then</code> 和 <code>When</code>。</p>
+
+<p>原本用 <code>it</code> 來寫測試，一個 <code>it</code> 裡面容易越寫愈多，越寫越肥，而且執行的程式碼和 assertion 混在一起，不容易閱讀。</p>
+
+<p>用 <code>Given</code> 定義需要的東西、 <code>When</code> 寫實際執行的程式碼、 <code>Then</code> 放 assertion，這樣可以很方便、清楚的組織你的測試程式碼。</p>
+
+<!--more-->
+
+
+<p>此外還有 <code>And</code> 可以搭配 <code>Then</code> 使用，以及一個比較特別的 <code>Invariant</code>：當每次 <code>Then</code> 被執行到的時候都會跑這個 assertion。</p>
+
+<h2>RSpec-Spies</h2>
+
+<p>我們現在把測試分很明顯的三個區塊 <code>Given</code>, <code>Then</code>, <code>When</code> 以後，就會碰到一個問題叫 <code>should_receive</code>。</p>
+
+<p>以往 <code>should_receive</code> 這件事是跟在 mock method 一起做的，這語句本身就同時有 <code>Then</code> 和 <code>When</code> 的涵義在。而且整段測試會變成前面有 assertion, 中間一段執行程式碼，後面又是 assertion ，使的整個閱讀性大大降低。</p>
+
+<p>並且，我們一般人思考的順序是「我做了什麼事」 → 「得到什麼結果」。而 <code>should_receive</code> 是要寫在真正執行的程式碼前面的，跟我們思考的順序恰好相反，容易混淆。所以我們需要有一個語法能把 mock 跟 assertion(should_receive) 這兩件事分開。</p>
+
+<p>這時候就可以使用 <a href="https://github.com/technicalpickles/rspec-spies">rspec-spies</a>。</p>
+
+<p>這樣我們就可以把 <code>have_receieved</code> 當成一般的 matcher 搬到 <code>Then</code> 區塊，整段測試就很清楚明瞭。</p>
+
+<p>更好的是這個語法在 RSpec 2.14 就會內建支援，所以現在先使用這個 gem ，等 RSpec 2.14 正式 release 以後再拿掉即可無縫銜接。</p>
+
+<h2>延伸閱讀</h2>
+
+<ul>
+<li><a href="https://github.com/jimweirich/rspec-given/wiki/Tutorial">RSpec/Given Tutorial</a></li>
+<li><a href="http://xunitpatterns.com/Test%20Spy.html">Test Spy Pattern</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

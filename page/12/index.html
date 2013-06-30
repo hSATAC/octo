@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="這幾天在忙什麼呢&#8230;？整理包裹、房間。工作，熟悉新環境。總之一整個混亂，每件事以一百倍的速度在發生，而且一次好幾件。手上總是有六七件以上的事同時在做。累到回家都不想開電腦沒時間騎車、看書、喝杯好茶。每天飆40分鐘的車去上班，再飆40分鐘的山路回家。 &hellip;">
+  <meta name="description" content="因為公司有要作上傳大檔案的需求這兩天研究了一下，得到了幾個結論1.HTML file input和flash都沒辦法做到續傳，因為沒辦法指定從檔案的哪個位置開始讀取。若要做到續傳，可能要配合java或activeX。2.網路上的許多上傳套件，只要有用flash接的，一概不能用。因為flash &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2008/07/%E4%B8%8A%E5%82%B3%E5%A4%A7%E6%AA%94%E6%A1%88/">上傳大檔案</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-09T00:00:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>因為公司有要作上傳大檔案的需求<br />這兩天研究了一下，得到了幾個結論<br /><br />1.HTML file input和flash都沒辦法做到續傳，因為沒辦法指定從檔案的哪個位置開始讀取。若要做到續傳，可能要配合java或activeX。<br /><br />2.網路上的許多上傳套件，只要有用flash接的，一概不能用。因為flash FileReference有100mb的限制。<br /><br />3.目前以純PHP來說，要做到真實的上傳比例進度棒，是不可行的。因為無法在上傳完畢以前就取得檔案大小以及目前檔案大小(用來算比例)。因此大多配合flash來取得檔案大小。但不適用於本專案(有大檔案需求)。<br /><br />4.有一個套件APC(Alternative PHP Cache)，可以解決真實上傳比例進度這個問題。但是這個套件現在沒有包含在標準安裝裡面(PHP 6應會內建)，現階段需要自行下載安裝。<br /><font color="#ff0000">20080710更新：利用APC實做upload progress無法multithread，等於無用！需另尋方法。</font><br /><br />5.真實網路情況下，用http post傳大檔案(以500mb作測試)，還是相當不穩定且速度緩慢。</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2008/07/%E4%B8%8A%E5%82%B3%E5%A4%A7%E6%AA%94%E6%A1%88/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -464,47 +505,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/06/%E4%B8%AD%E7%A7%91%E6%B0%B4%E5%A1%94/">中科水塔</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-11T00:00:00+08:00" pubdate data-updated="true">Jun 11<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天太興奮了，新輪組，新鞋子。<br />擋不住誘惑，晚上蹺課去騎車啦&gt;O&lt;<br /><br />今天騎的路線是傳說中的休閒級路線：中科水塔。<br />看著googlemap規劃好路線後就出發了。<br />預定走<br />文心路 &gt;&gt; 市政路 &gt;&gt; 環中路 &gt;&gt; 虹陽橋 &gt;&gt; 安和路 &gt;&gt; 福科路 &gt;&gt; 東大路 &gt;&gt; 科園路<br /><br />新的卡鞋真的很棒，完全不會有壓迫的感覺。<br />而且不知道是不是錯覺，感覺穿新卡鞋<br />很自然就會有提拉的動作，<br />以前都要稍為意識，動作才會出來。<br />不過也有可能是剛好習慣了卡鞋吧。<br /><br />騎到南屯路時，腳底板爆了，<br />轉進together買了浩悍的LOOK相容鞋底板<br />(以前用過wellgo和VP的)<br />在那邊借了工具當場安裝。<br /><br />出來以後，發現入卡的感覺和以往不太一樣<br />而且很容易滑出來。<br />以前是很緊密的嵌合在一起，不會有空隙。<br />現在的感覺是卡住了，但前後左右有空隙可以移動，<br />很不習慣，回去再調整看看。<br /><br />一路無話，順利到了福科路準備開始爬坡。<br />這時做了一件蠢事。<br />我以為我已經掛到小盤了，結果沒有。<br />覺得今天爬坡怎麼這麼累，明明看起來不陡啊。<br />右手趕快變檔&#8230;咦，怎麼已經用到27T的救命檔了。<br />爬上東大路時才發現原來我一直掛著大盤在爬&#8230;囧。<br />無緣無故的累積了很多的乳酸&#8230;。<br /><br />接著要上科園路了，一路被登山車追過。<br />被超過時我就假裝很認真在觀察旁邊的建築物&#8230;(汗)<br />用自己的步調慢慢龜上去，心跳和呼吸都還可以。<br />不過膝蓋有一種很熱很熱的感覺，以前沒有過。<br /><br />上到頂看到一堆人在看夜景聊天，<br />有騎單車的、有開車的、也有騎摩托車的。<br />這邊夜景真的很漂亮，路燈也很亮。<br />又沒有煞風景的鄉村卡啦OK&#8230;<br />難怪望高寮現在看夜景的人變少很多。<br /><br />回程原本想走望高寮，但路不熟，<br />又忘記帶GPS，就走西屯路去136喝個甜的，<br />翻翻雜誌。<br /><br />重編後的輪組很棒，順暢度一百分。<br />雖然讓我等了很久，但現在覺得都是值得的。<br />棘輪聲音好大，聽起來好爽。很有攻擊性的感覺。<br />不知道時間久了聲音會不會消失。</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2008/06/%E4%B8%AD%E7%A7%91%E6%B0%B4%E5%A1%94/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/13/">&larr; Older</a>
@@ -532,6 +532,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/05/tdd-rails/">TDD Rails</a>
       </li>
     
@@ -547,15 +551,11 @@
         <a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/02/puppet-study-note/">Puppet 學習筆記</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 124.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/ruby' style='font-size: 115.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 103.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 103.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 124.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 118.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 103.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
