@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-06-30T20:35:31+08:00</updated>
+  <updated>2013-07-04T17:46:27+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -696,6 +696,82 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[RubyConf.tw 2012]]></title>
+    <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en/"/>
+    <updated>2012-12-09T13:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en</id>
+    <content type="html"><![CDATA[<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
+
+<h3>Before Party</h3>
+
+<p><a href="http://twitter.com/ihower">ihower</a> had been inviting Matz, the creator of Ruby to Taiwan for the past three years. And finally he made it this year. Matz arrived Taiwan early, since it was a great opportunity to meet Matz in person so we hosted a meetup party with Matz the day before the conference.</p>
+
+<p><img src="http://blog.hsatac.net/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
+
+<!--more-->
+
+
+<h3>Day 1</h3>
+
+<p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
+
+<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&#8217;s quite nice.</p>
+
+<p>The first session of day 1 was Matz and of course it&#8217;s nice. And then Wei Lu from Singapore shared about pair programming, she&#8217;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
+
+<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>&#8220;I didn&#8217;t expect for this kind of mruby information.&#8221;</p></blockquote>
+
+<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&#8217;s also very nice, covered from real cases to deep theories.</p>
+
+<p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
+
+<h3>Party</h3>
+
+<p>I went to official party at day 1 night, I don&#8217;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
+
+<p>This was a great event to meet new people and old friends from every places in the world.</p>
+
+<p>I asked Matz in the party, &#8220;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&#8221;</p>
+
+<p>&#8220;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&#8217;s high quality&#8221; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
+
+<p>It&#8217;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
+
+<h3>Day 2</h3>
+
+<p>I was very excited about sessions in day 2: &#8220;devOps toolbox&#8221; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&#8217;ve been studying these 2 devOps frameworks and couldn&#8217;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
+
+<p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
+
+<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&#8217;t really dig into it because the lack of information and documents on the internet.</p>
+
+<h3>End</h3>
+
+<p>Ruby Conf Taiwan 2012 was so good, even people from other countries agreed:</p>
+
+<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>&#8220;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&#8221;</p></blockquote>
+
+<p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
+
+<p>ihower said they picked topics very carefully, they didn&#8217;t accept your proposal just because your a sponsor. I think it&#8217;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
+
+<p>It&#8217;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&#8217;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[RubyConf.tw 2012 流水帳]]></title>
     <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012/"/>
     <updated>2012-12-09T13:04:00+08:00</updated>
@@ -1295,55 +1371,6 @@ git reset --hard origin/master
 <p><img src="http://blog.hsatac.net/images/the_4_hours_body/weight.png" alt="weight" /></p>
 
 <p>還沒達到我的理想體重，因此我還會再持續好一陣子。以前減重帶給我的只有節制和痛苦。但現在我和我自己的身體玩的不亦樂乎，再也不是一件令人難以忍受的事了。我對自己身體的探索，還會再繼續下去。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[開發 Golang 的 IDEs]]></title>
-    <link href="http://blog.hsatac.net/2012/09/golang-ides/"/>
-    <updated>2012-09-19T00:34:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/09/golang-ides</id>
-    <content type="html"><![CDATA[<p>介紹一些開發 Golang 的 IDEs</p>
-
-<p>首先是我慣常使用的 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> 搭配  <a href="https://github.com/disposaboy/gosublime">gosublime</a> 外掛。</p>
-
-<p><img src="http://blog.hsatac.net/images/golang_ides/subl.png" alt="gosublime" /></p>
-
-<!--more-->
-
-
-<p>以及也是我慣用的 vim + <a href="https://github.com/nsf/gocode/">gocode</a></p>
-
-<p>在 <code>$GOROOT/misc/vim</code> 下已經有提供給 vim 使用的 syntax, indent, plugin 等，全部複製到 <code>~/.vim</code> 下面即可。如果不知道 go 安裝的位置可以使用 <code>go env</code> 來查詢。</p>
-
-<p>按 gocode 的說明安裝完成後就可以在 vim 裡面使用 golang 的 autocompletion 了。</p>
-
-<p><img src="http://blog.hsatac.net/images/golang_ides/vim.png" alt="vim + gocode" /></p>
-
-<p>提了 vim 也不得不提 emacs. Emacs 一樣使用 <code>$GOROOT/misc/emacs</code> 下提供的檔案以及搭配 gocode 做自動完成。</p>
-
-<p><img src="http://blog.hsatac.net/images/golang_ides/emacs.png" alt="emacs + gocode" /></p>
-
-<p>再來介紹一個大陸開發的 <a href="http://code.google.com/p/golangide/">golangide</a> 相當優秀，也是跨三平台版本。安裝就可以使用了，不需要多餘的設定。</p>
-
-<p><img src="http://blog.hsatac.net/images/golang_ides/golangide.png" alt="golangide" /></p>
-
-<p><a href="http://code.google.com/p/goclipse/">goeclipse</a>
-Golang 的 Eclipse plugin…Eclipse 現在完全是個萬能 editor.</p>
-
-<p><img src="http://blog.hsatac.net/images/golang_ides/goeclipse.png" alt="goeclipse" /></p>
-
-<p><a href="http://www.zeusedit.com/go.html">zeus</a> 是一個 windows 的 programming editor，也提供了深度支援開發 golang。</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/CZ5Yl0KnbKs" frameborder="0" allowfullscreen></iframe>
-
-
-
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/84i7H-E0YUM" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Zeus 整合的相當好，包括 debugger, build manager, package manager 都有提供，比較有完整 IDE 的感覺。但完整版是要付費購買的。不管如何，選擇一個喜歡，順手合自己意的才是最重要的。</p>
 ]]></content>
   </entry>
   

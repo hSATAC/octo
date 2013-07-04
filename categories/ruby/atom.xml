@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-06-30T20:35:31+08:00</updated>
+  <updated>2013-07-04T17:46:27+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -192,6 +192,82 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[RubyConf.tw 2012]]></title>
+    <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en/"/>
+    <updated>2012-12-09T13:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en</id>
+    <content type="html"><![CDATA[<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
+
+<h3>Before Party</h3>
+
+<p><a href="http://twitter.com/ihower">ihower</a> had been inviting Matz, the creator of Ruby to Taiwan for the past three years. And finally he made it this year. Matz arrived Taiwan early, since it was a great opportunity to meet Matz in person so we hosted a meetup party with Matz the day before the conference.</p>
+
+<p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
+
+<!--more-->
+
+
+<h3>Day 1</h3>
+
+<p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
+
+<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it's quite nice.</p>
+
+<p>The first session of day 1 was Matz and of course it's nice. And then Wei Lu from Singapore shared about pair programming, she's a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
+
+<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>"I didn't expect for this kind of mruby information."</p></blockquote>
+
+<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it's also very nice, covered from real cases to deep theories.</p>
+
+<p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
+
+<h3>Party</h3>
+
+<p>I went to official party at day 1 night, I don't usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
+
+<p>This was a great event to meet new people and old friends from every places in the world.</p>
+
+<p>I asked Matz in the party, "You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?"</p>
+
+<p>"Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it's high quality" he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
+
+<p>It's a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
+
+<h3>Day 2</h3>
+
+<p>I was very excited about sessions in day 2: "devOps toolbox" by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I've been studying these 2 devOps frameworks and couldn't decide which to use. After their sessions, I discussed some of my questions with them.</p>
+
+<p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
+
+<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn't really dig into it because the lack of information and documents on the internet.</p>
+
+<h3>End</h3>
+
+<p>Ruby Conf Taiwan 2012 was so good, even people from other countries agreed:</p>
+
+<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>"It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good."</p></blockquote>
+
+<p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
+
+<p>ihower said they picked topics very carefully, they didn't accept your proposal just because your a sponsor. I think it's smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
+
+<p>It's fair to say that Ruby Conf Taiwan 2012 is the best techical conference I've ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[RubyConf.tw 2012 流水帳]]></title>
     <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012/"/>
     <updated>2012-12-09T13:04:00+08:00</updated>
@@ -266,70 +342,6 @@
 <p>聽 ihower 說這次篩選主題非常嚴格，有許多 sponser 的投稿都沒能入選，我覺得這樣非常好，贊助歸贊助，會給他們廣告的空間，不過維持大會的水準才是第一要務。</p>
 
 <p>不誇張，這次 Ruby Conf Taiwan 2012 真的是我參加到目前為止台灣研討會裡最棒的一場，感謝 ihower 和慕凡以及所有工作人員的努力！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Youtube 加入我的最愛後自動抓檔上傳至 Google Music]]></title>
-    <link href="http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music/"/>
-    <updated>2012-01-17T19:33:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/01/youtube-favorite-add-google-music</id>
-    <content type="html"><![CDATA[<p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
-
-<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
-
-<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
-
-<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
-
-<!--more-->
-
-
-<p>想法很簡單，大概分為四部分：</p>
-
-<ul>
-<li><p>讀取 Youtube 我的最愛</p></li>
-<li><p>抓到有新增就取得資訊下載影片</p></li>
-<li><p>透過 <code>ffmpeg</code> 之類轉為 mp3</p></li>
-<li><p>透過 Google Music Manager 上傳</p></li>
-</ul>
-
-
-<p>做了一番 survey 後發現 <a href="https://github.com/rg3/youtube-dl">youtube-dl</a> 這個工具實在非常好用。他是用 python 寫的一個 script ，只要丟網址給他就會幫你下載。更棒的是他連 <code>ffmpeg</code> 都接好了，加上參數就可以直接輸出成 mp3 檔案。</p>
-
-<p>抓取的指令是：</p>
-
-<p><code>youtube-dl -o "%(title)s.%(ext)s" -q --extract-audio --audio-format "mp3" "[youtube_url]"</code></p>
-
-<p>剩下的工作就只剩下讀取 Youtube 我的最愛，判斷加入的時間。想來應該很簡單，不過這部份卻卡了一兩個小時。</p>
-
-<p>原因是 <strong>Youtube 的 API 寫的太不清楚啦！！！</strong></p>
-
-<p>根據 <a href="http://code.google.com/intl/zh-TW/apis/youtube/2.0/developers_guide_protocol_favorites.html#Retrieving_favorite_videos">GData Youtube API</a> ：</p>
-
-<blockquote><p>The <code>&lt;published&gt;</code> tag in a favorite videos feed entry identifies the time that the video was marked as a favorite and not the time that the video was published.</p></blockquote>
-
-<p>用 <code>&lt;published&gt;</code> 這個欄位就可以取得這筆影片新增到我的最愛的時間，這樣就可以用來判斷是否是新加入的項目。</p>
-
-<p>但是他從頭到尾沒有提到 <strong>這個 API 要用 v=2 來連這個欄位才會有效</strong> 這件事。如果沒有指定 version ，這個欄位出來的值是影片上傳時間，卡在這邊超久的啊。</p>
-
-<p>總之用一個檔案來記錄上次抓取的時間，就可以達成原本的目的了。</p>
-
-<p>記得最後把 Google Music Manager 設定成這個目錄，這樣轉好的 mp3 就會自動上傳到 Google Music 啦。</p>
-
-<p>所有的程式碼在這裡。</p>
-
-<p><a href="https://github.com/hSATAC/youtube-favorite-to-google-music">https://github.com/hSATAC/youtube-favorite-to-google-music</a></p>
-
-<h3>附錄</h3>
-
-<p>其實原本的需求是抓下來以後先存進 itunes 再上傳到 Google Music ，但是後來因為現在沒在用 itunes 所以簡化了。</p>
-
-<p>如果有這個需求的朋友可以參考 <a href="http://dougscripts.com/itunes/itinfo/folderaction01.php">Folder Actions and iTunes</a> (Mac Only)。</p>
-
-<p>對指定資料夾設定動作，當有新增音樂檔案到此資料夾的時候自動把檔案丟進 itunes 。再把 Google Music Manager 設定成自動上傳 itunes 新增的音樂即可。</p>
-
-<p>之後可能會加上轉好 mp3 後加上 ID3 TAG 的功能吧，不過那又是另外一個故事了(遠目)。</p>
 ]]></content>
   </entry>
   
