@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -84,7 +84,7 @@
 </ul>
 
 
-<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看......重複這個循環。</p>
+<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&hellip;&hellip;重複這個循環。</p>
 
 <p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
 
@@ -139,6 +139,8 @@
 
 <p>先使用 <code>ltrace</code> 來觀察：</p>
 
+<p></p>
+
 <pre>
 # ltrace -r ruby `which gem` help commands
   0.000000 __libc_start_main(0x400860, 4, 0x7fff767d5ce8, 0x4009a0 <unfinished ...>
@@ -152,7 +154,11 @@
 </pre>
 
 
+<p></p>
+
 <p>只能看出卡在 ruby_run_node 這邊，再翻出 <code>strace</code> 試試：</p>
+
+<p></p>
 
 <pre>
 # strace -rT ruby `which gem` help commands
@@ -179,13 +185,15 @@
 </pre>
 
 
+<p></p>
+
 <p>可以很明顯看出是往 192.168.79.161:53 問 devm3 ，結果 timeout 了四次，一次五秒剛好 20 秒。</p>
 
 <p>兇手已經呼之欲出了，就是我 =皿=</p>
 
-<p>當時幫這台新機器改了 hostname 以後，忘記修改 /etc/hosts ，導致他自己不認得自己的 hostname。當然那個會 timeout 的 DNS 也是有問題，不過那是關於 djbdns 的另一個故事了...。</p>
+<p>當時幫這台新機器改了 hostname 以後，忘記修改 /etc/hosts ，導致他自己不認得自己的 hostname。當然那個會 timeout 的 DNS 也是有問題，不過那是關於 djbdns 的另一個故事了&hellip;。</p>
 
-<p>最後將 /etc/hosts 改回來就完全正常了。可喜可賀。最難抓的 bug 果然都是最愚蠢的...。</p>
+<p>最後將 /etc/hosts 改回來就完全正常了。可喜可賀。最難抓的 bug 果然都是最愚蠢的&hellip;。</p>
 
 <p>在這邊要感謝 <a href="http://www.tenlong.com.tw/items/9862765674?item_id=481936">Debug Hacks 除錯駭客－極致除錯的技巧與工具</a> 一書的譯者，事實證明寫 scripting language 也是要會一些基礎 debug 技巧的！推薦各位購買這本書。</p>
 ]]></content>
@@ -211,9 +219,9 @@
 
 <p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
 
-<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it's quite nice.</p>
+<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&rsquo;s quite nice.</p>
 
-<p>The first session of day 1 was Matz and of course it's nice. And then Wei Lu from Singapore shared about pair programming, she's a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
+<p>The first session of day 1 was Matz and of course it&rsquo;s nice. And then Wei Lu from Singapore shared about pair programming, she&rsquo;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
 
 <blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
 
@@ -221,31 +229,31 @@
 <script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-<blockquote><p>"I didn't expect for this kind of mruby information."</p></blockquote>
+<blockquote><p>&ldquo;I didn&rsquo;t expect for this kind of mruby information.&rdquo;</p></blockquote>
 
-<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it's also very nice, covered from real cases to deep theories.</p>
+<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&rsquo;s also very nice, covered from real cases to deep theories.</p>
 
 <p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
 
 <h3>Party</h3>
 
-<p>I went to official party at day 1 night, I don't usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
+<p>I went to official party at day 1 night, I don&rsquo;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
 
 <p>This was a great event to meet new people and old friends from every places in the world.</p>
 
-<p>I asked Matz in the party, "You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?"</p>
+<p>I asked Matz in the party, &ldquo;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&rdquo;</p>
 
-<p>"Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it's high quality" he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
+<p>&ldquo;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&rsquo;s high quality&rdquo; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
 
-<p>It's a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
+<p>It&rsquo;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
 
 <h3>Day 2</h3>
 
-<p>I was very excited about sessions in day 2: "devOps toolbox" by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I've been studying these 2 devOps frameworks and couldn't decide which to use. After their sessions, I discussed some of my questions with them.</p>
+<p>I was very excited about sessions in day 2: &ldquo;devOps toolbox&rdquo; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&rsquo;ve been studying these 2 devOps frameworks and couldn&rsquo;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
 
 <p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
 
-<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn't really dig into it because the lack of information and documents on the internet.</p>
+<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&rsquo;t really dig into it because the lack of information and documents on the internet.</p>
 
 <h3>End</h3>
 
@@ -257,13 +265,13 @@
 <script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-<blockquote><p>"It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good."</p></blockquote>
+<blockquote><p>&ldquo;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&rdquo;</p></blockquote>
 
 <p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
 
-<p>ihower said they picked topics very carefully, they didn't accept your proposal just because your a sponsor. I think it's smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
+<p>ihower said they picked topics very carefully, they didn&rsquo;t accept your proposal just because your a sponsor. I think it&rsquo;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
 
-<p>It's fair to say that Ruby Conf Taiwan 2012 is the best techical conference I've ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
+<p>It&rsquo;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&rsquo;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
 ]]></content>
   </entry>
   

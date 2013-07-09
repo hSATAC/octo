@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -18,11 +18,11 @@
     <link href="http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers/"/>
     <updated>2012-02-02T14:56:00+08:00</updated>
     <id>http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It's a total waste to create numbers of workers when there's not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+    <content type="html"><![CDATA[<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
 
 <p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
 
-<p>Here's my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
 
 <h2>Introduction</h2>
 
@@ -83,15 +83,15 @@ class PHP_Job
 <li><p>Require <code>plugin.php</code> both in your resque init script and enqueue part.</p></li>
 <li><p>Change the setting and code in <code>plugin.php</code> based on your need.</p></li>
 <li><p>Start only one worker via your resque init script.</p></li>
-<li><p>Now it's auto-scalable.</p></li>
+<li><p>Now it&rsquo;s auto-scalable.</p></li>
 </ul>
 
 
 <h2>Disclaimer</h2>
 
-<p>For now it's all experimental design.</p>
+<p>For now it&rsquo;s all experimental design.</p>
 
-<p>All numbers and codes are not from production enviroments nor runned benchmarks. It's just a prototype for now, but it does what it says.</p>
+<p>All numbers and codes are not from production enviroments nor runned benchmarks. It&rsquo;s just a prototype for now, but it does what it says.</p>
 ]]></content>
   </entry>
   
@@ -128,14 +128,14 @@ class PHP_Job
 <p>PHP-Resque 支援的環境變數有：</p>
 
 <ul>
-<li><p>QUEUE - 這個是必要的，會決定 worker 要執行什麼任務，重要的在前，例如 <code>QUEUE=notify,mail,log</code> 。也可以設定為 <code>QUEUE=*</code> 表示執行所有任務。</p></li>
-<li><p>APP_INCLUDE - 這也可以說是必要的，因為 Resque 的 Job 都是寫成物件，那 worker 執行的時候當然要把物件的檔案引入進來。可以設成 <code>APP_INCLUDE=require.php</code> 再在 require.php 中引入所有 Job 的 Class 檔案即可。</p></li>
-<li><p>COUNT - 設定 worker 數量，預設是1 <code>COUNT=5</code> 。</p></li>
-<li><p>REDIS_BACKEND - 設定 Redis 的 ip, port。如果沒設定，預設是連 <code>localhost:6379</code> 。</p></li>
-<li><p>LOGGING, VERBOSE - 設定 log， <code>VERBOSE=1</code> 即可。</p></li>
-<li><p>VVERBOSE - 比較詳細的 log， <code>VVERBOSE=1</code> debug 的時候可以開出來看。</p></li>
-<li><p>INTERVAL - worker 檢查 queue 的間隔，預設是五秒 <code>INTERVAL=5</code> 。</p></li>
-<li><p>PIDFILE - 如果你是開單 worker，可以指定 PIDFILE 把 pid 寫入，例如 <code>PIDFILE=/var/run/resque.pid</code> 。</p></li>
+<li><p>QUEUE &ndash; 這個是必要的，會決定 worker 要執行什麼任務，重要的在前，例如 <code>QUEUE=notify,mail,log</code> 。也可以設定為 <code>QUEUE=*</code> 表示執行所有任務。</p></li>
+<li><p>APP_INCLUDE &ndash; 這也可以說是必要的，因為 Resque 的 Job 都是寫成物件，那 worker 執行的時候當然要把物件的檔案引入進來。可以設成 <code>APP_INCLUDE=require.php</code> 再在 require.php 中引入所有 Job 的 Class 檔案即可。</p></li>
+<li><p>COUNT &ndash; 設定 worker 數量，預設是1 <code>COUNT=5</code> 。</p></li>
+<li><p>REDIS_BACKEND &ndash; 設定 Redis 的 ip, port。如果沒設定，預設是連 <code>localhost:6379</code> 。</p></li>
+<li><p>LOGGING, VERBOSE &ndash; 設定 log， <code>VERBOSE=1</code> 即可。</p></li>
+<li><p>VVERBOSE &ndash; 比較詳細的 log， <code>VVERBOSE=1</code> debug 的時候可以開出來看。</p></li>
+<li><p>INTERVAL &ndash; worker 檢查 queue 的間隔，預設是五秒 <code>INTERVAL=5</code> 。</p></li>
+<li><p>PIDFILE &ndash; 如果你是開單 worker，可以指定 PIDFILE 把 pid 寫入，例如 <code>PIDFILE=/var/run/resque.pid</code> 。</p></li>
 </ul>
 
 
@@ -149,7 +149,7 @@ QUEUE=* APP_INCLUDE=require.php COUNT=5 VVERBOSE=1 php resque.php
 
 <p>如果覺得太長，可以寫一支啟動 script 來輔助你，我有寫一支可供參考：</p>
 
-<p><div><script src='https://gist.github.com/1619972.js?file='></script>
+<p><div><script src='https://gist.github.com/1619972.js'></script>
 <noscript><pre><code>#!/bin/bash
 export APP_INCLUDE=resque/require.php
 export QUEUE=*
@@ -243,9 +243,9 @@ class My_Job
 
 <p>``` php
 &lt;?php
-require_once 'lib/Resque.php';</p>
+require_once &lsquo;lib/Resque.php&rsquo;;</p>
 
-<p>Resque::setBackend('localhost:6379');</p>
+<p>Resque::setBackend(&lsquo;localhost:6379&rsquo;);</p>
 
 <p>$args = array(</p>
 
@@ -253,7 +253,7 @@ require_once 'lib/Resque.php';</p>
 </code></pre>
 
 <p>);
-Resque::enqueue('default', 'My_Job', $args);
+Resque::enqueue(&lsquo;default&rsquo;, &lsquo;My_Job&rsquo;, $args);
 ?>
 ```</p>
 

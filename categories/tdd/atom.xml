@@ -4,7 +4,7 @@
   <title><![CDATA[Category: TDD | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/tdd/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -84,7 +84,7 @@
 </ul>
 
 
-<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看......重複這個循環。</p>
+<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&hellip;&hellip;重複這個循環。</p>
 
 <p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
 

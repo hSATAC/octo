@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Game | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/game/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -104,54 +104,60 @@ function plugin.GetAuraScale(self, frame)
 
 
 
-<p> if position == "Below" or position == "Above" then<br />
-        if frame.autoScale then<br />
-            local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
-            scale = (self.frame:GetWidth() + offset)/(16*columns+(columns-1)*2)<br />
-        end<br />
-    elseif position == "Left" or position == "Right" then<br />
-        if frame.autoScale then<br />
-            local offset = type(frame.autoScale) == "number" and frame.autoScale or 0<br />
-            scale = (self.frame:GetHeight() + offset)/(16*rows+(rows-1)*2)<br />
-        end<br />
-    end<br />
-    if frame.auraScale then<br />
-        scale = frame.auraScale<br />
-    end<br />
-    if not scale or scale <= 0 then<br />
-        scale = 1<br />
-    end<br />
-    return scale<br />
-end<br />
---end here
+<p><p> if position == &ldquo;Below&rdquo; or position == &ldquo;Above&rdquo; then<br /></p>
 
-2.modity function UpdateAuraFrame()</p>
+<pre><code>    if frame.autoScale then&lt;br /&gt;
+        local offset = type(frame.autoScale) == "number" and frame.autoScale or 0&lt;br /&gt;
+        scale = (self.frame:GetWidth() + offset)/(16*columns+(columns-1)*2)&lt;br /&gt;
+    end&lt;br /&gt;
+elseif position == "Left" or position == "Right" then&lt;br /&gt;
+    if frame.autoScale then&lt;br /&gt;
+        local offset = type(frame.autoScale) == "number" and frame.autoScale or 0&lt;br /&gt;
+        scale = (self.frame:GetHeight() + offset)/(16*rows+(rows-1)*2)&lt;br /&gt;
+    end&lt;br /&gt;
+end&lt;br /&gt;
+if frame.auraScale then&lt;br /&gt;
+    scale = frame.auraScale&lt;br /&gt;
+end&lt;br /&gt;
+if not scale or scale &lt;= 0 then&lt;br /&gt;
+    scale = 1&lt;br /&gt;
+end&lt;br /&gt;
+return scale&lt;br /&gt;
+</code></pre>
 
-<p>a.find:
+<p>end<br />
+&mdash;end here</p>
+
+<p>2.modity function UpdateAuraFrame()</p></p>
+
+<p><p>a.find:
 <pre lang="lua" line="1">
-plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration)
+plugin.SetAura(self, frame[&ldquo;Aura&rdquo; .. i], false, id, icon, count, nil, expirationTime, duration)
 </pre>
 modify to:
 <pre lang="lua" line="1">
 local scale = plugin.GetAuraScale(self, frame)
-plugin.SetAura(self, frame["Aura" .. i], false, id, icon, count, nil, expirationTime, duration, scale)
+plugin.SetAura(self, frame[&ldquo;Aura&rdquo; .. i], false, id, icon, count, nil, expirationTime, duration, scale)
 </pre>
 b.find:
 <pre lang="lua" line="1">
-plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration)
+plugin.SetAura(self, frame[&ldquo;Aura&rdquo; .. index], true, id, icon, count, debuffType, expirationTime, duration)
 </pre>
 modify to:
 <pre lang="lua" line="1">
-local aura_name, aura_rank, aura_icon, aura_count, aura_debuffType,aura_duration, aura_expirationTime, aura_isMine, aura_isStealable =UnitAura(self.type, i,"HARMFUL")
+local aura_name, aura_rank, aura_icon, aura_count, aura_debuffType,aura_duration, aura_expirationTime, aura_isMine, aura_isStealable =UnitAura(self.type, i,&ldquo;HARMFUL&rdquo;)
 local scale = plugin.GetAuraScale(self, frame)
-if self.type == "target" and aura_isMine=="player" then
-    scale = scale * 2;
-end
-plugin.SetAura(self, frame["Aura" .. index], true, id, icon, count, debuffType, expirationTime, duration, scale)
-</pre>
-3.modity function SetAura()</p>
+if self.type == &ldquo;target&rdquo; and aura_isMine==&ldquo;player&rdquo; then</p>
 
-<p>a.find:
+<pre><code>scale = scale * 2;
+</code></pre>
+
+<p>end
+plugin.SetAura(self, frame[&ldquo;Aura&rdquo; .. index], true, id, icon, count, debuffType, expirationTime, duration, scale)
+</pre>
+3.modity function SetAura()</p></p>
+
+<p><p>a.find:
 <pre lang="lua" line="1">
 function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expirationTime, duration)
 </pre>
@@ -161,14 +167,16 @@ function plugin.SetAura(self, buffFrame, isDebuff, id, buff, count, class, expir
 </pre>
 b.add these line at the begining of this function:
 <pre lang="lua" line="1">
---start 就放大兩倍
-if scale then
-    buffFrame:SetScale(scale)
-end
---end 
-</pre>
-附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://blog.hsatac.net/images/wp-uploads/2009/04/auras.lua">下載</a></p>
+&mdash;start 就放大兩倍
+if scale then</p>
 
+<pre><code>buffFrame:SetScale(scale)
+</code></pre>
+
+<p>end
+&mdash;end
+</pre>
+附上我修改過的檔案，請備份原檔案後再試驗唷。<a href="http://blog.hsatac.net/images/wp-uploads/2009/04/auras.lua">下載</a></p></p>
 ]]></content>
   </entry>
   

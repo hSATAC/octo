@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="RSpec/Given rspec-given 其實是這次去新加坡 RedDotRubyConf 聽 rake 的作者 jimweirich 介紹的。 乍看之下只是一個 syntax sugar，但實際用起來非常有幫助，可以有效的協助你寫出乾淨漂亮的測試。 rspec-given 提供了 &hellip;">
+  <meta name="description" content="剛好又開新專案了，來介紹一下 Xray-rails 與 tmux, vim 的整合。 Xray-rails 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 ⌘ + ⇧ + x 就會開啟一層 overlay， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 Tmux, Vim 整合</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-09T22:00:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>剛好又開新專案了，來介紹一下 <a href="https://github.com/brentd/xray-rails">Xray-rails</a> 與 tmux, vim 的整合。</p>
+
+<p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 <code>⌘ + ⇧ + x</code> 就會開啟一層 overlay，讓你很清楚的看出現在的畫面由哪些 view, partial, controller 生成，更方便的是只要一點畫面，即可在編輯器中開啟該檔案，大大降低 trace 程式碼的時間。</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png"><img src="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png" alt="image" /></a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2013/07/xray-rails-tmux-vim-integration/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -266,11 +313,11 @@
   </header>
 
 
-  <div class="entry-content"><p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&#8217;s a little troublesome to migrate AWS AMI between regions.</p>
+  <div class="entry-content"><p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
 
-<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&#8217;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&#8217;s a online tool that does these steps for you.</p>
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
 
-<p>After some study, I found that it&#8217;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&#8217;t migrate AMI but we could do so just for some more steps.</p>
+<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
 
 </div>
   
@@ -315,7 +362,7 @@
 
   <div class="entry-content"><p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
 
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&#8230;。</p>
+<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&hellip;。</p>
 
 <p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
 
@@ -365,11 +412,11 @@
 
 <h2>Infrastructure as Code</h2>
 
-<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&#8230;？</p>
+<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&hellip;？</p>
 
 <p>其實基本上是相通的…但概念層次上高了一層。寫 shell script 主要是加速重複性工作、減少人為疏失，但你也很難去 reuse 這些東西。</p>
 
-<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&#8230;。</p>
+<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&hellip;。</p>
 
 <p>Code 就是文件， code 就是你的 infrastructure。不但好寫好讀好維護，更可直接拿來執行。</p>
 
@@ -512,7 +559,7 @@
   </header>
 
 
-  <div class="entry-content"><p>筆記一下安裝步驟&#8230;。</p>
+  <div class="entry-content"><p>筆記一下安裝步驟&hellip;。</p>
 
 <h2>Install Archlinux</h2>
 
@@ -599,11 +646,11 @@
   </header>
 
 
-  <div class="entry-content"><p>RWBY 第二部預告片 &#8220;White&#8221; 終於推出！</p>
+  <div class="entry-content"><p>RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！</p>
 
-<p>之前看完第一部 &#8220;Red&#8221; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &#8220;White&#8221; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
+<p>之前看完第一部 &ldquo;Red&rdquo; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &ldquo;White&rdquo; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
 
-<p>下一部 &#8220;Black&#8221; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&#8230;</p>
+<p>下一部 &ldquo;Black&rdquo; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&hellip;</p>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
 
@@ -613,51 +660,6 @@
   
     <footer>
       <a rel="full-article" href="/2013/02/rwby/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/01/trace-rubygems-require-slow/">追蹤 Rubygems Require 緩慢紀錄</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-30T10:18:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>昨天灌了一台新的機器，正準備用 <a href="http://puppetlabs.com">puppet</a> bootstrap 時卻發現他的 puppet 執行的非常緩慢。追蹤解決問題的過程十分有趣，在這邊紀錄一下。</p>
-
-<p>由於 puppet 執行檔本身是一隻 ruby script，於是開啟了 irb -d 使用 DEBUG 模式直接執行看看該 script 的內容，看看能否看出問題在哪。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/trace-rubygems-require-slow/">Read on &rarr;</a>
     </footer>
   
 
@@ -689,6 +691,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
       </li>
     
@@ -704,15 +710,11 @@
         <a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 124.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>

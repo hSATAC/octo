@@ -4,7 +4,7 @@
   <title><![CDATA[Category: route53 | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/route53/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -20,7 +20,7 @@
     <id>http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53</id>
     <content type="html"><![CDATA[<p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
 
-<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 http://checkip.dyndns.com 來抓取自己 ip 再更新 route 53 的 A record 。</p>
+<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 <a href="http://checkip.dyndns.com">http://checkip.dyndns.com</a> 來抓取自己 ip 再更新 route 53 的 A record 。</p>
 
 <p>不過 ec2 的 public dns 有一個特性，從外面解會解到 public ip ，但是從裡面解會解到 private ip ，同一個 availability zone 用 private ip 互連是不多收費的。</p>
 
@@ -33,7 +33,7 @@
 
 <p>修改過後的 script 如下：</p>
 
-<p><div><script src='https://gist.github.com/2880516.js?file='></script>
+<p><div><script src='https://gist.github.com/2880516.js'></script>
 <noscript><pre><code>#!/bin/sh
 
 # Setup dynamic dns on Route 53 for aws ec2 (CNAME)

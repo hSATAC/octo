@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。 原本以為這個需求無法達成，不過做了點研究以後發現是可行的，甚至 B repository 是已存在的 repository &hellip;">
+  <meta name="description" content="筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。 CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, Hg, Mercurial-server</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-13T10:41:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。</p>
+
+<p>CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 python 2.4，因此套件庫裡面的 hg 就不合用了。</p>
+
+<h2>安裝 Python 2.6 + hg</h2>
+
+<ul>
+<li>先 <code>sudo yum install python26 python26-devel</code> 從 epel 安裝 python 2.6</li>
+<li>抓下最新的 hg source <code>wget http://mercurial.selenic.com/release/mercurial-2.1.2.tar.gz</code> 解壓後不要急著 make，先修改一下 Makefile</li>
+<li>line 9 的 PYTHON 改成 <code>PYTHON=python26</code> 讓他抓 python 2.6</li>
+<li><p>doc 的部份應該是缺 docutils 所以會出錯，不需要 doc 直接砍掉：line 33 改為 <code>all: build</code>, line 53 改為 <code>install: install-bin</code></p></li>
+<li><p>接著就可以 <code>make all &amp;&amp; su -c "make install" &amp;&amp; hg version</code></p></li>
+</ul>
+
+
+<h2>安裝 mercurial-server</h2>
+
+<ul>
+<li>抓下最新 mercurial-server 原始碼解壓</li>
+<li>一樣先修改 Makefile， doc 的部份一樣移除： line 53 改為 <code>installfiles: install pythoninstall</code></li>
+<li>CentOS 的 useradd 不支援 <code>--system</code>，把 <code>--system</code> 改成 <code>-r</code>。如果 repositories 的 path 想改可以順便修改 <code>--home</code> 的值。</li>
+<li>修改完後 <code>sudo make setup-useradd</code> 就安裝好了</li>
+</ul>
+
+
+<h2>設定 mercurial-server</h2>
+
+<ul>
+<li>先把自己的 public key 放到 <code>/etc/mercurial-server/keys/root/</code> 下，接著要改用 hgadmin 這個 repo 來設定</li>
+<li>check out hgadmin 這個 repo <code>hg clone ssh://hg@localhost/hgadmin</code></li>
+<li>把 <code>/etc/mercurial-server/keys</code> 和 <code>etc/mercurial-server/access.conf</code> 複製過來。</li>
+<li>add, commit 後 push，以後就可以用這個 repo 來管理使用者和權限了。</li>
+<li>原本的 <code>/etc/mercurial-server/access.conf</code> 和 <code>/etc/mercurial-server/keys</code> 就可以刪除了。</li>
+</ul>
+
+
+<h3>Redmine + hg</h3>
+
+<p>順便講一下 Redmine 和 hg 搭配，如果設定好後在 repositories 分頁一直 404，看 log 顯示 <code>hg: error during getting info: hg exited with non-zero status: 255</code> 的話，多半是檔案權限問題。</p>
+
+<p>可以修改 <code>redmine/config/environment.rb</code> 打開 <code>config.log_level = :debug</code> 看更詳細的 log</p>
+
+<p>應該可以看到實際執行的 hg 指令，用 redmine user 去執行看看就能抓出問題所在。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -264,11 +344,11 @@
   </header>
 
 
-  <div class="entry-content"><p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&#8217;s a total waste to create numbers of workers when there&#8217;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+  <div class="entry-content"><p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
 
 <p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
 
-<p>Here&#8217;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
 
 <h2>Introduction</h2>
 
@@ -672,7 +752,7 @@ redis.conf 要稍微修改</p>
 
   <div class="entry-content"><p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
 
-<div><script src='https://gist.github.com/1496197.js?file='></script>
+<div><script src='https://gist.github.com/1496197.js'></script>
 <noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
   if !exists('*PHPsynCHK')
     function! PHPsynCHK()
@@ -697,74 +777,6 @@ redis.conf 要稍微修改</p>
 <p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
 </div>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-20T16:00:00+08:00" pubdate data-updated="true">Dec 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天 Even Wu 在 facebook 上問了一個問題：他的 Bash PS1 要補滿 dash 到換行為止，感覺很有趣，稍微研究了一下。</p>
-
-<p>首先要取得 term 的寬度，這個很容易直接抓 <code>$COLUMNS</code> 就好。</p>
-
-<p>再來要抓原本 PS1 的長度，原本打算用 <code>$PWD</code> 去抓，不過 \w 碰到自己的家目錄會變 <code>~</code> 所以長度不對，這邊要自己處理一下：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span> <span class="s2">&quot;$PWD&quot;</span> <span class="o">]</span>
-</span><span class='line'>  <span class="k">then</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~&quot;</span>
-</span><span class='line'>  <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;$HOME&quot;</span> <span class="o">==</span>  <span class="s2">&quot;${PWD:0:${#HOME}}&quot;</span> <span class="o">]</span>
-</span><span class='line'>  <span class="k">then</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="s2">&quot;~${PWD:${#HOME}}&quot;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'><span class="k">    </span><span class="nv">newPWD</span><span class="o">=</span><span class="nv">$PWD</span>
-</span><span class='line'>  <span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2011/12/bash-ps1-fill/">Read on &rarr;</a>
-    </footer>
   
 
 
@@ -797,6 +809,10 @@ redis.conf 要稍微修改</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
       </li>
     
@@ -812,15 +828,11 @@ redis.conf 要稍微修改</p>
         <a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 124.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 103.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>

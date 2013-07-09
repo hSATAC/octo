@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Redmine | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/redmine/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -93,7 +93,7 @@ sudo gem install sqlite3-ruby
 <li>migrate from trac
 ```
 RAILS_ENV=production bundle exec rake redmine:migrate_from_trac
-...
+&hellip;
 Are you sure you want to continue ? [y/N] y</li>
 </ul>
 </li>
@@ -107,7 +107,7 @@ Target project identifier []: miiicasa
 ```</p>
 
 <ul>
-<li><p>git clone https://github.com/xfalcons/migrate-trac-to-redmine.git
+<li><p>git clone <a href="https://github.com/xfalcons/migrate-trac-to-redmine.git">https://github.com/xfalcons/migrate-trac-to-redmine.git</a>
 Follow the instruction.</p></li>
 <li><p>Setup Redmine</p>
 
@@ -130,7 +130,7 @@ This action could take a very long time (maybe 1 day) and it got no progress bar
 <code>
 ps axww | grep git | grep -v grep
 </code>
-You'll see it's parsing git log.</li>
+You&rsquo;ll see it&rsquo;s parsing git log.</li>
 </ul>
 </li>
 </ul>

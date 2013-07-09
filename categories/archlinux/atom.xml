@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Archlinux | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -77,7 +77,7 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {&lt;/p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node &lsquo;devm3&rsquo; {&lt;/p>
 </span><span class='line'>
 </span><span class='line'>&lt;pre>&lt;code>stage { 'pre': }
 </span><span class='line'>class {
@@ -101,7 +101,7 @@
     <link href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/"/>
     <updated>2013-02-19T17:51:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet</id>
-    <content type="html"><![CDATA[<p>筆記一下安裝步驟...。</p>
+    <content type="html"><![CDATA[<p>筆記一下安裝步驟&hellip;。</p>
 
 <h2>Install Archlinux</h2>
 
@@ -182,23 +182,27 @@
 
 
 
-<p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
+<p><p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
 所以我寫成 script 可以放在 xinitrc 裏面去自動執行
 <pre lang="bash">#!/bin/sh
-DEVICE_ID=`xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'`
+DEVICE_ID=<code>xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'</code></p>
 
-if xinput -list-props $DEVICE_ID | grep "Device Enabled" | grep "1$" &gt; /dev/null
-then
-    xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0
-fi
+<p>if xinput -list-props $DEVICE_ID | grep &ldquo;Device Enabled&rdquo; | grep &ldquo;1$&rdquo; &gt; /dev/null
+then</p>
+
+<pre><code>xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0
+</code></pre>
+
+<p>fi
 </pre>
 接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
 在 /etc/pm/sleep.d/ 下<br />
 新增一個 script 讓他去執行上一段程式就可以了。
-<pre lang="bash">!/bin/sh
-# 90G300: suspend/wakeup Logitech G300 devices
+<pre lang="bash">!/bin/sh</p>
 
-case "$1" in
+<h1>90G300: suspend/wakeup Logitech G300 devices</h1>
+
+<p>case &ldquo;$1&rdquo; in
 hibernate|suspend)
 ;;
 thaw|resume)
@@ -207,10 +211,9 @@ thaw|resume)
 *) exit $NA
 ;;
 esac
-</pre>
+</pre></p>
 
-<p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p>
-
+<p><p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p></p>
 ]]></content>
   </entry>
   

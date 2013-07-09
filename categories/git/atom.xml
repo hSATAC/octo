@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -44,7 +44,7 @@
 
 <p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
 
-<p><div><script src='https://gist.github.com/3903435.js?file='></script>
+<p><div><script src='https://gist.github.com/3903435.js'></script>
 <noscript><pre><code>#!/bin/sh
 
 # do gocode first
@@ -89,7 +89,7 @@ git reset --hard origin/master
 
 <p>再來是檢查哪些 branches 已經開很久了(開超過一個月)，卻又沒有 merge 進主幹，這時管理者可以看一下這些 branches 是否已經不再使用，可以刪除。</p>
 
-<p><div><script src='https://gist.github.com/3246217.js?file='></script>
+<p><div><script src='https://gist.github.com/3246217.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
 require 'rubygems'
 require 'active_support'

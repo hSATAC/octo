@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xray-rails 與 tmux, vim 整合]]></title>
+    <link href="http://blog.hsatac.net/2013/07/xray-rails-tmux-vim-integration/"/>
+    <updated>2013-07-09T22:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/07/xray-rails-tmux-vim-integration</id>
+    <content type="html"><![CDATA[<p>剛好又開新專案了，來介紹一下 <a href="https://github.com/brentd/xray-rails">Xray-rails</a> 與 tmux, vim 的整合。</p>
+
+<p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 <code>⌘ + ⇧ + x</code> 就會開啟一層 overlay，讓你很清楚的看出現在的畫面由哪些 view, partial, controller 生成，更方便的是只要一點畫面，即可在編輯器中開啟該檔案，大大降低 trace 程式碼的時間。</p>
+
+<p><a href="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png"><img src="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png" alt="image" /></a></p>
+
+<!--more-->
+
+
+<p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 預設的編輯器是 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> (<code>/usr/local/bin/subl</code>)。可以透過 overlay 右下角的設定圖示、或者自己新增 <code>~/.xrayconfig</code> 檔案來設定你使用的編輯器。</p>
+
+<p>我平常使用 <a href="https://github.com/aziz/tmuxinator">Tmuxinator</a> 來管理我的專案和 tmux, 每個專案有自己的 tmux session，讓我可以快速在不同專案的開發環境之間切換。</p>
+
+<p>我的 <code>~/.xrayconfig</code> 也改成透過 tmux 傳送指令給我的 vim，範例設定檔如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:editor: "/usr/local/bin/tmux send -t openapply:editor $'\e' :tabe $file ENTER"</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>openapply</code> 是我的專案 tmux session 名稱，而 <code>editor</code> 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。</p>
+
+<p>但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 <code>~/.xrayconfig</code> 實在很不方便，所以希望能在每一個專案底下放自己的 <code>.xrayconfig</code>。</p>
+
+<p>這個功能已經<a href="https://github.com/brentd/xray-rails/issues/21">提案給原作者同意</a>，也送了 <a href="https://github.com/brentd/xray-rails/pull/23">pull request</a>，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  gem 'xray-rails', :git =&gt; 'https://github.com/hSATAC/xray-rails.git',
+</span><span class='line'>                    :branch =&gt; 'feature/project_specific_config'</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RSpec-Given 與 RSpec-Spies]]></title>
@@ -84,7 +122,7 @@
 </ul>
 
 
-<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&#8230;&#8230;重複這個循環。</p>
+<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&hellip;&hellip;重複這個循環。</p>
 
 <p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
 
@@ -135,16 +173,16 @@
     <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/"/>
     <updated>2013-02-27T15:45:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en</id>
-    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&#8217;s a little troublesome to migrate AWS AMI between regions.</p>
+    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
 
-<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&#8217;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&#8217;s a online tool that does these steps for you.</p>
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
 
-<p>After some study, I found that it&#8217;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&#8217;t migrate AMI but we could do so just for some more steps.</p>
+<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
 
 <!--more-->
 
 
-<p>It&#8217;s really simple:</p>
+<p>It&rsquo;s really simple:</p>
 
 <p>Find the snapshot or your AMI, click <code>Copy Snapshot</code> to copy snapshot to your destinated region.</p>
 
@@ -154,7 +192,7 @@
 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
 
-<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&#8217;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&rsquo;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
 
@@ -170,7 +208,7 @@
 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
 
-<p>You don&#8217;t need to rsync anything. It&#8217;s just that easy!</p>
+<p>You don&rsquo;t need to rsync anything. It&rsquo;s just that easy!</p>
 ]]></content>
   </entry>
   
@@ -181,7 +219,7 @@
     <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly</id>
     <content type="html"><![CDATA[<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
 
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&#8230;。</p>
+<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&hellip;。</p>
 
 <p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
 
@@ -198,7 +236,7 @@
 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
 
-<p>接著我們要使用演算法優化的大絕招 - 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+<p>接著我們要使用演算法優化的大絕招 &ndash; 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
 
@@ -228,11 +266,11 @@
 
 <h2>Infrastructure as Code</h2>
 
-<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&#8230;？</p>
+<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&hellip;？</p>
 
 <p>其實基本上是相通的…但概念層次上高了一層。寫 shell script 主要是加速重複性工作、減少人為疏失，但你也很難去 reuse 這些東西。</p>
 
-<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&#8230;。</p>
+<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&hellip;。</p>
 
 <p>Code 就是文件， code 就是你的 infrastructure。不但好寫好讀好維護，更可直接拿來執行。</p>
 
@@ -271,7 +309,7 @@
 </span><span class='line'>    notify {'/tmp/test1 has already been synced.':}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>也可以用 chaining 的寫法，以箭頭表示 <- 或 -> 都可以：</p>
+<p>也可以用 chaining 的寫法，以箭頭表示 &lt;&ndash; 或 &ndash;> 都可以：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -454,7 +492,7 @@
 <ul>
 <li><p><a href="http://docs.puppetlabs.com/guides/troubleshooting.html">Trouble Shooting</a> Puppet 使用上有問題可以先來這邊查查看。</p></li>
 <li><p><a href="http://www.puppetcookbook.com/">Puppet CookBook</a> 有許多實用案例</p></li>
-<li><p><a href="https://github.com/jordansissel/puppet-examples">Puppet Examples</a> 有很多東西直接看 code 是最快的&#8230;。</p></li>
+<li><p><a href="https://github.com/jordansissel/puppet-examples">Puppet Examples</a> 有很多東西直接看 code 是最快的&hellip;。</p></li>
 <li><p>關於 Archlinux 使用 Puppet 相關可參考我上兩篇文章：<a href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a>、<a href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></p></li>
 </ul>
 
@@ -535,7 +573,7 @@
     <link href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/"/>
     <updated>2013-02-19T17:51:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet</id>
-    <content type="html"><![CDATA[<p>筆記一下安裝步驟&#8230;。</p>
+    <content type="html"><![CDATA[<p>筆記一下安裝步驟&hellip;。</p>
 
 <h2>Install Archlinux</h2>
 
@@ -593,11 +631,11 @@
     <link href="http://blog.hsatac.net/2013/02/rwby/"/>
     <updated>2013-02-15T17:54:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/rwby</id>
-    <content type="html"><![CDATA[<p>RWBY 第二部預告片 &#8220;White&#8221; 終於推出！</p>
+    <content type="html"><![CDATA[<p>RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！</p>
 
-<p>之前看完第一部 &#8220;Red&#8221; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &#8220;White&#8221; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
+<p>之前看完第一部 &ldquo;Red&rdquo; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &ldquo;White&rdquo; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
 
-<p>下一部 &#8220;Black&#8221; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&#8230;</p>
+<p>下一部 &ldquo;Black&rdquo; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&hellip;</p>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
 
@@ -610,7 +648,7 @@
 <blockquote><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, locked inside of me.<br/>Tell me can a heart be turned to stone?</p><p>Mirror mirror what&#8217;s behind you?<br/>Save me from the things I see!<br/>I can keep it from the world,<br/>why wont you let me hide from me?</p><p>Mirror, mirror,<br/>tell me something.<br/>Who&#8217;s the loneliest of all?</p><p>I am the loneliest of all.</p></blockquote>
 
 
-<p>第一部 &#8220;Red&#8221;</p>
+<p>第一部 &ldquo;Red&rdquo;</p>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/pYW2GmHB5xs" frameborder="0" allowfullscreen></iframe>
 
@@ -687,9 +725,9 @@
 
 <p>兇手已經呼之欲出了，就是我 =皿=</p>
 
-<p>當時幫這台新機器改了 hostname 以後，忘記修改 /etc/hosts ，導致他自己不認得自己的 hostname。當然那個會 timeout 的 DNS 也是有問題，不過那是關於 djbdns 的另一個故事了&#8230;。</p>
+<p>當時幫這台新機器改了 hostname 以後，忘記修改 /etc/hosts ，導致他自己不認得自己的 hostname。當然那個會 timeout 的 DNS 也是有問題，不過那是關於 djbdns 的另一個故事了&hellip;。</p>
 
-<p>最後將 /etc/hosts 改回來就完全正常了。可喜可賀。最難抓的 bug 果然都是最愚蠢的&#8230;。</p>
+<p>最後將 /etc/hosts 改回來就完全正常了。可喜可賀。最難抓的 bug 果然都是最愚蠢的&hellip;。</p>
 
 <p>在這邊要感謝 <a href="http://www.tenlong.com.tw/items/9862765674?item_id=481936">Debug Hacks 除錯駭客－極致除錯的技巧與工具</a> 一書的譯者，事實證明寫 scripting language 也是要會一些基礎 debug 技巧的！推薦各位購買這本書。</p>
 ]]></content>
@@ -715,9 +753,9 @@
 
 <p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
 
-<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&#8217;s quite nice.</p>
+<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&rsquo;s quite nice.</p>
 
-<p>The first session of day 1 was Matz and of course it&#8217;s nice. And then Wei Lu from Singapore shared about pair programming, she&#8217;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
+<p>The first session of day 1 was Matz and of course it&rsquo;s nice. And then Wei Lu from Singapore shared about pair programming, she&rsquo;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
 
 <blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
 
@@ -725,31 +763,31 @@
 <script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-<blockquote><p>&#8220;I didn&#8217;t expect for this kind of mruby information.&#8221;</p></blockquote>
+<blockquote><p>&ldquo;I didn&rsquo;t expect for this kind of mruby information.&rdquo;</p></blockquote>
 
-<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&#8217;s also very nice, covered from real cases to deep theories.</p>
+<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&rsquo;s also very nice, covered from real cases to deep theories.</p>
 
 <p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
 
 <h3>Party</h3>
 
-<p>I went to official party at day 1 night, I don&#8217;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
+<p>I went to official party at day 1 night, I don&rsquo;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
 
 <p>This was a great event to meet new people and old friends from every places in the world.</p>
 
-<p>I asked Matz in the party, &#8220;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&#8221;</p>
+<p>I asked Matz in the party, &ldquo;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&rdquo;</p>
 
-<p>&#8220;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&#8217;s high quality&#8221; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
+<p>&ldquo;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&rsquo;s high quality&rdquo; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
 
-<p>It&#8217;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
+<p>It&rsquo;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
 
 <h3>Day 2</h3>
 
-<p>I was very excited about sessions in day 2: &#8220;devOps toolbox&#8221; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&#8217;ve been studying these 2 devOps frameworks and couldn&#8217;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
+<p>I was very excited about sessions in day 2: &ldquo;devOps toolbox&rdquo; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&rsquo;ve been studying these 2 devOps frameworks and couldn&rsquo;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
 
 <p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
 
-<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&#8217;t really dig into it because the lack of information and documents on the internet.</p>
+<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&rsquo;t really dig into it because the lack of information and documents on the internet.</p>
 
 <h3>End</h3>
 
@@ -761,13 +799,13 @@
 <script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-<blockquote><p>&#8220;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&#8221;</p></blockquote>
+<blockquote><p>&ldquo;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&rdquo;</p></blockquote>
 
 <p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
 
-<p>ihower said they picked topics very carefully, they didn&#8217;t accept your proposal just because your a sponsor. I think it&#8217;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
+<p>ihower said they picked topics very carefully, they didn&rsquo;t accept your proposal just because your a sponsor. I think it&rsquo;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
 
-<p>It&#8217;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&#8217;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
+<p>It&rsquo;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&rsquo;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
 ]]></content>
   </entry>
   
@@ -891,7 +929,7 @@
 
 <p>在 PHP 中 <code>array + array</code> 與 <code>array_merge</code> 的行為是不一樣的，陣列相加的效能會比 <code>array_merge</code> 來的好，但換來的代價是可能不是你預期的行為以及資料流失。</p>
 
-<p>PHP 的陣列可以有 key 也可以沒有 key，也可以兩者混合。不過所謂的沒有 key ，其實他還是有 key ，只是是自動編上去的 int 流水號 key 例如 0,1,2,3&#8230;不管是哪一種，在陣列相加以及 <code>array_merge</code> 的行為都不一樣。</p>
+<p>PHP 的陣列可以有 key 也可以沒有 key，也可以兩者混合。不過所謂的沒有 key ，其實他還是有 key ，只是是自動編上去的 int 流水號 key 例如 0,1,2,3&hellip;不管是哪一種，在陣列相加以及 <code>array_merge</code> 的行為都不一樣。</p>
 
 <p>先講一下 <code>array_merge</code> 的行為，<code>array_merge($a, $b)</code> 的話，如果 <code>$a</code> 和 <code>$b</code> 裡面有 key 相同的元素，則會<strong>後蓋前</strong>也就是 <code>$b</code> 的值會蓋掉 <code>$a</code> 的值。那如果是沒有 key (流水號 key)的值，則會以附加在尾端 (append) 的方式合併上去，而所有流水號 key 的 index 則會重排。</p>
 
@@ -1022,7 +1060,7 @@
     <id>http://blog.hsatac.net/2012/10/obj-c-unit-test-with-asynchronous-request</id>
     <content type="html"><![CDATA[<p>使用 Xcode 的 OCUnit 來做單元測試網路連線時，由於 OCUnit 不會等 block 執行，所以會直接跳到 pass。一般正常作法應該是用 mock object 來測試，不過總有要實際測試真實連線的時候。這時可以使用以下的 snippet:</p>
 
-<div><script src='https://gist.github.com/3978482.js?file='></script>
+<div><script src='https://gist.github.com/3978482.js'></script>
 <noscript><pre><code>- (void)testLogin
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -1070,7 +1108,7 @@
 
 <p>不過因為我朋友在網路掃圖掃太凶，他已經不記得這張圖是在哪裡取得，更不用說知道作者了，我一直很想知道這張圖的 license 獲得到原作者的授權，但始終無法找到，這件事就一直掛在我心上。</p>
 
-<p>還好沒過多久，Google 推出了兇惡的「以圖找圖」功能，馬上就用這個功能下去找&#8230;&#8230;沒想到不知道是當初作者網站還沒建立起來、還是還沒索引到，又或者是那時以圖找圖搜尋技術還沒成熟，仍然是無功而返。</p>
+<p>還好沒過多久，Google 推出了兇惡的「以圖找圖」功能，馬上就用這個功能下去找&hellip;&hellip;沒想到不知道是當初作者網站還沒建立起來、還是還沒索引到，又或者是那時以圖找圖搜尋技術還沒成熟，仍然是無功而返。</p>
 
 <p>時光又過了一兩年，有一天我又突然想起這件事，再試著找看看，沒想到這時很精準的就找到了作者的網站。</p>
 
@@ -1113,7 +1151,7 @@
 
 <p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
 
-<div><script src='https://gist.github.com/3903435.js?file='></script>
+<div><script src='https://gist.github.com/3903435.js'></script>
 <noscript><pre><code>#!/bin/sh
 
 # do gocode first
@@ -1265,9 +1303,9 @@ git reset --hard origin/master
 
 <h3>說明</h3>
 
-<p>Ack - Better than grep</p>
+<p>Ack &ndash; Better than grep</p>
 
-<p>Ag - Better than Ack</p>
+<p>Ag &ndash; Better than Ack</p>
 
 <p>比 grep 更方便好用</p>
 
@@ -1332,45 +1370,6 @@ git reset --hard origin/master
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[身體調校聖經]]></title>
-    <link href="http://blog.hsatac.net/2012/09/the-4-hours-body/"/>
-    <updated>2012-09-20T23:23:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/09/the-4-hours-body</id>
-    <content type="html"><![CDATA[<p><img src="http://blog.hsatac.net/images/the_4_hours_body/cover.jpg" alt="cover" /></p>
-
-<blockquote><p>⋯⋯《身體調校聖經》所提供的，是對人類重建身體的全新探索，全盤收錄幾百位優異運動員、幾十位醫師，以及幾千小時讓人目瞪口呆的個人實驗智慧；從奧林匹克訓練中心到地下實驗室，從矽谷到南非，作者提摩西．費里斯念茲在茲的改變人生問題是：</p><p>　　對所有關於身體的事情，如何以最小的改變來創造最大的成果？⋯⋯</p></blockquote>
-
-
-<p>前陣子很紅的《<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010541859">身體調校聖經</a>》，看了許多人的心得和推薦以後覺得很有意思，也買了一本。</p>
-
-<p>我的故事很平常，跟大多數人一樣，入伍時有著健康的好身材，退伍就業沒多久就因為天天坐在電腦前缺乏運動而發胖。從 70 kg 暴增到 90 kg。一直都有要減重的念頭，卻遲遲沒有實行。直到看了這本書。</p>
-
-<!--more-->
-
-
-<p>我覺得這本書給了我兩個很重要的觀念：一個是書中所提的「原宿時刻」。故事不在這邊細說，留給各位買書後自行閱讀。我就和故事的主角一樣，突然領悟到，在生命中我一直對最重要的資產——身體視而不見。下意識去忽略他。我知道我需要減重，我知道我要吃得健康，我知道我要維持運動。可是我總是什麼都不去做，就這樣等著看會不會有什麼神奇的事情發生。我每天在寫程式，學習新技術。不斷磨練自己，不斷改進自己的產品、開發流程。因為我知道每天都進步一點，持久下來就會很可觀。可是對自己身體的態度，我卻偏偏是我最瞧不起的那種人。意識到這點以後，要做改變一點都不困難了。</p>
-
-<p>第二個我覺得很棒的觀點是：「測量」。</p>
-
-<p>我從沒想過自己的身體也可以當玩具。我每個月都在買新玩具，沉迷於新玩具帶給我的刺激。但是陪伴我最久，離我最近的身體我居然沒想過要好好去研究他。書中提供了許多測量的方式和策略，只要有了測量和資料，我就可以分析方法是否有效，要如何改變或是繼續加強。就跟我們平時在優化程式、調校伺服器一樣。這不正是我們最擅長的嗎？</p>
-
-<p>除了帶給我這兩點觀念外，書裡也充滿了許多有用的知識和各種你沒想過/沒聽過的調校方法。真的很值得買一本，偶爾隨手翻翻都好，會有意想不到的收穫。</p>
-
-<p>最後附上我按書中提供的方法，選擇比較適合我生活型態的減重方式，運行一個月以來的成果。</p>
-
-<p>我使用的是「低醣減脂法」。不吃米麥糖奶和水果，只吃菜肉蛋豆；不喝飲料，只喝開水或黑咖啡/無糖茶。每天早上起床一小時內一定吃早餐並且補充蛋白質。每週六是作弊日，可以盡情吃任何想吃的東西。</p>
-
-<p>洗澡時洗冷水澡，並且固定時間測量自己的體重/體脂肪/腰圍等等。</p>
-
-<p>從 8/21 實行到今天結束剛好 30 天整。我的成果：腰圍由 101 cm 縮減到 93 cm；體重從 92.3 kg 減輕到 86 kg。後面附的是我體重曲線圖。</p>
-
-<p><img src="http://blog.hsatac.net/images/the_4_hours_body/weight.png" alt="weight" /></p>
-
-<p>還沒達到我的理想體重，因此我還會再持續好一陣子。以前減重帶給我的只有節制和痛苦。但現在我和我自己的身體玩的不亦樂乎，再也不是一件令人難以忍受的事了。我對自己身體的探索，還會再繼續下去。</p>
 ]]></content>
   </entry>
   

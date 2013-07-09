@@ -4,7 +4,7 @@
   <title><![CDATA[Category: aws | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/aws/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -18,16 +18,16 @@
     <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/"/>
     <updated>2013-02-27T15:45:00+08:00</updated>
     <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en</id>
-    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it's a little troublesome to migrate AWS AMI between regions.</p>
+    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
 
-<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there's <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it's a online tool that does these steps for you.</p>
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
 
-<p>After some study, I found that it's not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can't migrate AMI but we could do so just for some more steps.</p>
+<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
 
 <!--more-->
 
 
-<p>It's really simple:</p>
+<p>It&rsquo;s really simple:</p>
 
 <p>Find the snapshot or your AMI, click <code>Copy Snapshot</code> to copy snapshot to your destinated region.</p>
 
@@ -37,7 +37,7 @@
 
 <p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
 
-<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI's description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&rsquo;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
 
 <p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
 
@@ -53,7 +53,7 @@
 
 <p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
 
-<p>You don't need to rsync anything. It's just that easy!</p>
+<p>You don&rsquo;t need to rsync anything. It&rsquo;s just that easy!</p>
 ]]></content>
   </entry>
   
@@ -64,7 +64,7 @@
     <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly</id>
     <content type="html"><![CDATA[<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
 
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已...。</p>
+<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&hellip;。</p>
 
 <p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
 
@@ -81,7 +81,7 @@
 
 <p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
 
-<p>接著我們要使用演算法優化的大絕招 - 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
+<p>接著我們要使用演算法優化的大絕招 &ndash; 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
 
 <p><a href="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
 
@@ -108,7 +108,7 @@
     <id>http://blog.hsatac.net/2012/06/set-ec2-hostname-from-name-tag</id>
     <content type="html"><![CDATA[<p>如果 hostname 每一台都要自己一一指定相當麻煩，寫了一個小 script 放在開機時執行，抓取 instance-id 後取得 Name tag 再設定成 hostname。</p>
 
-<p><div><script src='https://gist.github.com/2887240.js?file='></script>
+<p><div><script src='https://gist.github.com/2887240.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
 require 'rubygems'
 require 'aws-sdk'
@@ -142,7 +142,7 @@ hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
 
 <p>script 如下：</p>
 
-<p><div><script src='https://gist.github.com/2881131.js?file='></script>
+<p><div><script src='https://gist.github.com/2881131.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
 # coding: utf-8
 require 'rubygems'
@@ -179,7 +179,7 @@ end</code></pre></noscript></div>
     <id>http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53</id>
     <content type="html"><![CDATA[<p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
 
-<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 http://checkip.dyndns.com 來抓取自己 ip 再更新 route 53 的 A record 。</p>
+<p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 <a href="http://checkip.dyndns.com">http://checkip.dyndns.com</a> 來抓取自己 ip 再更新 route 53 的 A record 。</p>
 
 <p>不過 ec2 的 public dns 有一個特性，從外面解會解到 public ip ，但是從裡面解會解到 private ip ，同一個 availability zone 用 private ip 互連是不多收費的。</p>
 
@@ -192,7 +192,7 @@ end</code></pre></noscript></div>
 
 <p>修改過後的 script 如下：</p>
 
-<p><div><script src='https://gist.github.com/2880516.js?file='></script>
+<p><div><script src='https://gist.github.com/2880516.js'></script>
 <noscript><pre><code>#!/bin/sh
 
 # Setup dynamic dns on Route 53 for aws ec2 (CNAME)

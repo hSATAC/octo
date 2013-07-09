@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ack | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ack/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -44,8 +44,8 @@
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mosh ash_wu@myserver.com
-</span><span class='line'>mosh myserver.com -- screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mosh &lt;a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#58;&#x61;&#115;&#x68;&#x5f;&#x77;&#x75;&#x40;&#109;&#x79;&#115;&#101;&#x72;&#118;&#x65;&#x72;&#46;&#x63;&#111;&#109;">&#x61;&#115;&#104;&#95;&#119;&#x75;&#x40;&#x6d;&#121;&#115;&#x65;&#114;&#118;&#101;&#x72;&#x2e;&#x63;&#111;&#109;&lt;/a>
+</span><span class='line'>mosh myserver.com &mdash; screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>2. Mitmproxy</h2>
 
@@ -125,9 +125,9 @@
 
 <h3>說明</h3>
 
-<p>Ack - Better than grep</p>
+<p>Ack &ndash; Better than grep</p>
 
-<p>Ag - Better than Ack</p>
+<p>Ag &ndash; Better than Ack</p>
 
 <p>比 grep 更方便好用</p>
 
@@ -182,11 +182,11 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>s &lt;bookmark_name> - Saves the current directory as "bookmark_name"
-</span><span class='line'>g &lt;bookmark_name> - Goes (cd) to the directory associated with "bookmark_name"
-</span><span class='line'>p &lt;bookmark_name> - Prints the directory associated with "bookmark_name"
-</span><span class='line'>d &lt;bookmark_name> - Deletes the bookmark
-</span><span class='line'>l                 - Lists all available bookmarks</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>s &lt;bookmark_name> &ndash; Saves the current directory as &ldquo;bookmark_name&rdquo;
+</span><span class='line'>g &lt;bookmark_name> &ndash; Goes (cd) to the directory associated with &ldquo;bookmark_name&rdquo;
+</span><span class='line'>p &lt;bookmark_name> &ndash; Prints the directory associated with &ldquo;bookmark_name&rdquo;
+</span><span class='line'>d &lt;bookmark_name> &ndash; Deletes the bookmark
+</span><span class='line'>l                 &ndash; Lists all available bookmarks</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   

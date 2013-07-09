@@ -4,7 +4,7 @@
   <title><![CDATA[Category: openssl | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/openssl/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-07-04T17:46:27+08:00</updated>
+  <updated>2013-07-09T22:37:17+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[hSATAC]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c/"/>
     <updated>2012-06-14T10:49:00+08:00</updated>
     <id>http://blog.hsatac.net/2012/06/php-openssl-pkey-get-details-implement-in-c</id>
-    <content type="html"><![CDATA[<p>It's easy to generate a RSA keypair in PHP, just like this:</p>
+    <content type="html"><![CDATA[<p>It&rsquo;s easy to generate a RSA keypair in PHP, just like this:</p>
 
 <p>```
 &lt;?php
@@ -30,22 +30,22 @@ openssl_pkey_export($res, $privkey);</p>
 
 <p>// Get public key
 $pubkey=openssl_pkey_get_details($res);
-$pubkey=$pubkey["key"];
+$pubkey=$pubkey[&ldquo;key&rdquo;];
 ?>
 ```</p>
 
-<p>But when it comes to C, it's not that simple.</p>
+<p>But when it comes to C, it&rsquo;s not that simple.</p>
 
-<p>You might want to use <code>RSA_generate_key</code> and then <code>PEM_write_RSAPublicKey</code>, but in fact, the output format of PHP's <code>openssl_pkey_get_details</code> is not a RSA public key.</p>
+<p>You might want to use <code>RSA_generate_key</code> and then <code>PEM_write_RSAPublicKey</code>, but in fact, the output format of PHP&rsquo;s <code>openssl_pkey_get_details</code> is not a RSA public key.</p>
 
 <p>If you want to get the same result in C, you have to convert your RSA keypair into EVP keypair.</p>
 
 <!--more-->
 
 
-<p>Here's my sample script:</p>
+<p>Here&rsquo;s my sample script:</p>
 
-<p><div><script src='https://gist.github.com/2909583.js?file='></script>
+<p><div><script src='https://gist.github.com/2909583.js'></script>
 <noscript><pre><code>/*
 example of c equivalent to php
 &lt;?php
