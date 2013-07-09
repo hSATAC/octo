@@ -19,6 +19,7 @@ categories: [Ruby]
 
 先使用 `ltrace` 來觀察：
 
+{% raw %}
 <pre>
 # ltrace -r ruby `which gem` help commands
   0.000000 __libc_start_main(0x400860, 4, 0x7fff767d5ce8, 0x4009a0 <unfinished ...>
@@ -30,9 +31,11 @@ categories: [Ruby]
   0.025221 ruby_run_node(0xad4800, 0x7fff767d6fea, 0x877520, 0xad9560
   20.511227 +++ exited (status 0) +++
 </pre>
+{% endraw %}
 
 只能看出卡在 ruby_run_node 這邊，再翻出 `strace` 試試：
 
+{% raw %}
 <pre>
 # strace -rT ruby `which gem` help commands
      0.000051 open("/usr/lib/libresolv.so.2", O_RDONLY|O_CLOEXEC) = 5 <0.000012>
@@ -56,6 +59,7 @@ categories: [Ruby]
      0.000075 poll([{fd=5, events=POLLIN}], 1, 5000^CProcess 7498 detached
  <detached ...>
 </pre>
+{% endraw %}
 
 可以很明顯看出是往 192.168.79.161:53 問 devm3 ，結果 timeout 了四次，一次五秒剛好 20 秒。
 
