@@ -9,7 +9,7 @@
   <meta name="author" content="hSATAC">
 
   
-  <meta name="description" content="⋯⋯《身體調校聖經》所提供的，是對人類重建身體的全新探索，全盤收錄幾百位優異運動員、幾十位醫師，以及幾千小時讓人目瞪口呆的個人實驗智慧；從奧林匹克訓練中心到地下實驗室，從矽谷到南非，作者提摩西．費里斯念茲在茲的改變人生問題是：　　對所有關於身體的事情，如何以最小的改變來創造最大的成果？⋯⋯ &hellip;">
+  <meta name="description" content="介紹八款我最近常用的 command line 工具，對開發很有幫助。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +94,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
+        <h1 class="entry-title"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/">8 款我最近常用的 Command Line 工具</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-28T13:45:00+08:00" pubdate data-updated="true">Sep 28<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>介紹八款我最近常用的 command line 工具，對開發很有幫助。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/2012/09/8-command-line-tools-i-have-been-using-lately/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -578,60 +621,6 @@ end</code></pre></noscript></div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/05/ssh-vm-with-virsh-console/">Ssh Vm With Virsh Console</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-02T16:29:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
-
-<p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
-
-<p>例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
-</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
-</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
-</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure>
-
-
-<p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -659,6 +648,10 @@ end</code></pre></noscript></div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
       </li>
     
@@ -674,15 +667,11 @@ end</code></pre></noscript></div>
         <a href="/2013/05/diff-puppet-chef/">Diff Puppet Chef</a>
       </li>
     
-      <li class="post">
-        <a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 112.0%'>Git</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
 </section>
 <section>
   <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
