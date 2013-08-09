@@ -1,34 +1,30 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Blog Archive - hSATAC</title>
-  <meta name="author" content="hSATAC">
+<!DOCTYPE HTML>
 
-  
-  <meta name="description" content="Blog Archive 2013 The Art of Readable Code 讀書筆記
-Aug 07 2013 posted in Art, Programming, Readability 用 Commandline 發 github pull request
-Jul 16 2013 &hellip;">
-  
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Blog Archives - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="2013 Aug 7 Art, Programming, Readability Comments The Art of Readable Code 讀書筆記 Jul 16 Git, Github, Hub Comments 用 Commandline 發 github pull request &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://blog.hsatac.net/blog/archives/">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/blog/archives/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <!-- Add jQuery library -->
@@ -36,2057 +32,2949 @@ Jul 16 2013 &hellip;">
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
 <script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
 <script type="text/javascript">
-  jQuery.noConflict();
-  jQuery(document).ready(function() {
-      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  //jQuery.noConflict();
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
   });
 </script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27441833-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">ash.cat</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
   <h1><a href="/">hSATAC</a></h1>
   
-    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
-  
-  <div class="clear"></div>
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.hsatac.net" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<nav id="main-nav"><ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+
+<section class="aboutme">
+  <p>
+    I am a programming language user, here's some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article role="article">
-  
-  <header>
-    <h1 class="entry-title">Blog Archive</h1>
-    
-  </header>
-  
-  <div id="blog-archives">
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><div itemscope itemtype="http://schema.org/Blog">
 
+	
 
 
-  
-  <h2>2013</h2>
+	
+	
+	<section class="archives"><h1 class="year">2013</h1>
 
-<article>
-  
-<h1><a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a></h1>
-<time datetime="2013-08-07T22:07:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-08-07T22:07:00+08:00" itemprop="datePublished">Aug  7</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/art/'>Art</a>, <a class='category' href='/categories/programming/'>Programming</a>, <a class='category' href='/categories/readability/'>Readability</a></span>
-</footer>
 
+	<a class='category' href='/categories/art/'>Art</a>, <a class='category' href='/categories/programming/'>Programming</a>, <a class='category' href='/categories/readability/'>Readability</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/08/the-art-of-readable-code/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-07-16T12:40:00+08:00" itemprop="datePublished">Jul 16</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a></h1>
-<time datetime="2013-07-16T12:40:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>16</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/github/'>Github</a>, <a class='category' href='/categories/hub/'>Hub</a></span>
-</footer>
+	<a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/github/'>Github</a>, <a class='category' href='/categories/hub/'>Hub</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/07/github-pull-request-from-commandline/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a></h1>
-<time datetime="2013-07-09T22:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>09</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-07-09T22:00:00+08:00" itemprop="datePublished">Jul  9</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ror/'>RoR</a>, <a class='category' href='/categories/xray-rails/'>Xray-rails</a>, <a class='category' href='/categories/tmux/'>tmux</a>, <a class='category' href='/categories/tmuxinator/'>tmuxinator</a>, <a class='category' href='/categories/vim/'>vim</a></span>
-</footer>
 
+	<a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ror/'>RoR</a>, <a class='category' href='/categories/xray-rails/'>Xray-rails</a>, <a class='category' href='/categories/tmux/'>tmux</a>, <a class='category' href='/categories/tmuxinator/'>tmuxinator</a>, <a class='category' href='/categories/vim/'>vim</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/07/xray-rails-tmux-vim-integration/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-06-30T17:53:00+08:00" itemprop="datePublished">Jun 30</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a></h1>
-<time datetime="2013-06-30T17:53:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>30</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rspec/'>Rspec</a>, <a class='category' href='/categories/rspec-given/'>Rspec-given</a>, <a class='category' href='/categories/rspec-spies/'>Rspec-spies</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a></span>
-</footer>
+	<a class='category' href='/categories/rspec/'>Rspec</a>, <a class='category' href='/categories/rspec-given/'>Rspec-given</a>, <a class='category' href='/categories/rspec-spies/'>Rspec-spies</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/06/rspec-given-rspec-spies/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/05/tdd-rails/">TDD Rails</a></h1>
-<time datetime="2013-05-19T19:23:00+08:00" pubdate><span class='month'>May</span> <span class='day'>19</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-05-19T19:23:00+08:00" itemprop="datePublished">May 19</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a></span>
-</footer>
 
+	<a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/05/tdd-rails/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/05/tdd-rails/">TDD Rails</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-05-14T22:29:00+08:00" itemprop="datePublished">May 14</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/05/diff-puppet-chef/">Diff Puppet Chef</a></h1>
-<time datetime="2013-05-14T22:29:00+08:00" pubdate><span class='month'>May</span> <span class='day'>14</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/chef/'>Chef</a>, <a class='category' href='/categories/puppet/'>Puppet</a></span>
-</footer>
+	<a class='category' href='/categories/chef/'>Chef</a>, <a class='category' href='/categories/puppet/'>Puppet</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/05/diff-puppet-chef/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/05/diff-puppet-chef/">Diff Puppet Chef</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a></h1>
-<time datetime="2013-02-27T15:45:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-27T15:45:00+08:00" itemprop="datePublished">Feb 27</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/aws/'>aws</a></span>
-</footer>
 
+	<a class='category' href='/categories/aws/'>aws</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/">Migrate AWS AMI across region painlessly</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a></h1>
-<time datetime="2013-02-27T15:45:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-27T15:45:00+08:00" itemprop="datePublished">Feb 27</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/aws/'>aws</a></span>
-</footer>
 
+	<a class='category' href='/categories/aws/'>aws</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/migrate-aws-ami-across-region-painlessly/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/migrate-aws-ami-across-region-painlessly/">無痛跨 region 轉移 AWS AMI</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-22T11:38:00+08:00" itemprop="datePublished">Feb 22</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/02/puppet-study-note/">Puppet 學習筆記</a></h1>
-<time datetime="2013-02-22T11:38:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>22</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/puppet/'>puppet</a></span>
-</footer>
+	<a class='category' href='/categories/puppet/'>puppet</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/puppet-study-note/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/puppet-study-note/">Puppet 學習筆記</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a></h1>
-<time datetime="2013-02-21T14:12:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>21</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-21T14:12:00+08:00" itemprop="datePublished">Feb 21</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a></span>
-</footer>
 
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/using-puppet-on-archlinux/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-19T17:51:00+08:00" itemprop="datePublished">Feb 19</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></h1>
-<time datetime="2013-02-19T17:51:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>19</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a></span>
-</footer>
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/bootstrap-archlinux-with-puppet/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2013/02/rwby/">RWBY</a></h1>
-<time datetime="2013-02-15T17:54:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>15</span> <span class='year'>2013</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-02-15T17:54:00+08:00" itemprop="datePublished">Feb 15</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rwby/'>RWBY</a></span>
-</footer>
 
+	<a class='category' href='/categories/rwby/'>RWBY</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2013/02/rwby/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/rwby/">RWBY</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2013-01-30T10:18:00+08:00" itemprop="datePublished">Jan 30</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2013/01/trace-rubygems-require-slow/">追蹤 Rubygems require 緩慢紀錄</a></h1>
-<time datetime="2013-01-30T10:18:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>30</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ruby/'>Ruby</a></span>
-</footer>
+	<a class='category' href='/categories/ruby/'>Ruby</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2013/01/trace-rubygems-require-slow/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/01/trace-rubygems-require-slow/">追蹤 Rubygems require 緩慢紀錄</a></h1>
 </article>
 
+	
 
 
-  
-  <h2>2012</h2>
+	
+	
+		</section>
+	
+	<section class="archives"><h1 class="year">2012</h1>
 
-<article>
-  
-<h1><a href="/2012/12/ruby-conf-taiwan-2012-en/">RubyConf.tw 2012</a></h1>
-<time datetime="2012-12-09T13:04:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>09</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-12-09T13:04:00+08:00" itemprop="datePublished">Dec  9</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a></span>
-</footer>
 
+	<a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/12/ruby-conf-taiwan-2012-en/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/ruby-conf-taiwan-2012-en/">RubyConf.tw 2012</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-12-09T13:04:00+08:00" itemprop="datePublished">Dec  9</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/12/ruby-conf-taiwan-2012/">RubyConf.tw 2012 流水帳</a></h1>
-<time datetime="2012-12-09T13:04:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>09</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a></span>
-</footer>
+	<a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/12/ruby-conf-taiwan-2012/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/ruby-conf-taiwan-2012/">RubyConf.tw 2012 流水帳</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/">2010 MBP 升級 SSD 與 Fusion Drive</a></h1>
-<time datetime="2012-11-26T15:15:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>26</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-11-26T15:15:00+08:00" itemprop="datePublished">Nov 26</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/">2010 MBP 升級 SSD 與 Fusion Drive</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/11/sentry-introduction-slides/">Sentry 簡介投影片</a></h1>
-<time datetime="2012-11-13T11:53:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>13</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-11-13T11:53:00+08:00" itemprop="datePublished">Nov 13</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sentry/'>Sentry</a></span>
-</footer>
 
+	<a class='category' href='/categories/sentry/'>Sentry</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/11/sentry-introduction-slides/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/sentry-introduction-slides/">Sentry 簡介投影片</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-11-06T13:17:00+08:00" itemprop="datePublished">Nov  6</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/11/php-array-plus-array-versus-array-merge/">PHP array 相加與 array_merge</a></h1>
-<time datetime="2012-11-06T13:17:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>06</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>PHP</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/11/php-array-plus-array-versus-array-merge/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/php-array-plus-array-versus-array-merge/">PHP array 相加與 array_merge</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/">Obj-C 單元測試非同步連線</a></h1>
-<time datetime="2012-10-30T13:14:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>30</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-10-30T13:14:00+08:00" itemprop="datePublished">Oct 30</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/unit-test/'>unit test</a></span>
-</footer>
 
+	<a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/unit-test/'>unit test</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/">Obj-C 單元測試非同步連線</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-10-21T11:07:00+08:00" itemprop="datePublished">Oct 21</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/10/about-my-logo/">關於我的 Logo</a></h1>
-<time datetime="2012-10-21T11:07:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>21</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/logo/'>logo</a></span>
-</footer>
+	<a class='category' href='/categories/logo/'>logo</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/10/about-my-logo/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/10/about-my-logo/">關於我的 Logo</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/10/sync-git-with-hg/">同步 git 和 hg 的 repository</a></h1>
-<time datetime="2012-10-17T10:20:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>17</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-10-17T10:20:00+08:00" itemprop="datePublished">Oct 17</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/go/'>go</a>, <a class='category' href='/categories/gocode/'>gocode</a>, <a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a></span>
-</footer>
 
+	<a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/go/'>go</a>, <a class='category' href='/categories/gocode/'>gocode</a>, <a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/10/sync-git-with-hg/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/10/sync-git-with-hg/">同步 git 和 hg 的 repository</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-09-28T13:45:00+08:00" itemprop="datePublished">Sep 28</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/">8 款我最近常用的 command line 工具</a></h1>
-<time datetime="2012-09-28T13:45:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>28</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ack/'>ack</a>, <a class='category' href='/categories/ag/'>ag</a>, <a class='category' href='/categories/bashmarks/'>bashmarks</a>, <a class='category' href='/categories/commandline/'>commandline</a>, <a class='category' href='/categories/goaccess/'>goaccess</a>, <a class='category' href='/categories/htop/'>htop</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>, <a class='category' href='/categories/mosh/'>mosh</a>, <a class='category' href='/categories/pdcp/'>pdcp</a>, <a class='category' href='/categories/pdsh/'>pdsh</a>, <a class='category' href='/categories/rpdcp/'>rpdcp</a>, <a class='category' href='/categories/the-silver-searcher/'>the_silver_searcher</a>, <a class='category' href='/categories/tig/'>tig</a></span>
-</footer>
+	<a class='category' href='/categories/ack/'>ack</a>, <a class='category' href='/categories/ag/'>ag</a>, <a class='category' href='/categories/bashmarks/'>bashmarks</a>, <a class='category' href='/categories/commandline/'>commandline</a>, <a class='category' href='/categories/goaccess/'>goaccess</a>, <a class='category' href='/categories/htop/'>htop</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>, <a class='category' href='/categories/mosh/'>mosh</a>, <a class='category' href='/categories/pdcp/'>pdcp</a>, <a class='category' href='/categories/pdsh/'>pdsh</a>, <a class='category' href='/categories/rpdcp/'>rpdcp</a>, <a class='category' href='/categories/the-silver-searcher/'>the_silver_searcher</a>, <a class='category' href='/categories/tig/'>tig</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/">8 款我最近常用的 command line 工具</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/09/the-4-hours-body/">身體調校聖經</a></h1>
-<time datetime="2012-09-20T23:23:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-09-20T23:23:00+08:00" itemprop="datePublished">Sep 20</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/book/'>book</a>, <a class='category' href='/categories/fitness/'>fitness</a></span>
-</footer>
 
+	<a class='category' href='/categories/book/'>book</a>, <a class='category' href='/categories/fitness/'>fitness</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/09/the-4-hours-body/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/09/the-4-hours-body/">身體調校聖經</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-09-19T00:34:00+08:00" itemprop="datePublished">Sep 19</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/09/golang-ides/">開發 Golang 的 IDEs</a></h1>
-<time datetime="2012-09-19T00:34:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>19</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/ide/'>IDE</a>, <a class='category' href='/categories/editor/'>editor</a>, <a class='category' href='/categories/golang/'>golang</a></span>
-</footer>
+	<a class='category' href='/categories/ide/'>IDE</a>, <a class='category' href='/categories/editor/'>editor</a>, <a class='category' href='/categories/golang/'>golang</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/09/golang-ides/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/09/golang-ides/">開發 Golang 的 IDEs</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/08/git-branching-model-regular-check/">自動檢查 git branch 是否 merge 過</a></h1>
-<time datetime="2012-08-12T12:28:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>12</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-08-12T12:28:00+08:00" itemprop="datePublished">Aug 12</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/git/'>Git</a></span>
-</footer>
 
+	<a class='category' href='/categories/git/'>Git</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/08/git-branching-model-regular-check/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/git-branching-model-regular-check/">自動檢查 git branch 是否 merge 過</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/">使用 mitmproxy 替換 request host 和 port</a></h1>
-<time datetime="2012-08-09T11:25:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>09</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-08-09T11:25:00+08:00" itemprop="datePublished">Aug  9</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a></span>
-</footer>
 
+	<a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/">使用 mitmproxy 替換 request host 和 port</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-07-28T20:30:00+08:00" itemprop="datePublished">Jul 28</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a></h1>
-<time datetime="2012-07-28T20:30:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>28</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/git/'>Git</a></span>
-</footer>
+	<a class='category' href='/categories/git/'>Git</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/07/git-restore-removed-files/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/07/git-restore-removed-files/">Git 救回已刪除的檔案</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">PHP openssl_pkey_get_details implement in c</a></h1>
-<time datetime="2012-06-14T10:49:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>14</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-06-14T10:49:00+08:00" itemprop="datePublished">Jun 14</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/c/'>C</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/openssl/'>openssl</a></span>
-</footer>
 
+	<a class='category' href='/categories/c/'>C</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/openssl/'>openssl</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/">PHP openssl_pkey_get_details implement in c</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-06-07T15:50:00+08:00" itemprop="datePublished">Jun  7</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/06/set-ec2-hostname-from-name-tag/">用 ec2 的 Name tag 設定 hostname</a></h1>
-<time datetime="2012-06-07T15:50:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>07</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a></span>
-</footer>
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/06/set-ec2-hostname-from-name-tag/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/set-ec2-hostname-from-name-tag/">用 ec2 的 Name tag 設定 hostname</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a></h1>
-<time datetime="2012-06-07T11:43:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>07</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-06-07T11:43:00+08:00" itemprop="datePublished">Jun  7</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/hosts/'>hosts</a></span>
-</footer>
 
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/hosts/'>hosts</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/06/generate-aws-ec2-hosts-file/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/generate-aws-ec2-hosts-file/">動態產生 ec2 的 hosts 檔案</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-06-06T14:44:00+08:00" itemprop="datePublished">Jun  6</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a></h1>
-<time datetime="2012-06-06T14:44:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>06</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/dns/'>dns</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/route53/'>route53</a></span>
-</footer>
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/dns/'>dns</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/route53/'>route53</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 route 53 設定 ec2 動態 DNS</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a></h1>
-<time datetime="2012-05-02T16:29:00+08:00" pubdate><span class='month'>May</span> <span class='day'>02</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-05-02T16:29:00+08:00" itemprop="datePublished">May  2</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/kvm/'>kvm</a>, <a class='category' href='/categories/virsh/'>virsh</a>, <a class='category' href='/categories/vm/'>vm</a>, <a class='category' href='/categories/vnc/'>vnc</a></span>
-</footer>
 
+	<a class='category' href='/categories/kvm/'>kvm</a>, <a class='category' href='/categories/virsh/'>virsh</a>, <a class='category' href='/categories/vm/'>vm</a>, <a class='category' href='/categories/vnc/'>vnc</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/05/ssh-vm-with-virsh-console/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/05/ssh-vm-with-virsh-console/">ssh vm with virsh console</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-04-13T10:41:00+08:00" itemprop="datePublished">Apr 13</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, hg, mercurial-server</a></h1>
-<time datetime="2012-04-13T10:41:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>13</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/centos/'>CentOS</a>, <a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>, <a class='category' href='/categories/mercurial-server/'>mercurial-server</a></span>
-</footer>
+	<a class='category' href='/categories/centos/'>CentOS</a>, <a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>, <a class='category' href='/categories/mercurial-server/'>mercurial-server</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, hg, mercurial-server</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a></h1>
-<time datetime="2012-04-03T21:43:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>03</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-04-03T21:43:00+08:00" itemprop="datePublished">Apr  3</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/git/'>Git</a></span>
-</footer>
 
+	<a class='category' href='/categories/git/'>Git</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 commit</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a></h1>
-<time datetime="2012-03-07T10:05:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>07</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-03-07T10:05:00+08:00" itemprop="datePublished">Mar  7</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 publish ipa for testflight</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-02-02T14:56:00+08:00" itemprop="datePublished">Feb  2</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a></h1>
-<time datetime="2012-02-02T14:56:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>02</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/02/php-resque-auto-scale-workers/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
-<time datetime="2012-01-17T19:33:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>17</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-01-17T19:33:00+08:00" itemprop="datePublished">Jan 17</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a></span>
-</footer>
 
+	<a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/01/youtube-favorite-add-google-music/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-01-13T14:03:00+08:00" itemprop="datePublished">Jan 13</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a></h1>
-<time datetime="2012-01-13T14:03:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>13</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/redmine/'>Redmine</a>, <a class='category' href='/categories/trac/'>Trac</a></span>
-</footer>
+	<a class='category' href='/categories/redmine/'>Redmine</a>, <a class='category' href='/categories/trac/'>Trac</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine migration from Trac 0.12</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a></h1>
-<time datetime="2012-01-06T15:14:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>06</span> <span class='year'>2012</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-01-06T15:14:00+08:00" itemprop="datePublished">Jan  6</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a></span>
-</footer>
 
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2012/01/php-resque-introduction/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2012-01-05T13:51:00+08:00" itemprop="datePublished">Jan  5</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
-<time datetime="2012-01-05T13:51:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>05</span> <span class='year'>2012</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/centos/'>centos</a>, <a class='category' href='/categories/redis/'>redis</a></span>
-</footer>
+	<a class='category' href='/categories/centos/'>centos</a>, <a class='category' href='/categories/redis/'>redis</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2012/01/upgrade-redis245-on-centos5/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
 </article>
 
+	
 
 
-  
-  <h2>2011</h2>
+	
+	
+		</section>
+	
+	<section class="archives"><h1 class="year">2011</h1>
 
-<article>
-  
-<h1><a href="/2011/12/record-terminal-using-script/">用 script 指令來紀錄輸出及輸入</a></h1>
-<time datetime="2011-12-29T14:59:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>29</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-12-29T14:59:00+08:00" itemprop="datePublished">Dec 29</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/linux/'>linux</a>, <a class='category' href='/categories/script/'>script</a></span>
-</footer>
 
+	<a class='category' href='/categories/linux/'>linux</a>, <a class='category' href='/categories/script/'>script</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/12/record-terminal-using-script/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/12/record-terminal-using-script/">用 script 指令來紀錄輸出及輸入</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-12-22T17:29:00+08:00" itemprop="datePublished">Dec 22</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a></h1>
-<time datetime="2011-12-22T17:29:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>22</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>php</a>, <a class='category' href='/categories/syntax/'>syntax</a>, <a class='category' href='/categories/vim/'>vim</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>php</a>, <a class='category' href='/categories/syntax/'>syntax</a>, <a class='category' href='/categories/vim/'>vim</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/">Vim runtime 不需存檔檢查 PHP 語法</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a></h1>
-<time datetime="2011-12-20T16:00:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>20</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-12-20T16:00:00+08:00" itemprop="datePublished">Dec 20</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/bash/'>Bash</a>, <a class='category' href='/categories/ps1/'>PS1</a>, <a class='category' href='/categories/prompt/'>Prompt</a></span>
-</footer>
 
+	<a class='category' href='/categories/bash/'>Bash</a>, <a class='category' href='/categories/ps1/'>PS1</a>, <a class='category' href='/categories/prompt/'>Prompt</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/12/bash-ps1-fill/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/12/bash-ps1-fill/">Bash PS1 補滿</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a></h1>
-<time datetime="2011-11-30T00:00:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>30</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-11-30T00:00:00+08:00" itemprop="datePublished">Nov 30</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/archlinux/'>Archlinux</a></span>
-</footer>
 
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/11/logitech-g300-on-archlinux/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/11/logitech-g300-on-archlinux/">Logitech G300 on ArchLinux</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-11-30T00:00:00+08:00" itemprop="datePublished">Nov 30</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/11/archlinux/">Archlinux 推廣</a></h1>
-<time datetime="2011-11-30T00:00:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>30</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/archlinux/'>Archlinux</a></span>
-</footer>
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/11/archlinux/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/11/archlinux/">Archlinux 推廣</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a></h1>
-<time datetime="2011-09-30T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>30</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-09-30T00:00:00+08:00" itemprop="datePublished">Sep 30</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a></span>
-</footer>
 
+	<a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/">Redmine + Bundler 復活記</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-09-20T00:00:00+08:00" itemprop="datePublished">Sep 20</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a></h1>
-<time datetime="2011-09-20T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
+	<a class='category' href='/categories/rails/'>Rails</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/09/rake-0-9/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/09/rake-0-9/">Rake 0.9 爆炸解法</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a></h1>
-<time datetime="2011-06-23T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>23</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-06-23T00:00:00+08:00" itemprop="datePublished">Jun 23</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/06/cloudaaa/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/06/cloudaaa/">CloudAAA 雲端大亂鬥簡記</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-06-12T00:00:00+08:00" itemprop="datePublished">Jun 12</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/06/empathy-p4-context/">讓 Empathy 支援 P4-Context</a></h1>
-<time datetime="2011-06-12T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>12</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/06/empathy-p4-context/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/06/empathy-p4-context/">讓 Empathy 支援 P4-Context</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/06/better-array-better-php/">Better Array, Better PHP</a></h1>
-<time datetime="2011-06-11T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>11</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-06-11T00:00:00+08:00" itemprop="datePublished">Jun 11</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/06/better-array-better-php/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/06/better-array-better-php/">Better Array, Better PHP</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-05-18T00:00:00+08:00" itemprop="datePublished">May 18</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/">我的 vimrc for vim, win32 gvim, macvim</a></h1>
-<time datetime="2011-05-18T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>18</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/">我的 vimrc for vim, win32 gvim, macvim</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/04/firefox4-x-webm-x-apache/">Firefox4 x WebM x Apache</a></h1>
-<time datetime="2011-04-28T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>28</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-04-28T00:00:00+08:00" itemprop="datePublished">Apr 28</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/04/firefox4-x-webm-x-apache/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/firefox4-x-webm-x-apache/">Firefox4 x WebM x Apache</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/04/redmine-git-integration/">整合 Redmine 和 git</a></h1>
-<time datetime="2011-04-14T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>14</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-04-14T00:00:00+08:00" itemprop="datePublished">Apr 14</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/04/redmine-git-integration/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/redmine-git-integration/">整合 Redmine 和 git</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-04-07T00:00:00+08:00" itemprop="datePublished">Apr  7</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/">How to enable php gmp on Mac OS X without macports</a></h1>
-<time datetime="2011-04-07T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>07</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/">How to enable php gmp on Mac OS X without macports</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/">連猴子也會之：在 Mac mini server 上架設 WebDAV git server</a></h1>
-<time datetime="2011-04-04T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>04</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-04-04T00:00:00+08:00" itemprop="datePublished">Apr  4</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/">連猴子也會之：在 Mac mini server 上架設 WebDAV git server</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-02-28T00:00:00+08:00" itemprop="datePublished">Feb 28</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/">Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版</a></h1>
-<time datetime="2011-02-28T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>28</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/">Mahou Shoujo Madoka Magica - Connect - ClariS 歌詞 漢字假名拼音對照版</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/">用 Passenger(mod_rails) 部屬 Sinatra</a></h1>
-<time datetime="2011-02-22T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>22</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-02-22T00:00:00+08:00" itemprop="datePublished">Feb 22</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
 
+	<a class='category' href='/categories/rails/'>Rails</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/">用 Passenger(mod_rails) 部屬 Sinatra</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-02-22T00:00:00+08:00" itemprop="datePublished">Feb 22</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/">Mac OSX Server 10.6 安裝 mysql2 gem</a></h1>
-<time datetime="2011-02-22T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>22</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/">Mac OSX Server 10.6 安裝 mysql2 gem</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/">用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎</a></h1>
-<time datetime="2011-02-17T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>17</span> <span class='year'>2011</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-02-17T00:00:00+08:00" itemprop="datePublished">Feb 17</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/">用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2011-01-25T00:00:00+08:00" itemprop="datePublished">Jan 25</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/">Freenode伺服器名稱</a></h1>
-<time datetime="2011-01-25T00:00:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>25</span> <span class='year'>2011</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/">Freenode伺服器名稱</a></h1>
 </article>
 
+	
 
 
-  
-  <h2>2010</h2>
+	
+	
+		</section>
+	
+	<section class="archives"><h1 class="year">2010</h1>
 
-<article>
-  
-<h1><a href="/2010/10/only-my-railgun/">Only my railgun</a></h1>
-<time datetime="2010-10-26T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>26</span> <span class='year'>2010</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-10-26T00:00:00+08:00" itemprop="datePublished">Oct 26</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2010/10/only-my-railgun/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/10/only-my-railgun/">Only my railgun</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/">Mac Os Server 輕鬆設定  Passenger (mod_rails)</a></h1>
-<time datetime="2010-09-26T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>26</span> <span class='year'>2010</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-09-26T00:00:00+08:00" itemprop="datePublished">Sep 26</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/09/mac-os-server-%E8%BC%95%E9%AC%86%E8%A8%AD%E5%AE%9A-passenger-mod_rails/">Mac Os Server 輕鬆設定  Passenger (mod_rails)</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-09-20T00:00:00+08:00" itemprop="datePublished">Sep 20</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2010/09/tm_syntax_highlighting-rails-3-macos/">tm_syntax_highlighting + rails 3 + MacOs</a></h1>
-<time datetime="2010-09-20T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2010</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a></span>
-</footer>
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2010/09/tm_syntax_highlighting-rails-3-macos/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/09/tm_syntax_highlighting-rails-3-macos/">tm_syntax_highlighting + rails 3 + MacOs</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac mini server使用homebrew安裝PHP mcrypt套件</a></h1>
-<time datetime="2010-08-28T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>28</span> <span class='year'>2010</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-08-28T00:00:00+08:00" itemprop="datePublished">Aug 28</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/08/mac-mini-server%E4%BD%BF%E7%94%A8brew%E5%AE%89%E8%A3%85php-mcrypt%E5%A5%97%E4%BB%B6/">Mac mini server使用homebrew安裝PHP mcrypt套件</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-08-27T00:00:00+08:00" itemprop="datePublished">Aug 27</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Transmission X Dropbox X Mac mini server = 動物機</a></h1>
-<time datetime="2010-08-27T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2010</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
+	<a class='category' href='/categories/mac/'>Mac</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/">Transmission X Dropbox X Mac mini server = 動物機</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/">Mac mini server 心得&備忘</a></h1>
-<time datetime="2010-08-24T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>24</span> <span class='year'>2010</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-08-24T00:00:00+08:00" itemprop="datePublished">Aug 24</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/mac/'>Mac</a></span>
-</footer>
 
+	<a class='category' href='/categories/mac/'>Mac</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/">Mac mini server 心得&備忘</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">倒數80天，我用aNobii記錄我的軍旅生活</a></h1>
-<time datetime="2010-03-13T00:00:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>13</span> <span class='year'>2010</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2010-03-13T00:00:00+08:00" itemprop="datePublished">Mar 13</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/">倒數80天，我用aNobii記錄我的軍旅生活</a></h1>
 </article>
+
+	
 
 
+	
+	
+		</section>
+	
+	<section class="archives"><h1 class="year">2009</h1>
 
-  
-  <h2>2009</h2>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-06-20T00:00:00+08:00" itemprop="datePublished">Jun 20</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Tiger 上班去</a></h1>
-<time datetime="2009-06-20T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>20</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/">Tiger 上班去</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/06/%E5%8D%81%E6%AC%BE%E7%B7%9A%E4%B8%8A%E8%A8%98%E5%B8%B3%E8%A9%A6%E7%94%A8%E5%BF%83%E5%BE%97/">十款線上記帳試用心得</a></h1>
-<time datetime="2009-06-08T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-06-08T00:00:00+08:00" itemprop="datePublished">Jun  8</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/06/%E5%8D%81%E6%AC%BE%E7%B7%9A%E4%B8%8A%E8%A8%98%E5%B8%B3%E8%A9%A6%E7%94%A8%E5%BF%83%E5%BE%97/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/%E5%8D%81%E6%AC%BE%E7%B7%9A%E4%B8%8A%E8%A8%98%E5%B8%B3%E8%A9%A6%E7%94%A8%E5%BF%83%E5%BE%97/">十款線上記帳試用心得</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-06-05T00:00:00+08:00" itemprop="datePublished">Jun  5</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">使用 jQuery BlockUI 取代 confirm()</a></h1>
-<time datetime="2009-06-05T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>05</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/%E4%BD%BF%E7%94%A8-jquery-blockui-%E5%8F%96%E4%BB%A3-confirm/">使用 jQuery BlockUI 取代 confirm()</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/06/%E5%9B%9E%E5%88%B0%E8%A0%BB%E8%8D%92/">回到蠻荒</a></h1>
-<time datetime="2009-06-03T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>03</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-06-03T00:00:00+08:00" itemprop="datePublished">Jun  3</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/06/%E5%9B%9E%E5%88%B0%E8%A0%BB%E8%8D%92/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/%E5%9B%9E%E5%88%B0%E8%A0%BB%E8%8D%92/">回到蠻荒</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/06/%E6%9C%89-bug/">有 Bug!</a></h1>
-<time datetime="2009-06-01T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>01</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-06-01T00:00:00+08:00" itemprop="datePublished">Jun  1</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/06/%E6%9C%89-bug/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/06/%E6%9C%89-bug/">有 Bug!</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-28T00:00:00+08:00" itemprop="datePublished">May 28</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 urldecode $_GET</a></h1>
-<time datetime="2009-05-28T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>28</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/php-%E8%87%AA%E5%8B%95-urldecode-_get/">PHP 自動 urldecode $_GET</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/05/login-sftp-with-www-data/">Login SFTP with www-data</a></h1>
-<time datetime="2009-05-22T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>22</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-22T00:00:00+08:00" itemprop="datePublished">May 22</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/login-sftp-with-www-data/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/login-sftp-with-www-data/">Login SFTP with www-data</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-21T00:00:00+08:00" itemprop="datePublished">May 21</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/">Ruby Tuesday 五月場</a></h1>
-<time datetime="2009-05-21T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>21</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/ruby-tuesday-%E4%BA%94%E6%9C%88%E5%A0%B4/">Ruby Tuesday 五月場</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">貓貓日</a></h1>
-<time datetime="2009-05-17T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>17</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-17T00:00:00+08:00" itemprop="datePublished">May 17</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/%E8%B2%93%E8%B2%93%E6%97%A5/">貓貓日</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/05/using-public-key-for-authentication/">Using Public Key for Authentication</a></h1>
-<time datetime="2009-05-17T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>17</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-17T00:00:00+08:00" itemprop="datePublished">May 17</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/using-public-key-for-authentication/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/using-public-key-for-authentication/">Using Public Key for Authentication</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2009/05/khs-m451r/">KHS m451R</a></h1>
-<time datetime="2009-05-07T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>07</span> <span class='year'>2009</span></time>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-05-07T00:00:00+08:00" itemprop="datePublished">May  7</time></span>
+		<br>
+		<span class="tags">
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/05/khs-m451r/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/05/khs-m451r/">KHS m451R</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-04-18T00:00:00+08:00" itemprop="datePublished">Apr 18</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/">延伸 MVC 的 V - 以 CodeIgniter 為例</a></h1>
-<time datetime="2009-04-18T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>18</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>PHP</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/04/%E5%BB%B6%E4%BC%B8-mvc-%E7%9A%84-v-%E4%BB%A5-codeigniter-%E7%82%BA%E4%BE%8B/">延伸 MVC 的 V - 以 CodeIgniter 為例</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/04/my-workstation/">My Workstation</a></h1>
-<time datetime="2009-04-18T00:00:00+08:00" pubdate><span class='month'>Apr</span> <span class='day'>18</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-04-18T00:00:00+08:00" itemprop="datePublished">Apr 18</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/04/my-workstation/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/04/my-workstation/">My Workstation</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/03/hack-into-aguf-big-buff-feature/">Hack into AGUF: Big Buff Feature (Updated for 3.1)</a></h1>
-<time datetime="2009-03-13T00:00:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>13</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-03-13T00:00:00+08:00" itemprop="datePublished">Mar 13</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/game/'>Game</a></span>
-</footer>
 
+	<a class='category' href='/categories/game/'>Game</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2009/03/hack-into-aguf-big-buff-feature/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/03/hack-into-aguf-big-buff-feature/">Hack into AGUF: Big Buff Feature (Updated for 3.1)</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-03-09T00:00:00+08:00" itemprop="datePublished">Mar  9</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2009/03/%E5%A4%9C%E6%9A%AE/">夜暮</a></h1>
-<time datetime="2009-03-09T00:00:00+08:00" pubdate><span class='month'>Mar</span> <span class='day'>09</span> <span class='year'>2009</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/game/'>Game</a></span>
-</footer>
+	<a class='category' href='/categories/game/'>Game</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/">夜暮</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2009/02/using-fckeditor-in-ci-17/">Using fckeditor in CI 1.7</a></h1>
-<time datetime="2009-02-15T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>15</span> <span class='year'>2009</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-02-15T00:00:00+08:00" itemprop="datePublished">Feb 15</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
 
+	<a class='category' href='/categories/php/'>PHP</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/02/using-fckeditor-in-ci-17/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/02/using-fckeditor-in-ci-17/">Using fckeditor in CI 1.7</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2009/02/scream/">Scream!</a></h1>
-<time datetime="2009-02-15T00:00:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>15</span> <span class='year'>2009</span></time>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2009-02-15T00:00:00+08:00" itemprop="datePublished">Feb 15</time></span>
+		<br>
+		<span class="tags">
 
+</span>
+	    
+	    <span class="comments"><a href="/2009/02/scream/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/02/scream/">Scream!</a></h1>
 </article>
 
+	
 
 
-  
-  <h2>2008</h2>
+	
+	
+		</section>
+	
+	<section class="archives"><h1 class="year">2008</h1>
 
-<article>
-  
-<h1><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/">PHP 打包下載最新的 svn repos</a></h1>
-<time datetime="2008-12-12T00:00:00+08:00" pubdate><span class='month'>Dec</span> <span class='day'>12</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-12-12T00:00:00+08:00" itemprop="datePublished">Dec 12</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
 
+	<a class='category' href='/categories/php/'>PHP</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/">PHP 打包下載最新的 svn repos</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-11-02T00:00:00+08:00" itemprop="datePublished">Nov  2</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/">CodeIgniter 1.7 Session Bug within object storage</a></h1>
-<time datetime="2008-11-02T00:00:00+08:00" pubdate><span class='month'>Nov</span> <span class='day'>02</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
+	<a class='category' href='/categories/php/'>PHP</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/">CodeIgniter 1.7 Session Bug within object storage</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/">PHP framework執行效能</a></h1>
-<time datetime="2008-10-19T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>19</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-19T00:00:00+08:00" itemprop="datePublished">Oct 19</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/php/'>PHP</a></span>
-</footer>
 
+	<a class='category' href='/categories/php/'>PHP</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/">PHP framework執行效能</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2008/10/bizarre-love-triangle-by-frente/">Bizarre Love Triangle by Frente!</a></h1>
-<time datetime="2008-10-17T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>17</span> <span class='year'>2008</span></time>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-17T00:00:00+08:00" itemprop="datePublished">Oct 17</time></span>
+		<br>
+		<span class="tags">
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/bizarre-love-triangle-by-frente/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/bizarre-love-triangle-by-frente/">Bizarre Love Triangle by Frente!</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/10/exp-decay/">exp decay&#8230;</a></h1>
-<time datetime="2008-10-14T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>14</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-14T00:00:00+08:00" itemprop="datePublished">Oct 14</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
 
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/exp-decay/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/exp-decay/">exp decay&#8230;</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/">POSH Hair 剪髮記</a></h1>
-<time datetime="2008-10-12T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>12</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-12T00:00:00+08:00" itemprop="datePublished">Oct 12</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/">POSH Hair 剪髮記</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2008/10/bug-%E4%B8%80%E7%89%9B%E8%BB%8A/">Bug 一牛車</a></h1>
-<time datetime="2008-10-10T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>10</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-10T00:00:00+08:00" itemprop="datePublished">Oct 10</time></span>
+		<br>
+		<span class="tags">
 
 
-</article>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/bug-%E4%B8%80%E7%89%9B%E8%BB%8A/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/bug-%E4%B8%80%E7%89%9B%E8%BB%8A/">Bug 一牛車</a></h1>
+</article>
 
-<article>
-  
-<h1><a href="/2008/10/ie7-vs-https/">ie7 vs https</a></h1>
-<time datetime="2008-10-09T00:00:00+08:00" pubdate><span class='month'>Oct</span> <span class='day'>09</span> <span class='year'>2008</span></time>
+	
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-10-09T00:00:00+08:00" itemprop="datePublished">Oct  9</time></span>
+		<br>
+		<span class="tags">
 
-</article>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
-<article>
-  
-<h1><a href="/2008/09/%E6%90%AC%E6%96%B0%E5%AE%B6/">搬新家</a></h1>
-<time datetime="2008-09-22T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>22</span> <span class='year'>2008</span></time>
+</span>
+	    
+	    <span class="comments"><a href="/2008/10/ie7-vs-https/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/ie7-vs-https/">ie7 vs https</a></h1>
+</article>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+	
 
 
-</article>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-22T00:00:00+08:00" itemprop="datePublished">Sep 22</time></span>
+		<br>
+		<span class="tags">
 
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
-<article>
-  
-<h1><a href="/2008/09/%E5%B0%8F%E6%A0%BC%E9%A0%AD%E8%A9%A6%E8%BB%8A/">小格頭試車</a></h1>
-<time datetime="2008-09-09T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>09</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E6%90%AC%E6%96%B0%E5%AE%B6/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E6%90%AC%E6%96%B0%E5%AE%B6/">搬新家</a></h1>
+</article>
 
+	
 
-</article>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-09T00:00:00+08:00" itemprop="datePublished">Sep  9</time></span>
+		<br>
+		<span class="tags">
 
 
-<article>
-  
-<h1><a href="/2008/09/felt-sc1%E7%B5%84%E7%AB%8B%E7%B5%82%E4%BA%86%EF%BC%81/">Felt SC1組立終了！</a></h1>
-<time datetime="2008-09-08T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>08</span> <span class='year'>2008</span></time>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E5%B0%8F%E6%A0%BC%E9%A0%AD%E8%A9%A6%E8%BB%8A/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E5%B0%8F%E6%A0%BC%E9%A0%AD%E8%A9%A6%E8%BB%8A/">小格頭試車</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/09/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A2%AB%E8%AD%A6%E5%AF%9F%E6%94%94%E6%B2%92%E8%A2%AB%E9%96%8B%E5%96%AE/">第一次被警察攔沒被開單</a></h1>
-<time datetime="2008-09-06T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>06</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-08T00:00:00+08:00" itemprop="datePublished">Sep  8</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/felt-sc1%E7%B5%84%E7%AB%8B%E7%B5%82%E4%BA%86%EF%BC%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/felt-sc1%E7%B5%84%E7%AB%8B%E7%B5%82%E4%BA%86%EF%BC%81/">Felt SC1組立終了！</a></h1>
+</article>
 
+	
 
-</article>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-06T00:00:00+08:00" itemprop="datePublished">Sep  6</time></span>
+		<br>
+		<span class="tags">
 
 
-<article>
-  
-<h1><a href="/2008/09/%E6%95%B4%E5%82%99%E7%AC%AC%E4%B8%80%E9%9A%8E%E6%AE%B5/">整備第一階段</a></h1>
-<time datetime="2008-09-04T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>04</span> <span class='year'>2008</span></time>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A2%AB%E8%AD%A6%E5%AF%9F%E6%94%94%E6%B2%92%E8%A2%AB%E9%96%8B%E5%96%AE/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E7%AC%AC%E4%B8%80%E6%AC%A1%E8%A2%AB%E8%AD%A6%E5%AF%9F%E6%94%94%E6%B2%92%E8%A2%AB%E9%96%8B%E5%96%AE/">第一次被警察攔沒被開單</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/09/%E6%84%9B%E8%BB%8A%E5%A4%A7%E6%94%B9%E9%80%A0%EF%BC%81/">愛車大改造！</a></h1>
-<time datetime="2008-09-04T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>04</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-04T00:00:00+08:00" itemprop="datePublished">Sep  4</time></span>
+		<br>
+		<span class="tags">
 
-
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E6%95%B4%E5%82%99%E7%AC%AC%E4%B8%80%E9%9A%8E%E6%AE%B5/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E6%95%B4%E5%82%99%E7%AC%AC%E4%B8%80%E9%9A%8E%E6%AE%B5/">整備第一階段</a></h1>
 </article>
-
 
+	
 
-<article>
-  
-<h1><a href="/2008/09/%E5%91%BC%E5%90%B8%E4%B9%8B%E9%96%93/">呼吸之間</a></h1>
-<time datetime="2008-09-04T00:00:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>04</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-04T00:00:00+08:00" itemprop="datePublished">Sep  4</time></span>
+		<br>
+		<span class="tags">
 
-
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E6%84%9B%E8%BB%8A%E5%A4%A7%E6%94%B9%E9%80%A0%EF%BC%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E6%84%9B%E8%BB%8A%E5%A4%A7%E6%94%B9%E9%80%A0%EF%BC%81/">愛車大改造！</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E8%87%A8%E7%95%8C%E9%BB%9E/">臨界點</a></h1>
-<time datetime="2008-08-31T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>31</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-09-04T00:00:00+08:00" itemprop="datePublished">Sep  4</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/09/%E5%91%BC%E5%90%B8%E4%B9%8B%E9%96%93/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/09/%E5%91%BC%E5%90%B8%E4%B9%8B%E9%96%93/">呼吸之間</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-31T00:00:00+08:00" itemprop="datePublished">Aug 31</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/">淡水行，犯太歲。</a></h1>
-<time datetime="2008-08-30T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>30</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%87%A8%E7%95%8C%E9%BB%9E/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%87%A8%E7%95%8C%E9%BB%9E/">臨界點</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E8%BF%91%E6%B3%81/">近況</a></h1>
-<time datetime="2008-08-27T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-30T00:00:00+08:00" itemprop="datePublished">Aug 30</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E6%B7%A1%E6%B0%B4%E8%A1%8C%EF%BC%8C%E7%8A%AF%E5%A4%AA%E6%AD%B2%E3%80%82/">淡水行，犯太歲。</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-27T00:00:00+08:00" itemprop="datePublished">Aug 27</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/08/%E8%A8%93%E7%B7%B4%E5%BF%83%E5%BE%97/">訓練心得</a></h1>
-<time datetime="2008-08-27T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%BF%91%E6%B3%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%BF%91%E6%B3%81/">近況</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E6%90%9C%E5%B0%8B%E9%97%9C%E9%8D%B5%E5%AD%97%E8%AE%8A%E8%89%B2/">搜尋關鍵字變色</a></h1>
-<time datetime="2008-08-21T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>21</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-27T00:00:00+08:00" itemprop="datePublished">Aug 27</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%A8%93%E7%B7%B4%E5%BF%83%E5%BE%97/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%A8%93%E7%B7%B4%E5%BF%83%E5%BE%97/">訓練心得</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E8%B2%93%E7%9C%8B2008%E4%BA%AC%E5%A5%A7-%E5%BC%B5%E5%A8%9F%E5%A8%9F%E7%AE%AD%E7%A0%B4%E9%9F%93%E5%9C%8B%E7%A5%9E%E8%A9%B1/">貓看2008京奧 - 張娟娟箭破韓國神話</a></h1>
-<time datetime="2008-08-15T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>15</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-21T00:00:00+08:00" itemprop="datePublished">Aug 21</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E6%90%9C%E5%B0%8B%E9%97%9C%E9%8D%B5%E5%AD%97%E8%AE%8A%E8%89%B2/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E6%90%9C%E5%B0%8B%E9%97%9C%E9%8D%B5%E5%AD%97%E8%AE%8A%E8%89%B2/">搜尋關鍵字變色</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-15T00:00:00+08:00" itemprop="datePublished">Aug 15</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/08/%E7%99%BC%E4%BA%BA%E7%9C%81%E6%80%9D%E7%9A%84%E5%B0%8F%E6%95%85%E4%BA%8B/">發人省思的小故事</a></h1>
-<time datetime="2008-08-15T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>15</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%B2%93%E7%9C%8B2008%E4%BA%AC%E5%A5%A7-%E5%BC%B5%E5%A8%9F%E5%A8%9F%E7%AE%AD%E7%A0%B4%E9%9F%93%E5%9C%8B%E7%A5%9E%E8%A9%B1/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%B2%93%E7%9C%8B2008%E4%BA%AC%E5%A5%A7-%E5%BC%B5%E5%A8%9F%E5%A8%9F%E7%AE%AD%E7%A0%B4%E9%9F%93%E5%9C%8B%E7%A5%9E%E8%A9%B1/">貓看2008京奧 - 張娟娟箭破韓國神話</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E8%AA%BF%E5%BC%93%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/">調弓注意事項</a></h1>
-<time datetime="2008-08-13T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>13</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-15T00:00:00+08:00" itemprop="datePublished">Aug 15</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E7%99%BC%E4%BA%BA%E7%9C%81%E6%80%9D%E7%9A%84%E5%B0%8F%E6%95%85%E4%BA%8B/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E7%99%BC%E4%BA%BA%E7%9C%81%E6%80%9D%E7%9A%84%E5%B0%8F%E6%95%85%E4%BA%8B/">發人省思的小故事</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-13T00:00:00+08:00" itemprop="datePublished">Aug 13</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/08/%E5%B0%8F%E8%B2%93%E8%A3%9D%E5%82%99%E4%B8%80%E8%A6%BD%E6%9C%AC/">小貓裝備一覽本</a></h1>
-<time datetime="2008-08-13T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>13</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%AA%BF%E5%BC%93%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%AA%BF%E5%BC%93%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85/">調弓注意事項</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E7%94%B7%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 男子團體</a></h1>
-<time datetime="2008-08-11T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-13T00:00:00+08:00" itemprop="datePublished">Aug 13</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
 
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E5%B0%8F%E8%B2%93%E8%A3%9D%E5%82%99%E4%B8%80%E8%A6%BD%E6%9C%AC/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E5%B0%8F%E8%B2%93%E8%A3%9D%E5%82%99%E4%B8%80%E8%A6%BD%E6%9C%AC/">小貓裝備一覽本</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-11T00:00:00+08:00" itemprop="datePublished">Aug 11</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E5%A5%B3%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 女子團體</a></h1>
-<time datetime="2008-08-11T00:00:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E7%94%B7%E5%AD%90%E5%9C%98%E9%AB%94/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E7%94%B7%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 男子團體</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/07/sugar-and-spice-and-everything-nice/">Sugar and spice and everything nice</a></h1>
-<time datetime="2008-07-26T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>26</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-08-11T00:00:00+08:00" itemprop="datePublished">Aug 11</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/zhi-zi-pian-yu/'>隻字片語</a></span>
-</footer>
 
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E5%A5%B3%E5%AD%90%E5%9C%98%E9%AB%94/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/08/%E8%B2%93%E7%9C%8B%E4%BA%AC%E5%A5%A7%E5%B0%84%E7%AE%AD-%E5%A5%B3%E5%AD%90%E5%9C%98%E9%AB%94/">貓看京奧射箭 - 女子團體</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-26T00:00:00+08:00" itemprop="datePublished">Jul 26</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/07/mt-new-server%E8%A8%AD%E5%AE%9A%E6%9A%AB%E8%A8%98/">mt new server設定暫記</a></h1>
-<time datetime="2008-07-23T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>23</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/zhi-zi-pian-yu/'>隻字片語</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/sugar-and-spice-and-everything-nice/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/sugar-and-spice-and-everything-nice/">Sugar and spice and everything nice</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/07/%E5%AF%8C%E8%B6%B3%E7%9A%84%E4%B8%80%E5%A4%A9/">富足的一天</a></h1>
-<time datetime="2008-07-12T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>12</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-23T00:00:00+08:00" itemprop="datePublished">Jul 23</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/mt-new-server%E8%A8%AD%E5%AE%9A%E6%9A%AB%E8%A8%98/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/mt-new-server%E8%A8%AD%E5%AE%9A%E6%9A%AB%E8%A8%98/">mt new server設定暫記</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/07/%E5%AE%89%E8%A3%9D%E8%88%87%E8%A8%AD%E5%AE%9Aapc/">安裝與設定APC</a></h1>
-<time datetime="2008-07-10T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>10</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-12T00:00:00+08:00" itemprop="datePublished">Jul 12</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/%E5%AF%8C%E8%B6%B3%E7%9A%84%E4%B8%80%E5%A4%A9/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/%E5%AF%8C%E8%B6%B3%E7%9A%84%E4%B8%80%E5%A4%A9/">富足的一天</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-10T00:00:00+08:00" itemprop="datePublished">Jul 10</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/07/%E4%B8%8A%E5%82%B3%E5%A4%A7%E6%AA%94%E6%A1%88/">上傳大檔案</a></h1>
-<time datetime="2008-07-09T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>09</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/%E5%AE%89%E8%A3%9D%E8%88%87%E8%A8%AD%E5%AE%9Aapc/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/%E5%AE%89%E8%A3%9D%E8%88%87%E8%A8%AD%E5%AE%9Aapc/">安裝與設定APC</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/07/%E5%8F%B0%E5%8C%97%E7%94%9F%E6%B4%BB/">台北生活</a></h1>
-<time datetime="2008-07-06T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>06</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-09T00:00:00+08:00" itemprop="datePublished">Jul  9</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/%E4%B8%8A%E5%82%B3%E5%A4%A7%E6%AA%94%E6%A1%88/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/%E4%B8%8A%E5%82%B3%E5%A4%A7%E6%AA%94%E6%A1%88/">上傳大檔案</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2008/07/mantis/">Mantis</a></h1>
-<time datetime="2008-07-06T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>06</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a></span>
-</footer>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-06T00:00:00+08:00" itemprop="datePublished">Jul  6</time></span>
+		<br>
+		<span class="tags">
 
 
-</article>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/%E5%8F%B0%E5%8C%97%E7%94%9F%E6%B4%BB/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/%E5%8F%B0%E5%8C%97%E7%94%9F%E6%B4%BB/">台北生活</a></h1>
+</article>
 
-<article>
-  
-<h1><a href="/2008/07/%E7%BE%8E%E9%BA%97%E8%8F%AF%E6%91%A9%E5%A4%A9%E8%BC%AA/">美麗華摩天輪</a></h1>
-<time datetime="2008-07-02T00:00:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>02</span> <span class='year'>2008</span></time>
+	
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/zhi-zi-pian-yu/'>隻字片語</a></span>
-</footer>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-06T00:00:00+08:00" itemprop="datePublished">Jul  6</time></span>
+		<br>
+		<span class="tags">
 
-</article>
 
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
-<article>
-  
-<h1><a href="/2008/06/%E5%A5%BD%E4%B9%85%E6%B2%92%E5%B0%84%E7%AE%AD%E4%BA%86/">好久沒射箭了</a></h1>
-<time datetime="2008-06-27T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>27</span> <span class='year'>2008</span></time>
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/mantis/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/mantis/">Mantis</a></h1>
+</article>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a></span>
-</footer>
+	
 
 
-</article>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-07-02T00:00:00+08:00" itemprop="datePublished">Jul  2</time></span>
+		<br>
+		<span class="tags">
 
 
+	<a class='category' href='/categories/zhi-zi-pian-yu/'>隻字片語</a>
 
-<article>
-  
-<h1><a href="/2008/06/%E5%88%A5%E4%BA%86%EF%BC%8C%E5%8F%B0%E4%B8%AD%E3%80%82/">別了，台中。</a></h1>
-<time datetime="2008-06-26T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>26</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
+</span>
+	    
+	    <span class="comments"><a href="/2008/07/%E7%BE%8E%E9%BA%97%E8%8F%AF%E6%91%A9%E5%A4%A9%E8%BC%AA/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/07/%E7%BE%8E%E9%BA%97%E8%8F%AF%E6%91%A9%E5%A4%A9%E8%BC%AA/">美麗華摩天輪</a></h1>
+</article>
 
+	
 
-</article>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-27T00:00:00+08:00" itemprop="datePublished">Jun 27</time></span>
+		<br>
+		<span class="tags">
 
 
-<article>
-  
-<h1><a href="/2008/06/%E6%B0%B8%E9%81%A0%E7%9A%84%E5%86%A0%E8%BB%8D-justine-henin/">永遠的冠軍 Justine Henin</a></h1>
-<time datetime="2008-06-24T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>24</span> <span class='year'>2008</span></time>
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E5%A5%BD%E4%B9%85%E6%B2%92%E5%B0%84%E7%AE%AD%E4%BA%86/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E5%A5%BD%E4%B9%85%E6%B2%92%E5%B0%84%E7%AE%AD%E4%BA%86/">好久沒射箭了</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/06/%E9%BB%83%E7%AB%B9%E5%9D%91/">黃竹坑</a></h1>
-<time datetime="2008-06-20T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>20</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-26T00:00:00+08:00" itemprop="datePublished">Jun 26</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
-</article>
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E5%88%A5%E4%BA%86%EF%BC%8C%E5%8F%B0%E4%B8%AD%E3%80%82/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E5%88%A5%E4%BA%86%EF%BC%8C%E5%8F%B0%E4%B8%AD%E3%80%82/">別了，台中。</a></h1>
+</article>
 
+	
 
-<article>
-  
-<h1><a href="/2008/06/look-cleats/">Look Cleats</a></h1>
-<time datetime="2008-06-17T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>17</span> <span class='year'>2008</span></time>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-24T00:00:00+08:00" itemprop="datePublished">Jun 24</time></span>
+		<br>
+		<span class="tags">
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E6%B0%B8%E9%81%A0%E7%9A%84%E5%86%A0%E8%BB%8D-justine-henin/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E6%B0%B8%E9%81%A0%E7%9A%84%E5%86%A0%E8%BB%8D-justine-henin/">永遠的冠軍 Justine Henin</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/06/%E8%BC%AA%E7%B5%84%E5%9B%9E%E4%BE%86%E4%BA%86%EF%BC%81/">輪組回來了！</a></h1>
-<time datetime="2008-06-11T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>11</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-20T00:00:00+08:00" itemprop="datePublished">Jun 20</time></span>
+		<br>
+		<span class="tags">
 
 
-</article>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E9%BB%83%E7%AB%B9%E5%9D%91/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E9%BB%83%E7%AB%B9%E5%9D%91/">黃竹坑</a></h1>
+</article>
 
-<article>
-  
-<h1><a href="/2008/06/%E4%B8%AD%E7%A7%91%E6%B0%B4%E5%A1%94/">中科水塔</a></h1>
-<time datetime="2008-06-11T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>11</span> <span class='year'>2008</span></time>
+	
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-17T00:00:00+08:00" itemprop="datePublished">Jun 17</time></span>
+		<br>
+		<span class="tags">
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/look-cleats/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/look-cleats/">Look Cleats</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/06/31%E5%AD%B8%E5%88%86%E7%9A%84%E6%9C%9F%E6%9C%AB%E8%80%83/">31學分的期末考</a></h1>
-<time datetime="2008-06-11T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>11</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-11T00:00:00+08:00" itemprop="datePublished">Jun 11</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
-
-
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E8%BC%AA%E7%B5%84%E5%9B%9E%E4%BE%86%E4%BA%86%EF%BC%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E8%BC%AA%E7%B5%84%E5%9B%9E%E4%BE%86%E4%BA%86%EF%BC%81/">輪組回來了！</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/06/136/">136</a></h1>
-<time datetime="2008-06-07T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>07</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-11T00:00:00+08:00" itemprop="datePublished">Jun 11</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E4%B8%AD%E7%A7%91%E6%B0%B4%E5%A1%94/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E4%B8%AD%E7%A7%91%E6%B0%B4%E5%A1%94/">中科水塔</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/06/%E5%A4%9C%E9%A8%8E%E6%92%BF%E5%88%B0%E4%B8%80%E9%9A%BB%E8%B2%93/">夜騎撿到一隻貓</a></h1>
-<time datetime="2008-06-04T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>04</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-11T00:00:00+08:00" itemprop="datePublished">Jun 11</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/31%E5%AD%B8%E5%88%86%E7%9A%84%E6%9C%9F%E6%9C%AB%E8%80%83/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/31%E5%AD%B8%E5%88%86%E7%9A%84%E6%9C%9F%E6%9C%AB%E8%80%83/">31學分的期末考</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-07T00:00:00+08:00" itemprop="datePublished">Jun  7</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/06/%E5%96%AE%E8%BB%8A%E7%9B%B8%E9%97%9C%E4%BD%9C%E5%93%81/">單車相關作品</a></h1>
-<time datetime="2008-06-01T00:00:00+08:00" pubdate><span class='month'>Jun</span> <span class='day'>01</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/136/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/136/">136</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/05/dorcus/">Dorcus</a></h1>
-<time datetime="2008-05-30T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>30</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-04T00:00:00+08:00" itemprop="datePublished">Jun  4</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E5%A4%9C%E9%A8%8E%E6%92%BF%E5%88%B0%E4%B8%80%E9%9A%BB%E8%B2%93/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E5%A4%9C%E9%A8%8E%E6%92%BF%E5%88%B0%E4%B8%80%E9%9A%BB%E8%B2%93/">夜騎撿到一隻貓</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-06-01T00:00:00+08:00" itemprop="datePublished">Jun  1</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/05/%E9%99%B0%E9%9B%A8%E5%A4%A9%E8%A9%A6%E8%BB%8A/">陰雨天試車</a></h1>
-<time datetime="2008-05-29T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>29</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/06/%E5%96%AE%E8%BB%8A%E7%9B%B8%E9%97%9C%E4%BD%9C%E5%93%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/06/%E5%96%AE%E8%BB%8A%E7%9B%B8%E9%97%9C%E4%BD%9C%E5%93%81/">單車相關作品</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/05/%E6%94%BF%E6%B2%BB%E6%AD%A3%E7%A2%BA/">政治正確</a></h1>
-<time datetime="2008-05-28T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>28</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-30T00:00:00+08:00" itemprop="datePublished">May 30</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/dorcus/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/dorcus/">Dorcus</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/05/%E6%84%9B%E8%BB%8A%E6%9A%AB%E6%99%82%E5%BE%A9%E6%B4%BB%EF%BC%81/">愛車(暫時)復活！</a></h1>
-<time datetime="2008-05-28T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>28</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-29T00:00:00+08:00" itemprop="datePublished">May 29</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E9%99%B0%E9%9B%A8%E5%A4%A9%E8%A9%A6%E8%BB%8A/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E9%99%B0%E9%9B%A8%E5%A4%A9%E8%A9%A6%E8%BB%8A/">陰雨天試車</a></h1>
 </article>
+
+	
 
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-28T00:00:00+08:00" itemprop="datePublished">May 28</time></span>
+		<br>
+		<span class="tags">
 
-<article>
-  
-<h1><a href="/2008/05/%E6%B2%92%E6%9C%89%E8%BB%8A%E9%A8%8E%E7%9A%84%E6%97%A5%E5%AD%90/">沒有車騎的日子</a></h1>
-<time datetime="2008-05-25T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>25</span> <span class='year'>2008</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
 
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E6%94%BF%E6%B2%BB%E6%AD%A3%E7%A2%BA/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E6%94%BF%E6%B2%BB%E6%AD%A3%E7%A2%BA/">政治正確</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/05/%E4%B8%80%E9%80%B1%E6%B2%92%E8%BB%8A%E9%A8%8E%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">一週沒車騎的碎碎念</a></h1>
-<time datetime="2008-05-24T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>24</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-28T00:00:00+08:00" itemprop="datePublished">May 28</time></span>
+		<br>
+		<span class="tags">
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a></span>
-</footer>
 
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E6%84%9B%E8%BB%8A%E6%9A%AB%E6%99%82%E5%BE%A9%E6%B4%BB%EF%BC%81/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E6%84%9B%E8%BB%8A%E6%9A%AB%E6%99%82%E5%BE%A9%E6%B4%BB%EF%BC%81/">愛車(暫時)復活！</a></h1>
 </article>
 
+	
 
 
-<article>
-  
-<h1><a href="/2008/05/%E8%B4%88%E9%80%81shimano-light-action%E5%BE%8C%E8%AE%8A%E4%B8%80%E9%A1%86/">贈送Shimano Light-Action後變一顆</a></h1>
-<time datetime="2008-05-22T00:00:00+08:00" pubdate><span class='month'>May</span> <span class='day'>22</span> <span class='year'>2008</span></time>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-25T00:00:00+08:00" itemprop="datePublished">May 25</time></span>
+		<br>
+		<span class="tags">
 
 
-</article>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
-</div>
 
-  
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E6%B2%92%E6%9C%89%E8%BB%8A%E9%A8%8E%E7%9A%84%E6%97%A5%E5%AD%90/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E6%B2%92%E6%9C%89%E8%BB%8A%E9%A8%8E%E7%9A%84%E6%97%A5%E5%AD%90/">沒有車騎的日子</a></h1>
 </article>
 
-</div>
+	
 
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
-  <span>
-    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
-    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
-    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
-    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
-  </span>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/tdd-rails/">TDD Rails</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/art' style='font-size: 103.0%'>Art</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/programming' style='font-size: 103.0%'>Programming</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/readability' style='font-size: 103.0%'>Readability</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
-</section>
-<section>
-  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
-</section>
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("hSATAC", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
-  
-</section>
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-24T00:00:00+08:00" itemprop="datePublished">May 24</time></span>
+		<br>
+		<span class="tags">
 
 
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
-</section>
+	<a class='category' href='/categories/dan-che-ri-zhi/'>單車日誌</a>
 
-<section class="googleplus googleplus-hidden">
-  <h1>
-    <a href="https://plus.google.com/113141223333997550446?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
 
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E4%B8%80%E9%80%B1%E6%B2%92%E8%BB%8A%E9%A8%8E%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E4%B8%80%E9%80%B1%E6%B2%92%E8%BB%8A%E9%A8%8E%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/">一週沒車騎的碎碎念</a></h1>
+</article>
 
+	
 
-  
-</aside>
 
+<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<span class="date"><time datetime="2008-05-22T00:00:00+08:00" itemprop="datePublished">May 22</time></span>
+		<br>
+		<span class="tags">
+
+</span>
+	    
+	    <span class="comments"><a href="/2008/05/%E8%B4%88%E9%80%81shimano-light-action%E5%BE%8C%E8%AE%8A%E4%B8%80%E9%A1%86/#disqus_thread">Comments</a></span>
+	    
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/05/%E8%B4%88%E9%80%81shimano-light-action%E5%BE%8C%E8%AE%8A%E4%B8%80%E9%A1%86/">贈送Shimano Light-Action後變一顆</a></h1>
+</article>
 
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hSATAC -
+  </section>
+</div></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Ash Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'hsatac';
@@ -2103,40 +2991,22 @@ Jul 16 2013 &hellip;">
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
 
-
+		</div>
+	</div>
 </body>
 </html>

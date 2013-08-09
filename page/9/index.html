@@ -1,32 +1,30 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>hSATAC</title>
-  <meta name="author" content="hSATAC">
+<!DOCTYPE HTML>
 
-  
-  <meta name="description" content="I updated this article for WoW 3.1, AGUF r700 release. Before: After: ">
-  
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Mar 13th, 2009 Game Comments Hack Into AGUF: Big Buff Feature (Updated for 3.1) I updated this article for WoW 3.1, AGUF r700 release. Before: After &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://blog.hsatac.net/page/9/">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/page/9/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <!-- Add jQuery library -->
@@ -34,79 +32,85 @@
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
 <script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
 <script type="text/javascript">
-  jQuery.noConflict();
-  jQuery(document).ready(function() {
-      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  //jQuery.noConflict();
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
   });
 </script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27441833-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">ash.cat</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
   <h1><a href="/">hSATAC</a></h1>
   
-    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
-  
-  <div class="clear"></div>
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.hsatac.net" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<nav id="main-nav"><ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+
+<section class="aboutme">
+  <p>
+    I am a programming language user, here's some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/03/hack-into-aguf-big-buff-feature/">Hack Into AGUF: Big Buff Feature (Updated for 3.1)</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -118,14 +122,21 @@
   
 
 
-<time datetime="2009-03-13T00:00:00+08:00" pubdate data-updated="true">Mar 13<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2009-03-13T00:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 13<span>th</span>, 2009</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>I updated this article for WoW 3.1, AGUF r700 release.</p>
+	<a class='category' href='/categories/game/'>Game</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2009/03/hack-into-aguf-big-buff-feature/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/03/hack-into-aguf-big-buff-feature/" itemprop="url">Hack Into AGUF: Big Buff Feature (Updated for 3.1)</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I updated this article for WoW 3.1, AGUF r700 release.</p>
 
 <p>Before:
 <a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1ac52a7.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="before" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1b65f58.jpg" border="0" alt="before" width="208" height="112" /></a></p>
@@ -133,29 +144,17 @@
 <p>After:
 <a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1bdc5f2.jpg"><img style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="after" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/49ba4a1c68782.jpg" border="0" alt="after" width="241" height="113" /></a></p>
 
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/03/hack-into-aguf-big-buff-feature/">Read on &rarr;</a>
-    </footer>
-  
+<p>
+		
+		<a href="/2009/03/hack-into-aguf-big-buff-feature/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/">夜暮</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -167,43 +166,38 @@
   
 
 
-<time datetime="2009-03-09T00:00:00+08:00" pubdate data-updated="true">Mar 9<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2009-03-09T00:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 9<span>th</span>, 2009</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>今天要寫兩件很宅的事。<br />
+	<a class='category' href='/categories/game/'>Game</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/03/%E5%A4%9C%E6%9A%AE/" itemprop="url">夜暮</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天要寫兩件很宅的事。<br />
 不過回歸魔獸以來，難得碰到值得寫的，還是紀錄一下。</p>
 
 <p>其一是經過兩個 CD 的拓荒，終於在 3/7 拿到夜暮頭銜。<br />
 魔獸這版確實是太簡單了。要打到最難的 10 人 1+3，<br />
 才讓我有以前信on推王的感覺，那美、海二空二的那種刺激度。</p>
 
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/03/%E5%A4%9C%E6%9A%AE/">Read on &rarr;</a>
-    </footer>
-  
+<p>
+		
+		<a href="/2009/03/%E5%A4%9C%E6%9A%AE/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/02/using-fckeditor-in-ci-17/">Using Fckeditor in CI 1.7</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -215,42 +209,37 @@
   
 
 
-<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2009-02-15T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 15<span>th</span>, 2009</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
+	<a class='category' href='/categories/php/'>PHP</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2009/02/using-fckeditor-in-ci-17/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/02/using-fckeditor-in-ci-17/" itemprop="url">Using Fckeditor in CI 1.7</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>使用CI 1.7後，發現許多bug以及相容問題。(btw CI 1.7.1出了，果然很多地雷&#8230;)</p>
 
 <p>這個 fckeditor 移植也讓我搞了好幾個小時=  =b</p>
 
 <p>總之，要在CI 1.7中繼續使用 fckeditor (按照CI WIKI中提供的方法)，請做以下的更動。</p>
 
-<p></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2009/02/using-fckeditor-in-ci-17/">Read on &rarr;</a>
-    </footer>
-  
+<p>
+		
+		<a href="/2009/02/using-fckeditor-in-ci-17/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2009/02/scream/">Scream!</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -262,14 +251,17 @@
   
 
 
-<time datetime="2009-02-15T00:00:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2009-02-15T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 15<span>th</span>, 2009</time></div>
+		<div class="tags">
 
-
-  <div class="entry-content"><p><p><strong>Lyrics to Scream</strong> :<br />
+</div>
+		
+			<span class="comments"><a href="/2009/02/scream/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2009/02/scream/" itemprop="url">Scream!</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><p><strong>Lyrics to Scream</strong> :<br />
 The day a door is closed<br />
 The echoes fill your soul<br />
 They won&#8217;t say which way to go<br />
@@ -334,44 +326,43 @@ I want my own thing. I want my own thing!<br />
 I can&#8217;t choose, so confused! What&#8217;s it all mean?<br />
 I want my own dream. So bad I&#8217;m gonna Scream!</p>
 </p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-12T00:00:00+08:00" data-updated="true" itemprop="datePublished">Dec 12<span>th</span>, 2008</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/">PHP 打包下載最新的 Svn Repos</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-12T00:00:00+08:00" pubdate data-updated="true">Dec 12<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近有個需求，是要能透過一個簡單的網頁介面<br />
+		
+			<span class="comments"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/12/php-%E6%89%93%E5%8C%85%E4%B8%8B%E8%BC%89%E6%9C%80%E6%96%B0%E7%9A%84-svn-repos/" itemprop="url">PHP 打包下載最新的 Svn Repos</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近有個需求，是要能透過一個簡單的網頁介面<br />
 把svn repos打包下載</p>
 
 <p>首先先把 www-data 加入 svn user group 讓 php可以使用 svn
@@ -411,44 +402,43 @@ tar -zcvf $2.tar.gz $2</p>
 <p>rm -rf $2</p>
 
 <p>稍微紀錄一下</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-02T00:00:00+08:00" data-updated="true" itemprop="datePublished">Nov 2<span>nd</span>, 2008</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/">CodeIgniter 1.7 Session Bug Within Object Storage</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-11-02T00:00:00+08:00" pubdate data-updated="true">Nov 2<span>nd</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I don’t know whether it’s a bug or what.<br />
+		
+			<span class="comments"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/11/codeigniter-17-session-bug-within-object-storage/" itemprop="url">CodeIgniter 1.7 Session Bug Within Object Storage</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I don’t know whether it’s a bug or what.<br />
 I would store a object in session sometimes, like this.
 <div class="codeblock"><code><span style="color: #000000;">
 <span style="color: #0000bb;">$this</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">session</span><span style="color: #007700;">-&gt;</span><span style="color: #0000bb;">set_userdata</span><span style="color: #007700;">(</span><span style="color: #dd0000;">'session_name'</span><span style="color: #007700;">, </span><span style="color: #0000bb;">$object</span><span style="color: #007700;">); </span>
@@ -497,44 +487,43 @@ and put it into /system/application/libraries/Session_fix.php</p>
 </span>
 </code></div>
 Now it’s done!</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-19T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 19<span>th</span>, 2008</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/">PHP Framework執行效能</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-19T00:00:00+08:00" pubdate data-updated="true">Oct 19<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近在玩 RoR&#8230;突然想到執行效能的問題<br />
+		
+			<span class="comments"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/php-framework%E5%9F%B7%E8%A1%8C%E6%95%88%E8%83%BD/" itemprop="url">PHP Framework執行效能</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近在玩 RoR&#8230;突然想到執行效能的問題<br />
 上網找了一些<a href="http://www.avnetlabs.com/php/php-framework-comparison-benchmarks" target="_blank">資料</a></p>
 
 <p>常用的三套 PHP Framework - CakePHP, Zend, CodeIginter<br />
@@ -567,44 +556,39 @@ Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
 
 <p>不過等以後碰到效能瓶頸時再研究吧<br />
 先把 RoR 摸熟點再說。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-17T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 17<span>th</span>, 2008</time></div>
+		<div class="tags">
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/10/bizarre-love-triangle-by-frente/">Bizarre Love Triangle by Frente!</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-17T00:00:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/48f8aefa03b37.jpg"><img style="border-width: 0px;" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/48f8af005af0e.jpg" alt="51ZXJVWX86L._SL500_AA240_" border="0" width="260" height="260" /></a> <br /><br />之前在電視常常看到 VW 的 Golf 廣告放這首配樂<br />但是歌名怎麼都想不起來</p>
+		
+			<span class="comments"><a href="/2008/10/bizarre-love-triangle-by-frente/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/bizarre-love-triangle-by-frente/" itemprop="url">Bizarre Love Triangle by Frente!</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><p><a href="http://p4.p.pixnet.net/albums/userpics/4/5/761745/48f8aefa03b37.jpg"><img style="border-width: 0px;" src="http://p4.p.pixnet.net/albums/userpics/4/5/761745/48f8af005af0e.jpg" alt="51ZXJVWX86L._SL500_AA240_" border="0" width="260" height="260" /></a> <br /><br />之前在電視常常看到 VW 的 Golf 廣告放這首配樂<br />但是歌名怎麼都想不起來</p>
 <p>今天在家和 tiger 玩時哼著哼著突然就想起來了。<br />當初是兔子傳給我的，我那時也超迷這首歌&#8230;整天都在唱。</p>
 <p>
 <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,124,0" width="425" height="344">
@@ -616,196 +600,118 @@ Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
 <p>Every time I think of you<br />I get a shot right through into a bolt of blue<br />It&#8217;s no problem of mine but it&#8217;s a problem I find<br />Living a life that I can&#8217;t leave behind<br />There&#8217;s no sense in telling me<br />The wisdom of a fool won&#8217;t set you free<br />But that&#8217;s the way that it goes<br />And it&#8217;s what nobody knows<br />And every day my confusion grows<br />Every time I see you falling<br />I get down on my knees and pray<br />I&#8217;m waiting for that final moment<br />You&#8217;ll say the words that I can&#8217;t say<br />I feel fine and I feel good<br />I feel like I never should<br />Whenever I get this way, I just don&#8217;t know what to say<br />Why can&#8217;t we be ourselves like we were yesterday<br />I&#8217;m not sure what this could mean<br />I don&#8217;t think you&#8217;re what you seem<br />I do admit to myself<br />That if I hurt someone else<br />Then we&#8217;d never see just what we&#8217;re meant to be<br />Every time I see you falling<br />I get down on my knees and pray<br />I&#8217;m waiting for that final moment<br />You&#8217;ll say the words that I cant say</p>
 </blockquote>
 </p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-14T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 14<span>th</span>, 2008</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/she-jian-sheng-huo/'>射箭生活</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/10/exp-decay/">Exp Decay&#8230;</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-14T00:00:00+08:00" pubdate data-updated="true">Oct 14<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p>相隔太久沒有射箭，之前累積的經驗值都 decay 的差不多了 =&nbsp; =<br />現在的新動作還不太習慣，考慮先不要用 clicker 熟悉動作以後再上。</p>
+		
+			<span class="comments"><a href="/2008/10/exp-decay/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/exp-decay/" itemprop="url">Exp Decay&#8230;</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><p>相隔太久沒有射箭，之前累積的經驗值都 decay 的差不多了 =&nbsp; =<br />現在的新動作還不太習慣，考慮先不要用 clicker 熟悉動作以後再上。</p>
 <p>記得頭側轉的角度大一點，臉稍微壓低這樣才不會卡到。<br />以前臉會不自覺得仰起是為了配合下巴的形狀定位<br />但現在把anchor片裝回來後，就不需要抬高臉。</p>
 <p>壓肩的動作空手時做的很好，實際舉弓時會有困難<br />可能要先拿輕一點的弓練習，在家也要用橡皮筋模擬練習沉肩轉臂的動作。</p>
 </p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-12T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 12<span>th</span>, 2008</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/">POSH Hair 剪髮記</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-12T00:00:00+08:00" pubdate data-updated="true">Oct 12<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><p><img src="http://farm3.static.flickr.com/2347/1548979242_a295041af1.jpg" /><br />圖片來自網路&nbsp; </p> <p>以前每次剪髮，都覺得好像在玩俄羅斯羅盤<br />隨便挑一家salon，隨便挑一位設計師<br />剪好剪壞，聽天由命靠運氣<br />差別只在於死以及頂著一頭爛髮型一個月<br />不過後者也跟死差不多了&#8230;生不如死啊。</p> <p>直到大二在台中碰到 Takumi，才真正遇見了合拍的設計師<br />只覺得他隨便剪，都超合我的型<br /><strike>(這跟他長得很帥一點關係都沒有)<br /></strike>再也不用擔心頭髮會爆炸一個月而羞於見人</p> <p>從此就一直跟著他剪了三四年、換了三四家店<br />從300元、400、500一直剪到600元<br />直到現在回台北&#8230;。</p> <p>說實在內心很害怕又碰到地雷，但頭髮也不得不剪<br />於是決定先去每天上班都會經過的POSH Hair試試運氣。<br /><br />坦白說，一開始我是被他的裝潢吸引進去的，所以我其實對他不大有信心<br />總感覺裝潢太fasion的店剪得都不怎麼樣=&nbsp; =b<br />先透漏結果好了，這次的成果是滿意的。</p> <p>剪+洗的價位分 650 和 850，我想說試試手氣，就選了650的設計師<br />不過這次650的設計師都沒有空，於是來了一位850等級的 Michelle幫我剪<br />但還是收650的錢 (這次還有打折，算下來500多而已)<br /><br />簡單說了我想剪的感覺後就乖乖認命讓設計師操刀<br />剪得過程感覺很舒服，微微跟你閒聊又不會覺得太聒噪<br />(我很怕聒噪的設計師和計程車司機&#8230;)<br /><br />剪完後算滿滿意的，雖然價位貴了點 (台北嘛)<br />不過下次可能還是會去那邊剪喔 (這樣就不用再玩俄羅斯輪盤了&#8230;)<br /><br /><a title="http://blog.yam.com/user/poshhair.html" href="http://blog.yam.com/user/poshhair.html">http://blog.yam.com/user/poshhair.html</a></p> <p>POSH HAIR地址：<br />台北市民生東路5段69巷4弄41號1樓<br />電話：2762-5050<br />POSH+(分店)地址：<br />台北市三民路136巷6號1樓<br />電話：2761-1241<br />營業時間：AM10:00 ~ PM08:00</p>
+		
+			<span class="comments"><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2008/10/posh-hair-%E5%89%AA%E9%AB%AE%E8%A8%98/" itemprop="url">POSH Hair 剪髮記</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><p><img src="http://farm3.static.flickr.com/2347/1548979242_a295041af1.jpg" /><br />圖片來自網路&nbsp; </p> <p>以前每次剪髮，都覺得好像在玩俄羅斯羅盤<br />隨便挑一家salon，隨便挑一位設計師<br />剪好剪壞，聽天由命靠運氣<br />差別只在於死以及頂著一頭爛髮型一個月<br />不過後者也跟死差不多了&#8230;生不如死啊。</p> <p>直到大二在台中碰到 Takumi，才真正遇見了合拍的設計師<br />只覺得他隨便剪，都超合我的型<br /><strike>(這跟他長得很帥一點關係都沒有)<br /></strike>再也不用擔心頭髮會爆炸一個月而羞於見人</p> <p>從此就一直跟著他剪了三四年、換了三四家店<br />從300元、400、500一直剪到600元<br />直到現在回台北&#8230;。</p> <p>說實在內心很害怕又碰到地雷，但頭髮也不得不剪<br />於是決定先去每天上班都會經過的POSH Hair試試運氣。<br /><br />坦白說，一開始我是被他的裝潢吸引進去的，所以我其實對他不大有信心<br />總感覺裝潢太fasion的店剪得都不怎麼樣=&nbsp; =b<br />先透漏結果好了，這次的成果是滿意的。</p> <p>剪+洗的價位分 650 和 850，我想說試試手氣，就選了650的設計師<br />不過這次650的設計師都沒有空，於是來了一位850等級的 Michelle幫我剪<br />但還是收650的錢 (這次還有打折，算下來500多而已)<br /><br />簡單說了我想剪的感覺後就乖乖認命讓設計師操刀<br />剪得過程感覺很舒服，微微跟你閒聊又不會覺得太聒噪<br />(我很怕聒噪的設計師和計程車司機&#8230;)<br /><br />剪完後算滿滿意的，雖然價位貴了點 (台北嘛)<br />不過下次可能還是會去那邊剪喔 (這樣就不用再玩俄羅斯輪盤了&#8230;)<br /><br /><a title="http://blog.yam.com/user/poshhair.html" href="http://blog.yam.com/user/poshhair.html">http://blog.yam.com/user/poshhair.html</a></p> <p>POSH HAIR地址：<br />台北市民生東路5段69巷4弄41號1樓<br />電話：2762-5050<br />POSH+(分店)地址：<br />台北市三民路136巷6號1樓<br />電話：2761-1241<br />營業時間：AM10:00 ~ PM08:00</p>
 </p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-      <a class="prev" href="/page/10/">&larr; Older</a>
+        <a href="/page/8/" class="prev">Prev</a>
     
-    <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/page/8/">Newer &rarr;</a>
+        <a href="/page/10/" class="next">Next</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
-  <span>
-    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
-    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
-    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
-    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
-  </span>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/tdd-rails/">TDD Rails</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/art' style='font-size: 103.0%'>Art</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/programming' style='font-size: 103.0%'>Programming</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/readability' style='font-size: 103.0%'>Readability</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
-</section>
-<section>
-  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("hSATAC", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
-  
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-<section class="googleplus googleplus-hidden">
-  <h1>
-    <a href="https://plus.google.com/113141223333997550446?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hSATAC -
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Ash Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'hsatac';
@@ -822,40 +728,22 @@ Benchmark出來效能上 CI &gt; Zend &gt; CakePHP</p>
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
 
-
+		</div>
+	</div>
 </body>
 </html>

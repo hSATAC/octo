@@ -4,11 +4,11 @@
   <title><![CDATA[Category: bashmarks | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/bashmarks/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-09T10:40:48+08:00</updated>
+  <updated>2013-08-09T17:51:40+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
-    <name><![CDATA[hSATAC]]></name>
-    
+    <name><![CDATA[Ash Wu]]></name>
+    <email><![CDATA[hsatac@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -44,7 +44,7 @@
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mosh &lt;a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#97;&#x73;&#x68;&#95;&#x77;&#117;&#x40;&#109;&#x79;&#115;&#x65;&#114;&#x76;&#101;&#114;&#x2e;&#x63;&#x6f;&#109;">&#x61;&#115;&#104;&#x5f;&#119;&#117;&#64;&#109;&#x79;&#x73;&#101;&#x72;&#x76;&#x65;&#114;&#x2e;&#x63;&#x6f;&#109;&lt;/a>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mosh &lt;a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#58;&#x61;&#x73;&#x68;&#95;&#x77;&#117;&#x40;&#109;&#x79;&#x73;&#x65;&#x72;&#x76;&#x65;&#x72;&#x2e;&#x63;&#111;&#109;">&#97;&#x73;&#x68;&#x5f;&#x77;&#x75;&#64;&#109;&#121;&#115;&#x65;&#114;&#118;&#101;&#114;&#46;&#x63;&#111;&#x6d;&lt;/a>
 </span><span class='line'>mosh myserver.com &mdash; screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h2>2. Mitmproxy</h2>

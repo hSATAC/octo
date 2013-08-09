@@ -1,33 +1,30 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>hSATAC</title>
-  <meta name="author" content="hSATAC">
+<!DOCTYPE HTML>
 
-  
-  <meta name="description" content="筆記一下安裝步驟&hellip;。 Install Archlinux 由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 @helmuthdu 的快速安裝 script AUI，安裝完成後再使用 puppet bootstrap 環境 放入 CD 選擇 x64_64 開機
-執行 &hellip;">
-  
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Feb 19th, 2013 Archlinux, puppet Comments 使用 Puppet 快速佈署 Archlinux 筆記一下安裝步驟&hellip;。 Install Archlinux 由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 @helmuthdu &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://blog.hsatac.net/page/2/">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/page/2/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <!-- Add jQuery library -->
@@ -35,79 +32,85 @@
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
 <script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
 <script type="text/javascript">
-  jQuery.noConflict();
-  jQuery(document).ready(function() {
-      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  //jQuery.noConflict();
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
   });
 </script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27441833-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">ash.cat</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
   <h1><a href="/">hSATAC</a></h1>
   
-    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
-  
-  <div class="clear"></div>
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.hsatac.net" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<nav id="main-nav"><ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+
+<section class="aboutme">
+  <p>
+    I am a programming language user, here's some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -119,14 +122,21 @@
   
 
 
-<time datetime="2013-02-19T17:51:00+08:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-02-19T17:51:00+08:00" data-updated="true" itemprop="datePublished">Feb 19<span>th</span>, 2013</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>筆記一下安裝步驟&hellip;。</p>
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2013/02/bootstrap-archlinux-with-puppet/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/bootstrap-archlinux-with-puppet/" itemprop="url">使用 Puppet 快速佈署 Archlinux</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>筆記一下安裝步驟&hellip;。</p>
 
 <h2>Install Archlinux</h2>
 
@@ -176,44 +186,43 @@
 <li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
 </ul>
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-15T17:54:00+08:00" data-updated="true" itemprop="datePublished">Feb 15<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/rwby/'>RWBY</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/02/rwby/">RWBY</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-15T17:54:00+08:00" pubdate data-updated="true">Feb 15<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！</p>
+		
+			<span class="comments"><a href="/2013/02/rwby/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/rwby/" itemprop="url">RWBY</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！</p>
 
 <p>之前看完第一部 &ldquo;Red&rdquo; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &ldquo;White&rdquo; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
 
@@ -222,93 +231,83 @@
 <iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
 
 
+
+		
+		<a href="/2013/02/rwby/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-30T10:18:00+08:00" data-updated="true" itemprop="datePublished">Jan 30<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/ruby/'>Ruby</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/02/rwby/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2013/01/trace-rubygems-require-slow/">追蹤 Rubygems Require 緩慢紀錄</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-30T10:18:00+08:00" pubdate data-updated="true">Jan 30<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>昨天灌了一台新的機器，正準備用 <a href="http://puppetlabs.com">puppet</a> bootstrap 時卻發現他的 puppet 執行的非常緩慢。追蹤解決問題的過程十分有趣，在這邊紀錄一下。</p>
+		
+			<span class="comments"><a href="/2013/01/trace-rubygems-require-slow/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/01/trace-rubygems-require-slow/" itemprop="url">追蹤 Rubygems Require 緩慢紀錄</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>昨天灌了一台新的機器，正準備用 <a href="http://puppetlabs.com">puppet</a> bootstrap 時卻發現他的 puppet 執行的非常緩慢。追蹤解決問題的過程十分有趣，在這邊紀錄一下。</p>
 
 <p>由於 puppet 執行檔本身是一隻 ruby script，於是開啟了 irb -d 使用 DEBUG 模式直接執行看看該 script 的內容，看看能否看出問題在哪。</p>
 
+
+		
+		<a href="/2013/01/trace-rubygems-require-slow/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-09T13:04:00+08:00" data-updated="true" itemprop="datePublished">Dec 9<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2013/01/trace-rubygems-require-slow/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/12/ruby-conf-taiwan-2012-en/">RubyConf.tw 2012</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-09T13:04:00+08:00" pubdate data-updated="true">Dec 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
+		
+			<span class="comments"><a href="/2012/12/ruby-conf-taiwan-2012-en/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/ruby-conf-taiwan-2012-en/" itemprop="url">RubyConf.tw 2012</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
 
 <h3>Before Party</h3>
 
@@ -316,48 +315,43 @@
 
 <p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
 
+
+		
+		<a href="/2012/12/ruby-conf-taiwan-2012-en/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-09T13:04:00+08:00" data-updated="true" itemprop="datePublished">Dec 9<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/ruby-conf-taiwan-2012-en/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/12/ruby-conf-taiwan-2012/">RubyConf.tw 2012 流水帳</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-09T13:04:00+08:00" pubdate data-updated="true">Dec 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今年的 Ruby Conf Taiwan 2012 實在太精彩，太感動了，一定要寫下來紀錄一下。</p>
+		
+			<span class="comments"><a href="/2012/12/ruby-conf-taiwan-2012/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/ruby-conf-taiwan-2012/" itemprop="url">RubyConf.tw 2012 流水帳</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今年的 Ruby Conf Taiwan 2012 實在太精彩，太感動了，一定要寫下來紀錄一下。</p>
 
 <h3>前夜祭</h3>
 
@@ -365,48 +359,43 @@
 
 <p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
 
+
+		
+		<a href="/2012/12/ruby-conf-taiwan-2012/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-26T15:15:00+08:00" data-updated="true" itemprop="datePublished">Nov 26<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/12/ruby-conf-taiwan-2012/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/">2010 MBP 升級 SSD 與 Fusion Drive</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-26T15:15:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我現在用來開發 iOS 的電腦是公司提供的一台 Macbook Pro 13&#8221; 2010 mid 4G ram。使用上還算堪用，但時不時的 lag 以及 freeze 實在非常挑戰開發者的耐心。尤其當我 Xcode 開著，git 切換 branch 然後 Xcode 重新 index 的時候簡直慘不忍睹。</p>
+		
+			<span class="comments"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/" itemprop="url">2010 MBP 升級 SSD 與 Fusion Drive</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>我現在用來開發 iOS 的電腦是公司提供的一台 Macbook Pro 13&#8221; 2010 mid 4G ram。使用上還算堪用，但時不時的 lag 以及 freeze 實在非常挑戰開發者的耐心。尤其當我 Xcode 開著，git 切換 branch 然後 Xcode 重新 index 的時候簡直慘不忍睹。</p>
 
 <p>畢竟電腦還是自己在用，開心順手最重要，所以決定自己投資一點下去升級。因為光碟機很少在用，所以查了一下以前看過的硬碟轉接托架，意外發現非常便宜才 200 多元，還附拆機工具組。參考<a href="http://blog.lyhdev.com/2012/10/apple-macbook-pro-ssd.html">玩物喪誌</a>的心得一樣購買 Jeyi 的硬碟托架以及 Micron M4 7mm 超薄 SSD。別人踩過一次的雷就不用再踩了。</p>
 
@@ -421,25 +410,17 @@
 <p>參考 <a href="http://jollyjinx.tumblr.com/post/34638496292/fusion-drive-on-older-macs-yes-since-apple-has">Fusion drive on older Macs? YES!</a> 的說明做好 Fusion Drive，再用 Carbon Copy Cloner 把外接 USB 硬碟的資料複製回做好的 Fusion Drive。值得一提的是 Fusion Drive 似乎無法製作 Recovery Partition，這部份只好無視他的 warning 。</p>
 
 <p>最後把 Fusion Drive 設為開機碟重開就完成了這次的升級。相關照片和紀錄都放在 <a href="http://www.facebook.com/media/set/?set=a.4857081506317.2196205.1275503618&amp;type=1&amp;l=bb8d23d675">Facebook 相簿</a> 中。</p>
-</div>
-  
-  
+
+		
+		
+	</div>
+
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/11/sentry-introduction-slides/">Sentry 簡介投影片</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -451,53 +432,59 @@
   
 
 
-<time datetime="2012-11-13T11:53:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2012-11-13T11:53:00+08:00" data-updated="true" itemprop="datePublished">Nov 13<span>th</span>, 2012</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><script async class="speakerdeck-embed" data-id="509a1faa3a7976000202bd2c" data-ratio="1.2994923857868" src="//speakerdeck.com/assets/embed.js"></script>
+	<a class='category' href='/categories/sentry/'>Sentry</a>
+
 
 </div>
+		
+			<span class="comments"><a href="/2012/11/sentry-introduction-slides/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/sentry-introduction-slides/" itemprop="url">Sentry 簡介投影片</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<script async class="speakerdeck-embed" data-id="509a1faa3a7976000202bd2c" data-ratio="1.2994923857868" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
   
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/11/php-array-plus-array-versus-array-merge/">PHP Array 相加與 Array_merge</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+<time datetime="2012-11-06T13:17:00+08:00" data-updated="true" itemprop="datePublished">Nov 6<span>th</span>, 2012</time></div>
+		<div class="tags">
 
 
+	<a class='category' href='/categories/php/'>PHP</a>
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T13:17:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。</p>
+</div>
+		
+			<span class="comments"><a href="/2012/11/php-array-plus-array-versus-array-merge/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/php-array-plus-array-versus-array-merge/" itemprop="url">PHP Array 相加與 Array_merge</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。</p>
 
 <p>在 PHP 中 <code>array + array</code> 與 <code>array_merge</code> 的行為是不一樣的，陣列相加的效能會比 <code>array_merge</code> 來的好，但換來的代價是可能不是你預期的行為以及資料流失。</p>
 
@@ -505,48 +492,43 @@
 
 <p>先講一下 <code>array_merge</code> 的行為，<code>array_merge($a, $b)</code> 的話，如果 <code>$a</code> 和 <code>$b</code> 裡面有 key 相同的元素，則會<strong>後蓋前</strong>也就是 <code>$b</code> 的值會蓋掉 <code>$a</code> 的值。那如果是沒有 key (流水號 key)的值，則會以附加在尾端 (append) 的方式合併上去，而所有流水號 key 的 index 則會重排。</p>
 
+
+		
+		<a href="/2012/11/php-array-plus-array-versus-array-merge/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-30T13:14:00+08:00" data-updated="true" itemprop="datePublished">Oct 30<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/unit-test/'>unit test</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/11/php-array-plus-array-versus-array-merge/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/">Obj-C 單元測試非同步連線</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-30T13:14:00+08:00" pubdate data-updated="true">Oct 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>使用 Xcode 的 OCUnit 來做單元測試網路連線時，由於 OCUnit 不會等 block 執行，所以會直接跳到 pass。一般正常作法應該是用 mock object 來測試，不過總有要實際測試真實連線的時候。這時可以使用以下的 snippet:</p>
+		
+			<span class="comments"><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/10/obj-c-unit-test-with-asynchronous-request/" itemprop="url">Obj-C 單元測試非同步連線</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>使用 Xcode 的 OCUnit 來做單元測試網路連線時，由於 OCUnit 不會等 block 執行，所以會直接跳到 pass。一般正常作法應該是用 mock object 來測試，不過總有要實際測試真實連線的時候。這時可以使用以下的 snippet:</p>
 
 <div><script src='https://gist.github.com/3978482.js'></script>
 <noscript><pre><code>- (void)testLogin
@@ -577,161 +559,80 @@
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-21T11:07:00+08:00" data-updated="true" itemprop="datePublished">Oct 21<span>st</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/logo/'>logo</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/10/about-my-logo/">關於我的 Logo</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-21T11:07:00+08:00" pubdate data-updated="true">Oct 21<span>st</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
+		
+			<span class="comments"><a href="/2012/10/about-my-logo/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/10/about-my-logo/" itemprop="url">關於我的 Logo</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
 
 <p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
 
+
+		
+		<a href="/2012/10/about-my-logo/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/10/about-my-logo/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-      <a class="prev" href="/page/3/">&larr; Older</a>
+        <a href="/" class="prev">Prev</a>
     
-    <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/">Newer &rarr;</a>
+        <a href="/page/3/" class="next">Next</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
-  <span>
-    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
-    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
-    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
-    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
-  </span>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/tdd-rails/">TDD Rails</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/art' style='font-size: 103.0%'>Art</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/programming' style='font-size: 103.0%'>Programming</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/readability' style='font-size: 103.0%'>Readability</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
-</section>
-<section>
-  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("hSATAC", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
-  
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-<section class="googleplus googleplus-hidden">
-  <h1>
-    <a href="https://plus.google.com/113141223333997550446?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hSATAC -
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Ash Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'hsatac';
@@ -748,40 +649,22 @@
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
 
-
+		</div>
+	</div>
 </body>
 </html>

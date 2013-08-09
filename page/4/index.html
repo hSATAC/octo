@@ -1,32 +1,30 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>hSATAC</title>
-  <meta name="author" content="hSATAC">
+<!DOCTYPE HTML>
 
-  
-  <meta name="description" content="最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上， &hellip;">
-  
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Jun 6th, 2012 aws, dns, ec2, route53 Comments 利用 Route 53 設定 Ec2 動態 DNS 最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決， &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://blog.hsatac.net/page/4/">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
-  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/page/4/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <!-- Add jQuery library -->
@@ -34,79 +32,85 @@
 <link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
 <script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
 <script type="text/javascript">
-  jQuery.noConflict();
-  jQuery(document).ready(function() {
-      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  //jQuery.noConflict();
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
   });
 </script>
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-27441833-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <div id="logo">
-  	<div id="logoLeft">{</div>
-  	<div id="logoText">ash.cat</div>
-  	<div id="logoRight">}</div>
-  	<div class="clear"></div>
-  </div>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
   <h1><a href="/">hSATAC</a></h1>
   
-    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
-  
-  <div class="clear"></div>
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.hsatac.net" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<nav id="main-nav"><ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
+
+<section class="aboutme">
+  <p>
+    I am a programming language user, here's some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a></h1>
-      
-    
-    
-      <p class="meta">
-        
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
 
 
 
@@ -118,14 +122,21 @@
   
 
 
-<time datetime="2012-06-06T14:44:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2012-06-06T14:44:00+08:00" data-updated="true" itemprop="datePublished">Jun 6<span>th</span>, 2012</time></div>
+		<div class="tags">
 
 
-  <div class="entry-content"><p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/dns/'>dns</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/route53/'>route53</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/" itemprop="url">利用 Route 53 設定 Ec2 動態 DNS</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
 
 <p>找到這個 <a href="http://www.linkdata.se/downloads/sourcecode/other/route53-dyndns.sh">script</a> 是利用 <a href="http://checkip.dyndns.com">http://checkip.dyndns.com</a> 來抓取自己 ip 再更新 route 53 的 A record 。</p>
 
@@ -135,48 +146,43 @@
 
 <p>具體作法，可以開一個 subdomain 例如 ec2.hsatac.net ，然後把這個 subdomain delegate 給我們的 route 53 來解析。在 DNS 的部分新增一筆 NS  <code>ec2.hsatac.net</code> 然後 server 設定為 route 53 給的那幾組即可。</p>
 
+
+		
+		<a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-02T16:29:00+08:00" data-updated="true" itemprop="datePublished">May 2<span>nd</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/kvm/'>kvm</a>, <a class='category' href='/categories/virsh/'>virsh</a>, <a class='category' href='/categories/vm/'>vm</a>, <a class='category' href='/categories/vnc/'>vnc</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/05/ssh-vm-with-virsh-console/">Ssh Vm With Virsh Console</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-02T16:29:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
+		
+			<span class="comments"><a href="/2012/05/ssh-vm-with-virsh-console/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/05/ssh-vm-with-virsh-console/" itemprop="url">Ssh Vm With Virsh Console</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
 
 <p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
 
@@ -193,44 +199,43 @@
 
 
 <p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-13T10:41:00+08:00" data-updated="true" itemprop="datePublished">Apr 13<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/centos/'>CentOS</a>, <a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>, <a class='category' href='/categories/mercurial-server/'>mercurial-server</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/">在 CentOS 5 上安裝 Python26, Hg, Mercurial-server</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-13T10:41:00+08:00" pubdate data-updated="true">Apr 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。</p>
+		
+			<span class="comments"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/04/python26-hg-mercurial-server-on-centos-5/" itemprop="url">在 CentOS 5 上安裝 Python26, Hg, Mercurial-server</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。</p>
 
 <p>CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 python 2.4，因此套件庫裡面的 hg 就不合用了。</p>
 
@@ -273,44 +278,43 @@
 <p>可以修改 <code>redmine/config/environment.rb</code> 打開 <code>config.log_level = :debug</code> 看更詳細的 log</p>
 
 <p>應該可以看到實際執行的 hg 指令，用 redmine user 去執行看看就能抓出問題所在。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-03T21:43:00+08:00" data-updated="true" itemprop="datePublished">Apr 3<span>rd</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/git/'>Git</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-03T21:43:00+08:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。</p>
+		
+			<span class="comments"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/" itemprop="url">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。</p>
 
 <p>原本以為這個需求無法達成，不過做了點研究以後發現是可行的，甚至 B repository 是已存在的 repository 也可以做到！</p>
 
@@ -323,44 +327,43 @@
 <p>接著講要把檔案和 commit log 匯到已存在的 B repository：接續上一步，用 <code>mkdir &lt;你要的目錄&gt;; mv * &lt;你要的目錄&gt;</code> 把抽出來的檔案都移到你預想要放的目錄 <code>git add .; git commit</code> 後 <code>cd ..</code> 再用 git clone 把 B repository clone 出來，切到 B repository 的目錄，用 add local repository as remote 的方式 <code>git remote add repoA ../&lt;A repo 的目錄&gt;</code> 然後 <code>git pull repoA master</code> 就完成了。</p>
 
 <p>參考：<a href="http://gbayer.com/development/moving-files-from-one-git-repository-to-another-preserving-history/">Moving Files from one Git Repository to Another, Preserving History</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T10:05:00+08:00" data-updated="true" itemprop="datePublished">Mar 7<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/">Xcode 4.3 Publish Ipa for Testflight</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-07T10:05:00+08:00" pubdate data-updated="true">Mar 7<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
+		
+			<span class="comments"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/" itemprop="url">Xcode 4.3 Publish Ipa for Testflight</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
 
 <p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
 
@@ -412,44 +415,43 @@
 </span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
 </span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-02T14:56:00+08:00" data-updated="true" itemprop="datePublished">Feb 2<span>nd</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
+
+
 </div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/02/php-resque-auto-scale-workers/">PHP-Resque Auto Scale Workers</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-02T14:56:00+08:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+		
+			<span class="comments"><a href="/2012/02/php-resque-auto-scale-workers/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/02/php-resque-auto-scale-workers/" itemprop="url">PHP-Resque Auto Scale Workers</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
 
 <p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
 
@@ -459,48 +461,43 @@
 
 <p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
 
+
+		
+		<a href="/2012/02/php-resque-auto-scale-workers/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T19:33:00+08:00" data-updated="true" itemprop="datePublished">Jan 17<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/02/php-resque-auto-scale-workers/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/01/youtube-favorite-add-google-music/">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-17T19:33:00+08:00" pubdate data-updated="true">Jan 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
+		
+			<span class="comments"><a href="/2012/01/youtube-favorite-add-google-music/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/youtube-favorite-add-google-music/" itemprop="url">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
 
 <p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
 
@@ -508,48 +505,43 @@
 
 <p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
 
+
+		
+		<a href="/2012/01/youtube-favorite-add-google-music/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-13T14:03:00+08:00" data-updated="true" itemprop="datePublished">Jan 13<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/redmine/'>Redmine</a>, <a class='category' href='/categories/trac/'>Trac</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/01/youtube-favorite-add-google-music/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Redmine Migration From Trac 0.12</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-13T14:03:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
+		
+			<span class="comments"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/" itemprop="url">Redmine Migration From Trac 0.12</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
 
 <ul>
 <li><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_install_Redmine_on_CentOS_5">Install Redmine on CentOS 5</a>
@@ -597,48 +589,43 @@
 </span><span class='line'>   &lt;/VirtualHost&gt;</span></code></pre></td></tr></table></div></figure>
 
 
+
+		
+		<a href="/2012/01/redmine-migrate-from-trac-0-dot-12/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" data-updated="true" itemprop="datePublished">Jan 6<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/01/redmine-migrate-from-trac-0-dot-12/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/01/php-resque-introduction/">PHP-Resque 簡介</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-06T15:14:00+08:00" pubdate data-updated="true">Jan 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+		
+			<span class="comments"><a href="/2012/01/php-resque-introduction/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/php-resque-introduction/" itemprop="url">PHP-Resque 簡介</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
 
 <p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
 
@@ -658,48 +645,43 @@
 
 <p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
 
+
+		
+		<a href="/2012/01/php-resque-introduction/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T13:51:00+08:00" data-updated="true" itemprop="datePublished">Jan 5<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/centos/'>centos</a>, <a class='category' href='/categories/redis/'>redis</a>
+
+
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/2012/01/php-resque-introduction/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <!-- Now we're back to normal posts. Note the links used under href in both headers.-->
-        <h1 class="entry-title"><a href="/2012/01/upgrade-redis245-on-centos5/">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-05T13:51:00+08:00" pubdate data-updated="true">Jan 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>CentOS 5 上的 Redis 套件只有到 2.0
+		
+			<span class="comments"><a href="/2012/01/upgrade-redis245-on-centos5/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/upgrade-redis245-on-centos5/" itemprop="url">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>CentOS 5 上的 Redis 套件只有到 2.0
 最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
 
 <p>首先抓下最新穩定版解壓</p>
@@ -745,116 +727,40 @@ redis.conf 要稍微修改</p>
 
 
 <p>大功告成。</p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-      <a class="prev" href="/page/5/">&larr; Older</a>
+        <a href="/page/3/" class="prev">Prev</a>
     
-    <a href="/blog/archives">Blog Archives</a>
     
-    <a class="next" href="/page/3/">Newer &rarr;</a>
+        <a href="/page/5/" class="next">Next</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
-  <span>
-    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
-    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
-    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
-    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
-  </span>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/tdd-rails/">TDD Rails</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/art' style='font-size: 103.0%'>Art</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/programming' style='font-size: 103.0%'>Programming</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/readability' style='font-size: 103.0%'>Readability</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
-</section>
-<section>
-  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("hSATAC", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
-  
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-<section class="googleplus googleplus-hidden">
-  <h1>
-    <a href="https://plus.google.com/113141223333997550446?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - hSATAC -
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2013 - Ash Wu -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
 
 <script type="text/javascript">
       var disqus_shortname = 'hsatac';
@@ -871,40 +777,22 @@ redis.conf 要稍微修改</p>
 
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
 
 
 
 
-
+		</div>
+	</div>
 </body>
 </html>
