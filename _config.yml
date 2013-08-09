@@ -4,10 +4,11 @@
 
 url: http://blog.hsatac.net
 title: hSATAC
-subtitle: ">> ('cat' + 'ash').reverse #=> \"hsatac\"" 
-author: hSATAC
+#subtitle: ">> ('cat' + 'ash').reverse #=> \"hsatac\"" 
+subtitle: 
+author: Ash Wu
 simple_search: http://google.com/search
-description:
+description: "I am a programming language user, here's some breadcrumbs of my work and life.\n >> ('cat' + 'ash').reverse #=> \"hsatac\""
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
@@ -19,7 +20,7 @@ date_format: "ordinal"
 subscribe_rss: http://feeds.feedburner.com/hsatac
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: hsatac@gmail.com
 
 # ----------------------- #
 #    Jekyll & Plugins     #
@@ -50,7 +51,8 @@ titlecase: true       # Converts page and post titles to titlecase
 
 # list each of the sidebar modules you want to include, in the order you want them to appear.
 # To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asides/category_cloud.html, custom/asides/disqus.html, asides/twitter.html, asides/delicious.html,  asides/googleplus.html]
+# default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asides/category_cloud.html, custom/asides/disqus.html, asides/twitter.html, asides/delicious.html,  asides/googleplus.html]
+default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.html, asides/googleplus.html]
 
 # Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
 # and add an array with the asides you want to use.
@@ -63,17 +65,13 @@ default_asides: [custom/asides/about.html, asides/recent_posts.html, custom/asid
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: hSATAC
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
 twitter_user: hSATAC
-twitter_tweet_count: 4
-twitter_show_replies: false
-twitter_follow_button: true
-twitter_show_follower_count: false
 twitter_tweet_button: true
 
 # Google +1
@@ -83,7 +81,7 @@ google_plus_one_size: medium
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
 googleplus_user: 113141223333997550446
-googleplus_hidden: true
+googleplus_hidden: false
 
 # Pinboard
 pinboard_user:
@@ -95,7 +93,7 @@ delicious_count: 5
 
 # Disqus Comments
 disqus_short_name: hsatac
-disqus_show_comment_count: false 
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id: UA-27441833-1
