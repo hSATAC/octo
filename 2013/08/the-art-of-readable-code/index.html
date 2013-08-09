@@ -1,0 +1,779 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Art of Readable Code 讀書筆記 - hSATAC</title>
+  <meta name="author" content="hSATAC">
+
+  
+  <meta name="description" content="這次公司的讀書分享會我被指定報告這本 The Art of Readable Code。 這本書我以前就看過英文本，這次借這個機會重新複習整理了一下，又有新的收穫。把一些我覺得比較重要的點筆記下來，太基礎或可能用不太到的這邊就省略了。很推薦各位翻一下這本，是一本很值得一讀的小書。 摘要 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.hsatac.net/2013/08/the-art-of-readable-code/">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/stylesheets/jquery.fancybox.css?v=2.0.4" type="text/css" media="screen" />
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  jQuery.noConflict();
+  jQuery(document).ready(function() {
+      jQuery("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-27441833-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft">{</div>
+  	<div id="logoText">ash.cat</div>
+  	<div id="logoRight">}</div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">hSATAC</a></h1>
+  
+    <h2>>> ('cat' + 'ash').reverse #=> "hsatac"</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hsatac" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.hsatac.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">The Art of Readable Code 讀書筆記</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T22:07:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>這次公司的讀書分享會我被指定報告這本 <a href="http://shop.oreilly.com/product/9780596802301.do">The Art of Readable Code</a>。</p>
+
+<p><a href="/images/art_of_readable_code/cover.jpg"><img src="/images/art_of_readable_code/cover.jpg" alt="The Art of Readable Code Cover" /></a></p>
+
+<p>這本書我以前就看過英文本，這次借這個機會重新複習整理了一下，又有新的收穫。把一些我覺得比較重要的點筆記下來，太基礎或可能用不太到的這邊就省略了。很推薦各位翻一下這本，是一本很值得一讀的小書。</p>
+
+<!--more-->
+
+
+<h2>摘要</h2>
+
+<p>可讀性就是易於理解(最短時間理解)。</p>
+
+<p>把寫程式從「會動就好」(寫給機器讀)，提升到「表明自己的意圖」(寫給人讀)的層次。</p>
+
+<p>試著思考，閱讀這段程式的人會用怎樣的脈絡來理解你的程式碼。</p>
+
+<h2>Part 1. 表層改善</h2>
+
+<h3>富含資訊的名稱</h3>
+
+<ul>
+<li>選擇詞彙</li>
+</ul>
+
+
+<p><code>FetchPage</code> 比 <code>GetPage</code> 要好，表達出從網路拉資料的行為。</p>
+
+<p>可以使用比 <code>Stop</code> 更清楚的名稱，例如不能復原的用 <code>Kill</code>，能復原的用 <code>Pause</code>, <code>Resume</code>。</p>
+
+<ul>
+<li><p>避免使用 tmp, ret, i, j, k (除非真的是要交換變數)</p></li>
+<li><p>優先使用具體名稱而非抽象名稱</p></li>
+</ul>
+
+
+<p><code>ServerCanStart</code> 抽象</p>
+
+<p><code>ServerCanListenOnPort</code> 具體</p>
+
+<ul>
+<li>在名稱中加入額外資訊</li>
+</ul>
+
+
+<p><code>start</code> => <code>start_ms</code></p>
+
+<p><code>size</code> => <code>size_mb</code></p>
+
+<ul>
+<li>加入其他重要屬性</li>
+</ul>
+
+
+<p><code>password</code> => <code>plaintext_password</code></p>
+
+<p><code>comment</code> => <code>unescaped_comment</code></p>
+
+<p>較小範圍適合較短變數名稱</p>
+
+<h3>不被誤解的名稱</h3>
+
+<p><code>Filter()</code> 是包含還是排除？ <code>Select()</code>, <code>Exclude()</code> 更清楚</p>
+
+<p><code>start, stop</code> 有沒有包含？ <code>first, last</code> 清楚表明有包含</p>
+
+<ul>
+<li>符合使用者的預期</li>
+</ul>
+
+
+<p><code>get*()</code> 開頭預期是輕量 getter，不要做耗時運算。</p>
+
+<p><code>size()</code> 預期輕量，要計算可改為 <code>computeSize()</code></p>
+
+<h3>美學</h3>
+
+<ul>
+<li><p>排版</p></li>
+<li><p>有意義的順序</p></li>
+</ul>
+
+
+<p><code>first_name, last_name, email</code></p>
+
+<p><code>first_name, email,...last_name</code></p>
+
+<ul>
+<li><p>風格一致性</p></li>
+<li><p>區分程式碼段落</p></li>
+</ul>
+
+
+<h3>註解</h3>
+
+<ul>
+<li><p>註解自己的想法</p></li>
+<li><p>註解程式碼缺陷</p></li>
+<li><p>註解常數 (常數的設定通常都有其原因和意義)</p></li>
+</ul>
+
+
+<p><code>NUM_THREADS</code> 可能是根據 CPU 核心數推算出來。</p>
+
+<ul>
+<li>為讀者設想(可能需要額外思考)</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">NSSet</span> <span class="o">*</span><span class="n">selectedAdvisorIDs</span>  <span class="o">=</span> <span class="n">_filterVC</span><span class="p">.</span><span class="n">selectedAdvisors</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">MBAdvisor</span> <span class="o">*</span><span class="n">advisor</span> <span class="k">in</span> <span class="p">[</span><span class="n">self</span> <span class="n">currentGroup</span><span class="p">].</span><span class="n">advisors</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">([</span><span class="n">selectedAdvisorIDs</span> <span class="nl">containsObject:</span><span class="n">advisor</span><span class="p">.</span><span class="n">ID</span><span class="p">])</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">_filteredAdvisors</span> <span class="nl">addObject:</span><span class="n">advisor</span><span class="p">];</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 為什麼不直接從 selectedAdvisorIDs 迴圈作處理？</span>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSNumber</span> <span class="o">*</span><span class="n">advisorID</span> <span class="k">in</span> <span class="n">selectedAdvisorIDs</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="p">[</span><span class="n">_filteredAdvisors</span> <span class="nl">addObject:</span><span class="p">[</span><span class="n">self</span> <span class="nl">findAdvisorByID:</span><span class="n">advisorID</span><span class="p">]];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 為了維持原本 Advisor 的順序</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>註明可能的陷阱</li>
+</ul>
+
+
+<h3>讓註解精確與簡潔</h3>
+
+<ul>
+<li>精確描述函數行為</li>
+</ul>
+
+
+<p><code>傳回檔案行數</code> 可能有很多狀況，改為 <code>計算檔案中 \n 個數</code> 更為精確。</p>
+
+<ul>
+<li><p>使用代表性的輸入輸出範例 (rdoc)</p></li>
+<li><p>函數參數名稱註解 (named parameters)</p></li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Connect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Connect</span><span class="p">(</span><span class="n">timeout_ms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">use_encryption</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">Connect</span><span class="p">(</span><span class="cm">/* timeout_ms = */</span> <span class="mi">10</span><span class="p">,</span> <span class="cm">/* use_encryption = */</span> <span class="nb">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>使用訊息密集的詞彙</li>
+</ul>
+
+
+<p><code>cache</code>, <code>singleton</code></p>
+
+<h2>Part 2. 簡化迴圈與邏輯</h2>
+
+<h3>提高控制流程與可讀性</h3>
+
+<ul>
+<li>if/else 區塊順序
+
+<ol>
+<li> 先肯定而非否定的情況</li>
+<li> 先簡單的情況</li>
+<li> 先<em>有趣</em>或明顯的情況</li>
+</ol>
+</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">url</span><span class="p">.</span><span class="n">HasQueryParameter</span><span class="p">(</span><span class="s">&quot;expand_all&quot;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>     <span class="n">response</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">...</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Expand</span><span class="p">();</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>     <span class="p">...</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 看到 expand_all 會一直想著 expand_all =&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="n">HasQueryParameter</span><span class="p">(</span><span class="s">&quot;expand_all&quot;</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>         <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Expand</span><span class="p">();</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>     <span class="p">...</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>     <span class="n">response</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">...</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>盡早返回 (return)</p></li>
+<li><p>消除迴圈中的巢狀結構 (continue)</p></li>
+</ul>
+
+
+<h3>分解巨大表示式</h3>
+
+<ul>
+<li>解釋性變數</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s">&quot;root&quot;</span><span class="p">:</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">username</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span class='line'><span class="k">if</span> <span class="n">username</span> <span class="o">==</span> <span class="s">&quot;root&quot;</span><span class="p">:</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>變數與可讀性</h3>
+
+<ul>
+<li>消除變數</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</span><span class='line'><span class="n">root_message</span><span class="o">.</span><span class="n">last_view_time</span> <span class="o">=</span> <span class="n">now</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># =&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">root_message</span><span class="o">.</span><span class="n">last_view_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>縮減變數範圍</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">UIButton</span> <span class="o">*</span><span class="n">sideMenuButton</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIButton</span> <span class="nl">buttonWithType:</span><span class="n">UIButtonTypeCustom</span><span class="p">];</span>
+</span><span class='line'><span class="n">sideMenuButton</span><span class="p">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'><span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;sidemenu_icon.png&quot;</span><span class="p">]</span> <span class="nl">forState:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="n">toggleRightPanelAction</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCustomView:</span><span class="n">sideMenuButton</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// =&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// scoped temp variables. last line will be returned.</span>
+</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="p">({</span>
+</span><span class='line'>  <span class="n">UIButton</span> <span class="o">*</span><span class="n">sideMenuButton</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIButton</span> <span class="nl">buttonWithType:</span><span class="n">UIButtonTypeCustom</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">sideMenuButton</span><span class="p">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="s">@&quot;sidemenu_icon.png&quot;</span><span class="p">]</span> <span class="nl">forState:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="n">toggleRightPanelAction</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCustomView:</span><span class="n">sideMenuButton</span><span class="p">];</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>減少變數改變</li>
+</ul>
+
+
+<h2>Part 3. 重新組織程式碼</h2>
+
+<h3>抽離不相關子問題</h3>
+
+<ul>
+<li>避免過猶不及</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">user_info</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;username&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span><span class="p">,</span> <span class="s">&quot;password&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="n">user_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>
+</span><span class='line'><span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="s">&quot;aes_128_cbc&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">PRIVATE_KEY</span><span class="p">,</span> <span class="n">init_vector</span><span class="o">=</span><span class="n">INIT_VECTOR</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">ENCODE</span><span class="p">)</span>
+</span><span class='line'><span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">user_str</span><span class="p">)</span>
+</span><span class='line'><span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out the current 128 bit block</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://example.com/?user_info=&quot;</span> <span class="o">+</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">encrypted_bytes</span><span class="p">)</span>
+</span><span class='line'><span class="err">…</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#=&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">url_safe_encrypt</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">obj_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="s">&quot;aes_128_cbc&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">PRIVATE_KEY</span><span class="p">,</span> <span class="n">init_vector</span><span class="o">=</span><span class="n">INIT_VECTOR</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">ENCODE</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">obj_str</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out the current 128 bit block</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">encrypted_bytes</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">user_info</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;username&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span><span class="p">,</span> <span class="s">&quot;password&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://example.com/?user_info=&quot;</span> <span class="o">+</span> <span class="n">url_safe_encrypt</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">#=&gt; this went too far…</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">user_info</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;username&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span><span class="p">,</span> <span class="s">&quot;password&quot;</span><span class="p">:</span> <span class="s">&quot;...&quot;</span> <span class="p">}</span>
+</span><span class='line'><span class="n">url</span> <span class="o">=</span> <span class="s">&quot;http://example.com/?user_info=&quot;</span> <span class="o">+</span> <span class="n">url_safe_encrypt_obj</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">url_safe_encrypt_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">obj_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">url_safe_encrypt_str</span><span class="p">(</span><span class="n">obj_str</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">url_safe_encrypt_str</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">encrypted_bytes</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">cipher</span> <span class="o">=</span> <span class="n">make_cipher</span><span class="p">()</span>
+</span><span class='line'>  <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out any remaining bytes</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">encrypted_bytes</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">make_cipher</span><span class="p">():</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">Cipher</span><span class="p">(</span><span class="s">&quot;aes_128_cbc&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">PRIVATE_KEY</span><span class="p">,</span> <span class="n">init_vector</span><span class="o">=</span><span class="n">INIT_VECTOR</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">ENCODE</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>撰寫較少程式碼</h3>
+
+<ul>
+<li><p>可讀性最高的程式碼就是完全沒有程式碼</p></li>
+<li><p>不開發那些功能 &ndash; 不會需要</p></li>
+<li><p>詢問與分解需求</p></li>
+<li><p>熟悉你的函式庫</p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hSATAC</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T22:07:00+08:00" pubdate data-updated="true">Aug 7<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/art/'>Art</a>, <a class='category' href='/categories/programming/'>Programming</a>, <a class='category' href='/categories/readability/'>Readability</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog.hsatac.net/2013/08/the-art-of-readable-code/" data-via="hSATAC" data-counturl="http://blog.hsatac.net/2013/08/the-art-of-readable-code/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2013/07/github-pull-request-from-commandline/" title="Previous Post: 用 Commandline 發 github pull request">&laquo; 用 Commandline 發 github pull request</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <a href="/images/gplusid.png"><img src="/images/gplusid.png" /></a>
+  <span>
+    <a href="https://www.facebook.com/hSATAC" target="_blank"><img src="/images/icon_facebook.png"></a>
+    <a href="https://twitter.com/hSATAC" target="_blank"><img src="/images/icon_twitter.png"></a>
+    <a href="http://www.plurk.com/hSATAC" target="_blank"><img src="/images/icon_plurk.png"></a>
+    <a href="http://hsatac.net/+" target="_blank"><img src="/images/icon_googleplus.png"></a>
+  </span>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/the-art-of-readable-code/">The Art of Readable Code 讀書筆記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/github-pull-request-from-commandline/">用 Commandline 發 github pull request</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/xray-rails-tmux-vim-integration/">Xray-rails 與 tmux, vim 整合</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/rspec-given-rspec-spies/">RSpec-Given 與 RSpec-Spies</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/tdd-rails/">TDD Rails</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/categories/ack' style='font-size: 103.0%'>ack</a> <a href='/categories/ag' style='font-size: 103.0%'>ag</a> <a href='/categories/archlinux' style='font-size: 112.0%'>Archlinux</a> <a href='/categories/art' style='font-size: 103.0%'>Art</a> <a href='/categories/aws' style='font-size: 115.0%'>aws</a> <a href='/categories/bash' style='font-size: 103.0%'>Bash</a> <a href='/categories/bashmarks' style='font-size: 103.0%'>bashmarks</a> <a href='/categories/book' style='font-size: 103.0%'>book</a> <a href='/categories/c' style='font-size: 103.0%'>C</a> <a href='/categories/centos' style='font-size: 103.0%'>CentOS</a> <a href='/categories/centos' style='font-size: 103.0%'>centos</a> <a href='/categories/chef' style='font-size: 103.0%'>Chef</a> <a href='/categories/commandline' style='font-size: 103.0%'>commandline</a> <a href='/categories/dns' style='font-size: 103.0%'>dns</a> <a href='/categories/ec2' style='font-size: 109.0%'>ec2</a> <a href='/categories/editor' style='font-size: 103.0%'>editor</a> <a href='/categories/fitness' style='font-size: 103.0%'>fitness</a> <a href='/categories/game' style='font-size: 106.0%'>Game</a> <a href='/categories/git' style='font-size: 115.0%'>Git</a> <a href='/categories/github' style='font-size: 103.0%'>Github</a> <a href='/categories/go' style='font-size: 103.0%'>go</a> <a href='/categories/goaccess' style='font-size: 103.0%'>goaccess</a> <a href='/categories/gocode' style='font-size: 103.0%'>gocode</a> <a href='/categories/golang' style='font-size: 106.0%'>golang</a> <a href='/categories/google-music' style='font-size: 103.0%'>Google Music</a> <a href='/categories/hg' style='font-size: 106.0%'>hg</a> <a href='/categories/hosts' style='font-size: 103.0%'>hosts</a> <a href='/categories/htop' style='font-size: 103.0%'>htop</a> <a href='/categories/hub' style='font-size: 103.0%'>Hub</a> <a href='/categories/ide' style='font-size: 103.0%'>IDE</a> <a href='/categories/ios' style='font-size: 106.0%'>iOS</a> <a href='/categories/kvm' style='font-size: 103.0%'>kvm</a> <a href='/categories/linux' style='font-size: 103.0%'>linux</a> <a href='/categories/logo' style='font-size: 103.0%'>logo</a> <a href='/categories/mac' style='font-size: 133.0%'>Mac</a> <a href='/categories/mercurial' style='font-size: 106.0%'>mercurial</a> <a href='/categories/mercurial-server' style='font-size: 103.0%'>mercurial-server</a> <a href='/categories/mitmproxy' style='font-size: 106.0%'>mitmproxy</a> <a href='/categories/mosh' style='font-size: 103.0%'>mosh</a> <a href='/categories/openssl' style='font-size: 103.0%'>openssl</a> <a href='/categories/pdcp' style='font-size: 103.0%'>pdcp</a> <a href='/categories/pdsh' style='font-size: 103.0%'>pdsh</a> <a href='/categories/php' style='font-size: 139.0%'>PHP</a> <a href='/categories/php' style='font-size: 103.0%'>php</a> <a href='/categories/php-resque' style='font-size: 106.0%'>PHP-Resque</a> <a href='/categories/programming' style='font-size: 103.0%'>Programming</a> <a href='/categories/prompt' style='font-size: 103.0%'>Prompt</a> <a href='/categories/ps1' style='font-size: 103.0%'>PS1</a> <a href='/categories/puppet' style='font-size: 109.0%'>puppet</a> <a href='/categories/puppet' style='font-size: 103.0%'>Puppet</a> <a href='/categories/python' style='font-size: 106.0%'>Python</a> <a href='/categories/rails' style='font-size: 127.0%'>Rails</a> <a href='/categories/readability' style='font-size: 103.0%'>Readability</a> <a href='/categories/redis' style='font-size: 103.0%'>redis</a> <a href='/categories/redmine' style='font-size: 103.0%'>Redmine</a> <a href='/categories/resque' style='font-size: 106.0%'>Resque</a> <a href='/categories/ror' style='font-size: 103.0%'>RoR</a> <a href='/categories/route53' style='font-size: 103.0%'>route53</a> <a href='/categories/rpdcp' style='font-size: 103.0%'>rpdcp</a> <a href='/categories/rspec' style='font-size: 103.0%'>Rspec</a> <a href='/categories/rspec-given' style='font-size: 103.0%'>Rspec-given</a> <a href='/categories/rspec-spies' style='font-size: 103.0%'>Rspec-spies</a> <a href='/categories/ruby' style='font-size: 121.0%'>Ruby</a> <a href='/categories/rubyconf' style='font-size: 106.0%'>Rubyconf</a> <a href='/categories/rwby' style='font-size: 103.0%'>RWBY</a> <a href='/categories/script' style='font-size: 103.0%'>script</a> <a href='/categories/sentry' style='font-size: 103.0%'>Sentry</a> <a href='/categories/syntax' style='font-size: 103.0%'>syntax</a> <a href='/categories/tdd' style='font-size: 106.0%'>TDD</a> <a href='/categories/testflight' style='font-size: 103.0%'>testflight</a> <a href='/categories/the-silver-searcher' style='font-size: 103.0%'>the_silver_searcher</a> <a href='/categories/tig' style='font-size: 103.0%'>tig</a> <a href='/categories/tmux' style='font-size: 103.0%'>tmux</a> <a href='/categories/tmuxinator' style='font-size: 103.0%'>tmuxinator</a> <a href='/categories/trac' style='font-size: 103.0%'>Trac</a> <a href='/categories/unit-test' style='font-size: 103.0%'>unit test</a> <a href='/categories/vim' style='font-size: 106.0%'>vim</a> <a href='/categories/virsh' style='font-size: 103.0%'>virsh</a> <a href='/categories/vm' style='font-size: 103.0%'>vm</a> <a href='/categories/vnc' style='font-size: 103.0%'>vnc</a> <a href='/categories/xcode' style='font-size: 103.0%'>Xcode</a> <a href='/categories/xray-rails' style='font-size: 103.0%'>Xray-rails</a> <a href='/categories/youtube' style='font-size: 103.0%'>Youtube</a> <a href='/categories/單車日誌' style='font-size: 139.0%'>單車日誌</a> <a href='/categories/射箭生活' style='font-size: 127.0%'>射箭生活</a> <a href='/categories/工作紀錄' style='font-size: 154.0%'>工作紀錄</a> <a href='/categories/生活雜談' style='font-size: 160.0%'>生活雜談</a> <a href='/categories/隻字片語' style='font-size: 106.0%'>隻字片語</a> </span>
+</section>
+<section>
+  <div id="recentcomments" class="dsq-widget"><h2 class="dsq-widget-title">Recent Comments</h2><script type="text/javascript" src="http://hsatac.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=48&excerpt_length=200"></script></div>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("hSATAC", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/hSATAC" class="twitter-follow-button" data-show-count="false">Follow @hSATAC</a>
+  
+</section>
+
+
+<section>
+  <h1>On Delicious</h1>
+  <div id="delicious"></div>
+  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/cat?count=5&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
+  <p><a href="http://delicious.com/cat">My Delicious Bookmarks &raquo;</a></p>
+</section>
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/113141223333997550446?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - hSATAC -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2013/08/the-art-of-readable-code/';
+        var disqus_url = 'http://blog.hsatac.net/2013/08/the-art-of-readable-code/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
