@@ -8,7 +8,7 @@ title: hSATAC
 subtitle: 
 author: Ash Wu
 simple_search: http://google.com/search
-description: "I am a programming language user, here's some breadcrumbs of my work and life.\n >> ('cat' + 'ash').reverse #=> \"hsatac\""
+description: "I am a programming language user. Here are some breadcrumbs of my work and life.\n >> ('cat' + 'ash').reverse #=> \"hsatac\""
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
