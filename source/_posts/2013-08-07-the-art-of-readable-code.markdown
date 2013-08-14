@@ -8,7 +8,7 @@ categories: [Programming, Art, Readability]
 
 這次公司的讀書分享會我被指定報告這本 [The Art of Readable Code](http://shop.oreilly.com/product/9780596802301.do)。
 
-[![The Art of Readable Code Cover](/images/art_of_readable_code/cover.jpg)](/images/art_of_readable_code/cover.jpg)
+![The Art of Readable Code Cover](/images/art_of_readable_code/cover.jpg)
 
 這本書我以前就看過英文本，這次借這個機會重新複習整理了一下，又有新的收穫。把一些我覺得比較重要的點筆記下來，太基礎或可能用不太到的這邊就省略了。很推薦各位翻一下這本，是一本很值得一讀的小書。
 

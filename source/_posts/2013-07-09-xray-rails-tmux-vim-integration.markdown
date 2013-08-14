@@ -10,7 +10,8 @@ categories: [Xray-rails, Rails, RoR, tmux, vim, tmuxinator]
 
 [Xray-rails](https://github.com/brentd/xray-rails) 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 `⌘ + ⇧ + x` 就會開啟一層 overlay，讓你很清楚的看出現在的畫面由哪些 view, partial, controller 生成，更方便的是只要一點畫面，即可在編輯器中開啟該檔案，大大降低 trace 程式碼的時間。
 
-[![image](https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png)](https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png)
+![Xray-rails](https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png)
+
 <!--more-->
 [Xray-rails](https://github.com/brentd/xray-rails) 預設的編輯器是 [Sublime Text 2](http://www.sublimetext.com/2) (`/usr/local/bin/subl`)。可以透過 overlay 右下角的設定圖示、或者自己新增 `~/.xrayconfig` 檔案來設定你使用的編輯器。
 
@@ -25,6 +26,10 @@ categories: [Xray-rails, Rails, RoR, tmux, vim, tmuxinator]
 `openapply` 是我的專案 tmux session 名稱，而 `editor` 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。
 
 但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 `~/.xrayconfig` 實在很不方便，所以希望能在每一個專案底下放自己的 `.xrayconfig`。
+
+{%ribbonp info Update 2013/08/14 %}
+這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。
+{%endribbonp%}
 
 這個功能已經[提案給原作者同意](https://github.com/brentd/xray-rails/issues/21)，也送了 [pull request](https://github.com/brentd/xray-rails/pull/23)，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。
 
