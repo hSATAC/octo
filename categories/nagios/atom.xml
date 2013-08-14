@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: nagios | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/nagios/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2013-08-14T13:09:42+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[Ash Wu]]></name>
+    <email><![CDATA[hsatac@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Nagios 基本設定]]></title>
+    <link href="http://blog.hsatac.net/2012/12/nagios-basic-configuration/"/>
+    <updated>2012-12-11T13:41:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/12/nagios-basic-configuration</id>
+    <content type="html"><![CDATA[<p>Nagios 是一個相當萬用的老牌監控軟體，資源和插件都很多。不過由於他的彈性太好，相對設定上就不是很容易上手。這篇文章將會紀錄比較重要的一些基本設定和觀念。</p>
+
+<p>由於不同 distribution 的差異，以下路徑都是 Archlinux 下的，可能會有所不同。</p>
+
+<h3>/etc/nagios/nagios.cfg</h3>
+
+<p>所有相關 nagios 本身的設定都在此。如果之後發現有一些預期以外的行為，通常回來這個檔案仔細檢查問題都在這。基礎跑的話可以先不用修改這個檔案的內容。先把監控項目設定起來，最後再回頭來微調就好。</p>
+
+<h3>/etc/nagios/objects</h3>
+
+<p>這個目錄是最重要的目錄，所有監控的設定都放在這邊。</p>
+
+<h3>/etc/nagios/objects/templates.cfg</h3>
+
+<p>Nagios 設定的方式有點 OO 的感覺，許多設定都是繼承某個原型而來。當然你也可以都不要繼承，每一條都詳細設定，不過這樣寫起來會很繁瑣，日後也不好維護管理。</p>
+]]></content>
+  </entry>
+  
+</feed>

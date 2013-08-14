@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tmux | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/tmux/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-10T10:12:18+08:00</updated>
+  <updated>2013-08-14T13:09:42+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -22,7 +22,7 @@
 
 <p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 <code>⌘ + ⇧ + x</code> 就會開啟一層 overlay，讓你很清楚的看出現在的畫面由哪些 view, partial, controller 生成，更方便的是只要一點畫面，即可在編輯器中開啟該檔案，大大降低 trace 程式碼的時間。</p>
 
-<p><a href="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png"><img src="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png" alt="image" /></a></p>
+<p><img src="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png" alt="Xray-rails" /></p>
 
 <!--more-->
 
@@ -40,6 +40,8 @@
 <p><code>openapply</code> 是我的專案 tmux session 名稱，而 <code>editor</code> 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。</p>
 
 <p>但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 <code>~/.xrayconfig</code> 實在很不方便，所以希望能在每一個專案底下放自己的 <code>.xrayconfig</code>。</p>
+
+<p><p class='info info' data-title='Update 2013/08/14'>這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。</p></p>
 
 <p>這個功能已經<a href="https://github.com/brentd/xray-rails/issues/21">提案給原作者同意</a>，也送了 <a href="https://github.com/brentd/xray-rails/pull/23">pull request</a>，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。</p>
 
