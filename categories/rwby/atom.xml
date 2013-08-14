@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RWBY | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/rwby/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -30,14 +30,39 @@
 <!--more-->
 
 
-<p><blockquote><p>Mirror, tell me something.<br/>Tell me who&rsquo;s the loneliest of all.</p></p><p><p>Mirror, tell me something.<br/>Tell me who&rsquo;s the loneliest of all.</p></p><p><p>Mirror, locked inside of me.<br/>Tell me can a heart be turned to stone?</p></p><p><p>Mirror mirror what&rsquo;s behind you?<br/>Save me from the things I see!<br/>I can keep it from the world,<br/>why wont you let me hide from me?</p></p><p><p>Mirror, mirror,<br/>tell me something.<br/>Who&rsquo;s the loneliest of all?</p></p><p><p>I am the loneliest of all.</p></blockquote></p>
+<p>{% blockquote %}
+Mirror, tell me something.
+Tell me who&rsquo;s the loneliest of all.</p>
+
+<p>Mirror, tell me something.
+Tell me who&rsquo;s the loneliest of all.</p>
+
+<p>Mirror, locked inside of me.
+Tell me can a heart be turned to stone?</p>
+
+<p>Mirror mirror what&rsquo;s behind you?
+Save me from the things I see!
+I can keep it from the world,
+why wont you let me hide from me?</p>
+
+<p>Mirror, mirror,
+tell me something.
+Who&rsquo;s the loneliest of all?</p>
+
+<p>I am the loneliest of all.
+{% endblockquote %}</p>
 
 <p>第一部 &ldquo;Red&rdquo;</p>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/pYW2GmHB5xs" frameborder="0" allowfullscreen></iframe>
 
 
-<p><blockquote><p>Red like roses fills my dreams and brings me to the place you rest<br/>White is cold and always yearning burdened by a royal test<br/>Black the beast descends from shadows<br/>Yellow beauty burns gold</p></blockquote></p>
+<p>{% blockquote %}
+Red like roses fills my dreams and brings me to the place you rest
+White is cold and always yearning burdened by a royal test
+Black the beast descends from shadows
+Yellow beauty burns gold
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   

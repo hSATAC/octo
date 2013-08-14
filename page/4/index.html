@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 7th, 2012 aws, ec2, hosts Comments 動態產生 Ec2 的 Hosts 檔案 這個議題類似上一篇 利用 Route 53 設定 Ec2 動態 DNS ，同樣也是要解決主機名稱對應浮動 ip 的問題。 雖然現在用完整域名已經可以對應到 ip ， &hellip;">
+	<meta name="description" content="Jun 6th, 2012 aws, dns, ec2, route53 Comments 利用 Route 53 設定 Ec2 動態 DNS 最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +72,8 @@
 <nav id="sub-nav">
 	<div class="social">
 		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
 		
 		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
 		
@@ -83,6 +85,8 @@
 		
 		
 		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
 		
 		
 		
@@ -104,81 +108,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-07T11:43:00+08:00" data-updated="true" itemprop="datePublished">Jun 7<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/hosts/'>hosts</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2012/06/generate-aws-ec2-hosts-file/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2012/06/generate-aws-ec2-hosts-file/" itemprop="url">動態產生 Ec2 的 Hosts 檔案</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這個議題類似上一篇 <a href="http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a> ，同樣也是要解決主機名稱對應浮動 ip 的問題。</p>
-
-<p>雖然現在用完整域名已經可以對應到 ip ，但是還是有很多時候我們的主機需要知道主機名稱和 ip 的對應。</p>
-
-<p>這個問題大概也是可以用 hosts 或 dns 來解決，不過由於我已經把 yp nis 架設起來，其他機器可以直接吃 nis 伺服器的 hosts 檔案，所以決定用 hosts 這個方式來處理。</p>
-
-<p>概念很簡單，利用 ec2 api sdk 抓取正在運行的主機列表，一一寫入 /etc/hosts 後再重新 make yp 的資料庫。</p>
-
-<p>設個排程每個小時跑一下或開新機器時手動執行一下即可。</p>
-
-<p>script 如下：</p>
-
-<div><script src='https://gist.github.com/2881131.js'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-# coding: utf-8
-require 'rubygems'
-require 'aws-sdk'
-
-config = {:access_key_id =&gt; '',
-          :secret_access_key =&gt; ''}
-AWS.config(config)
-ec2 = AWS::EC2.new
-ec2 = ec2.regions['ap-northeast-1']
-
-hosts = []
-hosts &lt;&lt; &quot;127.0.0.1\tlocalhost localhost.localdomain&quot;
-ec2.instances.each do |instance|
-  next unless instance.status == :running
-  tags = instance.tags.to_h
-  hosts &lt;&lt; &quot;#{instance.private_ip_address}\t#{tags[&quot;Name&quot;]}&quot;
-end
-
-`cp -p /etc/hosts /etc/hosts.bak`
-open(&quot;/etc/hosts.new&quot;, &quot;w&quot;) {|f| f.write hosts.join(&quot;\n&quot;)+&quot;\n&quot;}
-is_same = system(&quot;diff -q /etc/hosts.new /etc/hosts &gt; /dev/null 2&gt;/dev/null&quot;)
-unless is_same
-  `cp -p /etc/hosts.new /etc/hosts`
-end</code></pre></noscript></div>
-
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -725,6 +654,88 @@ end</code></pre></noscript></div>
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T13:51:00+08:00" data-updated="true" itemprop="datePublished">Jan 5<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/centos/'>centos</a>, <a class='category' href='/categories/redis/'>redis</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2012/01/upgrade-redis245-on-centos5/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/upgrade-redis245-on-centos5/" itemprop="url">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
+
+<p>首先抓下最新穩定版解壓</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
+</span><span class='line'>tar zxvf redis-2.4.5.tar.gz
+</span><span class='line'>cd redis-2.4.5
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>跟原本的 redis 2.0 裝在同一個目錄</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make PREFIX=/usr install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再把新的 config 檔蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp redis.conf /etc/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了讓原本的 init script 正常運作
+redis.conf 要稍微修改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>daemonize yes
+</span><span class='line'>...
+</span><span class='line'>pidfile /var/run/redis/redis.pid</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
+把 /usr/sbin/redis-server 覆蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv /usr/bin/redis-server /usr/sbin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大功告成。</p>
+
+		
+		
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
@@ -743,14 +754,6 @@ end</code></pre></noscript></div>
 
 Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
 			<script src="/javascripts/slash.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
 
 
 <script type="text/javascript">
@@ -779,6 +782,7 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+
 
 
 

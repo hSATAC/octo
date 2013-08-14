@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Programming | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/programming/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -127,47 +127,28 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">NSSet</span> <span class="o">*</span><span class="n">selectedAdvisorIDs</span>  <span class="o">=</span> <span class="n">_filterVC</span><span class="p">.</span><span class="n">selectedAdvisors</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">for</span> <span class="p">(</span><span class="n">MBAdvisor</span> <span class="o">*</span><span class="n">advisor</span> <span class="k">in</span> <span class="p">[</span><span class="n">self</span> <span class="n">currentGroup</span><span class="p">].</span><span class="n">advisors</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">([</span><span class="n">selectedAdvisorIDs</span> <span class="nl">containsObject:</span><span class="n">advisor</span><span class="p">.</span><span class="n">ID</span><span class="p">])</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">_filteredAdvisors</span> <span class="nl">addObject:</span><span class="n">advisor</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// 為什麼不直接從 selectedAdvisorIDs 迴圈作處理？</span>
-</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="n">NSNumber</span> <span class="o">*</span><span class="n">advisorID</span> <span class="k">in</span> <span class="n">selectedAdvisorIDs</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>    <span class="p">[</span><span class="n">_filteredAdvisors</span> <span class="nl">addObject:</span><span class="p">[</span><span class="n">self</span> <span class="nl">findAdvisorByID:</span><span class="n">advisorID</span><span class="p">]];</span>
-</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// 為了維持原本 Advisor 的順序</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:obj-c %}
+NSSet *selectedAdvisorIDs  = _filterVC.selectedAdvisors;</p>
+
+<p>for (MBAdvisor *advisor in [self currentGroup].advisors) {</p>
+
+<pre><code>if ([selectedAdvisorIDs containsObject:advisor.ID]) {
+    [_filteredAdvisors addObject:advisor];
+}
+</code></pre>
+
+<p>}</p>
+
+<p>// 為什麼不直接從 selectedAdvisorIDs 迴圈作處理？
+for (NSNumber *advisorID in selectedAdvisorIDs) {</p>
+
+<pre><code>    [_filteredAdvisors addObject:[self findAdvisorByID:advisorID]];
+</code></pre>
+
+<p>}</p>
+
+<p>// 為了維持原本 Advisor 的順序
+{% endcodeblock %}</p>
 
 <ul>
 <li>註明可能的陷阱</li>
@@ -189,25 +170,17 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">Connect</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//=&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Connect</span><span class="p">(</span><span class="n">timeout_ms</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">use_encryption</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">//=&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">Connect</span><span class="p">(</span><span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">timeout_ms</span> <span class="o">=</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span> <span class="mi">10</span><span class="p">,</span> <span class="o">/&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">use_encryption</span> <span class="o">=</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;/</span> <span class="nb">false</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:c %}
+Connect(10, false);</p>
+
+<p>//=></p>
+
+<p>Connect(timeout_ms = 10, use_encryption = false);</p>
+
+<p>//=></p>
+
+<p>Connect(/<em> timeout_ms = </em>/ 10, /<em> use_encryption = </em>/ false);
+{% endcodeblock %}</p>
 
 <ul>
 <li>使用訊息密集的詞彙</li>
@@ -232,13 +205,11 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">url</span><span class="p">.</span><span class="n">HasQueryParameter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">expand_all</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;))</span> <span class="p">{</span>     <span class="n">response</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>     <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;}</span> <span class="k">else</span> <span class="p">{</span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Expand</span><span class="p">();</span>     <span class="p">}</span>     <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;}</span>
-</span><span class='line'><span class="c1">// 看到 expand_all 會一直想著 expand_all =&gt;</span>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="n">HasQueryParameter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">expand_all</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;))</span> <span class="p">{</span>     <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">items</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Expand</span><span class="p">();</span>     <span class="p">}</span>     <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;}</span> <span class="k">else</span> <span class="p">{</span>     <span class="n">response</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>     <span class="o">&amp;</span><span class="n">hellip</span><span class="p">;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:c %}
+if (!url.HasQueryParameter(&ldquo;expand_all&rdquo;)) {     response.Render(items);     &hellip;} else {     for (int i = 0; i &lt; items.size(); i++) {         items[i].Expand();     }     &hellip;}
+// 看到 expand_all 會一直想著 expand_all =>
+if (url.HasQueryParameter(&ldquo;expand_all&rdquo;)) {     for (int i = 0; i &lt; items.size(); i++) {         items[i].Expand();     }     &hellip;} else {     response.Render(items);     &hellip;}
+{% endcodeblock %}</p>
 
 <ul>
 <li><p>盡早返回 (return)</p></li>
@@ -253,19 +224,14 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;:</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">root</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">username</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;:</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-</span><span class='line'><span class="k">if</span> <span class="n">username</span> <span class="o">==</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">root</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:python %}
+if line.split(&lsquo;:&rsquo;)[0].strip() == &ldquo;root&rdquo;:</p>
+
+<h1>=></h1>
+
+<p>username = line.split(&lsquo;:&rsquo;)[0].strip()
+if username == &ldquo;root&rdquo;:
+{% endcodeblock %}</p>
 
 <h3>變數與可讀性</h3>
 
@@ -274,58 +240,38 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-</span><span class='line'><span class="n">root_message</span><span class="o">.</span><span class="n">last_view_time</span> <span class="o">=</span> <span class="n">now</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">root_message</span><span class="o">.</span><span class="n">last_view_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:python %}
+now = datetime.datetime.now()
+root_message.last_view_time = now</p>
+
+<h1>=></h1>
+
+<p>root_message.last_view_time = datetime.datetime.now()
+{% endcodeblock %}</p>
 
 <ul>
 <li>縮減變數範圍</li>
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">UIButton</span> <span class="o">*</span><span class="n">sideMenuButton</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIButton</span> <span class="nl">buttonWithType:</span><span class="n">UIButtonTypeCustom</span><span class="p">];</span>
-</span><span class='line'><span class="n">sideMenuButton</span><span class="p">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'><span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">sidemenu_icon</span><span class="p">.</span><span class="n">png</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span> <span class="nl">forState:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
-</span><span class='line'><span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="n">toggleRightPanelAction</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
-</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCustomView:</span><span class="n">sideMenuButton</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// =&gt;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// scoped temp variables. last line will be returned.</span>
-</span><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">navigationItem</span><span class="p">.</span><span class="n">rightBarButtonItem</span> <span class="o">=</span> <span class="p">({</span>
-</span><span class='line'>  <span class="n">UIButton</span> <span class="o">*</span><span class="n">sideMenuButton</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIButton</span> <span class="nl">buttonWithType:</span><span class="n">UIButtonTypeCustom</span><span class="p">];</span>
-</span><span class='line'>  <span class="n">sideMenuButton</span><span class="p">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">setImage:</span><span class="p">[</span><span class="n">UIImage</span> <span class="nl">imageNamed:</span><span class="err">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">sidemenu_icon</span><span class="p">.</span><span class="n">png</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span> <span class="nl">forState:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[</span><span class="n">sideMenuButton</span> <span class="nl">addTarget:</span><span class="n">self</span> <span class="nl">action:</span><span class="k">@selector</span><span class="p">(</span><span class="n">toggleRightPanelAction</span><span class="p">)</span> <span class="nl">forControlEvents:</span><span class="n">UIControlEventTouchUpInside</span><span class="p">];</span>
-</span><span class='line'>  <span class="p">[[</span><span class="n">UIBarButtonItem</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCustomView:</span><span class="n">sideMenuButton</span><span class="p">];</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:obj-c %}
+UIButton *sideMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+sideMenuButton.bounds = CGRectMake(0, 0, 20, 20);
+[sideMenuButton setImage:[UIImage imageNamed:@&ldquo;sidemenu_icon.png&rdquo;] forState:UIControlStateNormal];
+[sideMenuButton addTarget:self action:@selector(toggleRightPanelAction) forControlEvents:UIControlEventTouchUpInside];
+self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:sideMenuButton];</p>
+
+<p>// =></p>
+
+<p>// scoped temp variables. last line will be returned.
+self.navigationItem.rightBarButtonItem = ({
+  UIButton *sideMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  sideMenuButton.bounds = CGRectMake(0, 0, 20, 20);
+  [sideMenuButton setImage:[UIImage imageNamed:@&ldquo;sidemenu_icon.png&rdquo;] forState:UIControlStateNormal];
+  [sideMenuButton addTarget:self action:@selector(toggleRightPanelAction) forControlEvents:UIControlEventTouchUpInside];
+  [[UIBarButtonItem alloc] initWithCustomView:sideMenuButton];
+});
+{% endcodeblock %}</p>
 
 <ul>
 <li>減少變數改變</li>
@@ -341,29 +287,19 @@
 </ul>
 
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">user_info</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">username</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">password</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="p">}</span><span class="n">user_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span><span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">aes_128_cbc</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">key</span><span class="o">=</span><span class="n">PRIVATE_KEY</span><span class="p">,</span> <span class="n">init_vector</span><span class="o">=</span><span class="n">INIT_VECTOR</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">ENCODE</span><span class="p">)</span><span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">user_str</span><span class="p">)</span><span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out the current 128 bit blockurl = &amp;ldquo;&lt;a href=&quot;http://example.com/?user_info=&quot;&gt;http://example.com/?user_info=&lt;/a&gt;&amp;rdquo; + base64.urlsafe_b64encode(encrypted_bytes)</span>
-</span><span class='line'><span class="err">…</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">def</span> <span class="nf">url_safe_encrypt</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>  <span class="n">obj_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>   <span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">aes_128_cbc</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="n">key</span><span class="o">=</span><span class="n">PRIVATE_KEY</span><span class="p">,</span> <span class="n">init_vector</span><span class="o">=</span><span class="n">INIT_VECTOR</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">ENCODE</span><span class="p">)</span> <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">obj_str</span><span class="p">)</span>    <span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out the current 128 bit block return base64.urlsafe_b64encode(encrypted_bytes)user_info = { &amp;ldquo;username&amp;rdquo;: &amp;ldquo;&amp;hellip;&amp;rdquo;, &amp;ldquo;password&amp;rdquo;: &amp;ldquo;&amp;hellip;&amp;rdquo; }url = &amp;ldquo;&lt;a href=&quot;http://example.com/?user_info=&quot;&gt;http://example.com/?user_info=&lt;/a&gt;&amp;rdquo; + url_safe_encrypt(user_info)&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;=&gt;</span> <span class="n">this</span> <span class="n">went</span> <span class="n">too</span> <span class="n">far</span><span class="err">…</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">user_info</span> <span class="o">=</span> <span class="p">{</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">username</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">password</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;:</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">hellip</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="p">}</span><span class="n">url</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&quot;http://example.com/?user_info=&quot;</span><span class="o">&gt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="err">?</span><span class="n">user_info</span><span class="o">=&lt;/</span><span class="n">a</span><span class="o">&gt;&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="n">url_safe_encrypt_obj</span><span class="p">(</span><span class="n">user_info</span><span class="p">)</span>
-</span><span class='line'><span class="k">def</span> <span class="nf">url_safe_encrypt_obj</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>  <span class="n">obj_str</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>   <span class="k">return</span> <span class="n">url_safe_encrypt_str</span><span class="p">(</span><span class="n">obj_str</span><span class="p">)</span><span class="k">def</span> <span class="nf">url_safe_encrypt_str</span><span class="p">(</span><span class="n">data</span><span class="p">):</span> <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">encrypted_bytes</span><span class="p">)</span><span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>  <span class="n">cipher</span> <span class="o">=</span> <span class="n">make_cipher</span><span class="p">()</span>  <span class="n">encrypted_bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>   <span class="n">encrypted_bytes</span> <span class="o">+=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">final</span><span class="p">()</span> <span class="c"># flush out any remaining bytes   return encrypted_bytesdef make_cipher():    return Cipher(&amp;ldquo;aes_128_cbc&amp;rdquo;, key=PRIVATE_KEY, init_vector=INIT_VECTOR, op=ENCODE)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:python %}
+user_info = { &ldquo;username&rdquo;: &ldquo;&hellip;&rdquo;, &ldquo;password&rdquo;: &ldquo;&hellip;&rdquo; }user_str = json.dumps(user_info)cipher = Cipher(&ldquo;aes_128_cbc&rdquo;, key=PRIVATE_KEY, init_vector=INIT_VECTOR, op=ENCODE)encrypted_bytes = cipher.update(user_str)encrypted_bytes += cipher.final() # flush out the current 128 bit blockurl = &ldquo;<a href="http://example.com/?user_info=">http://example.com/?user_info=</a>&rdquo; + base64.urlsafe_b64encode(encrypted_bytes)
+…</p>
+
+<h1>=></h1>
+
+<p>def url_safe_encrypt(obj):  obj_str = json.dumps(obj)   cipher = Cipher(&ldquo;aes_128_cbc&rdquo;, key=PRIVATE_KEY, init_vector=INIT_VECTOR, op=ENCODE) encrypted_bytes = cipher.update(obj_str)    encrypted_bytes += cipher.final() # flush out the current 128 bit block return base64.urlsafe_b64encode(encrypted_bytes)user_info = { &ldquo;username&rdquo;: &ldquo;&hellip;&rdquo;, &ldquo;password&rdquo;: &ldquo;&hellip;&rdquo; }url = &ldquo;<a href="http://example.com/?user_info=">http://example.com/?user_info=</a>&rdquo; + url_safe_encrypt(user_info)</p>
+
+<h1>=> this went too far…</h1>
+
+<p>user_info = { &ldquo;username&rdquo;: &ldquo;&hellip;&rdquo;, &ldquo;password&rdquo;: &ldquo;&hellip;&rdquo; }url = &ldquo;<a href="http://example.com/?user_info=">http://example.com/?user_info=</a>&rdquo; + url_safe_encrypt_obj(user_info)
+def url_safe_encrypt_obj(obj):  obj_str = json.dumps(obj)   return url_safe_encrypt_str(obj_str)def url_safe_encrypt_str(data): encrypted_bytes = encrypt(data) return base64.urlsafe_b64encode(encrypted_bytes)def encrypt(data):  cipher = make_cipher()  encrypted_bytes = cipher.update(data)   encrypted_bytes += cipher.final() # flush out any remaining bytes   return encrypted_bytesdef make_cipher():    return Cipher(&ldquo;aes_128_cbc&rdquo;, key=PRIVATE_KEY, init_vector=INIT_VECTOR, op=ENCODE)
+{% endcodeblock %}</p>
 
 <h3>撰寫較少程式碼</h3>
 

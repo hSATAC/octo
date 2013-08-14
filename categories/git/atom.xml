@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Git | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/git/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -36,9 +36,7 @@ gem install hub
 
 <p>我們 team 開發流程是 feature branch 開發完畢後 push 到專案 remote 發 pull request，所以我在 <code>.bash_profile</code> 加了下面這個 function：</p>
 
-<p><div><script src='https://gist.github.com/5591270.js'></script>
-<noscript><pre><code></code></pre></noscript></div>
-</p>
+<p>{% gist 5591270 %}</p>
 
 <blockquote><p>從 team 的 (現在目錄所在 branch) 發 pull request 到 team 的 (develop) branch</p></blockquote>
 ]]></content>
@@ -75,32 +73,7 @@ gem install hub
 
 <p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
 
-<p><div><script src='https://gist.github.com/3903435.js'></script>
-<noscript><pre><code>#!/bin/sh
-
-# do gocode first
-cd /Users/cat/golang.tw/gocode
-git pull
-git filter-branch -f --subdirectory-filter vim -- --all
-git push pathogen master
-git fetch
-git reset --hard origin/master
-
-# do git-hg sync go
-cd /Users/cat/golang.tw/go.git
-git-hg pull
-git push origin master
-
-# do go.vim
-
-cd /Users/cat/golang.tw/go.vim
-git pull
-git filter-branch -f --subdirectory-filter misc/vim -- --all
-git push github master
-git fetch
-git reset --hard origin/master
-</code></pre></noscript></div>
-</p>
+<p>{% gist 3903435 %}</p>
 ]]></content>
   </entry>
   
@@ -120,36 +93,13 @@ git reset --hard origin/master
 
 <p>再來是檢查哪些 branches 已經開很久了(開超過一個月)，卻又沒有 merge 進主幹，這時管理者可以看一下這些 branches 是否已經不再使用，可以刪除。</p>
 
-<p><div><script src='https://gist.github.com/3246217.js'></script>
-<noscript><pre><code>#!/usr/bin/env ruby
-require 'rubygems'
-require 'active_support'
-
-merged = `cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch --merged master | grep -v master`
-not_merged_cmd = 'cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch | grep -v master | grep -v support | grep -v qa'
-for line in merged.split(&quot;\n&quot;)
-  not_merged_cmd += '| grep -v ' + line
-end
-puts &quot;This is a regular check of miiiCasa.git branches\n&quot;
-puts &quot;List below are branches already been merged into [master]:&quot;
-puts &quot;Please check if they are still needed, grb delete them otherwise.\n&quot;
-puts merged
-
-puts &quot;\n--------------------\n\n&quot;
-
-puts 'List below are branches order than 1 month and have NOT been merged into [master]:'
-puts &quot;Please check if they are abandoned or forgotten.&quot;
-not_merged = `#{not_merged_cmd}`
-for line in not_merged
-  date =  /\S+_([0-9]+)_/.match(line)[1]
-  puts line if 1.month.ago &gt; Date.parse(date)
-end</code></pre></noscript></div>
-</p>
+<p>{% gist 3246217 %}</p>
 
 <p>我們團隊對於 branch 命名有規定，中間一定是八位數字的日期，例如 feature_20120812_sthcool 以便分辨這個 branch 的開創時間。如果沒有這樣的命名規定的話，也可以透過下面這樣的 script 來找出最後 active 的時間。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>for k in &lt;code>git branch|perl -pe s/^..//&lt;/code>;do echo -e &lt;code>git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1&lt;/code>\t$k;done|sort -r</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+for k in <code>git branch|perl -pe s/^..//</code>;do echo -e <code>git show --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $k|head -n 1</code>\t$k;done|sort -r
+{% endcodeblock %}</p>
 ]]></content>
   </entry>
   

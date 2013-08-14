@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RoR | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ror/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -41,7 +41,9 @@
 
 <p>但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 <code>~/.xrayconfig</code> 實在很不方便，所以希望能在每一個專案底下放自己的 <code>.xrayconfig</code>。</p>
 
-<p><p class='info info' data-title='Update 2013/08/14'>這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。</p></p>
+<p>{%ribbonp info Update 2013/08/14 %}
+這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。
+{%endribbonp%}</p>
 
 <p>這個功能已經<a href="https://github.com/brentd/xray-rails/issues/21">提案給原作者同意</a>，也送了 <a href="https://github.com/brentd/xray-rails/pull/23">pull request</a>，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。</p>
 

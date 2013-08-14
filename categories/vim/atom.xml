@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vim/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -41,7 +41,9 @@
 
 <p>但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 <code>~/.xrayconfig</code> 實在很不方便，所以希望能在每一個專案底下放自己的 <code>.xrayconfig</code>。</p>
 
-<p><p class='info info' data-title='Update 2013/08/14'>這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。</p></p>
+<p>{%ribbonp info Update 2013/08/14 %}
+這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。
+{%endribbonp%}</p>
 
 <p>這個功能已經<a href="https://github.com/brentd/xray-rails/issues/21">提案給原作者同意</a>，也送了 <a href="https://github.com/brentd/xray-rails/pull/23">pull request</a>，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。</p>
 
@@ -62,27 +64,7 @@
     <id>http://blog.hsatac.net/2011/12/vim-php-runtime-syntax-check-without-saving-file</id>
     <content type="html"><![CDATA[<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
 
-<p><div><script src='https://gist.github.com/1496197.js'></script>
-<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
-  if !exists('*PHPsynCHK')
-    function! PHPsynCHK()
-      ccl
-      let winnum = winnr()
-      let linenum = line('.')
-      let colnum = col('.')
-      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
-      silent cf .vimerr
-      cw
-      execute winnum . &quot;wincmd w&quot;
-      silent undo
-      silent cf
-      if 1 == len(getqflist())
-         call cursor(linenum, colnum)
-      endif
-    endfunction
-  endif
-</code></pre></noscript></div>
-</p>
+<p>{% gist 1496197 %}</p>
 
 <p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
 ]]></content>

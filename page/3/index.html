@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Oct 21st, 2012 logo Comments 關於我的 Logo 在莊神的部落格被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。 Read on &rarr; Oct 17th, 2012 Git, go, gocode, golang, hg, &hellip;">
+	<meta name="description" content="Oct 17th, 2012 Git, go, gocode, golang, hg, mercurial Comments 同步 Git 和 Hg 的 Repository 最近在玩 go，編輯器主要是使用 vim 搭配 gocode。我習慣用 pathogen.vim 來管理我的 vim &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -72,6 +72,8 @@
 <nav id="sub-nav">
 	<div class="social">
 		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
 		
 		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
 		
@@ -83,6 +85,8 @@
 		
 		
 		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
 		
 		
 		
@@ -104,46 +108,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-21T11:07:00+08:00" data-updated="true" itemprop="datePublished">Oct 21<span>st</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/logo/'>logo</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2012/10/about-my-logo/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2012/10/about-my-logo/" itemprop="url">關於我的 Logo</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
-
-<p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
-
-
-		
-		<a href="/2012/10/about-my-logo/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -552,6 +516,81 @@ hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-07T11:43:00+08:00" data-updated="true" itemprop="datePublished">Jun 7<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/hosts/'>hosts</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2012/06/generate-aws-ec2-hosts-file/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/06/generate-aws-ec2-hosts-file/" itemprop="url">動態產生 Ec2 的 Hosts 檔案</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這個議題類似上一篇 <a href="http://blog.hsatac.net/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/">利用 Route 53 設定 Ec2 動態 DNS</a> ，同樣也是要解決主機名稱對應浮動 ip 的問題。</p>
+
+<p>雖然現在用完整域名已經可以對應到 ip ，但是還是有很多時候我們的主機需要知道主機名稱和 ip 的對應。</p>
+
+<p>這個問題大概也是可以用 hosts 或 dns 來解決，不過由於我已經把 yp nis 架設起來，其他機器可以直接吃 nis 伺服器的 hosts 檔案，所以決定用 hosts 這個方式來處理。</p>
+
+<p>概念很簡單，利用 ec2 api sdk 抓取正在運行的主機列表，一一寫入 /etc/hosts 後再重新 make yp 的資料庫。</p>
+
+<p>設個排程每個小時跑一下或開新機器時手動執行一下即可。</p>
+
+<p>script 如下：</p>
+
+<div><script src='https://gist.github.com/2881131.js'></script>
+<noscript><pre><code>#!/usr/bin/env ruby
+# coding: utf-8
+require 'rubygems'
+require 'aws-sdk'
+
+config = {:access_key_id =&gt; '',
+          :secret_access_key =&gt; ''}
+AWS.config(config)
+ec2 = AWS::EC2.new
+ec2 = ec2.regions['ap-northeast-1']
+
+hosts = []
+hosts &lt;&lt; &quot;127.0.0.1\tlocalhost localhost.localdomain&quot;
+ec2.instances.each do |instance|
+  next unless instance.status == :running
+  tags = instance.tags.to_h
+  hosts &lt;&lt; &quot;#{instance.private_ip_address}\t#{tags[&quot;Name&quot;]}&quot;
+end
+
+`cp -p /etc/hosts /etc/hosts.bak`
+open(&quot;/etc/hosts.new&quot;, &quot;w&quot;) {|f| f.write hosts.join(&quot;\n&quot;)+&quot;\n&quot;}
+is_same = system(&quot;diff -q /etc/hosts.new /etc/hosts &gt; /dev/null 2&gt;/dev/null&quot;)
+unless is_same
+  `cp -p /etc/hosts.new /etc/hosts`
+end</code></pre></noscript></div>
+
+
+		
+		
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
@@ -570,14 +609,6 @@ hostname = ec2.instances[instance_id].tags.to_h[&quot;Name&quot;]
 
 Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
 			<script src="/javascripts/slash.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-<script src="/javascripts/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-	$('.fancybox').fancybox();
-})(jQuery);
-</script> <!-- Delete or comment this line to disable Fancybox -->
 
 
 <script type="text/javascript">
@@ -606,6 +637,7 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+
 
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gocode | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/gocode/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -44,32 +44,7 @@
 
 <p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
 
-<p><div><script src='https://gist.github.com/3903435.js'></script>
-<noscript><pre><code>#!/bin/sh
-
-# do gocode first
-cd /Users/cat/golang.tw/gocode
-git pull
-git filter-branch -f --subdirectory-filter vim -- --all
-git push pathogen master
-git fetch
-git reset --hard origin/master
-
-# do git-hg sync go
-cd /Users/cat/golang.tw/go.git
-git-hg pull
-git push origin master
-
-# do go.vim
-
-cd /Users/cat/golang.tw/go.vim
-git pull
-git filter-branch -f --subdirectory-filter misc/vim -- --all
-git push github master
-git fetch
-git reset --hard origin/master
-</code></pre></noscript></div>
-</p>
+<p>{% gist 3903435 %}</p>
 ]]></content>
   </entry>
   

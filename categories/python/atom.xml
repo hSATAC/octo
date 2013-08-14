@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/python/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -32,12 +32,7 @@
 
 <p>使用方法很簡單，首先開一個檔案例如 mitmproxy.py</p>
 
-<p><div><script src='https://gist.github.com/3300699.js'></script>
-<noscript><pre><code>def request(context, flow):
-	if &quot;miiicasa.com&quot; in flow.request.host:
-		flow.request.host = &quot;192.168.254.9&quot;
-		flow.request.port = &quot;50113&quot;</code></pre></noscript></div>
-</p>
+<p>{% gist 3300699 %}</p>
 
 <p>開啟 mitmproxy 的時候帶參數 -s <code>mitmproxy -s mitmproxy.py</code> 或者進入 mitmproxy 後按快速鍵 s 輸入 mitmproxy.py 載入即可。</p>
 ]]></content>

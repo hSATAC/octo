@@ -4,7 +4,7 @@
   <title><![CDATA[Category: route53 | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/route53/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -33,133 +33,7 @@
 
 <p>修改過後的 script 如下：</p>
 
-<p><div><script src='https://gist.github.com/2880516.js'></script>
-<noscript><pre><code>#!/bin/sh
-
-# Setup dynamic dns on Route 53 for aws ec2 (CNAME)
-#
-# Modified from Johan Lindh's script
-#
-# Script requirements:
-#
-#  wget
-#  grep
-#  sed
-#  dig
-#  cut
-#  openssl
-#  base64
-#
-# Most if not all of these come standard on *nix distros.
-#
-
-# The domain and host name to update
-# and the desired TTL of the record
-Domain=your.domain.net
-Hostname=`hostname`
-NewTTL=600
-
-# The Amazon Route 53 zone ID for the domain
-# and the Amazon ID and SecretKey. Remember to
-# ensure that this file can't be read by
-# unauthorized people!
-ZoneID=Z1234567890
-AmazonID=A1234567890
-SecretKey=GR$WYTJ%Y$@GY%J$%GY@H
-
-# Enter the URL used to check extern IP
-CheckIPURL='http://169.254.169.254/latest/meta-data/public-hostname'
-
-# Enter some static text that immediately preceeds the current IP in the HTML output
-# Note that you'll probably need to look at the actual HTML code to find this
-CheckIPText='Current IP Address:'
-
-###############################################################
-# You should not need to change anything beyond this point
-###############################################################
-
-# Find an authoritative AWS R53 nameserver so we get a clean TTL
-AuthServer=$(dig NS $Domain | grep -v ';' | grep -m 1 awsdns | grep $Domain | cut -f 6)
-if [ &quot;$AuthServer&quot; = &quot;&quot; ]; then
-  echo The domain $Domain has no authoritative Amazon Route 53 name servers
-  exit 1
-fi
-
-# Get the record and extract its parts
-Record=$(dig @$AuthServer A $Hostname.$Domain | grep -v &quot;;&quot; | grep &quot;$Hostname\.$Domain&quot;)
-OldType=$( echo $Record | cut -d ' ' -f 4 )
-OldTTL=$( echo $Record | cut -d ' ' -f 2 )
-OldIP=$( echo $Record | cut -d ' ' -f 5 | sed s/.$//)
-
-# Make sure it is an A record (could be CNAME)
-if [ &quot;$Record&quot; != &quot;&quot; -a &quot;$OldType&quot; != &quot;CNAME&quot; ]; then
-  echo $Hostname.$Domain has a $OldType record, expected 'CNAME'
-  exit 1
-fi
-
-# Retrieve the current IP
-CurrentIP=$(wget &quot;$CheckIPURL&quot; -o /dev/null -O /dev/stdout)
-
-# Changeset preamble
-Changeset=&quot;&quot;
-Changeset=$Changeset&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;&quot;
-Changeset=$Changeset&quot;&lt;ChangeResourceRecordSetsRequest xmlns=\&quot;https://route53.amazonaws.com/doc/2010-10-01/\&quot;&gt;&quot;
-Changeset=$Changeset&quot;&lt;ChangeBatch&gt;&lt;Comment&gt;Update $Hostname.$Domain&lt;/Comment&gt;&lt;Changes&gt;&quot;
-
-if [ &quot;$OldIP&quot; != &quot;&quot; ]; then
-  # Add a DELETE request to the changeset
-  Changeset=$Changeset&quot;&lt;Change&gt;&quot;
-  Changeset=$Changeset&quot;&lt;Action&gt;DELETE&lt;/Action&gt;&quot;
-  Changeset=$Changeset&quot;&lt;ResourceRecordSet&gt;&quot;
-  Changeset=$Changeset&quot;&lt;Name&gt;$Hostname.$Domain.&lt;/Name&gt;&quot;
-  Changeset=$Changeset&quot;&lt;Type&gt;CNAME&lt;/Type&gt;&quot;
-  Changeset=$Changeset&quot;&lt;TTL&gt;$OldTTL&lt;/TTL&gt;&quot;
-  Changeset=$Changeset&quot;&lt;ResourceRecords&gt;&quot;
-  Changeset=$Changeset&quot;&lt;ResourceRecord&gt;&quot;
-  Changeset=$Changeset&quot;&lt;Value&gt;$OldIP&lt;/Value&gt;&quot;
-  Changeset=$Changeset&quot;&lt;/ResourceRecord&gt;&quot;
-  Changeset=$Changeset&quot;&lt;/ResourceRecords&gt;&quot;
-  Changeset=$Changeset&quot;&lt;/ResourceRecordSet&gt;&quot;
-  Changeset=$Changeset&quot;&lt;/Change&gt;&quot;
-fi
-
-# Add CREATE request to the changeset
-Changeset=$Changeset&quot;&lt;Change&gt;&quot;
-Changeset=$Changeset&quot;&lt;Action&gt;CREATE&lt;/Action&gt;&quot;
-Changeset=$Changeset&quot;&lt;ResourceRecordSet&gt;&quot;
-Changeset=$Changeset&quot;&lt;Name&gt;$Hostname.$Domain.&lt;/Name&gt;&quot;
-Changeset=$Changeset&quot;&lt;Type&gt;CNAME&lt;/Type&gt;&quot;
-Changeset=$Changeset&quot;&lt;TTL&gt;$NewTTL&lt;/TTL&gt;&quot;
-Changeset=$Changeset&quot;&lt;ResourceRecords&gt;&quot;
-Changeset=$Changeset&quot;&lt;ResourceRecord&gt;&quot;
-Changeset=$Changeset&quot;&lt;Value&gt;$CurrentIP&lt;/Value&gt;&quot;
-Changeset=$Changeset&quot;&lt;/ResourceRecord&gt;&quot;
-Changeset=$Changeset&quot;&lt;/ResourceRecords&gt;&quot;
-Changeset=$Changeset&quot;&lt;/ResourceRecordSet&gt;&quot;
-Changeset=$Changeset&quot;&lt;/Change&gt;&quot;
-
-# Close the changeset
-Changeset=$Changeset&quot;&lt;/Changes&gt;&quot;
-Changeset=$Changeset&quot;&lt;/ChangeBatch&gt;&quot;
-Changeset=$Changeset&quot;&lt;/ChangeResourceRecordSetsRequest&gt;&quot;
-
-if [ &quot;$OldIP&quot; != &quot;$CurrentIP&quot; ]; then
-  # Get the date at the Amazon servers
-  CurrentDate=$(wget -q -S https://route53.amazonaws.com/date -O /dev/null 2&gt;&amp;1 | grep Date | sed 's/.*Date: //')
-
-  # Calculate the SHA1 hash and required headers
-  Signature=$(echo -n $CurrentDate | openssl dgst -binary -sha1 -hmac $SecretKey | base64)
-  DateHeader=&quot;Date: &quot;$CurrentDate
-  AuthHeader=&quot;X-Amzn-Authorization: AWS3-HTTPS AWSAccessKeyId=$AmazonID,Algorithm=HmacSHA1,Signature=$Signature&quot;
-
-  # Submit request
-  Result=$(wget -nv --header=&quot;$DateHeader&quot; --header=&quot;$AuthHeader&quot; --header=&quot;Content-Type: text/xml; charset=UTF-8&quot; --post-data=&quot;$Changeset&quot; -O /dev/stdout -o /dev/stdout https://route53.amazonaws.com/2010-10-01/hostedzone/$ZoneID/rrset)
-
-  if [ &quot;$?&quot; -ne &quot;0&quot; ]; then
-    echo &quot;Failed to update $Hostname.$Domain: &quot;$Result
-  fi
-fi</code></pre></noscript></div>
-</p>
+<p>{% gist 2880516 %}</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tig | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/tig/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -33,19 +33,18 @@
 <h3>安裝</h3>
 
 <p>client 和 server 都需要安裝
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>packer mosh (Archlinux)
-</span><span class='line'>yum install mosh (Centos)
-</span><span class='line'>brew install mobile-shell (MacOS)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock %}
+packer mosh (Archlinux)
+yum install mosh (Centos)
+brew install mobile-shell (MacOS)
+{% endcodeblock %}</p>
 
 <h3>使用</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mosh &lt;a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#111;&#58;&#97;&#x73;&#x68;&#x5f;&#x77;&#117;&#x40;&#109;&#x79;&#115;&#101;&#x72;&#118;&#101;&#x72;&#46;&#x63;&#111;&#109;">&#x61;&#115;&#x68;&#95;&#119;&#x75;&#x40;&#x6d;&#121;&#115;&#x65;&#114;&#x76;&#x65;&#x72;&#46;&#99;&#x6f;&#x6d;&lt;/a>
-</span><span class='line'>mosh myserver.com &mdash; screen -rx</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+mosh <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#97;&#115;&#104;&#x5f;&#x77;&#117;&#64;&#109;&#121;&#x73;&#101;&#114;&#118;&#x65;&#x72;&#46;&#x63;&#111;&#109;">&#x61;&#x73;&#x68;&#x5f;&#119;&#117;&#x40;&#x6d;&#x79;&#115;&#x65;&#x72;&#118;&#x65;&#x72;&#x2e;&#x63;&#x6f;&#x6d;</a>
+mosh myserver.com &mdash; screen -rx
+{% endcodeblock %}</p>
 
 <h2>2. Mitmproxy</h2>
 
@@ -61,23 +60,25 @@
 
 <p>有 https 需求的話則需要安裝他的憑證</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pip install mitmproxy</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+pip install mitmproxy
+{% endcodeblock %}</p>
 
 <h3>使用</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mitmproxy
-</span><span class='line'>mitmdump</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+mitmproxy
+mitmdump
+{% endcodeblock %}</p>
 
 <h3>擴充</h3>
 
 <p>mitmproxy 提供許多 hook 可以自訂擴充，以 python 編寫即可。可參考我的文章</p>
 
 <p><a href="http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/">http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/</a>
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mitmproxy -s test.py</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock %}
+mitmproxy -s test.py
+{% endcodeblock %}</p>
 
 <h2>3. pdsh/pdcp/rpdcp</h2>
 
@@ -88,19 +89,18 @@
 <h3>安裝</h3>
 
 <p>要使用 pdcp 的話 client 和 server 都要裝
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>packer pdsh (Archlinux)
-</span><span class='line'>yum install pdsh (Centos)
-</span><span class='line'>brew install pdsh (MacOS)</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+{% codeblock %}
+packer pdsh (Archlinux)
+yum install pdsh (Centos)
+brew install pdsh (MacOS)
+{% endcodeblock %}</p>
 
 <h3>使用</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pdsh -w web[01-10],static[7,9-10] ls
-</span><span class='line'>pdcp -w ash_wu@dmyserver[1-2].com test.py /home/ash_wu/</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+pdsh -w web[01-10],static[7,9-10] ls
+pdcp -w ash_wu@dmyserver[1-2].com test.py /home/ash_wu/
+{% endcodeblock %}</p>
 
 <h2>4. htop</h2>
 
@@ -118,8 +118,7 @@
 
 <h3>使用</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>goaccess &lt;apache_access_log or nginx_access_log></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}goaccess &lt;apache_access_log or nginx_access_log>{% endcodeblock %}</p>
 
 <h2>6. ack, ag</h2>
 
@@ -137,10 +136,10 @@
 
 <h3>安裝</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>packer the_silver_searcher
-</span><span class='line'>brew install the_silver_searcher</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+packer the_silver_searcher
+brew install the_silver_searcher
+{% endcodeblock %}</p>
 
 <h3>同場加映</h3>
 
@@ -168,25 +167,21 @@
 
 <h3>安裝</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/huyng/bashmarks.git
-</span><span class='line'>make install
-</span><span class='line'>source ~/.local/bin/bashmarks.sh from within your ~.bash_profile or ~/.bashrc file</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+git clone git://github.com/huyng/bashmarks.git
+make install
+source ~/.local/bin/bashmarks.sh from within your ~.bash_profile or ~/.bashrc file
+{% endcodeblock %}</p>
 
 <h3>使用</h3>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>s &lt;bookmark_name> &ndash; Saves the current directory as &ldquo;bookmark_name&rdquo;
-</span><span class='line'>g &lt;bookmark_name> &ndash; Goes (cd) to the directory associated with &ldquo;bookmark_name&rdquo;
-</span><span class='line'>p &lt;bookmark_name> &ndash; Prints the directory associated with &ldquo;bookmark_name&rdquo;
-</span><span class='line'>d &lt;bookmark_name> &ndash; Deletes the bookmark
-</span><span class='line'>l                 &ndash; Lists all available bookmarks</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+s &lt;bookmark_name> &ndash; Saves the current directory as &ldquo;bookmark_name&rdquo;
+g &lt;bookmark_name> &ndash; Goes (cd) to the directory associated with &ldquo;bookmark_name&rdquo;
+p &lt;bookmark_name> &ndash; Prints the directory associated with &ldquo;bookmark_name&rdquo;
+d &lt;bookmark_name> &ndash; Deletes the bookmark
+l                 &ndash; Lists all available bookmarks
+{% endcodeblock %}</p>
 ]]></content>
   </entry>
   

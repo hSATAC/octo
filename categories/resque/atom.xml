@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -149,61 +149,7 @@ QUEUE=* APP_INCLUDE=require.php COUNT=5 VVERBOSE=1 php resque.php
 
 <p>如果覺得太長，可以寫一支啟動 script 來輔助你，我有寫一支可供參考：</p>
 
-<p><div><script src='https://gist.github.com/1619972.js'></script>
-<noscript><pre><code>#!/bin/bash
-export APP_INCLUDE=resque/require.php
-export QUEUE=*
-export COUNT=1
-export VVERBOSE=1 # for debugging
-export REDIS_BACKEND=localhost:6379
-. /etc/rc.d/init.d/functions
-
-start() {
-    /usr/bin/php ../lib/sdk/php-resque/resque.php
-}
-
-stop() {
-    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -15
-}
-kill() {
-    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -9
-}
-case &quot;$1&quot; in
-    start)
-         number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
-        if [ $number -gt 0 ]
-        then
-          echo &quot;php-resque is running. ($number workers)&quot;
-          echo &quot;You may wanna stop them before you start.&quot;
-          start
-        else
-          start
-        fi
-    ;;
-
-    stop)
-        stop
-    ;;
-
-    kill)
-        kill
-    ;;
-
-    status)
-        number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
-        if [ $number -gt 0 ]
-        then
-          echo &quot;php-resque is running. ($number workers)&quot;
-        else
-          echo &quot;php-resque is not running.&quot;
-        fi
-    ;;
-
-    *)
-        echo -n &quot;Usage: $0 {start|stop|status}&quot;
-esac
-</code></pre></noscript></div>
-</p>
+<p>{% gist 1619972 %}</p>
 
 <h2>使用 PHP-Resque</h2>
 
@@ -281,7 +227,7 @@ Resque::enqueue(&lsquo;default&rsquo;, &lsquo;My_Job&rsquo;, $args);
 
 <p>首頁有 live reload 按鈕可以按， debug 時非常方便。</p>
 
-<p>screenshot: <img src="/images/wp-uploads/2012/01/resque-web.jpg"></p>
+<p>screenshot: {% img /images/wp-uploads/2012/01/resque-web.jpg %}</p>
 
 <h3>Supervisord</h3>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Archlinux | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T13:09:42+08:00</updated>
+  <updated>2013-08-14T16:29:49+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -30,65 +30,40 @@
 
 <p>以上這兩個問題我有寫了一段 module</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;h1>For Archlinux. This issue will be fixed in puppet 3.1&lt;/h1>
-</span><span class='line'>
-</span><span class='line'>&lt;p>class archfix {&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code>file {'/bin/systemctl':
-</span><span class='line'>    ensure =&gt; link,
-</span><span class='line'>    target =&gt; '/usr/bin/systemctl',
-</span><span class='line'>}   
-</span><span class='line'>exec {'pacman -Syy':
-</span><span class='line'>    path =&gt; ["/usr/bin"]
-</span><span class='line'>}   
-</span><span class='line'>&lt;/code>&lt;/pre>
-</span><span class='line'>
-</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}</p>
+
+<h1>For Archlinux. This issue will be fixed in puppet 3.1</h1>
+
+<p>class archfix {</p>
+
+<pre><code>file {'/bin/systemctl':
+    ensure =&gt; link,
+    target =&gt; '/usr/bin/systemctl',
+}   
+exec {'pacman -Syy':
+    path =&gt; ["/usr/bin"]
+}   
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
 
 <p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>node &lsquo;devm3&rsquo; {&lt;/p>
-</span><span class='line'>
-</span><span class='line'>&lt;pre>&lt;code>stage { 'pre': }
-</span><span class='line'>class {
-</span><span class='line'>    "archfix": stage =&gt; "pre"; 
-</span><span class='line'>}   
-</span><span class='line'>Stage["pre"] -&gt; Stage["main"]
-</span><span class='line'>
-</span><span class='line'># include other modules...
-</span><span class='line'>&lt;/code>&lt;/pre>
-</span><span class='line'>
-</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock %}
+node &lsquo;devm3&rsquo; {</p>
+
+<pre><code>stage { 'pre': }
+class {
+    "archfix": stage =&gt; "pre"; 
+}   
+Stage["pre"] -&gt; Stage["main"]
+
+# include other modules...
+</code></pre>
+
+<p>}
+{% endcodeblock %}</p>
 
 <h2>Openrc &amp; Systemd</h2>
 
