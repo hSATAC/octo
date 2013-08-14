@@ -100,3 +100,9 @@ google_analytics_tracking_id: UA-27441833-1
 
 # Facebook Like
 facebook_like: true 
+
+# Facebook
+facebook_user: hSATAC
+
+# linkedin
+linkedin_user: hSATAC
