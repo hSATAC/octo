@@ -17,7 +17,7 @@ categories: [Golang, Vim]
 * [Golang 官方 vim plugin](https://github.com/golangtw/go.vim)
 * [Gocode vim plugin](https://github.com/golangtw/gocode.vim)
 
-如果搭配 [spuertab](https://github.com/ervandew/supertab) 可以設 `let g:SuperTabDefaultCompletionType = "context"` 來 trigger gocode 自動補完。
+如果搭配 [supertab](https://github.com/ervandew/supertab) 可以設 `let g:SuperTabDefaultCompletionType = "context"` 來 trigger gocode 自動補完。
 
 ![gocode](/images/vimrc_golang/gocode.png)
 <!--more-->
