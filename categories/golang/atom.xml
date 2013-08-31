@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: golang | hSATAC]]></title>
+  <title><![CDATA[Category: Golang | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/golang/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T16:29:49+08:00</updated>
+  <updated>2013-08-31T19:58:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -14,86 +14,50 @@
 
   
   <entry>
-    <title type="html"><![CDATA[同步 git 和 hg 的 repository]]></title>
-    <link href="http://blog.hsatac.net/2012/10/sync-git-with-hg/"/>
-    <updated>2012-10-17T10:20:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/10/sync-git-with-hg</id>
-    <content type="html"><![CDATA[<p>最近在玩 go，編輯器主要是使用 vim 搭配 <a href="https://github.com/nsf/gocode">gocode</a>。我習慣用 <a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> 來管理我的 vim 套件，不過 go 官方附的 vim syntax plugin 和 gocode 提供的 autocompletion plugin 目錄結構都無法直接當成 git submodule 引入我的 vim 設定中。</p>
+    <title type="html"><![CDATA[我的 Golang Vim 配置]]></title>
+    <link href="http://blog.hsatac.net/2013/08/my-vimrc-for-golang/"/>
+    <updated>2013-08-31T19:09:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/08/my-vimrc-for-golang</id>
+    <content type="html"><![CDATA[<p>去年九月發過一篇<a href="http://blog.hsatac.net/2012/09/golang-ides/">開發 Golang 的 IDEs</a>，不過現在我基本上都使用 vim 開發了， update 一下我現在的配置。所有資料都可以在我的 <a href="https://github.com/hSATAC/vimrc">vimrc</a> 找到。</p>
 
-<p>由於我個人潔癖作祟，不想再用 copy 的方式來管理我的 vim plugins，所以我決定自己把這兩份 plugin 抽出來獨立成各自的 git repositories，就可以當成 git submodule 引用了。</p>
+<h3>插件</h3>
 
-<!--more-->
+<p>和之前一樣最主要還是靠 golang 官方 plugin 以及 <a href="https://github.com/nsf/gocode">gocode</a> 這兩個，多加了一個 <a href="https://github.com/jstemmer/gotags">gotags</a> 取代 ctags，這個超好用的。</p>
 
-
-<p>gocode 的部分很容易，他原本就是 git，只要參考我之前的文章「<a href="http://blog.hsatac.net/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a>」就可以了。不過 go 的部分就沒這麼簡單了。go 的原始碼 host 在 google code 上，採用 hg，因此要想辦法先把他由 hg 轉換成 git 才行。</p>
-
-<p>一開始使用的是 <a href="http://hg-git.github.com/">hg-git</a> 這套，不過在 gexport 這個過程非常緩慢，不知道是這個套件本身有問題還是 go 的 hg repository 太大了。試了兩天之後只好放棄，改用 <a href="http://offbytwo.com/git-hg/">git-hg</a> 這套。這套一樣也是使用 python 寫的，不過效率上就挺不錯的。使用上也很方便，直接 <code>git-hg clone https://code.google.com/p/go/</code> 出來就是 git 的目錄了。</p>
-
-<p>值得一提的是，使用 homebrew 安裝 git-hg 時，由於 git-hg 有 require <a href="http://repo.or.cz/w/fast-export.git">fast-export</a> 這個 submodule，但 homebrew 安裝下來的 fast-export 居然不是最新的，導致無法使用。後來自己到 <code>/usr/local/Cellar/git-hg/HEAD</code> 把 fast-export 這個目錄移除，再 clone 一份新的 fast-export 就可以正常使用了。</p>
-
-<p>我不想弄亂這個目錄，所以我是在 local 端再 clone 一次這個使用 git-hg clone 下來的 repository，再來作 <code>git filter-branch</code> 的動作。另外這個 repository 也順便丟到 github 上當作一個 go 的 git mirror 給有需要的人使用。</p>
-
-<p>產出三個 repositories:</p>
+<p>由於 golang 官方 plugin 和 gocode 的 plugin 都沒有抽出單獨的 repo，不方便 vundle 或 pathogen 使用，所以我之前就有自己抽出方便安裝的 repo：</p>
 
 <ul>
-<li><p><a href="https://github.com/golangtw/go.vim">https://github.com/golangtw/go.vim</a> go 的 syntax plugin</p></li>
-<li><p><a href="https://github.com/golangtw/gocode.vim">https://github.com/golangtw/gocode.vim</a> gocode 的 autocomplete plugin</p></li>
-<li><p><a href="https://github.com/golangtw/go">https://github.com/golangtw/go</a> go 的 git mirror</p></li>
+<li><a href="https://github.com/golangtw/go.vim">Golang 官方 vim plugin</a></li>
+<li><a href="https://github.com/golangtw/gocode.vim">Gocode vim plugin</a></li>
 </ul>
 
 
-<p>最後再寫一個 script 每天跑一次 cronjob 自動去 sync 就完成啦！</p>
+<p>如果搭配 <a href="https://github.com/ervandew/supertab">spuertab</a> 可以設 <code>let g:SuperTabDefaultCompletionType = "context"</code> 來 trigger gocode 自動補完。</p>
 
-<p>{% gist 3903435 %}</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[開發 Golang 的 IDEs]]></title>
-    <link href="http://blog.hsatac.net/2012/09/golang-ides/"/>
-    <updated>2012-09-19T00:34:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/09/golang-ides</id>
-    <content type="html"><![CDATA[<p>介紹一些開發 Golang 的 IDEs</p>
-
-<p>首先是我慣常使用的 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> 搭配  <a href="https://github.com/disposaboy/gosublime">gosublime</a> 外掛。</p>
-
-<p><img src="/images/golang_ides/subl.png" alt="gosublime" /></p>
+<p><img src="/images/vimrc_golang/gocode.png" alt="gocode" /></p>
 
 <!--more-->
 
 
-<p>以及也是我慣用的 vim + <a href="https://github.com/nsf/gocode/">gocode</a></p>
+<p><a href="https://github.com/jstemmer/gotags">gotags</a> 的部份則是要搭配 <a href="http://majutsushi.github.com/tagbar/">tagbar</a> 來使用，抓的非常準(感謝 go 天生內建語法樹 parser)，而且安排的順序就完全是建議的順序，按這個順序組織你的程式碼就對了。</p>
 
-<p>在 <code>$GOROOT/misc/vim</code> 下已經有提供給 vim 使用的 syntax, indent, plugin 等，全部複製到 <code>~/.vim</code> 下面即可。如果不知道 go 安裝的位置可以使用 <code>go env</code> 來查詢。</p>
+<p><img src="/images/vimrc_golang/gotags.png" alt="gotags" /></p>
 
-<p>按 gocode 的說明安裝完成後就可以在 vim 裡面使用 golang 的 autocompletion 了。</p>
+<p><a href="https://github.com/bling/vim-airline">vim-airline</a> 現在也內建 <a href="http://majutsushi.github.com/tagbar/">tagbar</a> 支援了，所以可以直接在狀態列看到現在在程式的什麼區塊。</p>
 
-<p><img src="/images/golang_ides/vim.png" alt="vim + gocode" /></p>
+<h3>設定與巨集</h3>
 
-<p>提了 vim 也不得不提 emacs. Emacs 一樣使用 <code>$GOROOT/misc/emacs</code> 下提供的檔案以及搭配 gocode 做自動完成。</p>
+<p><code>go fmt</code> 實在是一個非常優秀的設計，不用再為了 style 的瑣事吵半天。在存檔的時候順手執行 <code>go fmt</code> 吧！安裝過官方插件的話，只要加上 <code>au FileType go au BufWritePre &lt;buffer&gt; Fmt</code> 即可。</p>
 
-<p><img src="/images/golang_ides/emacs.png" alt="emacs + gocode" /></p>
+<p>由於 golang 的哲學是，不需要的程式碼就不要，所以沒用到的變數或 import package 都會被當成 error 處理。導致常常改一改就要回到檔案最上方處理 import。多利用 <code>:Import &lt;package&gt;</code> 跟 <code>:Drop &lt;package&gt;</code> 兩個命令可以簡化這個步驟。</p>
 
-<p>再來介紹一個大陸開發的 <a href="http://code.google.com/p/golangide/">golangide</a> 相當優秀，也是跨三平台版本。安裝就可以使用了，不需要多餘的設定。</p>
+<p>測試的部份，原來我就有使用 <a href="https://github.com/jgdavey/tslime.vim">tslime</a> 這個插件，就多 bind 一個指令 <code>au FileType go map &lt;leader&gt;t :Tmux go test&lt;CR&gt;</code> 把 <code>go test</code> 指令送到 tmux 其他 window。目前這樣就能滿足我的需求。</p>
 
-<p><img src="/images/golang_ides/golangide.png" alt="golangide" /></p>
+<p><img src="/images/vimrc_golang/gotest.png" alt="gotest" /></p>
 
-<p><a href="http://code.google.com/p/goclipse/">goeclipse</a>
-Golang 的 Eclipse plugin…Eclipse 現在完全是個萬能 editor.</p>
+<h3>參考資料</h3>
 
-<p><img src="/images/golang_ides/goeclipse.png" alt="goeclipse" /></p>
-
-<p><a href="http://www.zeusedit.com/go.html">zeus</a> 是一個 windows 的 programming editor，也提供了深度支援開發 golang。</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/CZ5Yl0KnbKs" frameborder="0" allowfullscreen></iframe>
-
-
-
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/84i7H-E0YUM" frameborder="0" allowfullscreen></iframe>
-
-
-<p>Zeus 整合的相當好，包括 debugger, build manager, package manager 都有提供，比較有完整 IDE 的感覺。但完整版是要付費購買的。不管如何，選擇一個喜歡，順手合自己意的才是最重要的。</p>
+<p>還有更多 plugin 可以參考這篇：<a href="http://0value.com/my-Go-centric-Vim-setup">My (Go-centric) Vim Setup</a></p>
 ]]></content>
   </entry>
   

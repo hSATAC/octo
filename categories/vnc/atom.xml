@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vnc | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vnc/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T16:29:49+08:00</updated>
+  <updated>2013-08-31T19:58:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -23,12 +23,14 @@
 <p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
 
 <p>例如：
-{% codeblock %}
-kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
-er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
-d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
-shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200
-{% endcodeblock %}</p>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
+</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
+</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
+</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
 ]]></content>

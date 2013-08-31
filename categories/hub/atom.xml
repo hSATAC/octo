@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hub | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/hub/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T16:29:49+08:00</updated>
+  <updated>2013-08-31T19:58:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -36,7 +36,9 @@ gem install hub
 
 <p>我們 team 開發流程是 feature branch 開發完畢後 push 到專案 remote 發 pull request，所以我在 <code>.bash_profile</code> 加了下面這個 function：</p>
 
-<p>{% gist 5591270 %}</p>
+<p><div><script src='https://gist.github.com/5591270.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
 
 <blockquote><p>從 team 的 (現在目錄所在 branch) 發 pull request 到 team 的 (develop) branch</p></blockquote>
 ]]></content>

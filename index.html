@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Aug 7th, 2013 Art, Programming, Readability Comments The Art of Readable Code 讀書筆記 這次公司的讀書分享會我被指定報告這本 The Art of Readable Code。 這本書我以前就看過英文本， &hellip;">
+	<meta name="description" content="Aug 31st, 2013 Golang, Vim Comments 我的 Golang Vim 配置 去年九月發過一篇開發 Golang 的 IDEs，不過現在我基本上都使用 vim 開發了， update 一下我現在的配置。所有資料都可以在我的 vimrc 找到。 插件 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,60 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-31T19:09:00+08:00" data-updated="true" itemprop="datePublished">Aug 31<span>st</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/golang/'>Golang</a>, <a class='category' href='/categories/vim/'>Vim</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2013/08/my-vimrc-for-golang/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2013/08/my-vimrc-for-golang/" itemprop="url">我的 Golang Vim 配置</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>去年九月發過一篇<a href="http://blog.hsatac.net/2012/09/golang-ides/">開發 Golang 的 IDEs</a>，不過現在我基本上都使用 vim 開發了， update 一下我現在的配置。所有資料都可以在我的 <a href="https://github.com/hSATAC/vimrc">vimrc</a> 找到。</p>
+
+<h3>插件</h3>
+
+<p>和之前一樣最主要還是靠 golang 官方 plugin 以及 <a href="https://github.com/nsf/gocode">gocode</a> 這兩個，多加了一個 <a href="https://github.com/jstemmer/gotags">gotags</a> 取代 ctags，這個超好用的。</p>
+
+<p>由於 golang 官方 plugin 和 gocode 的 plugin 都沒有抽出單獨的 repo，不方便 vundle 或 pathogen 使用，所以我之前就有自己抽出方便安裝的 repo：</p>
+
+<ul>
+<li><a href="https://github.com/golangtw/go.vim">Golang 官方 vim plugin</a></li>
+<li><a href="https://github.com/golangtw/gocode.vim">Gocode vim plugin</a></li>
+</ul>
+
+
+<p>如果搭配 <a href="https://github.com/ervandew/supertab">spuertab</a> 可以設 <code>let g:SuperTabDefaultCompletionType = "context"</code> 來 trigger gocode 自動補完。</p>
+
+<p><img src="/images/vimrc_golang/gocode.png" alt="gocode" /></p>
+
+
+		
+		<a href="/2013/08/my-vimrc-for-golang/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -494,103 +548,6 @@
 
 		
 		<a href="/2013/02/puppet-study-note/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-21T14:12:00+08:00" data-updated="true" itemprop="datePublished">Feb 21<span>st</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2013/02/using-puppet-on-archlinux/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2013/02/using-puppet-on-archlinux/" itemprop="url">ArchLinux 使用 Puppet 注意事項</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
-
-<h2>systemctl 路徑</h2>
-
-<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
-
-<h2>套件庫需更新到最新版</h2>
-
-<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
-
-<p>以上這兩個問題我有寫了一段 module</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># For Archlinux. This issue will be fixed in puppet 3.1
-</span><span class='line'>
-</span><span class='line'>class archfix {
-</span><span class='line'>    file {'/bin/systemctl':
-</span><span class='line'>        ensure => link,
-</span><span class='line'>        target => '/usr/bin/systemctl',
-</span><span class='line'>    }   
-</span><span class='line'>    exec {'pacman -Syy':
-</span><span class='line'>        path => ["/usr/bin"]
-</span><span class='line'>    }   
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {
-</span><span class='line'>    stage { 'pre': }
-</span><span class='line'>    class {
-</span><span class='line'>        "archfix": stage => "pre"; 
-</span><span class='line'>    }   
-</span><span class='line'>    Stage["pre"] -> Stage["main"]
-</span><span class='line'>
-</span><span class='line'>  # include other modules...
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Openrc &amp; Systemd</h2>
-
-<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
-
-		
-		
 	</div>
 
 </article>

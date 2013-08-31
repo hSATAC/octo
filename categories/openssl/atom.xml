@@ -4,7 +4,7 @@
   <title><![CDATA[Category: openssl | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/openssl/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-14T16:29:49+08:00</updated>
+  <updated>2013-08-31T19:58:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -45,7 +45,79 @@ $pubkey=$pubkey[&ldquo;key&rdquo;];
 
 <p>Here&rsquo;s my sample script:</p>
 
-<p>{% gist 2909583 %}</p>
+<p><div><script src='https://gist.github.com/2909583.js'></script>
+<noscript><pre><code>/*
+example of c equivalent to php
+&lt;?php
+// Create the keypair
+$res=openssl_pkey_new();
+
+// Get private key
+openssl_pkey_export($res, $privkey);
+
+// Get public key
+$pubkey=openssl_pkey_get_details($res);
+$pubkey=$pubkey[&quot;key&quot;];
+?&gt;
+*/
+#include&lt;stdio.h&gt;
+#include&lt;openssl/rsa.h&gt;
+#include&lt;openssl/evp.h&gt;
+
+EVP_PKEY *pubkey_a,*privkey_a;
+
+generate_keys ()
+{
+  RSA *rsa, *pub_rsa, *priv_rsa;
+  int len;
+  unsigned char *buf, *p;
+
+  rsa = RSA_generate_key (1024, RSA_F4, NULL, (char *) stdout);
+
+  buf = (char *) malloc (2048);
+
+  p = buf;
+
+  len = i2d_RSAPublicKey (rsa, &amp;p);
+  len += i2d_RSAPrivateKey (rsa, &amp;p);
+
+  RSA_free (rsa);
+
+  p = buf;
+  pub_rsa = d2i_RSAPublicKey (NULL, &amp;p, (long) len);
+  len -= (p - buf);
+  priv_rsa = d2i_RSAPrivateKey (NULL, &amp;p, (long) len);
+
+  if ((pub_rsa == NULL) || (priv_rsa == NULL))
+    ERR_print_errors_fp (stderr);
+
+
+  pubkey_a = EVP_PKEY_new ();
+  privkey_a = EVP_PKEY_new ();
+
+  EVP_PKEY_set1_RSA (pubkey_a, pub_rsa);
+  EVP_PKEY_set1_RSA (privkey_a, priv_rsa);
+
+  RSA_free (pub_rsa);
+  RSA_free (priv_rsa);
+
+}
+
+main()
+{   
+
+  EVP_PKEY *pubkey,*privkey;
+
+  generate_keys ();
+
+  pubkey=pubkey_a;
+  privkey=privkey_a;
+
+  PEM_write_PUBKEY(stdout, pubkey);
+  return 0;
+ 
+}</code></pre></noscript></div>
+</p>
 
 <p>You can test it by folloing commands:
 <code>gcc -o key key.c -lssl &amp;&amp; ./key</code></p>
