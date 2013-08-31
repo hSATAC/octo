@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Golang | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/golang/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-08-31T19:58:20+08:00</updated>
+  <updated>2013-08-31T20:04:12+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -32,7 +32,7 @@
 </ul>
 
 
-<p>如果搭配 <a href="https://github.com/ervandew/supertab">spuertab</a> 可以設 <code>let g:SuperTabDefaultCompletionType = "context"</code> 來 trigger gocode 自動補完。</p>
+<p>如果搭配 <a href="https://github.com/ervandew/supertab">supertab</a> 可以設 <code>let g:SuperTabDefaultCompletionType = "context"</code> 來 trigger gocode 自動補完。</p>
 
 <p><img src="/images/vimrc_golang/gocode.png" alt="gocode" /></p>
 
