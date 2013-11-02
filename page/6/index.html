@@ -9,9 +9,9 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 12th, 2011 工作紀錄 Comments 讓 Empathy 支援 P4-Context 這兩天灌了 Ubuntu 11.04 在玩
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im
-但是他的 msn 不支援 msn protocol 的 P4-Context tag &hellip;">
+	<meta name="description" content="Jun 23rd, 2011 工作紀錄 Comments CloudAAA 雲端大亂鬥簡記 這次 CloudAAA 活動是由 CloudTW 與 Taipei-GTUG 合辦
+借到了精誠資訊的大樓，相當棒的一個場地。
+不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +110,54 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-23T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 23<span>rd</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2011/06/cloudaaa/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/06/cloudaaa/" itemprop="url">CloudAAA 雲端大亂鬥簡記</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
+借到了精誠資訊的大樓，相當棒的一個場地。<br />
+不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
+食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
+
+<p>一開始 Hank Lin 主講 aws 的部份<br />
+Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
+因為我本身對 aws 比較沒有深入研究<br />
+加上 Hank 講得實在是有點快<br />
+只略約有印象好像介紹了一些 Route 53 的新特色<br />
+還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
+然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
+(認識的要買可以找我，打6折)
+		
+		<a href="/2011/06/cloudaaa/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -551,66 +599,6 @@ apache vhost的設法和 rails 的一樣即可
   
 
 </pre></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-22T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/" itemprop="url">Mac OSX Server 10.6 安裝 Mysql2 Gem</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
-下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
-
-<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
-<pre lang="bash">
-EBuilding native extensions.  This could take a while...
-ERROR:  Error installing mysql2:
-    ERROR: Failed to build gem native extension.</pre></p>
-
-<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
-checking for rb_thread_blocking_region()&#8230; no<br />
-checking for mysql.h&#8230; no<br />
-checking for mysql/mysql.h&#8230; no<br />
-&#8212;&#8211;<br />
-mysql.h is missing.  please check your installation of mysql and try again.<br />
-&#8212;&#8211;
-</p>
-
-<p>請下：
-<pre lang="bash">
-env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
-</pre></p>
-
-<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
 
 		
 		

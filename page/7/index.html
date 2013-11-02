@@ -9,8 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Feb 17th, 2011 工作紀錄 Comments 用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎 首先根據 OpenSearch 的規格寫出自訂搜尋引擎的描述 xml 檔
-如果用 Firefox 產生的 xml ，由於不是 OpenSearch &hellip;">
+	<meta name="description" content="Feb 22nd, 2011 Mac, Rails Comments Mac OSX Server 10.6 安裝 Mysql2 Gem 想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +108,66 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-22T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2011</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/" itemprop="url">Mac OSX Server 10.6 安裝 Mysql2 Gem</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
+下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
+
+<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
+<pre lang="bash">
+EBuilding native extensions.  This could take a while...
+ERROR:  Error installing mysql2:
+    ERROR: Failed to build gem native extension.</pre></p>
+
+<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
+checking for rb_thread_blocking_region()&#8230; no<br />
+checking for mysql.h&#8230; no<br />
+checking for mysql/mysql.h&#8230; no<br />
+&#8212;&#8211;<br />
+mysql.h is missing.  please check your installation of mysql and try again.<br />
+&#8212;&#8211;
+</p>
+
+<p>請下：
+<pre lang="bash">
+env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
+</pre></p>
+
+<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -494,42 +553,6 @@ end</pre></p>
 <p>
 		
 		<a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-06-20T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 20<span>th</span>, 2009</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/" itemprop="url">Tiger 上班去</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><p>又到了 Tiger 上班的日子了…   <br />今天都沒有別的貓咪來，tiger有點寂寞…</p>  <p><a href="/images/wp-uploads/2009/06/img-2562.jpg"><img title="IMG_2562" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="200" alt="IMG_2562" src="/images/wp-uploads/2009/06/img-2562-thumb.jpg" width="260" border="0" /></a> </p> 
-		
-		<a href="/2009/06/tiger-%E4%B8%8A%E7%8F%AD%E5%8E%BB/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

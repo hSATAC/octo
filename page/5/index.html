@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jan 6th, 2012 PHP, PHP-Resque, Resque Comments PHP-Resque 簡介 Resque 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔， &hellip;">
+	<meta name="description" content="Jan 13th, 2012 Redmine, Trac Comments Redmine Migration From Trac 0.12 This article will demostrate a near perfect redmine migration from trac 0.12 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,90 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-13T14:03:00+08:00" data-updated="true" itemprop="datePublished">Jan 13<span>th</span>, 2012</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/categories/redmine/'>Redmine</a>, <a class='category' href='/categories/trac/'>Trac</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/redmine-migrate-from-trac-0-dot-12/" itemprop="url">Redmine Migration From Trac 0.12</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
+
+<ul>
+<li><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_install_Redmine_on_CentOS_5">Install Redmine on CentOS 5</a>
+
+<ul>
+<li>Install Ruby</li>
+<li>Install rubygem</li>
+<li>Install passenger
+
+<ul>
+<li>/etc/conf.d/ruby.conf</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11/ext/apache2/mod_passenger.so
+</span><span class='line'>PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11
+</span><span class='line'>PassengerRuby /usr/bin/ruby</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>* /etc/httpd/conf.d/redmine.conf
+</code></pre>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   &lt;VirtualHost *:80&gt;
+</span><span class='line'>      ServerName redmine.miiicasa.com 
+</span><span class='line'>      DocumentRoot /home/m/share/htdocs/redmine/public
+</span><span class='line'>      &lt;Directory /home/m/share/htdocs/redmine/public&gt;
+</span><span class='line'>         AllowOverride all    
+</span><span class='line'>         Options -MultiViews    
+</span><span class='line'>      &lt;/Directory&gt;
+</span><span class='line'>   &lt;/VirtualHost&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/2012/01/redmine-migrate-from-trac-0-dot-12/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -640,54 +724,6 @@ stack level too deep</pre></p>
 
 		
 		<a href="/2011/09/rake-0-9/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-23T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 23<span>rd</span>, 2011</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/2011/06/cloudaaa/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/cloudaaa/" itemprop="url">CloudAAA 雲端大亂鬥簡記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
-借到了精誠資訊的大樓，相當棒的一個場地。<br />
-不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
-食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
-
-<p>一開始 Hank Lin 主講 aws 的部份<br />
-Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
-因為我本身對 aws 比較沒有深入研究<br />
-加上 Hank 講得實在是有點快<br />
-只略約有印象好像介紹了一些 Route 53 的新特色<br />
-還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
-然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
-(認識的要買可以找我，打6折)
-		
-		<a href="/2011/06/cloudaaa/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
