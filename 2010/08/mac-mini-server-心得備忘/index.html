@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Mac Mini Server 心得&備忘 最近很熱門的Mac mini server我有幸也拿到了一台。 之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。 我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。 &hellip;">
+	<meta name="description" content="Aug 24th, 2010 Mac Mac Mini Server 心得&備忘 最近很熱門的Mac mini server我有幸也拿到了一台。 之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。 我原本的ubuntu主機硬體壞掉， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,28 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-24T00:00:00+08:00" data-updated="true" itemprop="datePublished">Aug 24<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>
+
+
+</div>
+    </div>
 	<h1 class="title" itemprop="name">Mac Mini Server 心得&備忘</h1>
 	<div class="entry-content" itemprop="articleBody"><p><p>最近很熱門的Mac mini server我有幸也拿到了一台。</p>  <p><a href="/images/wp-uploads/2010/08/20100817_112424_451.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2010-08-17_11-24-24_45" border="0" alt="2010-08-17_11-24-24_45" src="/images/wp-uploads/2010/08/20100817_112424_45_thumb1.jpg" width="260" height="155" /></a> </p>  <p>之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。</p>  <p>我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。原本買這台Mac mini server就是為了替代原本的主機。再來就是想用textmate來開發程式，體驗一下MacOS傳說中的人性化介面，還有把Mac mini server當作家裡的多媒體中心，把音樂影片等等都丟上去。最後是把他當無線AP，讓家中網路無線化。</p>  <p>但是當Mac mini server來了以後，這些願景一個接著一個破滅了。</p> <!--more-->沒想到textmate完全不支援中文顯示、輸入。輸入的部份還好，裝個plugin就解決了，但是顯示的部份相當麻煩，有日本人釋出了字型patch，可以勉強顯示中文，但卻是用一個半形的寬度去顯示一個全形中文，導致字都擠在一起，相當難看。  <p></p>  <p>把所有音樂，影片集中，當itunes server的想法也失敗了。itunes區網分享只能播放，不能維護server資料庫，而家庭共享雖然可以抓server的歌，但也不能維護資料庫，更重要的是上面兩個方法client端都不能和ipod同步。後來想了另一個方法，在mac上開一個samba網路磁碟，其他電腦的itunes資料庫就指在這邊，共用一個資料庫。此法雖然可行，但當一邊的電腦更新資料庫後，另一邊的電腦要重新手動將資料夾加入資料庫才能看到變更，相當不方便。</p>  <p>接著是用Mac mini server當無線AP的想法，OSX server並不像OSX一樣有很簡單的網路共享，輕輕一勾就可以用airport分享網路，要在Mac mini server這樣做，似乎需要設定NAT, DHCP, DNS, firewall, bridge等等…折騰了好幾天還是無法搞定，最後只好去買了一台無線router。</p>  <p>儘管原本四個目標有三個失敗了，但我從不曾想要把Mac mini賣掉，因為在操作的過程中，Mac真的給了我很多的驚奇，不管是在硬體還是軟體方面。他確實顛覆了我過去長久以來在windows的使用經驗，我好像回到小學剛接觸電腦的時候，一種單純的快樂。</p>  <p><a href="/images/wp-uploads/2010/08/leopardserver1.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="leopardserver" border="0" alt="leopardserver" src="/images/wp-uploads/2010/08/leopardserver_thumb1.png" width="260" height="215" /></a> </p>  <p>現在我對Mac mini的用途定位在，web server和家中的NAS，之後可能會移到客廳接電視當多媒體播放機。</p>  <p>因為可能會很常重灌，以下就一些心得做一些備忘和分享。</p>  <h2>安裝</h2>  <p>內建兩顆500G硬碟，第一件事就是選擇要如何運用？因為我重要資料不多，所以選擇了raid 0。</p>  <p>設定raid 0相當簡單，光碟放進去按安裝以後，開機進入安裝模式，有個磁碟工具，建立raid，然後把兩顆硬碟拉進來，再選需要的raid模式就好了(raid 0是strip raid)。</p>  <p>安裝完以後記得安裝Xcode(for developer)，之後更新到10.6.4後語言的地方就有繁體中文可以選了。</p>  <p>Mac mini server管理真的滿簡單的，server admin開起來要的勾一勾，firewall也是要的勾一勾就設定完成了。</p>  <h2>鍵盤</h2>  <p>我是用一般windows的USB鍵盤，一進來他應該會叫你按z和/來偵測鍵盤類型。確認是USB鍵盤後，macos很奇怪的會把command(alt)和option(win) key位置互換，記得去換回來。</p>  <p>大部分快速鍵都差不多，ctrl換成command就可以了，差異比較大的是home和end鍵，在Mac這兩個鍵是直接到頁首和頁尾，要到行首行尾的快速鍵是command+← 和 command+→。</p>  <h2>終端機</h2>  <p>打開terminal，把自己的.bash_profile和.vimrc丟進去，一秒就回到自己熟悉的terminal環境了。</p>  <p>我習慣的prompt顏色設定是這樣：</p>  <pre lang="bash">LANG=zh_TW.UTF-8
 export LANG

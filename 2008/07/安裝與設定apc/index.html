@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="安裝與設定APC 安裝與設定APC&#8212;&#8212;&#8212;&#8211;linux:可至PECL下載APC下載APC後# tar xvzf APC-2.0.3.tgz 解壓縮# cd APC-2.0.3# /usr/bin/phpize# ./configure &#8211; &hellip;">
+	<meta name="description" content="Jul 10th, 2008 工作紀錄 安裝與設定APC 安裝與設定APC&#8212;&#8212;&#8212;&#8211;linux:可至PECL下載APC下載APC後# tar xvzf APC-2.0.3.tgz 解壓縮# cd APC-2.0.3# /usr/bin/phpize &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,28 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-07-10T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jul 10<span>th</span>, 2008</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+    </div>
 	<h1 class="title" itemprop="name">安裝與設定APC</h1>
 	<div class="entry-content" itemprop="articleBody"><p>安裝與設定APC<br />&#8212;&#8212;&#8212;&#8211;<br />linux:<br />可至<a href="http://pecl.php.net/package/APC">PECL下載APC</a><br /><br />下載APC後<br /><br /># tar xvzf APC-<st1:chsdate w:st="on" year="1899" month="12" day="30" islunardate="False" isrocdate="False">2.0.3</st1:chsdate>.tgz 解壓縮<br /># cd APC-<st1:chsdate w:st="on" year="1899" month="12" day="30" islunardate="False" isrocdate="False">2.0.3</st1:chsdate><br /># /usr/bin/phpize<br /># ./configure &#8211;enable-apc<br /># make<br /># make install <br /><br />windows:<br />可在<a href="http://pecl4win.php.net/list.php">PECL4Win下載編譯好的dll</a><br />請選擇適當版本自行丟到php include目錄中<br />&#8212;&#8212;&#8212;-<br /><br />接著更改php.ini設定<br /><br />貼上<br />linux:<br />extension = apc.so<br /><br />win:<br />extension = apc.dll<br /><br />apc.shm_segments=1<br />apc.optimization=0<br />apc.shm_size=128<br />apc.ttl=7200<br />apc.user_ttl=7200<br />apc.num_files_hint=1024<br />apc.mmap_file_mask=/tmp/apc.XXXXXX<br />apc.enable_cli=1<br />apc.rfc1867 = on<br /><br />重開apache2ctl graceful後，就安裝好了。<br />可至phpinfo.php檢查是否有正確啟動<br />或用壓縮檔中的apc.php查看apc資訊<!-- more -->
 </p>

@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="利用 Route 53 設定 Ec2 動態 DNS 最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制， &hellip;">
+	<meta name="description" content="Jun 6th, 2012 aws, dns, ec2, route53 利用 Route 53 設定 Ec2 動態 DNS 最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,28 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-06T14:44:00+08:00" data-updated="true" itemprop="datePublished">Jun 6<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/aws/'>aws</a>, <a class='category' href='/categories/dns/'>dns</a>, <a class='category' href='/categories/ec2/'>ec2</a>, <a class='category' href='/categories/route53/'>route53</a>
+
+
+</div>
+    </div>
 	<h1 class="title" itemprop="name">利用 Route 53 設定 Ec2 動態 DNS</h1>
 	<div class="entry-content" itemprop="articleBody"><p>最近在玩 aws ec2 第一個一定會碰到的問題就是 ip 都是動態的，每次開機都不一樣。造成大部分的佈署方式會有問題，一般都是用動態 dns 來解決，原本想自己架 bind 或 djbdns ，但是架好以後還要處理動態 dns 更新的機制，於是把想法動到價格低廉的 route 53 身上，他有完整的 restful api 應該很符合我的需求。</p>
 

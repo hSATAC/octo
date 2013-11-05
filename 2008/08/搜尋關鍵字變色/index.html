@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="搜尋關鍵字變色 &lt;script&gt;var keywords = Array(&nbsp; Array(&#8220;keyword&#8221;),)function replaceKeyword(objID) {&nbsp; var text = &#8220;&#8221;;& &hellip;">
+	<meta name="description" content="Aug 21st, 2008 工作紀錄 搜尋關鍵字變色 &lt;script&gt;var keywords = Array(&nbsp; Array(&#8220;keyword&#8221;),)function replaceKeyword(objID) {&nbsp; var text &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,6 +107,28 @@
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-21T00:00:00+08:00" data-updated="true" itemprop="datePublished">Aug 21<span>st</span>, 2008</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+    </div>
 	<h1 class="title" itemprop="name">搜尋關鍵字變色</h1>
 	<div class="entry-content" itemprop="articleBody"><p><p>&lt;script&gt;<br />var keywords = Array(<br />&nbsp; Array(&#8220;keyword&#8221;),<br />)<br /><br />function replaceKeyword(objID) {<br />&nbsp; var text = &#8220;&#8221;;<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; text = document.getElementById(objID).outerHTML;<br />&nbsp; } else {<br />&nbsp;&nbsp;&nbsp; text = document.body.innerHTML;<br />&nbsp; }<br />&nbsp; for (var i = 0; i &lt; keywords.length; i++) {<br />&nbsp;&nbsp;&nbsp; var re = new RegExp(keywords[i][0].replace(/\s+/, &#8220;&#92;s+&#8221;), &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp; var m = re.exec(text);<br />&nbsp;&nbsp;&nbsp; if (m != null) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var j = 0; j &lt; m.length; j++) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var reg = new RegExp(m[j], &#8220;g&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text = text.replace(reg, &#8220;&lt;span style=&#34;color:red;&#34;&gt;&#8221; + keywords[i][0] + &#8220;&lt;/span&gt;&#8221;);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp; }<br />&nbsp; }<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; document.getElementById(objID).outerHTML = text;<br />&nbsp; } else {<br />&nbsp; &nbsp;&nbsp;&nbsp; document.body.innerHTML = text;<br />&nbsp; }<br />}<br /><br />&nbsp; $(document).ready(function(){<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; replaceKeyword();<br />&nbsp;&nbsp;&nbsp; <br /><br />&nbsp; });<br />&lt;/script&gt;</p>
 </p>
