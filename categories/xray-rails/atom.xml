@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Xray-rails | hSATAC]]></title>
+  <title><![CDATA[Category: xray-rails | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/xray-rails/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Xray-rails 與 tmux, vim 整合]]></title>
+    <link href="http://blog.hsatac.net/2013/07/xray-rails-tmux-vim-integration/"/>
+    <updated>2013-07-09T22:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/07/xray-rails-tmux-vim-integration</id>
+    <content type="html"><![CDATA[<p>剛好又開新專案了，來介紹一下 <a href="https://github.com/brentd/xray-rails">Xray-rails</a> 與 tmux, vim 的整合。</p>
+
+<p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 是一層 rack middleware，會 inject 你的 view 和 javascript 檔案，只要在開發模式按快速鍵 <code>⌘ + ⇧ + x</code> 就會開啟一層 overlay，讓你很清楚的看出現在的畫面由哪些 view, partial, controller 生成，更方便的是只要一點畫面，即可在編輯器中開啟該檔案，大大降低 trace 程式碼的時間。</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/156655/xray-screenshot.png" alt="Xray-rails" /></p>
+
+<!--more-->
+
+
+<p><a href="https://github.com/brentd/xray-rails">Xray-rails</a> 預設的編輯器是 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> (<code>/usr/local/bin/subl</code>)。可以透過 overlay 右下角的設定圖示、或者自己新增 <code>~/.xrayconfig</code> 檔案來設定你使用的編輯器。</p>
+
+<p>我平常使用 <a href="https://github.com/aziz/tmuxinator">Tmuxinator</a> 來管理我的專案和 tmux, 每個專案有自己的 tmux session，讓我可以快速在不同專案的開發環境之間切換。</p>
+
+<p>我的 <code>~/.xrayconfig</code> 也改成透過 tmux 傳送指令給我的 vim，範例設定檔如下：</p>
+
+<p><code>
+:editor: "/usr/local/bin/tmux send -t openapply:editor $'\e' :tabe $file ENTER"
+</code></p>
+
+<p><code>openapply</code> 是我的專案 tmux session 名稱，而 <code>editor</code> 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。</p>
+
+<p>但問題來了，我每一個專案都有自己獨立的 tmux session，這樣每次切換專案的時候我都要修改 <code>~/.xrayconfig</code> 實在很不方便，所以希望能在每一個專案底下放自己的 <code>.xrayconfig</code>。</p>
+
+<p><p class='info info' data-title='Update 2013/08/14'>這個 Pull request 已被 upstream 收下，可以直接使用官方 git repo。</p></p>
+
+<p>這個功能已經<a href="https://github.com/brentd/xray-rails/issues/21">提案給原作者同意</a>，也送了 <a href="https://github.com/brentd/xray-rails/pull/23">pull request</a>，不過還沒被 merge 回主幹，如果現在有需要這個功能的朋友可以暫時先使用我修改的 fork。</p>
+
+<p>```
+  gem &lsquo;xray-rails&rsquo;, :git => &lsquo;<a href="https://github.com/hSATAC/xray-rails.git">https://github.com/hSATAC/xray-rails.git</a>&rsquo;,</p>
+
+<pre><code>                :branch =&gt; 'feature/project_specific_config'
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
   
 </feed>

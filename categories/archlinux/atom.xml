@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Archlinux | hSATAC]]></title>
+  <title><![CDATA[Category: archlinux | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/archlinux/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,270 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ArchLinux 使用 Puppet 注意事項]]></title>
+    <link href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/"/>
+    <updated>2013-02-21T14:12:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/using-puppet-on-archlinux</id>
+    <content type="html"><![CDATA[<p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
+
+<h2>systemctl 路徑</h2>
+
+<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
+
+<h2>套件庫需更新到最新版</h2>
+
+<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
+
+<p>以上這兩個問題我有寫了一段 module</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;h1>For Archlinux. This issue will be fixed in puppet 3.1&lt;/h1>
+</span><span class='line'>
+</span><span class='line'>&lt;p>class archfix {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>file {'/bin/systemctl':
+</span><span class='line'>    ensure =&gt; link,
+</span><span class='line'>    target =&gt; '/usr/bin/systemctl',
+</span><span class='line'>}   
+</span><span class='line'>exec {'pacman -Syy':
+</span><span class='line'>    path =&gt; ["/usr/bin"]
+</span><span class='line'>}   
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node &lsquo;devm3&rsquo; {&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>stage { 'pre': }
+</span><span class='line'>class {
+</span><span class='line'>    "archfix": stage =&gt; "pre"; 
+</span><span class='line'>}   
+</span><span class='line'>Stage["pre"] -&gt; Stage["main"]
+</span><span class='line'>
+</span><span class='line'># include other modules...
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>}</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Openrc &amp; Systemd</h2>
+
+<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Puppet 快速佈署 Archlinux]]></title>
+    <link href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/"/>
+    <updated>2013-02-19T17:51:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet</id>
+    <content type="html"><![CDATA[<p>筆記一下安裝步驟&hellip;。</p>
+
+<h2>Install Archlinux</h2>
+
+<p>由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 <a href="https://twitter.com/helmuthdu">@helmuthdu</a> 的快速安裝 script <a href="https://github.com/helmuthdu/aui">AUI</a>，安裝完成後再使用 puppet bootstrap 環境</p>
+
+<ul>
+<li>放入 CD 選擇 x64_64 開機</li>
+<li>執行 <code>curl hsatac.net/getaui | sh</code></li>
+<li>進入 helmuthdu-aui-xxxx 目錄</li>
+<li>執行 <code>./aui --ais</code> 進入安裝程式</li>
+<li>輸入 1-14 執行全部安裝步驟</li>
+</ul>
+
+
+<p>ps. 如遇特定機種無法使用 grub2 可改用 syslinux bootloader</p>
+
+<h2>Reboot</h2>
+
+<p>安裝完成重開機後後首先設定讓網路能通
+可參考<a href="https://wiki.archlinux.org/index.php/Network_Configuration">官方wiki</a></p>
+
+<p>如欲使用 dhcp 可執行 <code>systemctl start dhcpcd</code>
+<code>systemctl enable dhcpcd</code> 開機自動執行</p>
+
+<ul>
+<li>回到 helmuthdu-aui-xxx 目錄</li>
+<li>執行 <code>./aui</code> 繼續安裝</li>
+<li>新增使用者步驟必須執行，因後續步驟需用 sudo</li>
+<li>AUR helper 選擇 yaourt
+(Yaourt 和 packer 大同小異，但因 puppet 使用 yaourt 所以改用。)</li>
+<li>後面的 setup 可跳過，或者裝 Basic Setup 即可，這邊都是 桌面環境相關</li>
+<li>設定 /etc/resolv.conf</li>
+</ul>
+
+
+<h2>使用 puppet</h2>
+
+<p>puppet 可使用 master-agent 架構或者單機(solo) 安裝，詳見 puppet wiki</p>
+
+<ul>
+<li><code>yaourt puppet</code> 安裝 puppet</li>
+<li>在 /etc/hosts 設定 puppet master hostname 並在 /etc/puppet/puppet.conf [agent] 區塊設定 <code>server = xxx</code> (hostname 要跟 master hostname 一樣不然憑證不會過)</li>
+<li>run <code>puppet agent --test</code> 會出現沒有憑證訊息</li>
+<li>回到 puppet master 執行 <code>puppet cert list</code> 會看到待簽署的憑證</li>
+<li>執行 <code>puppet cert sign [hostname]</code> 簽署</li>
+<li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
+<li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Logitech G300 on ArchLinux]]></title>
+    <link href="http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux/"/>
+    <updated>2011-11-30T00:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/11/logitech-g300-on-archlinux</id>
+    <content type="html"><![CDATA[<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+
+
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。<!--more-->
+<pre lang="bash">xinput list</pre>
+應該可以看到各有一個 Logitech G300 的鍵盤和滑鼠，後面會有 id 例如 12
+<pre lang="bash">xinput list-props 12</pre>
+會看到類似
+<pre lang="bash">Device Enabled (132)</pre>
+再下
+<pre lang="bash">xinput set-prop 12 132 0</pre>
+就可以把這個裝置 disable 掉。</p>
+
+
+
+
+<p><p>但是每次都要這樣查很麻煩，而且這號碼不是固定的<br />
+所以我寫成 script 可以放在 xinitrc 裏面去自動執行
+<pre lang="bash">#!/bin/sh
+DEVICE_ID=<code>xinput list |  grep "Logitech Gaming Mouse G300" | grep keyboard | sed 's/.*id=\([0-9]*\).*/\1/'</code></p>
+
+<p>if xinput -list-props $DEVICE_ID | grep &ldquo;Device Enabled&rdquo; | grep &ldquo;1$&rdquo; &gt; /dev/null
+then</p>
+
+<pre><code>xinput set-int-prop $DEVICE_ID "Device Enabled" 8 0
+</code></pre>
+
+<p>fi
+</pre>
+接著還有一個小問題，就是每當機器 wake up 的時候，滑鼠又會跑掉了，那有沒有辦法在 wake up 時執行這段程式呢？<br />
+在 /etc/pm/sleep.d/ 下<br />
+新增一個 script 讓他去執行上一段程式就可以了。
+<pre lang="bash">!/bin/sh</p>
+
+<h1>90G300: suspend/wakeup Logitech G300 devices</h1>
+
+<p>case &ldquo;$1&rdquo; in
+hibernate|suspend)
+;;
+thaw|resume)
+/home/cat/.xinitrc.d/50-logitech-g300-mouse
+;;
+*) exit $NA
+;;
+esac
+</pre></p>
+
+<p><p>這個 solution 也同步更新到 Archwiki 上，這就是社群的力量啊！</p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Archlinux 推廣]]></title>
+    <link href="http://blog.hsatac.net/2011/11/archlinux/"/>
+    <updated>2011-11-30T00:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/11/archlinux</id>
+    <content type="html"><![CDATA[<p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
+
+
+
+
+<p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。<!--more-->
+<h1>Why Arch?</h1>
+Archlinux 設計的理念是「簡單」、「正確」、「使用者至上」、「開放」、「自由」(參見 <a href="https://wiki.archlinux.org/index.php/The_Arch_Way_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">Arch 之道</a>)。</p>
+
+
+
+
+<p>他採取滾動式升級 (rolling release system)，不再有每次大版本升級的噩夢。<br />
+他的套件管理 pacman 相當優秀，更有社群貢獻的套件庫 AUR，安裝軟體簡單又不髒手。
+<a href="https://wiki.archlinux.org/" target="_blank">Archwiki</a> 應該是網路上資料最豐富最齊全的 linux wiki 了，不管什麼疑難雜症都可以在裏面找到。<br />
+Archlinux 安裝完是一個乾淨輕巧的系統，你可以依照自己的喜好打造自己的工作環境。
+<h1>Install</h1>
+一開始的安裝可以跟著這兩篇 wiki：
+<ul>
+    <li><a href="https://wiki.archlinux.org/index.php/Official_Installation_Guide" target="_blank">Official Installation Guide</a></li>
+    <li><a href="https://wiki.archlinux.org/index.php/Beginners%27_Guide" target="_blank">Beginner's Guide</a></li>
+</ul>
+其實安裝很簡單，光碟插進去以後下一步就結束了，不過選項還是要稍微看一下。
+<h2>套件管理</h2>
+安裝完以後先把 pacman mirror 只留台灣站，做一次系統升級 sudo pacman -Syu<br />
+再想辦法安裝 AUR (Arch User Repositories) 輔助程式。<br />
+比較有名的是 Yaourt 不過已經停止開發了，我推薦使用 packer。<br />
+想辦法安裝 packer 以後，離成功就不遠啦！
+<div>
+<ul>
+    <li><a href="https://wiki.archlinux.org/index.php/Pacman_(%E6%AD%A3%E9%AB%94%E4%B8%AD%E6%96%87)" target="_blank">pacman 說明</a></li>
+    <li><a href="https://wiki.archlinux.org/index.php/AUR" target="_blank">AUR 說明</a></li>
+    <li><a href="https://wiki.archlinux.org/index.php/AUR_Helpers" target="_blank">AUR helper 說明</a></li>
+</ul>
+</div>
+<h2>桌面環境</h2>
+桌面環境有許多選擇，例如 gnome, kde, xfce4, lxde 等等，可以按自己的喜好做選擇。<br />
+安裝過程可以參考 archwiki，當然也有許多 Archlinux 分支出去，隨附 Desktop Environment 的發行版：<br />
+例如 kde 的 <a href="http://chakra-linux.org/about.html" target="_blank">Chakra</a> 、gnome 的 <a href="http://www.kahelos.org/" target="_blank">KahelOS</a> 、openbox 的 <a href="http://archbang.org/" target="_blank">Archbang</a> 等等，這裡有<a href="https://wiki.archlinux.org/index.php/Arch_Based_Distributions_(Active)" target="_blank">清單一覽</a>。<br />
+這些桌面發行版，除了簡化安裝流程外，通常也會針對桌面環境做設定和優化，想省時間的話不妨可以考慮。
+<h2>中文使用</h2>
+中文使用者的兩大問題不外乎就是字型和輸入法。<br />
+字型的部份可以參考<a href="http://imxie.net/2010/06/basic-lcd-font-config-on-archlinux.htm" target="_blank">這篇文章</a>來做設定。<br />
+我中文字型是選擇 Hiragino Sans GB ，從我的 Mac 上複製過來，效果非常好。<br />
+輸入法的部份大概就 scim, gcin, ibus 選一套，ibus 我用不太習慣，用了一陣子 scim ，發現不是很穩定，目前改用 gcin ，使用狀況良好。
+<h1>結語</h1>
+本來有很多踩到的雷想寫，後來想想都太瑣碎了。<br />
+玩 Arch 只要把握一個原則：查 wiki ，大概什麼問題都可以迎刃而解。<br />
+Linux DE 的原罪就是選擇太多，通常要自己試用、設定後才能符合自己的需求。<br />
+在這之中可能會有很多挫折，不過解決問題的過程也是一種喜悅。<br />
+只要肯花時間，絕對能把環境打造到你喜歡的樣子。<br />
+一起來享受 Arch 吧！</p>
+
+]]></content>
+  </entry>
   
 </feed>

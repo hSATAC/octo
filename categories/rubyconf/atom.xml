@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Rubyconf | hSATAC]]></title>
+  <title><![CDATA[Category: rubyconf | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/rubyconf/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,159 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf.tw 2012]]></title>
+    <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en/"/>
+    <updated>2012-12-09T13:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en</id>
+    <content type="html"><![CDATA[<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
+
+<h3>Before Party</h3>
+
+<p><a href="http://twitter.com/ihower">ihower</a> had been inviting Matz, the creator of Ruby to Taiwan for the past three years. And finally he made it this year. Matz arrived Taiwan early, since it was a great opportunity to meet Matz in person so we hosted a meetup party with Matz the day before the conference.</p>
+
+<p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
+
+<!--more-->
+
+
+<h3>Day 1</h3>
+
+<p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
+
+<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&rsquo;s quite nice.</p>
+
+<p>The first session of day 1 was Matz and of course it&rsquo;s nice. And then Wei Lu from Singapore shared about pair programming, she&rsquo;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
+
+<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>&ldquo;I didn&rsquo;t expect for this kind of mruby information.&rdquo;</p></blockquote>
+
+<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&rsquo;s also very nice, covered from real cases to deep theories.</p>
+
+<p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
+
+<h3>Party</h3>
+
+<p>I went to official party at day 1 night, I don&rsquo;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
+
+<p>This was a great event to meet new people and old friends from every places in the world.</p>
+
+<p>I asked Matz in the party, &ldquo;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&rdquo;</p>
+
+<p>&ldquo;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&rsquo;s high quality&rdquo; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
+
+<p>It&rsquo;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
+
+<h3>Day 2</h3>
+
+<p>I was very excited about sessions in day 2: &ldquo;devOps toolbox&rdquo; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&rsquo;ve been studying these 2 devOps frameworks and couldn&rsquo;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
+
+<p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
+
+<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&rsquo;t really dig into it because the lack of information and documents on the internet.</p>
+
+<h3>End</h3>
+
+<p>Ruby Conf Taiwan 2012 was so good, even people from other countries agreed:</p>
+
+<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>&ldquo;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&rdquo;</p></blockquote>
+
+<p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
+
+<p>ihower said they picked topics very carefully, they didn&rsquo;t accept your proposal just because your a sponsor. I think it&rsquo;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
+
+<p>It&rsquo;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&rsquo;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyConf.tw 2012 流水帳]]></title>
+    <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012/"/>
+    <updated>2012-12-09T13:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012</id>
+    <content type="html"><![CDATA[<p>今年的 Ruby Conf Taiwan 2012 實在太精彩，太感動了，一定要寫下來紀錄一下。</p>
+
+<h3>前夜祭</h3>
+
+<p>首先是經過 ihower 三年的邀請，今年終於邀請到 Ruby 之父 Matz 來到台灣。由於 Matz 提早到台灣，所以在 Ruby Conf 的前一天晚上也臨時加開了 Matz 見面會，能有這個近距離和大師接觸，聊天，提問的機會實在非常難得。不過也許是這時候大家把問題都問的差不多了，結果隔天 Matz 的 keynote 反而沒什麼人提問(笑)。</p>
+
+<p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
+
+<!--more-->
+
+
+<h3>Day 1</h3>
+
+<p>這次場地不是在老地方中研院，而是在天母農訓中心國際會議廳，大家應該都是第一次來這個地方。場地設備算 OK ，不過沒有有線網路可用，然後剛好無線網路又悲劇了，後來大家好像都是靠自己的 3G 上網。午餐也是在這邊有 buffet 可以吃，非常好吃！一般訂便當完全無法相提並論。不過座位稍微矮小狹窄了一點，我這個身高的人坐一整天其實膝蓋很痛⋯⋯。</p>
+
+<p>這個廳比中研院的大廳小，比中研院的小廳大。其實我覺得這樣的配置挺不錯的，不會離講者太遠，互動性比較高，也不會太擁擠。</p>
+
+<p>一早就是 Matz 的 Keynote，同時講了三個主題，非常豐富；接下來是來自新加坡的 Wei Lu 分享 Pair Programming ，台風非常穩健。最令人驚喜的是 Jserv 的 mruby talk！從為什麼他們選擇 mruby 到 ARM 優化的細節，最後 live demo，連 Matz 在台下都聽得連連點頭。</p>
+
+<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>「聽到這種 mruby 的資訊真是意料之外」</p></blockquote>
+
+<p>下午 godfat 關於 concurrency application servers 的 talk 也很精彩，從實務出發，由淺入深。</p>
+
+<p>這次與會的外國來賓和講者比例非常高，所以很多中文議程講者都臨時決定改用英文分享。其實我是覺得滿好的，身為一個國際性的研討會，盡可能照顧到所有人，讓外國來賓比較有參與感。</p>
+
+<p>結果第一天的議程除了 godfat 以外全部都用英文演說了，恭喜 godfat 得到「Day 1 唯一中文講者」的成就 XD</p>
+
+<h3>Party</h3>
+
+<p>晚上參加了 official party，表定到晚上 12 點，因為我不太喝酒，本來想說去 social 一下就回家了。沒想到真的喝到 12 點才走(爆)</p>
+
+<p>這個場合真的很好，可以很輕鬆的跟新朋友老朋友、各國來賓輕鬆的對談。跟好久不見的 dreamslab ben update 了一下近況；跟 jserv 聊了一下他的新公司；也跟慕凡交換了一下遊戲界甘苦談。</p>
+
+<p>席間我問 Matz：「您去過許多 ruby conf, 這是第一次來 ruby conf taiwan ，您覺得怎麼樣？」</p>
+
+<p>他回答，ruby conf taiwan 規模雖然小，但是質量水準很高，他相當驚訝。又問明年他是否願意再來，他說只要我們有邀請，他就會再來。</p>
+
+<p>能讓 Matz 如此肯定，ihower 跟慕凡辦的真的是太優秀了。</p>
+
+<h3>Day 2</h3>
+
+<p>Day 2 是我原本就期待許久的議程，主要是 dlackty 的 devOps toolbox 會提到 chef，緊接著 thegiive 會介紹 puppet，這兩套工具我 survey 了一陣子，無法決定要用哪套，剛好來聽聽看心得。在兩位 Session 結束後也分別向兩位請教了一些 devOps 上的疑惑。</p>
+
+<p>早上 Gosuke Miyashita 的 talk 也講了很多有趣的東西，例如他們的 <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> 和 <a href="https://github.com/mizzy/openssh-script-auth">SSH router 實作</a>，讓我對 paperboy &amp; co. 這家陌生的日本公司有很深刻的印象。</p>
+
+<p>下午 josephku 的 RubyMotion 也講的很精彩。 RubyMotion 也是我關注很久的技術，可以用 ruby 語法寫 iOS 對我這種被逼上梁山的 iOS 開發者來說有很大的吸引力。但是他的資料一直非常少，很訝異 josephku 能掌握並分享這樣一個新穎的技術，QA 時我也提問了兩個問題。會後本想找 josephku 認識一下，但緣鏗一面，希望日後有機會。</p>
+
+<h3>End</h3>
+
+<p>這次 Ruby Conf Taiwan 2012 的 Session 質量非常高，高到連外國來賓都很訝異。</p>
+
+<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
+
+
+<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<blockquote><p>「不過, 讓我談到最佳化之類的議題、被認真地問最佳化核心部份的問題 conference 似乎非常久沒遇過了, 台灣真厲害。」</p></blockquote>
+
+<p>我覺得這次議程篩選和安排的相當好，各領域的主題都有，展現了 Ruby 的多種可能性；深度也夠，不僅是聽眾收穫豐碩，講者們也能有互動。例如第一天 mruby 的幾位講者和來賓 jserv, matz, 高橋彼此會後也都能有交流。</p>
+
+<p>聽 ihower 說這次篩選主題非常嚴格，有許多 sponser 的投稿都沒能入選，我覺得這樣非常好，贊助歸贊助，會給他們廣告的空間，不過維持大會的水準才是第一要務。</p>
+
+<p>不誇張，這次 Ruby Conf Taiwan 2012 真的是我參加到目前為止台灣研討會裡最棒的一場，感謝 ihower 和慕凡以及所有工作人員的努力！</p>
+]]></content>
+  </entry>
   
 </feed>

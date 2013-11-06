@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PHP-Resque | hSATAC]]></title>
+  <title><![CDATA[Category: php-resque | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/php-resque/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,328 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PHP-Resque Auto Scale Workers]]></title>
+    <link href="http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers/"/>
+    <updated>2012-02-02T14:56:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/02/php-resque-auto-scale-workers</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+
+<p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
+
+<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+
+<h2>Introduction</h2>
+
+<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
+
+<!-- more -->
+
+
+<h2>Design</h2>
+
+<h3>Expected Behavior</h3>
+
+<ul>
+<li><p>Trigger <code>afterEnqueue</code> to check the total job number of this queue.</p></li>
+<li><p>If the number larger than <code>15</code> than check the total number of workers involved in this queue.</p></li>
+<li><p>If the worker number is not enough, create one or more workers.</p>
+
+<ul>
+<li><p>If there are more than one server, divided the number equally to each server.</p></li>
+<li><p>In the mean time, try to create workers that deal the same queues on each server.</p></li>
+</ul>
+</li>
+<li><p>Trigger <code>beforeFork</code> to check the total job number and worker number, close the useless ones.</p></li>
+</ul>
+
+
+<h3>Number of Jobs and Workers</h3>
+
+<ul>
+<li><p>1~15 jobs => 1 worker</p></li>
+<li><p>16~25 jobs => 2 workers</p></li>
+<li><p>26~40 jobs => 3 workers</p></li>
+<li><p>41~60 jobs => 4 workers</p></li>
+<li><p>60+ jobs => 5 workers</p></li>
+</ul>
+
+
+<h2>Usage</h2>
+
+<ul>
+<li>You need to add the queue type as a member static variable to your Job class. Like this:</li>
+</ul>
+
+
+<p>```php
+&lt;?php
+class PHP_Job
+{</p>
+
+<pre><code>static public $queue = "default";
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<ul>
+<li><p>Require <code>plugin.php</code> both in your resque init script and enqueue part.</p></li>
+<li><p>Change the setting and code in <code>plugin.php</code> based on your need.</p></li>
+<li><p>Start only one worker via your resque init script.</p></li>
+<li><p>Now it&rsquo;s auto-scalable.</p></li>
+</ul>
+
+
+<h2>Disclaimer</h2>
+
+<p>For now it&rsquo;s all experimental design.</p>
+
+<p>All numbers and codes are not from production enviroments nor runned benchmarks. It&rsquo;s just a prototype for now, but it does what it says.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHP-Resque 簡介]]></title>
+    <link href="http://blog.hsatac.net/2012/01/php-resque-introduction/"/>
+    <updated>2012-01-06T15:14:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/01/php-resque-introduction</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+
+<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<h2>設計</h2>
+
+<p>Resque 的設計有兩個角色： Job 和 Worker。 每個 Job 都是定義成類別，新增 Job 的時候會將 Job 的類別和相關參數 json_encode 後儲存到不同的 queue 裡面，而 Worker(s) 則會依序從 redis 讀取 Job 出來執行。</p>
+
+<p>執行的時候並不是這個 Worker 本身去執行，而是會 fork 一個 process 來執行。這樣設計是為了避免時間一長， Worker 的記憶體管理不良導致卡死的狀況。</p>
+
+<p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
+
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
+<p>以下先來介紹如何使用 PHP-Resque：</p>
+
+<h2>安裝 PHP-Resque</h2>
+
+<p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+<!-- more -->
+
+
+<h2>環境變數</h2>
+
+<p>PHP-Resque 支援的環境變數有：</p>
+
+<ul>
+<li><p>QUEUE &ndash; 這個是必要的，會決定 worker 要執行什麼任務，重要的在前，例如 <code>QUEUE=notify,mail,log</code> 。也可以設定為 <code>QUEUE=*</code> 表示執行所有任務。</p></li>
+<li><p>APP_INCLUDE &ndash; 這也可以說是必要的，因為 Resque 的 Job 都是寫成物件，那 worker 執行的時候當然要把物件的檔案引入進來。可以設成 <code>APP_INCLUDE=require.php</code> 再在 require.php 中引入所有 Job 的 Class 檔案即可。</p></li>
+<li><p>COUNT &ndash; 設定 worker 數量，預設是1 <code>COUNT=5</code> 。</p></li>
+<li><p>REDIS_BACKEND &ndash; 設定 Redis 的 ip, port。如果沒設定，預設是連 <code>localhost:6379</code> 。</p></li>
+<li><p>LOGGING, VERBOSE &ndash; 設定 log， <code>VERBOSE=1</code> 即可。</p></li>
+<li><p>VVERBOSE &ndash; 比較詳細的 log， <code>VVERBOSE=1</code> debug 的時候可以開出來看。</p></li>
+<li><p>INTERVAL &ndash; worker 檢查 queue 的間隔，預設是五秒 <code>INTERVAL=5</code> 。</p></li>
+<li><p>PIDFILE &ndash; 如果你是開單 worker，可以指定 PIDFILE 把 pid 寫入，例如 <code>PIDFILE=/var/run/resque.pid</code> 。</p></li>
+</ul>
+
+
+<p>有一個 Resque 支援，但 PHP-Resque 沒有的參數叫 <code>BACKGROUND</code> 可以把 resque 丟到背景執行。不過這個其實不太重要，有需要的話自己加個 <code>php resque.php &amp;</code> 就可以了。</p>
+
+<p>所以，你的指令最後可能會變這樣：</p>
+
+<p><code>
+QUEUE=* APP_INCLUDE=require.php COUNT=5 VVERBOSE=1 php resque.php
+</code></p>
+
+<p>如果覺得太長，可以寫一支啟動 script 來輔助你，我有寫一支可供參考：</p>
+
+<p><div><script src='https://gist.github.com/1619972.js'></script>
+<noscript><pre><code>#!/bin/bash
+export APP_INCLUDE=resque/require.php
+export QUEUE=*
+export COUNT=1
+export VVERBOSE=1 # for debugging
+export REDIS_BACKEND=localhost:6379
+. /etc/rc.d/init.d/functions
+
+start() {
+    /usr/bin/php ../lib/sdk/php-resque/resque.php
+}
+
+stop() {
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -15
+}
+kill() {
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -9
+}
+case &quot;$1&quot; in
+    start)
+         number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
+        if [ $number -gt 0 ]
+        then
+          echo &quot;php-resque is running. ($number workers)&quot;
+          echo &quot;You may wanna stop them before you start.&quot;
+          start
+        else
+          start
+        fi
+    ;;
+
+    stop)
+        stop
+    ;;
+
+    kill)
+        kill
+    ;;
+
+    status)
+        number=$(ps aux | grep php-resque/resque.php | grep -v grep | wc -l)
+        if [ $number -gt 0 ]
+        then
+          echo &quot;php-resque is running. ($number workers)&quot;
+        else
+          echo &quot;php-resque is not running.&quot;
+        fi
+    ;;
+
+    *)
+        echo -n &quot;Usage: $0 {start|stop|status}&quot;
+esac
+</code></pre></noscript></div>
+</p>
+
+<h2>使用 PHP-Resque</h2>
+
+<p>把檔案抓下來以後一定想先試驗看看的，確定你的 redis-server 都有正常啟動後，在 demo 資料夾下面有幾個檔案可以先試驗看看。</p>
+
+<p>切到 demo 目錄後，執行 <code>VVERBOSE=1 QUEUE=* php resque.php</code> 應該會看到 resque 已經開始執行了。</p>
+
+<p>執行 <code>php queue.php PHP_Job</code> 、 <code>php queue.php Bad_PHP_Job</code> 、 <code>php queue.php Long_PHP_Job</code> 、 <code>php queue.php PHP_Error_Job</code> 可以把工作丟進 queue 裡面，看看執行的結果。</p>
+
+<p>後面帶的名稱其實就是 Job class 的名稱，所以 PHP-Resque 在執行時也要把相關的 class 檔案設定在 APP_INCLUDE 引入才行。</p>
+
+<p>Job 的 class 很簡單，大概長這樣：</p>
+
+<p>``` php
+&lt;?php
+class My_Job
+{</p>
+
+<pre><code>public function perform()
+{
+    // Work work work
+    echo $this-&gt;args['name'];
+}
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<p>只要定義 perform 方法， Worker 就會把 Job new 出來以後執行 perform 。</p>
+
+<p>當然，也可以定義 <code>setUp()</code> 和 <code>tearDown()</code> 方法，前者會在 <code>perform()</code> 執行前執行，後者會在 <code>perform()</code> 執行後執行。</p>
+
+<p>需要注意的是，Job exit 後都視為正常執行，如果要讓他判斷失敗丟到 fail queue 中的話，需要 throw exception。</p>
+
+<p>將 Job 塞入 queue 的方式是：</p>
+
+<p>``` php
+&lt;?php
+require_once &lsquo;lib/Resque.php&rsquo;;</p>
+
+<p>Resque::setBackend(&lsquo;localhost:6379&rsquo;);</p>
+
+<p>$args = array(</p>
+
+<pre><code>'name' =&gt; 'Chris'
+</code></pre>
+
+<p>);
+Resque::enqueue(&lsquo;default&rsquo;, &lsquo;My_Job&rsquo;, $args);
+?>
+```</p>
+
+<p>其中第一個參數 <code>default</code> 就是你的 queue 名稱，例如你可以設定 notify, mail, image 之類，至於為什麼要這樣設計，在後面的篇幅再敘述。</p>
+
+<p>值得一提的是，在原 ruby 版 rescue 每個 Job 屬於哪個 queue 是直接定義在 class 中的，PHP 版則是 enqueue 時才傳入，不知道為什麼要這樣設計，可能會導致一些意料之外的結果，需要注意。</p>
+
+<p>PHP-Resque 的使用方法大致就是這樣，接下來講一些其他的小細節。</p>
+
+<h2>Hooks</h2>
+
+<p>PHP-Resque 可以定義 Event Hooks 讓你能在相對應的事件發生時執行你想要的動作。支援的事件有很多，請各位自行參考原專案的 README。在專案目錄下的 extra 目錄下有 sample.plugin.php 可以看 Event hook 的範例寫法。</p>
+
+<p>有一點需要注意的是，很直覺我們會把這隻 sample.plugin.php 丟到 APP_INCLUDE 變數中，這樣沒錯，但要注意跟 enqueue 有關的 event 並不是由 worker 來觸發，因此你在新增 Job 的那段程式也需要引入 sample.plugin.php 才能觸發到 <code>AFTERENQUEUE</code> 。</p>
+
+<h2>監控</h2>
+
+<h3>resque-web</h3>
+
+<p>前面有提到可以直接使用 resque-web 來監控 PHP-Resque 的狀態，相當建議使用，非常清楚易懂，要看 Redis 相關的數據也可以看，不用進 redis-cli 自己打指令。</p>
+
+<p>安裝方法：<code>gem install resque</code></p>
+
+<p>執行：<code>resque-web -p 3000</code> 即可運行在 3000 port。</p>
+
+<p>首頁有 live reload 按鈕可以按， debug 時非常方便。</p>
+
+<p>screenshot: <img src="/images/wp-uploads/2012/01/resque-web.jpg"></p>
+
+<h3>Supervisord</h3>
+
+<p>在專案的 extra 目錄下另有 resque.monit 檔案，這是供 <a href="http://supervisord.org/">Supervisord</a> 使用的設定檔。他會在 worker 吃掉 300MB 以上的記憶體，或者是跑了 10 次輪迴後砍掉重開。可以參考看看。</p>
+
+<h3>proctitle</h3>
+
+<p>如果你 <code>ps | grep resque</code> 只會看到 <code>php resuqe.php</code> 的訊息，還記得 Worker 會 fork 出一個 process 來執行 Job 嗎？這樣就有兩倍的 processes 但是你完全分不出來哪個是哪個。原本 ruby 版本的設計是可以輕易看出 Worker fork 了哪個 process 而被 fork 出來的正在執行什麼工作。</p>
+
+<p>Ruby 只要改 <code>$0</code> 就可以了， PHP 就沒這麼簡單了，要使用 <code>setproctitle</code> 。</p>
+
+<p>但是這要安裝 pecl 的 <code>proctitle</code> 模組才能使用。</p>
+
+<p>安裝方式：<code>pecl install proctitle channel://pecl.php.net/proctitle-0.1.1</code></p>
+
+<p>記得要去 php.ini 讀進 .so 的 extension 。</p>
+
+<p>完成後再執行 <code>ps -e -o pid,command | grep [r]esque</code> 時，就會從原本的</p>
+
+<p><code>
+10486 php resque.php
+10487 php resque.php
+</code></p>
+
+<p>變成好讀易懂的：</p>
+
+<p><code>
+10621 resque-1.0: Waiting for notify,mail,image,default
+10622 resque-1.0: Forked 10632 at 2012-01-16 13:42:55
+10632 resque-1.0: Processing default since 2012-01-16 13:42:55
+</code></p>
+
+<h2>佈署</h2>
+
+<p>之前提到可以除了預設的 default 以外，還可以設定不同的 queue，為什麼要這樣做呢？除了執行優先權外，(撈 queue 時會按你給 worker 的設定，在前面 queue 的會先撈，就會先執行到) 還有多伺服器佈署的原因。</p>
+
+<p>假如今天你有個 queue 專門要處理使用者圖片的東西，當然一般圖片會有自己的伺服器。於是在你的主 web 伺服器上你就可以執行 <code>QUEUE=notify,mail</code> 而在圖片伺服器上就可以執行 <code>QUEUE=images</code> 的 worker。</p>
+
+<p>另外就是由於 Worker 啟動時已經將 <code>APP_INCLUDE</code> 的檔案都讀入，持續執行。因此如果有修改引入的 Job 或 hook plugin 等檔案的話，deploy 時要將 worker 停止，重新啟動才會讀入新的 <code>APP_INCLULDE</code> 檔案。</p>
+
+<h2>已知問題</h2>
+
+<p>首先，PHP-Resque 使用的是 <a href="https://github.com/jdp/redisent">Redisent</a> 這套 Redis interface。但因為和另一套 php module <a href="http://code.google.com/p/phpredis/">phpredis</a> 同樣都定義了 RedisException 這個類別，所以會衝突，必須把 phpredis 移除才能使用。</p>
+
+<p>再來，在部屬時常常 REDIS_BACKEND 是設到別台機器的，而且一般我們都會開不只一個 worker ，這時候有一個已知 issue 就是有時 lpop 拉回來的 Job 錯誤，是一個陣列，導致噴出 json_decode 的錯誤，而且這個 Job 就不會執行，會 missing 。 (see <a href="https://github.com/chrisboulton/php-resque/issues/32">#32</a>)</p>
+
+<p>目前還不清楚確實問題所在，不過有一個 workaround 的解法是，不要用 <code>COUNT=5</code> 去開，而是設 <code>COUNT=1</code> 然後執行 5 次，就不會有這個問題產生。</p>
+
+<h2>結語</h2>
+
+<p>Resque 真的是一個很棒很輕巧的設計，感謝有人把它 porting 到 PHP 。希望越來越多人來使用，一起來發展維護 PHP-Resque。</p>
+]]></content>
+  </entry>
   
 </feed>

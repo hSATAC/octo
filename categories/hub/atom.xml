@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Hub | hSATAC]]></title>
+  <title><![CDATA[Category: hub | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/hub/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[用 Commandline 發 github pull request]]></title>
+    <link href="http://blog.hsatac.net/2013/07/github-pull-request-from-commandline/"/>
+    <updated>2013-07-16T12:40:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/07/github-pull-request-from-commandline</id>
+    <content type="html"><![CDATA[<p>現在團隊使用 github 來作 code hosting, 利用 pull request 機制來做 code review。比以往自己架 gitosis 和 redmine 的方式更方便好用。</p>
+
+<p>不過 programmer 天性懶惰，日子一久對於要開 github 網頁用滑鼠選 branch 發 pull request 的操作感到厭倦，能自動化的東西就懶得自己按按鈕啦！</p>
+
+<p>使用 <a href="https://github.com/github/hub">hub</a> 就可以用 commandline 進行各種 github 的操作。</p>
+
+<!--more-->
+
+
+<p>用 <code>homebrew</code> 或 <code>gem</code> 都可以進行安裝。</p>
+
+<p><code>
+brew install hub
+gem install hub
+</code></p>
+
+<p>我們 team 開發流程是 feature branch 開發完畢後 push 到專案 remote 發 pull request，所以我在 <code>.bash_profile</code> 加了下面這個 function：</p>
+
+<p><div><script src='https://gist.github.com/5591270.js'></script>
+<noscript><pre><code></code></pre></noscript></div>
+</p>
+
+<blockquote><p>從 team 的 (現在目錄所在 branch) 發 pull request 到 team 的 (develop) branch</p></blockquote>
+]]></content>
+  </entry>
   
 </feed>

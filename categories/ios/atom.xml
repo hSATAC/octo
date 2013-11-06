@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: iOS | hSATAC]]></title>
+  <title><![CDATA[Category: ios | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ios/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-06T11:32:10+08:00</updated>
+  <updated>2013-11-06T12:46:29+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,5 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Obj-C 單元測試非同步連線]]></title>
+    <link href="http://blog.hsatac.net/2012/10/obj-c-unit-test-with-asynchronous-request/"/>
+    <updated>2012-10-30T13:14:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/10/obj-c-unit-test-with-asynchronous-request</id>
+    <content type="html"><![CDATA[<p>使用 Xcode 的 OCUnit 來做單元測試網路連線時，由於 OCUnit 不會等 block 執行，所以會直接跳到 pass。一般正常作法應該是用 mock object 來測試，不過總有要實際測試真實連線的時候。這時可以使用以下的 snippet:</p>
+
+<p><div><script src='https://gist.github.com/3978482.js'></script>
+<noscript><pre><code>- (void)testLogin
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [[miiiCasaServer getServer] login:@&quot;test@example.com&quot; andPassword:@&quot;password&quot; success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        assertThat(responseObject[@&quot;status&quot;], is(@&quot;ok&quot;));
+        dispatch_semaphore_signal(semaphore);
+    } failure:nil];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+}
+- (void)testLoginFail
+{
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [[miiiCasaServer getServer] login:@&quot;test@example.com&quot; andPassword:@&quot;wrongpassword&quot; success:nil failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        assertThat([[error userInfo] objectForKey:@&quot;errmsg&quot;], containsString(@&quot;incorrect&quot;));
+        assertThatInteger([error code], equalToInt(401));
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
+                                 beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+}</code></pre></noscript></div>
+</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode 4.3 publish ipa for testflight]]></title>
+    <link href="http://blog.hsatac.net/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/"/>
+    <updated>2012-03-07T10:05:00+08:00</updated>
+    <id>http://blog.hsatac.net/2012/03/xcode-4-dot-3-publish-ipa-for-testflight</id>
+    <content type="html"><![CDATA[<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
+
+<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
+
+<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
+
+<p>Xcode 4.3 的 entitlement 換地方了。</p>
+
+<ul>
+<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
+<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
+<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
+</ul>
+
+
+<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
+
+<p>```
+<key>com.apple.developer.ubiquity-container-identifiers</key>
+ <array></p>
+
+<pre><code> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
+</code></pre>
+
+<p> </array>
+ <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+ <string>$(TeamIdentifierPrefix).*</string>
+```</p>
+
+<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+
+<p><em>2012/04/42 補充</em></p>
+
+<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
+
+<p>也就是：</p>
+
+<p>```
+<key>com.apple.developer.ubiquity-container-identifiers</key>
+ <array></p>
+
+<pre><code> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
+</code></pre>
+
+<p> </array>
+ <key>com.apple.developer.ubiquity-kvstore-identifier</key>
+ <string>$(TeamIdentifierPrefix)com.yourcompany.coolapp</string>
+```</p>
+]]></content>
+  </entry>
   
 </feed>
