@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Redmine | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/redmine/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-05T19:51:14+08:00</updated>
+  <updated>2013-11-06T11:32:10+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,130 +12,5 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Redmine migration from Trac 0.12]]></title>
-    <link href="http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12/"/>
-    <updated>2012-01-13T14:03:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/01/redmine-migrate-from-trac-0-dot-12</id>
-    <content type="html"><![CDATA[<p>This article will demostrate a near perfect redmine migration from trac 0.12 step by step.</p>
-
-<ul>
-<li><a href="http://www.redmine.org/projects/redmine/wiki/HowTo_install_Redmine_on_CentOS_5">Install Redmine on CentOS 5</a>
-
-<ul>
-<li>Install Ruby</li>
-<li>Install rubygem</li>
-<li>Install passenger
-
-<ul>
-<li>/etc/conf.d/ruby.conf
-<code>
-LoadModule passenger_module /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11/ext/apache2/mod_passenger.so
-PassengerRoot /usr/lib/ruby/gems/1.8/gems/passenger-3.0.11
-PassengerRuby /usr/bin/ruby
-</code></li>
-<li>/etc/httpd/conf.d/redmine.conf
-<code>
-&lt;VirtualHost *:80&gt;
-ServerName redmine.miiicasa.com
-DocumentRoot /home/m/share/htdocs/redmine/public
-&lt;Directory /home/m/share/htdocs/redmine/public&gt;
-   AllowOverride all    
-   Options -MultiViews    
-&lt;/Directory&gt;
-&lt;/VirtualHost&gt;
-</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<!--more-->
-
-
-<ul>
-<li>Get Redmine source from <a href="https://github.com/miiicasa/redmine">miiiCasa github repo</a> (bundler integrated and migrate_from_trac.rake modified)</li>
-<li>install bundler and bundle install
-<code>
-sudo gem install bundler
-bundle install
-</code></li>
-<li>Setup mysql database and user
-<code>
-create database redmine character set utf8;
-create user 'redmine'@'localhost' identified by 'my_password';
-grant all privileges on redmine.* to 'redmine'@'localhost';
-</code></li>
-<li>cp config/database.yml.example config/database.yml and modify it based on previous settings.</li>
-<li>cp config/configure.yml.example config/configure.yml and modify it.</li>
-<li>Generate the session store
-<code>
-RAILS_ENV=production bundle exec rake generate_session_store
-</code></li>
-<li>Migrate the database models
-<code>
-RAILS_ENV=production bundle exec rake db:migrate
-</code></li>
-<li><p>Load default data
-<code>
-RAILS_ENV=production bundle exec rake redmine:load_default_data
-</code></p></li>
-<li><p>Migrate from trac</p>
-
-<ul>
-<li>install sqlite3-ruby
-<code>
-sudo gem install sqlite3-ruby
-</code></li>
-<li>migrate from trac
-```
-RAILS_ENV=production bundle exec rake redmine:migrate_from_trac
-&hellip;
-Are you sure you want to continue ? [y/N] y</li>
-</ul>
-</li>
-</ul>
-
-
-<p>Trac directory []: /var/www/trac/miiicasa
-Trac database adapter (sqlite, sqlite3, mysql, postgresql) [sqlite3]:
-Trac database encoding [UTF-8]:
-Target project identifier []: miiicasa
-```</p>
-
-<ul>
-<li><p>git clone <a href="https://github.com/xfalcons/migrate-trac-to-redmine.git">https://github.com/xfalcons/migrate-trac-to-redmine.git</a>
-Follow the instruction.</p></li>
-<li><p>Setup Redmine</p>
-
-<ul>
-<li><p>Make all users admin:
-<code>
-$ RAILS_ENV=production ./script/console
-..
-for u in User.all
-u.admin = true
-u.save
-end
-</code></p></li>
-<li><p>Login and setup scm path</p></li>
-<li>Load git repo from script (prevent timeout)
-<code>
-$ ruby script/runner "Repository.fetch_changesets" -e production
-</code>
-This action could take a very long time (maybe 1 day) and it got no progress bar nor any output. If you want to check where it went, try:
-<code>
-ps axww | grep git | grep -v grep
-</code>
-You&rsquo;ll see it&rsquo;s parsing git log.</li>
-</ul>
-</li>
-</ul>
-
-]]></content>
-  </entry>
   
 </feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Puppet | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/puppet/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-05T19:51:14+08:00</updated>
+  <updated>2013-11-06T11:32:10+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,17 +12,5 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Diff Puppet Chef]]></title>
-    <link href="http://blog.hsatac.net/2013/05/diff-puppet-chef/"/>
-    <updated>2013-05-14T22:29:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/05/diff-puppet-chef</id>
-    <content type="html"><![CDATA[<p>這次和 <a href="https://twitter.com/v1nc3ntlaw">@v1nc3ntlaw </a> 在 Ruby Tuesday 分享的 diff puppet chef 投影片</p>
-
-<script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
-
-]]></content>
-  </entry>
   
 </feed>

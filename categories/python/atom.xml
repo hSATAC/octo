@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/python/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2013-11-05T19:51:14+08:00</updated>
+  <updated>2013-11-06T11:32:10+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,86 +12,5 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[使用 mitmproxy 替換 request host 和 port]]></title>
-    <link href="http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto/"/>
-    <updated>2012-08-09T11:25:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/08/mitmproxy-modify-request-host-and-port-howto</id>
-    <content type="html"><![CDATA[<p>常在開發或測試階段會有更換 http request host 的需求。
-簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 port 都需要轉，那就需要其他方式了。</p>
-
-<p>一般在 windows 上是推薦 <a href="http://www.fiddler2.com">fiddler 2</a> 這套軟體，非常好用。可以參考 <a href="http://blog.xuite.net/vexed/tech/62341108">vexed 的文章</a>。</p>
-
-<p>不過在其他平台，可以使用 <a href="http://mitmproxy.org">mitmproxy</a> 這套軟體，他是 CUI 介面，操作上沒有 fiddler 那樣直覺，但稍微看一下說明即可上手。</p>
-
-<p>mitmproxy 提供許多 API 讓使用者自訂需求，都使用 Python 來編寫。不過關於 script 的 document 較少，可以參考<a href="http://mitmproxy.org//doc/scripts.html">官方說明</a>有簡單的範例，或者使用 <code>pydoc libmproxy.flow.Request</code> 這樣的指令來查閱，再不然就只能直接看<a href="https://github.com/cortesi/mitmproxy/">原始碼</a>了。</p>
-
-<!--more-->
-
-
-<p>使用方法很簡單，首先開一個檔案例如 mitmproxy.py</p>
-
-<p><div><script src='https://gist.github.com/3300699.js'></script>
-<noscript><pre><code>def request(context, flow):
-	if &quot;miiicasa.com&quot; in flow.request.host:
-		flow.request.host = &quot;192.168.254.9&quot;
-		flow.request.port = &quot;50113&quot;</code></pre></noscript></div>
-</p>
-
-<p>開啟 mitmproxy 的時候帶參數 -s <code>mitmproxy -s mitmproxy.py</code> 或者進入 mitmproxy 後按快速鍵 s 輸入 mitmproxy.py 載入即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在 CentOS 5 上安裝 Python26, hg, mercurial-server]]></title>
-    <link href="http://blog.hsatac.net/2012/04/python26-hg-mercurial-server-on-centos-5/"/>
-    <updated>2012-04-13T10:41:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/04/python26-hg-mercurial-server-on-centos-5</id>
-    <content type="html"><![CDATA[<p>筆記一下在 CentOS 5 上設定 Python 2.6, hg 以及 mercurial-server。</p>
-
-<p>CentOS 套件庫裡面有 hg ，不過版本很舊，而且 mercurial-server 的 hook 部分會需要 python 2.5+ 的特性，而官方套件庫裡的 hg 相依於 python 2.4，因此套件庫裡面的 hg 就不合用了。</p>
-
-<h2>安裝 Python 2.6 + hg</h2>
-
-<ul>
-<li>先 <code>sudo yum install python26 python26-devel</code> 從 epel 安裝 python 2.6</li>
-<li>抓下最新的 hg source <code>wget http://mercurial.selenic.com/release/mercurial-2.1.2.tar.gz</code> 解壓後不要急著 make，先修改一下 Makefile</li>
-<li>line 9 的 PYTHON 改成 <code>PYTHON=python26</code> 讓他抓 python 2.6</li>
-<li><p>doc 的部份應該是缺 docutils 所以會出錯，不需要 doc 直接砍掉：line 33 改為 <code>all: build</code>, line 53 改為 <code>install: install-bin</code></p></li>
-<li><p>接著就可以 <code>make all &amp;&amp; su -c "make install" &amp;&amp; hg version</code></p></li>
-</ul>
-
-
-<h2>安裝 mercurial-server</h2>
-
-<ul>
-<li>抓下最新 mercurial-server 原始碼解壓</li>
-<li>一樣先修改 Makefile， doc 的部份一樣移除： line 53 改為 <code>installfiles: install pythoninstall</code></li>
-<li>CentOS 的 useradd 不支援 <code>--system</code>，把 <code>--system</code> 改成 <code>-r</code>。如果 repositories 的 path 想改可以順便修改 <code>--home</code> 的值。</li>
-<li>修改完後 <code>sudo make setup-useradd</code> 就安裝好了</li>
-</ul>
-
-
-<h2>設定 mercurial-server</h2>
-
-<ul>
-<li>先把自己的 public key 放到 <code>/etc/mercurial-server/keys/root/</code> 下，接著要改用 hgadmin 這個 repo 來設定</li>
-<li>check out hgadmin 這個 repo <code>hg clone ssh://hg@localhost/hgadmin</code></li>
-<li>把 <code>/etc/mercurial-server/keys</code> 和 <code>etc/mercurial-server/access.conf</code> 複製過來。</li>
-<li>add, commit 後 push，以後就可以用這個 repo 來管理使用者和權限了。</li>
-<li>原本的 <code>/etc/mercurial-server/access.conf</code> 和 <code>/etc/mercurial-server/keys</code> 就可以刪除了。</li>
-</ul>
-
-
-<h3>Redmine + hg</h3>
-
-<p>順便講一下 Redmine 和 hg 搭配，如果設定好後在 repositories 分頁一直 404，看 log 顯示 <code>hg: error during getting info: hg exited with non-zero status: 255</code> 的話，多半是檔案權限問題。</p>
-
-<p>可以修改 <code>redmine/config/environment.rb</code> 打開 <code>config.log_level = :debug</code> 看更詳細的 log</p>
-
-<p>應該可以看到實際執行的 hg 指令，用 redmine user 去執行看看就能抓出問題所在。</p>
-]]></content>
-  </entry>
   
 </feed>
