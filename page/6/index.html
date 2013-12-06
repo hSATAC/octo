@@ -9,9 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 23rd, 2011 工作紀錄 Comments CloudAAA 雲端大亂鬥簡記 這次 CloudAAA 活動是由 CloudTW 與 Taipei-GTUG 合辦
-借到了精誠資訊的大樓，相當棒的一個場地。
-不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意 &hellip;">
+	<meta name="description" content="Jun 11th, 2011 PHP, 工作紀錄 Comments Better Array, Better PHP PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。 Read on &rarr; May 18th, 2011 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,105 +108,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-23T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 23<span>rd</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/06/cloudaaa/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/cloudaaa/" itemprop="url">CloudAAA 雲端大亂鬥簡記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
-借到了精誠資訊的大樓，相當棒的一個場地。<br />
-不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
-食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
-
-<p>一開始 Hank Lin 主講 aws 的部份<br />
-Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
-因為我本身對 aws 比較沒有深入研究<br />
-加上 Hank 講得實在是有點快<br />
-只略約有印象好像介紹了一些 Route 53 的新特色<br />
-還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
-然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
-(認識的要買可以找我，打6折)
-		
-		<a href="/2011/06/cloudaaa/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-12T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 12<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/06/empathy-p4-context/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/empathy-p4-context/" itemprop="url">讓 Empathy 支援 P4-Context</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這兩天灌了 Ubuntu 11.04 在玩<br />
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
-但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
-最直接的影響就是 m群看不到是誰在說話。<br />
-看了一下發現他底層是用 python-papyon 這套 msn lib<br />
-於是就可以直接動手修改啦！</p>
-
-<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
-找到 387 行：
-<pre lang="python" line="387">        if message_type == 'text/plain':
-            msg = ConversationMessage(unicode(message.body, message_encoding),
-                    TextFormat.parse(message_formatting),
-                    self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-
-		
-		<a href="/2011/06/empathy-p4-context/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -408,75 +307,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
   
 
 
-<time datetime="2011-04-07T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 7<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/" itemprop="url">How to Enable Php Gmp on Mac OS X Without Macports</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-<p>And load it in your /private/etc/php.ini</p>
-
-<p>It&#8217;s done!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
 <time datetime="2011-04-04T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 4<span>th</span>, 2011</time></div>
         <div class="tags">
 
@@ -602,6 +432,129 @@ apache vhost的設法和 rails 的一樣即可
 
 		
 		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-17T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" itemprop="url">用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
+
+<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
+
+<p>
+		
+		<a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-25T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jan 25<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" itemprop="url">Freenode伺服器名稱</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
+當登入的時候會顯示作家的簡介，整理如下：</p>
+
+<p><em><strong>roddenberry.freenode.ne</strong>t</em>
+RODDENBERRY, GENE (1921-1991). Born in Texas, USA,<br />
+Roddenberry worked as a pilot for the US Army and later<br />
+as a commercial pilot. He then went on to create the<br />
+Star Trek television series, among others.
+		
+		<a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-26T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 26<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2010/10/only-my-railgun/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2010/10/only-my-railgun/" itemprop="url">Only My Railgun</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天的Coding BGM是這首：Only my railgun
+<object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
+
+<p>
+		
+		<a href="/2010/10/only-my-railgun/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
