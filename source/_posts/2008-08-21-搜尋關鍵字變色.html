@@ -4,7 +4,7 @@ title: 搜尋關鍵字變色
 categories:
 - 工作紀錄
 tags: []
-published: true
+published: false
 comments: true
 ---
 <p><p>&lt;script&gt;<br />var keywords = Array(<br />&nbsp; Array("keyword"),<br />)<br /><br />function replaceKeyword(objID) {<br />&nbsp; var text = "";<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; text = document.getElementById(objID).outerHTML;<br />&nbsp; } else {<br />&nbsp;&nbsp;&nbsp; text = document.body.innerHTML;<br />&nbsp; }<br />&nbsp; for (var i = 0; i &lt; keywords.length; i++) {<br />&nbsp;&nbsp;&nbsp; var re = new RegExp(keywords[i][0].replace(/\s+/, "\\s+"), "g");<br />&nbsp;&nbsp;&nbsp; var m = re.exec(text);<br />&nbsp;&nbsp;&nbsp; if (m != null) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (var j = 0; j &lt; m.length; j++) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var reg = new RegExp(m[j], "g");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; text = text.replace(reg, "&lt;span style=\"color:red;\"&gt;" + keywords[i][0] + "&lt;/span&gt;");<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp; }<br />&nbsp; }<br />&nbsp; if (objID != null) {<br />&nbsp;&nbsp;&nbsp; document.getElementById(objID).outerHTML = text;<br />&nbsp; } else {<br />&nbsp; &nbsp;&nbsp;&nbsp; document.body.innerHTML = text;<br />&nbsp; }<br />}<br /><br />&nbsp; $(document).ready(function(){<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; replaceKeyword();<br />&nbsp;&nbsp;&nbsp; <br /><br />&nbsp; });<br />&lt;/script&gt;</p>
