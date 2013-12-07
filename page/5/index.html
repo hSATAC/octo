@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jan 13th, 2012 Redmine, Trac Comments Redmine Migration From Trac 0.12 This article will demostrate a near perfect redmine migration from trac 0.12 &hellip;">
+	<meta name="description" content="Jan 17th, 2012 Google Music, Ruby, Youtube Comments Youtube 加入我的最愛後自動抓檔上傳至 Google Music 這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。 這個需求是這樣來的 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,50 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-17T19:33:00+08:00" data-updated="true" itemprop="datePublished">Jan 17<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/01/youtube-favorite-add-google-music/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/youtube-favorite-add-google-music/" itemprop="url">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
+
+<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
+
+<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
+
+<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
+
+
+		
+		<a href="/2012/01/youtube-favorite-add-google-music/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -652,57 +696,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 (認識的要買可以找我，打6折)
 		
 		<a href="/2011/06/cloudaaa/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-12T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 12<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/06/empathy-p4-context/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/empathy-p4-context/" itemprop="url">讓 Empathy 支援 P4-Context</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這兩天灌了 Ubuntu 11.04 在玩<br />
-內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
-但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
-最直接的影響就是 m群看不到是誰在說話。<br />
-看了一下發現他底層是用 python-papyon 這套 msn lib<br />
-於是就可以直接動手修改啦！</p>
-
-<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
-找到 387 行：
-<pre lang="python" line="387">        if message_type == 'text/plain':
-            msg = ConversationMessage(unicode(message.body, message_encoding),
-                    TextFormat.parse(message_formatting),
-                    self.__last_received_msn_objects)
-            try:
-                display_name = message.get_header('P4-Context')</pre>
-
-		
-		<a href="/2011/06/empathy-p4-context/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

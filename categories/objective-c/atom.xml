@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: objective-c | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/objective-c/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2013-12-07T22:02:51+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[Ash Wu]]></name>
+    <email><![CDATA[hsatac@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Functional Reactive Programming]]></title>
+    <link href="http://blog.hsatac.net/2013/12/functional-reactive-programming/"/>
+    <updated>2013-12-07T20:49:00+08:00</updated>
+    <id>http://blog.hsatac.net/2013/12/functional-reactive-programming</id>
+    <content type="html"><![CDATA[<h3>Functional Reactive Programming</h3>
+
+<p>第一次聽到 <a href="http://en.wikipedia.org/wiki/Functional_reactive_programming">Functional Reactive Programming(FRP)</a> 是在今年新加坡的 RedDotRubyConf 2013 的最後一個 Session: <a href="https://github.com/steveklabnik/frappuccino">Functional Reactive Programming in Ruby</a>。那時一直無法理解這個主題，直到大約九月時碰到了 <a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a> 並開始在公司專案中使用，才對 FRP 開始有些感覺。</p>
+
+<p>Functional Reactive Programming 就是 Functional Programming + Reactive Programming。 Functional Programming 大家應該比較熟悉，那什麼是 Reactive Programming 呢？最常看到的比喻就是像試算表一樣，你可以定義 <code>C1 = A1 + B1</code> ，之後只要你更改了 <code>A1</code> 或 <code>B1</code> 的值， <code>C1</code> 就會跟著改變。</p>
+
+<p>光看這樣實在還是無法理解到底 FRP 是什麼，以及可以帶來什麼好處。這就是我今年六月剛聽到這個名詞時的感受。直到我開始使用 ReactiveCocoa(RAC)。</p>
+
+<!-- more -->
+
+
+<h3>ReactiveCocoa</h3>
+
+<p>ReactiveCocoa 的概念是從 .NET 的 Reactive Extensions 來的，在 Cocoa Framework 上實作了這個 paradigm，使用 ReactiveCocoa 可以讓我們減少大量複雜的程式碼。</p>
+
+<p>幾個 FRP 中比較重要的名詞：<code>Streams</code>, <code>Sequences</code>, <code>Signals</code>,  <code>Subscriptions</code>。</p>
+
+<p><code>Stream</code> 就像是一個水管，裡面會一直有東西跑出來。</p>
+
+<p><code>Sequences</code> 是一種以拉為主的 <code>Stream</code>，常用在把 <code>NSArray</code>, <code>NSDictionary</code> 轉成 <code>RACSequence</code> 來接上高階函數操作 <code>map</code>, <code>filter</code>, <code>fold</code>, <code>reduce</code> 等。</p>
+
+<p><code>Signal</code> 是一種以推為主的 <code>Stream</code>，有三種類型：<code>next</code>, <code>error</code>, <code>completion</code> 分別表達有新的值、錯誤以及結束。</p>
+
+<p><code>Subscription</code> 則是誰要來等待/處理這些 <code>Signal</code>。</p>
+
+<p>基本概念大概是這樣，不過有什麼應用場景呢？官網給的範例其實都滿簡單的，例如處理表單驗證，或是等到兩個 requests 都完成後才做下一步動作等等&hellip;。其實無處不可用，用下去幾乎都能看到立即的好處，甚至也有看到把 delegate protocol 都用 FRP 來寫的。不過我覺得這反而有點難讀了。</p>
+
+<p>我們專案目前最常用的情境是：</p>
+
+<ol>
+<li><p>處理 Model 跟 View 之間的 binding, 值有變化的時候不用再一直去通知 View 更新。</p></li>
+<li><p>Request 回來後把資料轉成我們要的樣子。光是這樣就已經很好用了。</p></li>
+</ol>
+
+
+<p>不過 View 在處理深入一點的話可能要看看 MVVM 跟 <a href="https://github.com/ReactiveCocoa/ReactiveViewModel">ReactiveViewModel</a> 這樣感覺也比較好寫測試&hellip;不過可能要等之後的新專案再來研究看看。</p>
+
+<p>然後順便提一下 <a href="https://github.com/jspahrsummers/libextobjc">Extended Objective-C (libextobjc)</a> 這個東西&hellip;因為 ReactiveCocoa 依賴 libextobjc 所以一定會裝到，除了很常見的 <code>@weakify</code>, <code>@strongify</code> 以外 libextobjc 還有不少好東西可以用，例如 <code>Concrete protocols</code>，<code>EXTNil</code> 等等，可以參考看看。</p>
+
+<h3>Reference</h3>
+
+<ul>
+<li><a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a></li>
+<li><a href="https://github.com/ReactiveCocoa/ReactiveViewModel">ReactiveViewModel</a></li>
+<li><a href="http://nshipster.com/reactivecocoa/">Mattt Thompson 介紹 RAC</a></li>
+<li><a href="http://codeblog.shape.dk/blog/categories/reactivecocoa/">codeblog.share.dk 有幾篇不錯的文章</a></li>
+<li><a href="https://leanpub.com/iosfrp">Ash Furrow 寫的書 Functional Reactive Programming on iOS</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

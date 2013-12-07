@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Nov 2nd, 2013 Golang, TDD Comments Go Development Toolbox 這次去北京參加 RubyConfChina 2013 的來回飛機上，寫完了一個練習用的小專案：gosnake，很明顯就是用 Go 寫的貪食蛇。會挑貪食蛇來練習，是因為之前在 iOS &hellip;">
+	<meta name="description" content="Dec 7th, 2013 Cocoa, Functional Reactive Programming, Objective-C, ReactiveCocoa Comments Functional Reactive Programming Functional Reactive &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,6 +108,50 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-07T20:49:00+08:00" data-updated="true" itemprop="datePublished">Dec 7<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/cocoa/'>Cocoa</a>, <a class='category' href='/categories/functional-reactive-programming/'>Functional Reactive Programming</a>, <a class='category' href='/categories/objective-c/'>Objective-C</a>, <a class='category' href='/categories/reactivecocoa/'>ReactiveCocoa</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/12/functional-reactive-programming/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/12/functional-reactive-programming/" itemprop="url">Functional Reactive Programming</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h3>Functional Reactive Programming</h3>
+
+<p>第一次聽到 <a href="http://en.wikipedia.org/wiki/Functional_reactive_programming">Functional Reactive Programming(FRP)</a> 是在今年新加坡的 RedDotRubyConf 2013 的最後一個 Session: <a href="https://github.com/steveklabnik/frappuccino">Functional Reactive Programming in Ruby</a>。那時一直無法理解這個主題，直到大約九月時碰到了 <a href="https://github.com/ReactiveCocoa/ReactiveCocoa">ReactiveCocoa</a> 並開始在公司專案中使用，才對 FRP 開始有些感覺。</p>
+
+<p>Functional Reactive Programming 就是 Functional Programming + Reactive Programming。 Functional Programming 大家應該比較熟悉，那什麼是 Reactive Programming 呢？最常看到的比喻就是像試算表一樣，你可以定義 <code>C1 = A1 + B1</code> ，之後只要你更改了 <code>A1</code> 或 <code>B1</code> 的值， <code>C1</code> 就會跟著改變。</p>
+
+<p>光看這樣實在還是無法理解到底 FRP 是什麼，以及可以帶來什麼好處。這就是我今年六月剛聽到這個名詞時的感受。直到我開始使用 ReactiveCocoa(RAC)。</p>
+
+
+		
+		<a href="/2013/12/functional-reactive-programming/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -538,48 +582,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-27T15:45:00+08:00" data-updated="true" itemprop="datePublished">Feb 27<span>th</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/aws/'>aws</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/" itemprop="url">Migrate AWS AMI Across Region Painlessly</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
-
-<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
-
-<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
-
-
-		
-		<a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
