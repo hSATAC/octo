@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ror | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ror/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-02-09T21:57:24+08:00</updated>
+  <updated>2014-02-13T15:59:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -34,7 +34,7 @@
 <p>我的 <code>~/.xrayconfig</code> 也改成透過 tmux 傳送指令給我的 vim，範例設定檔如下：</p>
 
 <p><code>
-:editor: "/usr/local/bin/tmux send -t openapply:editor $'\e' :tabe $file ENTER"
+:editor: "/usr/local/bin/tmux send -t openapply:editor ESCAPE :tabe $file ENTER"
 </code></p>
 
 <p><code>openapply</code> 是我的專案 tmux session 名稱，而 <code>editor</code> 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。</p>

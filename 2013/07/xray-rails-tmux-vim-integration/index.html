@@ -147,7 +147,7 @@
 <p>我的 <code>~/.xrayconfig</code> 也改成透過 tmux 傳送指令給我的 vim，範例設定檔如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>:editor: "/usr/local/bin/tmux send -t openapply:editor $'\e' :tabe $file ENTER"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>:editor: "/usr/local/bin/tmux send -t openapply:editor ESCAPE :tabe $file ENTER"</span></code></pre></td></tr></table></div></figure>
 
 
 <p><code>openapply</code> 是我的專案 tmux session 名稱，而 <code>editor</code> 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。</p>
