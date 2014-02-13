@@ -20,7 +20,7 @@ categories: [Xray-rails, Rails, RoR, tmux, vim, tmuxinator]
 我的 `~/.xrayconfig` 也改成透過 tmux 傳送指令給我的 vim，範例設定檔如下：
 
 ```
-:editor: "/usr/local/bin/tmux send -t openapply:editor $'\e' :tabe $file ENTER"
+:editor: "/usr/local/bin/tmux send -t openapply:editor ESCAPE :tabe $file ENTER"
 ```
 
 `openapply` 是我的專案 tmux session 名稱，而 `editor` 是該 session 的 window 名稱，專門用來開啟 vim 編輯檔案。
