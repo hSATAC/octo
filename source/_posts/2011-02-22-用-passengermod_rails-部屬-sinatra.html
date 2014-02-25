@@ -18,16 +18,16 @@ comments: true
 在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾<br />
 config.ru 檔案內容為
 <pre lang="ruby">
-require 'project'</pre></p>
+require 'project'
 
-<p>root_dir = File.dirname(__FILE__)</p>
+root_dir = File.dirname(__FILE__)
 
-<p>set :environment, ENV['RACK_ENV'].to_sym<br />
-set :root,        root_dir<br />
-set :app_file,    File.join(root_dir, 'project.rb')<br />
+set :environment, ENV['RACK_ENV'].to_sym
+set :root,        root_dir
+set :app_file,    File.join(root_dir, 'project.rb')
 disable :run</p>
 
-<p>run Sinatra::Application</p>
+run Sinatra::Application</pre>
 
 <p>
 把 project 替換成你的專案名稱<br />
