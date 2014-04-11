@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jan 17th, 2012 Google Music, Ruby, Youtube Comments Youtube 加入我的最愛後自動抓檔上傳至 Google Music 這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。 這個需求是這樣來的 &hellip;">
+	<meta name="description" content="Apr 3rd, 2012 Git Comments 把 Git 中的目錄搬到另一個 Git 並保留 Commit 今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,189 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-03T21:43:00+08:00" data-updated="true" itemprop="datePublished">Apr 3<span>rd</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/git/'>Git</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/" itemprop="url">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。</p>
+
+<p>原本以為這個需求無法達成，不過做了點研究以後發現是可行的，甚至 B repository 是已存在的 repository 也可以做到！</p>
+
+<p>先說獨立出新的 repository 這個狀況，很簡單，先 git clone 出一個乾淨的 A repository 然後 <code>git remote rm origin</code> 不要 track remote。</p>
+
+<p>接著在 git 根目錄下 <code>git filter-branch --subdirectory-filter &lt;目錄&gt; -- --all</code> 你就會看到這個目錄以外的東西都不見了，而且相關的 commit log 還在。</p>
+
+<p>如果是要獨立出一個新的 repository 做到這邊就可以結束了。</p>
+
+<p>接著講要把檔案和 commit log 匯到已存在的 B repository：接續上一步，用 <code>mkdir &lt;你要的目錄&gt;; mv * &lt;你要的目錄&gt;</code> 把抽出來的檔案都移到你預想要放的目錄 <code>git add .; git commit</code> 後 <code>cd ..</code> 再用 git clone 把 B repository clone 出來，切到 B repository 的目錄，用 add local repository as remote 的方式 <code>git remote add repoA ../&lt;A repo 的目錄&gt;</code> 然後 <code>git pull repoA master</code> 就完成了。</p>
+
+<p>參考：<a href="http://gbayer.com/development/moving-files-from-one-git-repository-to-another-preserving-history/">Moving Files from one Git Repository to Another, Preserving History</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-07T10:05:00+08:00" data-updated="true" itemprop="datePublished">Mar 7<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/" itemprop="url">Xcode 4.3 Publish Ipa for Testflight</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
+
+<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
+
+<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
+
+<p>Xcode 4.3 的 entitlement 換地方了。</p>
+
+<ul>
+<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
+<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
+<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
+</ul>
+
+
+<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
+</span><span class='line'> &lt;array&gt;
+</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
+</span><span class='line'> &lt;/array&gt;
+</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
+</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
+
+<p><em>2012/04/42 補充</em></p>
+
+<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
+
+<p>也就是：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
+</span><span class='line'> &lt;array&gt;
+</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
+</span><span class='line'> &lt;/array&gt;
+</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
+</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-02T14:56:00+08:00" data-updated="true" itemprop="datePublished">Feb 2<span>nd</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/02/php-resque-auto-scale-workers/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/02/php-resque-auto-scale-workers/" itemprop="url">PHP-Resque Auto Scale Workers</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
+
+<p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
+
+<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
+
+<h2>Introduction</h2>
+
+<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
+
+
+		
+		<a href="/2012/02/php-resque-auto-scale-workers/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -568,135 +751,6 @@ redis.conf 要稍微修改</p>
 
 		
 		<a href="/2011/12/bash-ps1-fill/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-30T00:00:00+08:00" data-updated="true" itemprop="datePublished">Nov 30<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/archlinux/'>Archlinux</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/11/logitech-g300-on-archlinux/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/11/logitech-g300-on-archlinux/" itemprop="url">Logitech G300 on ArchLinux</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
-他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
-其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
-
-<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
-當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
-經過測試後，判斷是他送出的 keyboard 訊號問題<br />
-只要把 keyboard disable 掉就可以了。
-		
-		<a href="/2011/11/logitech-g300-on-archlinux/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-30T00:00:00+08:00" data-updated="true" itemprop="datePublished">Nov 30<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/archlinux/'>Archlinux</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/11/archlinux/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/11/archlinux/" itemprop="url">Archlinux 推廣</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img class="alignnone" title="archlinux_logo" src="http://d11xdyzr0div58.cloudfront.net/main-20111101/media/logos/archlinux-logo-dark-90dpi.png" alt="" width="75%" /></p>
-
-<p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。
-		
-		<a href="/2011/11/archlinux/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-23T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 23<span>rd</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/06/cloudaaa/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/cloudaaa/" itemprop="url">CloudAAA 雲端大亂鬥簡記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這次 CloudAAA 活動是由 <a href="http://groups.google.com/group/cloudtw?pli=1">CloudTW</a> 與 <a href="http://www.taipei-gtug.org/">Taipei-GTUG</a> 合辦<br />
-借到了精誠資訊的大樓，相當棒的一個場地。<br />
-不得不稱讚主辦單位，一進來打開電腦四個 AP 速度又快，足顯誠意<br />
-食物飲水也很精美充足，真的是沒什麼好挑剔的。</p>
-
-<p>一開始 Hank Lin 主講 aws 的部份<br />
-Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
-因為我本身對 aws 比較沒有深入研究<br />
-加上 Hank 講得實在是有點快<br />
-只略約有印象好像介紹了一些 Route 53 的新特色<br />
-還有 Oracle 的部份可以用自己的 license ，沒有的話可以用租的<br />
-然後<del datetime="2011-06-23T01:26:58+00:00"><a href="http://www.cite.com.tw/product_info.php?products_id=18865">買他的書</a></del>。<br />
-(認識的要買可以找我，打6折)
-		
-		<a href="/2011/06/cloudaaa/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

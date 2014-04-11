@@ -4,7 +4,7 @@
   <title><![CDATA[Category: chef | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/chef/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-02-13T15:59:20+08:00</updated>
+  <updated>2014-04-12T04:44:34+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[AWS OpsWorks Overview]]></title>
+    <link href="http://blog.hsatac.net/2014/03/aws-opsworks-overview/"/>
+    <updated>2014-03-30T04:38:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/03/aws-opsworks-overview</id>
+    <content type="html"><![CDATA[<p>前陣子 survey 了一下 <a href="https://aws.amazon.com/opsworks/">AWS OpsWorks</a> 做了一點筆記：</p>
+
+<script async class="speakerdeck-embed" data-id="72d076a09a160131f1ab7a4f652a1694" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<!-- more -->
+
+
+<p>如果對 Chef / Puppet 的概念還不熟悉的話可以參考我之前的投影片</p>
+
+<script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>結論來說，我覺得 OpsWorks 已經完全取代掉 CloudFormation 了。提供非常多實用的功能和架構，community 也有起來，resource 挺多的。如果沒有什麼歷史包袱，可以直接採用。就算不寫 chef 用他提供的內建 cookbook 也可以做到很多事。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Diff Puppet Chef]]></title>

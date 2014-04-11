@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jul 28th, 2012 Git Comments Git 救回已刪除的檔案 在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ， &hellip;">
+	<meta name="description" content="Sep 19th, 2012 IDE, editor, golang Comments 開發 Golang 的 IDEs 介紹一些開發 Golang 的 IDEs 首先是我慣常使用的 Sublime Text 2 搭配 gosublime 外掛。 Read on &rarr; Aug 12th &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,131 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-19T00:34:00+08:00" data-updated="true" itemprop="datePublished">Sep 19<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/ide/'>IDE</a>, <a class='category' href='/categories/editor/'>editor</a>, <a class='category' href='/categories/golang/'>golang</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/09/golang-ides/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/09/golang-ides/" itemprop="url">開發 Golang 的 IDEs</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>介紹一些開發 Golang 的 IDEs</p>
+
+<p>首先是我慣常使用的 <a href="http://www.sublimetext.com/2">Sublime Text 2</a> 搭配  <a href="https://github.com/disposaboy/gosublime">gosublime</a> 外掛。</p>
+
+<p><img src="/images/golang_ides/subl.png" alt="gosublime" /></p>
+
+
+		
+		<a href="/2012/09/golang-ides/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:28:00+08:00" data-updated="true" itemprop="datePublished">Aug 12<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/git/'>Git</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/08/git-branching-model-regular-check/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/git-branching-model-regular-check/" itemprop="url">自動檢查 Git Branch 是否 Merge 過</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>按照一般 <a href="http://nvie.com/posts/a-successful-git-branching-model/">Git branching model</a> 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 merge 進主幹、不再需要可以刪除；或者哪些 branches 沒有 merge 進主幹但已經放棄不用。這時就需要一些自動化的 script 幫助管理。</p>
+
+
+		
+		<a href="/2012/08/git-branching-model-regular-check/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T11:25:00+08:00" data-updated="true" itemprop="datePublished">Aug 9<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" itemprop="url">使用 Mitmproxy 替換 Request Host 和 Port</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>常在開發或測試階段會有更換 http request host 的需求。
+簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 port 都需要轉，那就需要其他方式了。</p>
+
+<p>一般在 windows 上是推薦 <a href="http://www.fiddler2.com">fiddler 2</a> 這套軟體，非常好用。可以參考 <a href="http://blog.xuite.net/vexed/tech/62341108">vexed 的文章</a>。</p>
+
+<p>不過在其他平台，可以使用 <a href="http://mitmproxy.org">mitmproxy</a> 這套軟體，他是 CUI 介面，操作上沒有 fiddler 那樣直覺，但稍微看一下說明即可上手。</p>
+
+<p>mitmproxy 提供許多 API 讓使用者自訂需求，都使用 Python 來編寫。不過關於 script 的 document 較少，可以參考<a href="http://mitmproxy.org//doc/scripts.html">官方說明</a>有簡單的範例，或者使用 <code>pydoc libmproxy.flow.Request</code> 這樣的指令來查閱，再不然就只能直接看<a href="https://github.com/cortesi/mitmproxy/">原始碼</a>了。</p>
+
+
+		
+		<a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -518,189 +643,6 @@ end</code></pre></noscript></div>
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-03T21:43:00+08:00" data-updated="true" itemprop="datePublished">Apr 3<span>rd</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/git/'>Git</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/04/moving-files-from-one-git-repository-to-another-keeping-commit-history/" itemprop="url">把 Git 中的目錄搬到另一個 Git 並保留 Commit</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>今天在 refactor 公司的 git repository 時，有個需求，是要把原本 A repository 的其中一個目錄抽出來，獨立成 B repository。</p>
-
-<p>原本以為這個需求無法達成，不過做了點研究以後發現是可行的，甚至 B repository 是已存在的 repository 也可以做到！</p>
-
-<p>先說獨立出新的 repository 這個狀況，很簡單，先 git clone 出一個乾淨的 A repository 然後 <code>git remote rm origin</code> 不要 track remote。</p>
-
-<p>接著在 git 根目錄下 <code>git filter-branch --subdirectory-filter &lt;目錄&gt; -- --all</code> 你就會看到這個目錄以外的東西都不見了，而且相關的 commit log 還在。</p>
-
-<p>如果是要獨立出一個新的 repository 做到這邊就可以結束了。</p>
-
-<p>接著講要把檔案和 commit log 匯到已存在的 B repository：接續上一步，用 <code>mkdir &lt;你要的目錄&gt;; mv * &lt;你要的目錄&gt;</code> 把抽出來的檔案都移到你預想要放的目錄 <code>git add .; git commit</code> 後 <code>cd ..</code> 再用 git clone 把 B repository clone 出來，切到 B repository 的目錄，用 add local repository as remote 的方式 <code>git remote add repoA ../&lt;A repo 的目錄&gt;</code> 然後 <code>git pull repoA master</code> 就完成了。</p>
-
-<p>參考：<a href="http://gbayer.com/development/moving-files-from-one-git-repository-to-another-preserving-history/">Moving Files from one Git Repository to Another, Preserving History</a></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-07T10:05:00+08:00" data-updated="true" itemprop="datePublished">Mar 7<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/" itemprop="url">Xcode 4.3 Publish Ipa for Testflight</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
-
-<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
-
-<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
-
-<p>Xcode 4.3 的 entitlement 換地方了。</p>
-
-<ul>
-<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
-<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
-<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
-</ul>
-
-
-<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
-</span><span class='line'> &lt;array&gt;
-</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
-</span><span class='line'> &lt;/array&gt;
-</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
-</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
-
-<p><em>2012/04/42 補充</em></p>
-
-<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
-
-<p>也就是：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
-</span><span class='line'> &lt;array&gt;
-</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
-</span><span class='line'> &lt;/array&gt;
-</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
-</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-02T14:56:00+08:00" data-updated="true" itemprop="datePublished">Feb 2<span>nd</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/02/php-resque-auto-scale-workers/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/02/php-resque-auto-scale-workers/" itemprop="url">PHP-Resque Auto Scale Workers</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
-
-<p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
-
-<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
-
-<h2>Introduction</h2>
-
-<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
-
-
-		
-		<a href="/2012/02/php-resque-auto-scale-workers/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
