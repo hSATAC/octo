@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vim/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -64,13 +64,13 @@
 
 <p><div><script src='https://gist.github.com/1496197.js'></script>
 <noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
-  if !exists('*PHPsynCHK')
+  if !exists(&#39;*PHPsynCHK&#39;)
     function! PHPsynCHK()
       ccl
       let winnum = winnr()
-      let linenum = line('.')
-      let colnum = col('.')
-      silent execute &quot;%!php -l -f /dev/stdin | sed 's/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g' &gt;.vimerr; cat&quot;
+      let linenum = line(&#39;.&#39;)
+      let colnum = col(&#39;.&#39;)
+      silent execute &quot;%!php -l -f /dev/stdin | sed &#39;s/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g&#39; &gt;.vimerr; cat&quot;
       silent cf .vimerr
       cw
       execute winnum . &quot;wincmd w&quot;

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -365,10 +365,10 @@ start() {
 }
 
 stop() {
-    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -15
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk &#39;{print $2}&#39; | xargs kill -15
 }
 kill() {
-    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk '{print $2}' | xargs kill -9
+    ps -ef | grep resque | grep -v grep | grep -v resque-web | awk &#39;{print $2}&#39; | xargs kill -9
 }
 case &quot;$1&quot; in
     start)

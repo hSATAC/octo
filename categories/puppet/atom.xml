@@ -4,7 +4,7 @@
   <title><![CDATA[Category: puppet | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/puppet/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -414,6 +414,211 @@
 <li>執行 <code>puppet cert sign [hostname]</code> 簽署</li>
 <li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
 <li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Roles and Profiles Pattern in Puppet]]></title>
+    <link href="http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet/"/>
+    <updated>2014-04-12T14:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet</id>
+    <content type="html"><![CDATA[<p>一開始寫 Puppet 就是 node definition 直接寫寫寫&hellip;後來就會開始把重複的 resource, file 等等拆成 modules&hellip;。不過當機器越來越多，發現還是有許多重複的地方，例如有好多台 web server, 但是他們有些又有些許的不同&hellip;。</p>
+
+<!-- more -->
+
+
+<h2>Original Style</h2>
+
+<p>先看看傳統的寫法：</p>
+
+<p>```
+node web {</p>
+
+<pre><code>include users
+include nginx
+include rails
+</code></pre>
+
+<p>}</p>
+
+<p>node worker {</p>
+
+<pre><code>include users
+include rails
+include redis
+</code></pre>
+
+<p>}</p>
+
+<p>node db {</p>
+
+<pre><code>include users
+include mysql
+</code></pre>
+
+<p>}</p>
+
+<p>node web-qa {</p>
+
+<pre><code>include users
+include nginx
+include rails
+include mysql
+include redis
+</code></pre>
+
+<p>}
+```</p>
+
+<p>四個看起來還好，但是當機器越來越多的時候，就會感到難以維護了。</p>
+
+<h2>Roles and Profiles Pattern</h2>
+
+<blockquote><p>All problems in computer science can be solved by another level of indirection.</p></blockquote>
+
+<p>所有電腦科學領域的問題都可以用抽象化來解決(除了抽象太多層以外)，以上的問題我們可以用現在常見的 &ldquo;Roles and Profiles Pattern&rdquo; 來做抽象。</p>
+
+<h2>Role</h2>
+
+<p>Role 很好理解，顧名思義就是「扮演的角色」，以上面的例子我們就有 web, db, worker，web 可能又分成 production 環境和 QA 環境。</p>
+
+<p>用這個思路來整理 node 會變成這樣：</p>
+
+<p>```
+node web {</p>
+
+<pre><code>include role::web::production
+</code></pre>
+
+<p>}</p>
+
+<p>node worker {</p>
+
+<pre><code>include role::worker
+</code></pre>
+
+<p>}</p>
+
+<p>node db {</p>
+
+<pre><code>include role::db
+</code></pre>
+
+<p>}</p>
+
+<p>node web-qa {</p>
+
+<pre><code>include role::web::qa
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Role 本身大概會長這樣：</p>
+
+<p>```
+class role {
+  include profile::base
+}</p>
+
+<p>class role::web inherits role {
+  include profile::nginx
+}</p>
+
+<p>class role::web::production inherits role::web {
+  include profile::nginx::production
+}</p>
+
+<p>class role::web::qa inherits role::web {
+  include profile::nginx::qa
+  include profile::db
+  include profile::worker
+}</p>
+
+<p>class role::db inherits role {
+  include profile::mysql
+}</p>
+
+<p>class role::worker inherits role {
+  include profile::worker
+}
+```</p>
+
+<h2>Profile</h2>
+
+<p>Profile 則是用來抽象化「一組服務、設定」的。看上面 Role 的部份應該有點感覺了：</p>
+
+<p>```
+class profile::base {</p>
+
+<pre><code>include users
+</code></pre>
+
+<p>}</p>
+
+<p>class profile::web {</p>
+
+<pre><code>include nginx
+include rails
+</code></pre>
+
+<p>}</p>
+
+<p>class profile::web::production inherits profile::web {</p>
+
+<pre><code>::nginx::file { 'production.conf':
+  content =&gt; ...,
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>class profile::web::qa inherits profile::web {</p>
+
+<pre><code>::nginx::file { 'qa.conf':
+  content =&gt; ...,
+</code></pre>
+
+<p>  }
+}</p>
+
+<p>class profile::db inherits {</p>
+
+<pre><code>include profile::mysql
+</code></pre>
+
+<p>}</p>
+
+<p>class profile::worker {}</p>
+
+<pre><code>include rails
+include redis
+</code></pre>
+
+<p>}
+```</p>
+
+<p>這樣就可以把重複的程式碼減少，同時又保留彈性。</p>
+
+<h2>Tips</h2>
+
+<ul>
+<li>一個 node 只 include <em>一個</em> role。如果這兩個 role 很像，但又有些微不同，那就是一個新 role。</li>
+<li>一個 role include 一個或多個 profile，而且 <em>只能 include profile</em> 。</li>
+</ul>
+
+
+<h2>Further Reading</h2>
+
+<p>更多詳細細節、優缺點以及不同的設計方式可以參考以下的幾篇連結：</p>
+
+<ul>
+<li><a href="http://www.craigdunn.org/2012/05/239/">Designing Puppet – Roles and Profiles</a></li>
+<li><a href="http://www.slideshare.net/PuppetLabs/roles-talk">Designing Puppet: Roles/Profiles Pattern</a></li>
+<li><a href="http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/">Building a Functional Puppet Workflow Part 2: Roles and Profiles</a></li>
+<li><a href="http://sysadvent.blogspot.tw/2012/12/day-13-configuration-management-as-legos.html">Configuration Management as Legos</a></li>
 </ul>
 
 ]]></content>

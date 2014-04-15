@@ -9,7 +9,9 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Nov 30th, 2011 Archlinux Comments Archlinux 推廣 一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。 Read on &rarr; &hellip;">
+	<meta name="description" content="Nov 30th, 2011 Archlinux Comments Logitech G300 on ArchLinux 前陣子入手了 Logitech G300 這支滑鼠，相當優秀。
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +111,49 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-30T00:00:00+08:00" data-updated="true" itemprop="datePublished">Nov 30<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/11/logitech-g300-on-archlinux/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/11/logitech-g300-on-archlinux/" itemprop="url">Logitech G300 on ArchLinux</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>前陣子入手了 Logitech G300 這支滑鼠，相當優秀。<br />
+他的特色是把快速鍵記在滑鼠內，不需要安裝任何驅動程式。<br />
+其原理是送出「真正的鍵盤訊號」，因此可以相容所有遊戲。</p>
+
+<p>不過在我的 ArchLinux 下這支 G300 使用不太正常<br />
+當我按下滑鼠鍵後，游標會飄移到螢幕左上方。<br />
+經過測試後，判斷是他送出的 keyboard 訊號問題<br />
+只要把 keyboard disable 掉就可以了。
+		
+		<a href="/2011/11/logitech-g300-on-archlinux/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -503,73 +548,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
 
 		
 		<a href="/2011/02/mahou-shoujo-madoka-magica-connect-claris-%E6%AD%8C%E8%A9%9E-%E6%BC%A2%E5%AD%97%E5%81%87%E5%90%8D%E6%8B%BC%E9%9F%B3%E5%B0%8D%E7%85%A7%E7%89%88/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-22T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/rails/'>Rails</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/02/%E7%94%A8-passengermod_rails-%E9%83%A8%E5%B1%AC-sinatra/" itemprop="url">用 Passenger(mod_rails) 部屬 Sinatra</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近寫了一些小 app / web service ，因為用不到 rails 那樣的大架構和功能，於是嘗試了 sinatra。<br />
-寫起來挺快得，感覺跟之前玩 node.js 的感覺有點像。<br />
-部屬方面也很容易<br />
-在你的專案目錄下新建一個 config.ru 檔案，以及 public 和 tmp 資料夾<br />
-config.ru 檔案內容為
-<pre lang="ruby">
-require 'project'</pre></p>
-
-<p>root_dir = File.dirname(__FILE__)</p>
-
-<p>set :environment, ENV[&#8216;RACK_ENV&#8217;].to_sym<br />
-set :root,        root_dir<br />
-set :app_file,    File.join(root_dir, &#8216;project.rb&#8217;)<br />
-disable :run</p>
-
-<p>run Sinatra::Application</p>
-
-<p>
-把 project 替換成你的專案名稱<br />
-apache vhost的設法和 rails 的一樣即可
-<pre lang="bash">
-<VirtualHost *:80>
-  ServerName project.hsatac.net
-  DocumentRoot "/project/public"
-  RackEnv production
-  <Directory "/project/public">
-    Order allow,deny
-    Allow from all
-  
-
-</pre></p>
-
-		
-		
 	</div>
 
 </article>

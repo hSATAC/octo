@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="May 19th, 2013 Rails, Ruby, TDD Comments TDD Rails 這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake，許多觀念和工具都是他帶給我的。 還記得幾年前剛聽到「測試」、「TDD」 &hellip;">
+	<meta name="description" content="Jun 30th, 2013 Rspec, Rspec-given, Rspec-spies, Ruby, TDD Comments RSpec-Given 與 RSpec-Spies RSpec/Given rspec-given 其實是這次去新加坡 RedDotRubyConf 聽 rake &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,54 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-30T17:53:00+08:00" data-updated="true" itemprop="datePublished">Jun 30<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/rspec/'>Rspec</a>, <a class='category' href='/categories/rspec-given/'>Rspec-given</a>, <a class='category' href='/categories/rspec-spies/'>Rspec-spies</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/tdd/'>TDD</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/06/rspec-given-rspec-spies/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/06/rspec-given-rspec-spies/" itemprop="url">RSpec-Given 與 RSpec-Spies</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>RSpec/Given</h2>
+
+<p><a href="https://github.com/jimweirich/rspec-given">rspec-given</a> 其實是這次去新加坡 <a href="http://www.reddotrubyconf.com/">RedDotRubyConf</a> 聽 rake 的作者 <a href="https://twitter.com/jimweirich">jimweirich</a> 介紹的。</p>
+
+<p>乍看之下只是一個 syntax sugar，但實際用起來非常有幫助，可以有效的協助你寫出乾淨漂亮的測試。</p>
+
+<p><a href="https://github.com/jimweirich/rspec-given">rspec-given</a> 提供了 <code>Given</code>, <code>Then</code>, <code>When</code> 三個關鍵字以及其他一些額外的功能。 <code>Given</code> 類似原本的 <code>let</code>，而 <code>it</code> 則拆成 <code>Then</code> 和 <code>When</code>。</p>
+
+<p>原本用 <code>it</code> 來寫測試，一個 <code>it</code> 裡面容易越寫愈多，越寫越肥，而且執行的程式碼和 assertion 混在一起，不容易閱讀。</p>
+
+<p>用 <code>Given</code> 定義需要的東西、 <code>When</code> 寫實際執行的程式碼、 <code>Then</code> 放 assertion，這樣可以很方便、清楚的組織你的測試程式碼。</p>
+
+
+		
+		<a href="/2013/06/rspec-given-rspec-spies/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -589,50 +637,6 @@
 
 		
 		<a href="/2013/01/trace-rubygems-require-slow/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-09T13:04:00+08:00" data-updated="true" itemprop="datePublished">Dec 9<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/rubyconf/'>Rubyconf</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/12/ruby-conf-taiwan-2012-en/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/12/ruby-conf-taiwan-2012-en/" itemprop="url">RubyConf.tw 2012</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
-
-<h3>Before Party</h3>
-
-<p><a href="http://twitter.com/ihower">ihower</a> had been inviting Matz, the creator of Ruby to Taiwan for the past three years. And finally he made it this year. Matz arrived Taiwan early, since it was a great opportunity to meet Matz in person so we hosted a meetup party with Matz the day before the conference.</p>
-
-<p><img src="/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
-
-
-		
-		<a href="/2012/12/ruby-conf-taiwan-2012-en/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

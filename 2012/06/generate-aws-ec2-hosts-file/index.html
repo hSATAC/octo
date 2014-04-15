@@ -146,14 +146,14 @@
 <div><script src='https://gist.github.com/2881131.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
 # coding: utf-8
-require 'rubygems'
-require 'aws-sdk'
+require &#39;rubygems&#39;
+require &#39;aws-sdk&#39;
 
-config = {:access_key_id =&gt; '',
-          :secret_access_key =&gt; ''}
+config = {:access_key_id =&gt; &#39;&#39;,
+          :secret_access_key =&gt; &#39;&#39;}
 AWS.config(config)
 ec2 = AWS::EC2.new
-ec2 = ec2.regions['ap-northeast-1']
+ec2 = ec2.regions[&#39;ap-northeast-1&#39;]
 
 hosts = []
 hosts &lt;&lt; &quot;127.0.0.1\tlocalhost localhost.localdomain&quot;

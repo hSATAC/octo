@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ios | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ios/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -31,7 +31,7 @@
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+    dispatch_release(semaphore);   // You don&#39;t need this if your deployment target &gt;= 6.0 and ARC enabled.
 }
 - (void)testLoginFail
 {
@@ -44,7 +44,7 @@
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+    dispatch_release(semaphore);   // You don&#39;t need this if your deployment target &gt;= 6.0 and ARC enabled.
 }</code></pre></noscript></div>
 </p>
 ]]></content>

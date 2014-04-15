@@ -144,13 +144,13 @@
 
 <div><script src='https://gist.github.com/3246217.js'></script>
 <noscript><pre><code>#!/usr/bin/env ruby
-require 'rubygems'
-require 'active_support'
+require &#39;rubygems&#39;
+require &#39;active_support&#39;
 
 merged = `cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch --merged master | grep -v master`
-not_merged_cmd = 'cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch | grep -v master | grep -v support | grep -v qa'
+not_merged_cmd = &#39;cd /home/m/git/repositories/miiicasa.git &amp;&amp; git branch | grep -v master | grep -v support | grep -v qa&#39;
 for line in merged.split(&quot;\n&quot;)
-  not_merged_cmd += '| grep -v ' + line
+  not_merged_cmd += &#39;| grep -v &#39; + line
 end
 puts &quot;This is a regular check of miiiCasa.git branches\n&quot;
 puts &quot;List below are branches already been merged into [master]:&quot;
@@ -159,7 +159,7 @@ puts merged
 
 puts &quot;\n--------------------\n\n&quot;
 
-puts 'List below are branches order than 1 month and have NOT been merged into [master]:'
+puts &#39;List below are branches order than 1 month and have NOT been merged into [master]:&#39;
 puts &quot;Please check if they are abandoned or forgotten.&quot;
 not_merged = `#{not_merged_cmd}`
 for line in not_merged

@@ -144,7 +144,7 @@
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+    dispatch_release(semaphore);   // You don&#39;t need this if your deployment target &gt;= 6.0 and ARC enabled.
 }
 - (void)testLoginFail
 {
@@ -157,7 +157,7 @@
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode
                                  beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-    dispatch_release(semaphore);   // You don't need this if your deployment target &gt;= 6.0 and ARC enabled.
+    dispatch_release(semaphore);   // You don&#39;t need this if your deployment target &gt;= 6.0 and ARC enabled.
 }</code></pre></noscript></div>
 
 

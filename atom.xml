@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,258 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Roles and Profiles Pattern in Puppet]]></title>
+    <link href="http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet/"/>
+    <updated>2014-04-12T14:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet</id>
+    <content type="html"><![CDATA[<p>一開始寫 Puppet 就是 node definition 直接寫寫寫&hellip;後來就會開始把重複的 resource, file 等等拆成 modules&hellip;。不過當機器越來越多，發現還是有許多重複的地方，例如有好多台 web server, 但是他們有些又有些許的不同&hellip;。</p>
+
+<!-- more -->
+
+
+<h2>Original Style</h2>
+
+<p>先看看傳統的寫法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node web {
+</span><span class='line'>  include users
+</span><span class='line'>  include nginx
+</span><span class='line'>  include rails
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node worker {
+</span><span class='line'>  include users
+</span><span class='line'>  include rails
+</span><span class='line'>  include redis
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node db {
+</span><span class='line'>  include users
+</span><span class='line'>  include mysql
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node web-qa {
+</span><span class='line'>  include users
+</span><span class='line'>  include nginx
+</span><span class='line'>  include rails
+</span><span class='line'>  include mysql
+</span><span class='line'>  include redis
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>四個看起來還好，但是當機器越來越多的時候，就會感到難以維護了。</p>
+
+<h2>Roles and Profiles Pattern</h2>
+
+<blockquote><p>All problems in computer science can be solved by another level of indirection.</p></blockquote>
+
+<p>所有電腦科學領域的問題都可以用抽象化來解決(除了抽象太多層以外)，以上的問題我們可以用現在常見的 &ldquo;Roles and Profiles Pattern&rdquo; 來做抽象。</p>
+
+<h2>Role</h2>
+
+<p>Role 很好理解，顧名思義就是「扮演的角色」，以上面的例子我們就有 web, db, worker，web 可能又分成 production 環境和 QA 環境。</p>
+
+<p>用這個思路來整理 node 會變成這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node web {
+</span><span class='line'>  include role::web::production
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node worker {
+</span><span class='line'>  include role::worker
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node db {
+</span><span class='line'>  include role::db
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>node web-qa {
+</span><span class='line'>  include role::web::qa
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Role 本身大概會長這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class role { 
+</span><span class='line'>  include profile::base
+</span><span class='line'>}
+</span><span class='line'> 
+</span><span class='line'>class role::web inherits role { 
+</span><span class='line'>  include profile::nginx
+</span><span class='line'>}
+</span><span class='line'> 
+</span><span class='line'>class role::web::production inherits role::web { 
+</span><span class='line'>  include profile::nginx::production
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class role::web::qa inherits role::web { 
+</span><span class='line'>  include profile::nginx::qa
+</span><span class='line'>  include profile::db
+</span><span class='line'>  include profile::worker
+</span><span class='line'>}
+</span><span class='line'> 
+</span><span class='line'>class role::db inherits role { 
+</span><span class='line'>  include profile::mysql
+</span><span class='line'>}
+</span><span class='line'> 
+</span><span class='line'>class role::worker inherits role { 
+</span><span class='line'>  include profile::worker
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Profile</h2>
+
+<p>Profile 則是用來抽象化「一組服務、設定」的。看上面 Role 的部份應該有點感覺了：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class profile::base {
+</span><span class='line'>  include users
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class profile::web {
+</span><span class='line'>  include nginx
+</span><span class='line'>  include rails
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class profile::web::production inherits profile::web {
+</span><span class='line'>  ::nginx::file { 'production.conf':
+</span><span class='line'>      content =&gt; ...,
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class profile::web::qa inherits profile::web {
+</span><span class='line'>  ::nginx::file { 'qa.conf':
+</span><span class='line'>      content =&gt; ...,
+</span><span class='line'>  }
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class profile::db inherits { 
+</span><span class='line'>  include profile::mysql
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>class profile::worker {}
+</span><span class='line'>  include rails
+</span><span class='line'>  include redis
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>這樣就可以把重複的程式碼減少，同時又保留彈性。</p>
+
+<h2>Tips</h2>
+
+<ul>
+<li>一個 node 只 include <em>一個</em> role。如果這兩個 role 很像，但又有些微不同，那就是一個新 role。</li>
+<li>一個 role include 一個或多個 profile，而且 <em>只能 include profile</em> 。</li>
+</ul>
+
+
+<h2>Further Reading</h2>
+
+<p>更多詳細細節、優缺點以及不同的設計方式可以參考以下的幾篇連結：</p>
+
+<ul>
+<li><a href="http://www.craigdunn.org/2012/05/239/">Designing Puppet – Roles and Profiles</a></li>
+<li><a href="http://www.slideshare.net/PuppetLabs/roles-talk">Designing Puppet: Roles/Profiles Pattern</a></li>
+<li><a href="http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/">Building a Functional Puppet Workflow Part 2: Roles and Profiles</a></li>
+<li><a href="http://sysadvent.blogspot.tw/2012/12/day-13-configuration-management-as-legos.html">Configuration Management as Legos</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails i18n Relative Key in Controller Before Action]]></title>
@@ -1779,82 +2031,6 @@
 <p>最後將 /etc/hosts 改回來就完全正常了。可喜可賀。最難抓的 bug 果然都是最愚蠢的&hellip;。</p>
 
 <p>在這邊要感謝 <a href="http://www.tenlong.com.tw/items/9862765674?item_id=481936">Debug Hacks 除錯駭客－極致除錯的技巧與工具</a> 一書的譯者，事實證明寫 scripting language 也是要會一些基礎 debug 技巧的！推薦各位購買這本書。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RubyConf.tw 2012]]></title>
-    <link href="http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en/"/>
-    <updated>2012-12-09T13:04:00+08:00</updated>
-    <id>http://blog.hsatac.net/2012/12/ruby-conf-taiwan-2012-en</id>
-    <content type="html"><![CDATA[<p>Ruby Conf Taiwan 2012 is so amazing I have to write it down.</p>
-
-<h3>Before Party</h3>
-
-<p><a href="http://twitter.com/ihower">ihower</a> had been inviting Matz, the creator of Ruby to Taiwan for the past three years. And finally he made it this year. Matz arrived Taiwan early, since it was a great opportunity to meet Matz in person so we hosted a meetup party with Matz the day before the conference.</p>
-
-<p><img src="http://blog.hsatac.net/images/rubyconftw2012/matz_and_i.jpg" alt="matz and I" /></p>
-
-<!--more-->
-
-
-<h3>Day 1</h3>
-
-<p>The location of Ruby Conf 2012 is not at Acdemia Sinica as usual, but at Tianmu Convention Center. This is the first time we host a conference here. The facilities were ok, but the wireless routers were not in good conditions, we have to get Internet via 3G. The place came with a very good restaurant, we had buffet for lunch here, it was so delicious. But the seat here were not very comfortable for talls like me.</p>
-
-<p>The hall is not too small for a international conference, also not too large to interact to speakers. I think it&rsquo;s quite nice.</p>
-
-<p>The first session of day 1 was Matz and of course it&rsquo;s nice. And then Wei Lu from Singapore shared about pair programming, she&rsquo;s a tactful speaker. The most surprising was the mruby talk by <a href="http://twitter.com/jserv">Jserv</a>. He talked about why his team choose mruby and go to details about ARM optimization of mruby followed up a attractive live demo, even Matz enjoyed his talk:</p>
-
-<blockquote class="twitter-tweet"><p>こういうmrubyの話が聞けるのは予想外だったなあ</p>&mdash; Yukihiro Matsumoto (@yukihiro_matz) <a href="https://twitter.com/yukihiro_matz/status/276903947690729472" data-datetime="2012-12-07T04:20:20+00:00">December 7, 2012</a></blockquote>
-
-
-<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<blockquote><p>&ldquo;I didn&rsquo;t expect for this kind of mruby information.&rdquo;</p></blockquote>
-
-<p>In the afternoon, <a href="http://twitter.com/godfat">godfat</a> gave a tlak about concurrency application servers, it&rsquo;s also very nice, covered from real cases to deep theories.</p>
-
-<p>High percentage of attendances and speakers were foreigners, so most of the sessions were gave in English. In my opinion this was a great way to welcome foreign friends as a international conference.</p>
-
-<h3>Party</h3>
-
-<p>I went to official party at day 1 night, I don&rsquo;t usually drink so I planned to go there just to meet some friends. But at the end I drank until the club was closed.</p>
-
-<p>This was a great event to meet new people and old friends from every places in the world.</p>
-
-<p>I asked Matz in the party, &ldquo;You have been to lots of Ruby confs, and this is the first time you come to Ruby Conf Taiwan, what do you think?&rdquo;</p>
-
-<p>&ldquo;Ruby Conf Taiwan is a relatively small conference compared to other conferences, but it&rsquo;s high quality&rdquo; he said. And I asked about if he would love to come next year, he gave a confirmation answer.</p>
-
-<p>It&rsquo;s a great honor to hear Matz says this, well done for <a href="http://twitter.com/ihower">ihower</a> and <a href="https://twitter.com/ryudoawaru">Ryudoawaru</a>.。</p>
-
-<h3>Day 2</h3>
-
-<p>I was very excited about sessions in day 2: &ldquo;devOps toolbox&rdquo; by <a href="http://twitter.com/dlackty">dlackty</a> will talk about chef, and thegiive from Yahoo Taiwan will talk about puppet. I&rsquo;ve been studying these 2 devOps frameworks and couldn&rsquo;t decide which to use. After their sessions, I discussed some of my questions with them.</p>
-
-<p>The talk of Gosuke Miyashita from Japan also introduced lots of interesting things, for example, their <a href="https://github.com/paperboy-sqale/sqale-patches">anti fork bomb patch</a> and <a href="https://github.com/mizzy/openssh-script-auth">SSH router implement</a>. I was impressed by paperboy &amp; co.</p>
-
-<p><a href="http://twitter.com/josephku">Joseph Ku</a> gave a talk about RubyMotion. As a iOS develop and a Ruby develop, I was also interested in RubyMotion but I didn&rsquo;t really dig into it because the lack of information and documents on the internet.</p>
-
-<h3>End</h3>
-
-<p>Ruby Conf Taiwan 2012 was so good, even people from other countries agreed:</p>
-
-<blockquote class="twitter-tweet"><p>しかし，私が最適化の話とかをして，真面目に最適化の中身の質問を受けるカンファレンスは非常に久しぶりな気がする．台湾凄い．</p>&mdash; _ko1 (@_ko1) <a href="https://twitter.com/_ko1/status/277339165358714880" data-datetime="2012-12-08T09:09:44+00:00">December 8, 2012</a></blockquote>
-
-
-<script src="http://blog.hsatac.net//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<blockquote><p>&ldquo;It had been a long time for me to be asked questions and discuss about optimization of Ruby core in conference, Taiwan is very good.&rdquo;</p></blockquote>
-
-<p>I think the sessions were nicely chosen. The variaties present the possibilities of Ruby as a programming language. Not only attendances learnt a lot, speakers also interacted with each other.</p>
-
-<p>ihower said they picked topics very carefully, they didn&rsquo;t accept your proposal just because your a sponsor. I think it&rsquo;s smart to keep advertisement of sponsors from keynotes, the quality of conference is the most important.</p>
-
-<p>It&rsquo;s fair to say that Ruby Conf Taiwan 2012 is the best techical conference I&rsquo;ve ever been to. Thanks to the efforts of ihower, Ryudoawaru and all the staff.</p>
 ]]></content>
   </entry>
   

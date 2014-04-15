@@ -4,7 +4,7 @@
   <title><![CDATA[Category: dns | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/dns/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-12T05:03:00+08:00</updated>
+  <updated>2014-04-15T22:49:18+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -38,7 +38,7 @@
 
 # Setup dynamic dns on Route 53 for aws ec2 (CNAME)
 #
-# Modified from Johan Lindh's script
+# Modified from Johan Lindh&#39;s script
 #
 # Script requirements:
 #
@@ -61,25 +61,25 @@ NewTTL=600
 
 # The Amazon Route 53 zone ID for the domain
 # and the Amazon ID and SecretKey. Remember to
-# ensure that this file can't be read by
+# ensure that this file can&#39;t be read by
 # unauthorized people!
 ZoneID=Z1234567890
 AmazonID=A1234567890
 SecretKey=GR$WYTJ%Y$@GY%J$%GY@H
 
 # Enter the URL used to check extern IP
-CheckIPURL='http://169.254.169.254/latest/meta-data/public-hostname'
+CheckIPURL=&#39;http://169.254.169.254/latest/meta-data/public-hostname&#39;
 
 # Enter some static text that immediately preceeds the current IP in the HTML output
-# Note that you'll probably need to look at the actual HTML code to find this
-CheckIPText='Current IP Address:'
+# Note that you&#39;ll probably need to look at the actual HTML code to find this
+CheckIPText=&#39;Current IP Address:&#39;
 
 ###############################################################
 # You should not need to change anything beyond this point
 ###############################################################
 
 # Find an authoritative AWS R53 nameserver so we get a clean TTL
-AuthServer=$(dig NS $Domain | grep -v ';' | grep -m 1 awsdns | grep $Domain | cut -f 6)
+AuthServer=$(dig NS $Domain | grep -v &#39;;&#39; | grep -m 1 awsdns | grep $Domain | cut -f 6)
 if [ &quot;$AuthServer&quot; = &quot;&quot; ]; then
   echo The domain $Domain has no authoritative Amazon Route 53 name servers
   exit 1
@@ -87,13 +87,13 @@ fi
 
 # Get the record and extract its parts
 Record=$(dig @$AuthServer A $Hostname.$Domain | grep -v &quot;;&quot; | grep &quot;$Hostname\.$Domain&quot;)
-OldType=$( echo $Record | cut -d ' ' -f 4 )
-OldTTL=$( echo $Record | cut -d ' ' -f 2 )
-OldIP=$( echo $Record | cut -d ' ' -f 5 | sed s/.$//)
+OldType=$( echo $Record | cut -d &#39; &#39; -f 4 )
+OldTTL=$( echo $Record | cut -d &#39; &#39; -f 2 )
+OldIP=$( echo $Record | cut -d &#39; &#39; -f 5 | sed s/.$//)
 
 # Make sure it is an A record (could be CNAME)
 if [ &quot;$Record&quot; != &quot;&quot; -a &quot;$OldType&quot; != &quot;CNAME&quot; ]; then
-  echo $Hostname.$Domain has a $OldType record, expected 'CNAME'
+  echo $Hostname.$Domain has a $OldType record, expected &#39;CNAME&#39;
   exit 1
 fi
 
@@ -145,7 +145,7 @@ Changeset=$Changeset&quot;&lt;/ChangeResourceRecordSetsRequest&gt;&quot;
 
 if [ &quot;$OldIP&quot; != &quot;$CurrentIP&quot; ]; then
   # Get the date at the Amazon servers
-  CurrentDate=$(wget -q -S https://route53.amazonaws.com/date -O /dev/null 2&gt;&amp;1 | grep Date | sed 's/.*Date: //')
+  CurrentDate=$(wget -q -S https://route53.amazonaws.com/date -O /dev/null 2&gt;&amp;1 | grep Date | sed &#39;s/.*Date: //&#39;)
 
   # Calculate the SHA1 hash and required headers
   Signature=$(echo -n $CurrentDate | openssl dgst -binary -sha1 -hmac $SecretKey | base64)
