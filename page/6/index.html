@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Dec 22nd, 2011 php, syntax, vim Comments Vim Runtime 不需存檔檢查 PHP 語法 之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。 set errorformat=%m\ in\ %f &hellip;">
+	<meta name="description" content="Dec 20th, 2011 Bash, PS1, Prompt Comments Bash PS1 補滿 今天 Even Wu 在 facebook 上問了一個問題：他的 Bash PS1 要補滿 dash 到換行為止，感覺很有趣，稍微研究了一下。 首先要取得 term 的寬度， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,67 +109,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-22T17:29:00+08:00" data-updated="true" itemprop="datePublished">Dec 22<span>nd</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/php/'>php</a>, <a class='category' href='/categories/syntax/'>syntax</a>, <a class='category' href='/categories/vim/'>vim</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/" itemprop="url">Vim Runtime 不需存檔檢查 PHP 語法</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
-
-<div><script src='https://gist.github.com/1496197.js'></script>
-<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
-  if !exists(&#39;*PHPsynCHK&#39;)
-    function! PHPsynCHK()
-      ccl
-      let winnum = winnr()
-      let linenum = line(&#39;.&#39;)
-      let colnum = col(&#39;.&#39;)
-      silent execute &quot;%!php -l -f /dev/stdin | sed &#39;s/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g&#39; &gt;.vimerr; cat&quot;
-      silent cf .vimerr
-      cw
-      execute winnum . &quot;wincmd w&quot;
-      silent undo
-      silent cf
-      if 1 == len(getqflist())
-         call cursor(linenum, colnum)
-      endif
-    endfunction
-  endif
-</code></pre></noscript></div>
-
-
-<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -311,126 +250,6 @@
 <p>一個月前，因為工作環境轉換，決定趁機開始使用 Linux 作為日常桌面環境。以往都用 ubuntu 但不甚滿意，這次決定試試看 Archlinux，果然沒有讓我失望。
 		
 		<a href="/2011/11/archlinux/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-30T00:00:00+08:00" data-updated="true" itemprop="datePublished">Sep 30<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ruby/'>Ruby</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/09/redmine-bundler-%E5%BE%A9%E6%B4%BB%E8%A8%98/" itemprop="url">Redmine + Bundler 復活記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>老實說，不記得之前是動了什麼，總之我的佈署 apache + passenger + ree 環境<br />
-redmine 爆炸了。推測應該是 gem 的關係。<br />
-上網看了一下， rails 2.3 只支援 rubygems 1.7<br />
-就先把 rubygems downgrade 回來
-<pre lang="bash">gem update --system 1.7</pre></p>
-
-<p>和 tkalu, xdite, ihower, 以及小蟹詢問了各種可能的解決方案後<br />
-確定我應該是要用 bundler 來管理一下 redmine 的 gems</p>
-
-<p>根據 ihower 提供的資訊， redmine 有一個內建 bundler 的 fork 版<br />
-搜尋了一下找到了 https://www.chiliproject.org/<br />
-把他的 <a href="https://github.com/chiliproject/chiliproject/blob/unstable/Gemfile" target="_blank">Gemfile</a> 借過來一用</p>
-
-<p>再按照 <a href="http://gembundler.com/rails23.html" target="_blank">Bundler 官網上的 Rails 2 教學</a>
-來設定，果然成功把我的 redmine 救了回來！</p>
-
-<p>chiliproject 的 Gemfile 可能要稍加修改，例如他用 rails 2.3.14，可以改成 redmine 官網支援的 2.3.11<br />
-然後一些沒用到的 gem 例如 pg 可以移除。</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-20T00:00:00+08:00" data-updated="true" itemprop="datePublished">Sep 20<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/rails/'>Rails</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/09/rake-0-9/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/09/rake-0-9/" itemprop="url">Rake 0.9 爆炸解法</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>由於 rake 0.9 跟之前的不相容，因此裝了以後大概都會碰到這堆錯誤：
-<pre lang="bash">/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:4: warning: already initialized constant MAJOR
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:5: warning: already initialized constant MINOR
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:6: warning: already initialized constant BUILD
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:3: warning: already initialized constant NUMBERS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/version.rb:9: warning: already initialized constant VERSION
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:26: warning: already initialized constant RAKEVERSION
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/early_time.rb:17: warning: already initialized constant EARLY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/alt_system.rb:32: warning: already initialized constant WINDOWS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/application.rb:28: warning: already initialized constant DEFAULT_RAKEFILES
-WARNING: Possible conflict with Rake extension: String#ext already exists
-WARNING: Possible conflict with Rake extension: String#pathmap already exists
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/task_arguments.rb:73: warning: already initialized constant EMPTY_TASK_ARGS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/invocation_chain.rb:49: warning: already initialized constant EMPTY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:10: warning: already initialized constant RUBY
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_utils.rb:84: warning: already initialized constant LN_SUPPORTED
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/dsl_definition.rb:143: warning: already initialized constant Commands
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:44: warning: already initialized constant ARRAY_METHODS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:47: warning: already initialized constant MUST_DEFINE
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:51: warning: already initialized constant MUST_NOT_DEFINE
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:55: warning: already initialized constant SPECIAL_RETURN
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:61: warning: already initialized constant DELEGATING_METHODS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:364: warning: already initialized constant DEFAULT_IGNORE_PATTERNS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake/file_list.rb:370: warning: already initialized constant DEFAULT_IGNORE_PROCS
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:64: warning: already initialized constant FileList
-/Users/cat/.rvm/gems/ruby-1.9.2-p290@global/gems/rake-0.9.2/lib/rake.rb:65: warning: already initialized constant RakeFileUtils
-rake aborted!
-stack level too deep</pre></p>
-
-<p>(See full trace by running task with &#8211;trace)
-
-		
-		<a href="/2011/09/rake-0-9/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -606,6 +425,152 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 <p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。
 		
 		<a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-28T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 28<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/04/firefox4-x-webm-x-apache/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/firefox4-x-webm-x-apache/" itemprop="url">Firefox4 X WebM X Apache</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
+
+<p>&nbsp;</p>
+
+<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
+
+<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
+
+<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
+<pre lang="bash">video/webm webm</pre>
+至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧&#8230;</p>
+
+<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-14T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 14<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/04/redmine-git-integration/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/redmine-git-integration/" itemprop="url">整合 Redmine 和 Git</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已<br />
+不過一直報找不到專案，看了一下 error log  原來是找不到 git 執行檔<br />
+解法很簡單，原本 httpd.conf 設定的 ruby 要再包一層去 export path<br />
+例如原本你設定的是
+<pre lang="bash">
+PassengerRuby /usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby
+</pre></p>
+
+<p>就開一個  /usr/local/bin/ruby_with_env 的可執行檔<br />
+裡面把 export $PATH
+<pre lang="bash">
+#!/bin/bash
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin:/usr/local/git/bin/:$PATH"
+/usr/local/Cellar/ruby-enterprise-edition/2011.03/bin/ruby $*
+</pre></p>
+
+<p>再把 httpd.conf 的裡面設定的 ruby 改成
+<pre lang="bash">
+PassengerRuby /usr/local/bin/ruby_with_env
+</pre></p>
+
+<p>大功告成！</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-04T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 4<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/" itemprop="url">連猴子也會之：在 Mac Mini Server 上架設 WebDAV Git Server</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>因為我的 mac mini server 不想開著 ssh 一直給人掃，所以想設定 https 的 git server，試了一下真的超簡單的。
+<p style="text-align: center;"><a href="/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png"><img class="aligncenter size-full wp-image-360" title="螢幕快照 2011-04-04 下午1.47.38" src="/images/wp-uploads/2011/04/螢幕快照-2011-04-04-下午1.47.38.png" alt="" width="522" height="312" /></a></p>
+▲首先打開你的 Server Admin 建立一個新 Site 例如 repo.hsatac.net
+
+		
+		<a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

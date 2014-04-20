@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="May 2nd, 2012 kvm, virsh, vm, vnc Comments Ssh Vm With Virsh Console 最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 &hellip;">
+	<meta name="description" content="Apr 13th, 2012 CentOS, Python, hg, mercurial, mercurial-server Comments 在 CentOS 5 上安裝 Python26, Hg, Mercurial-server 筆記一下在 CentOS 5 上設定 Python 2.6 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,59 +109,6 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-02T16:29:00+08:00" data-updated="true" itemprop="datePublished">May 2<span>nd</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/kvm/'>kvm</a>, <a class='category' href='/categories/virsh/'>virsh</a>, <a class='category' href='/categories/vm/'>vm</a>, <a class='category' href='/categories/vnc/'>vnc</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/05/ssh-vm-with-virsh-console/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/05/ssh-vm-with-virsh-console/" itemprop="url">Ssh Vm With Virsh Console</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
-
-<p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
-
-<p>例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
-</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
-</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
-</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure>
-
-
-<p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
-
-		
-		
-	</div>
-
-</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -756,6 +703,67 @@ redis.conf 要稍微修改</p>
 
 
 
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-22T17:29:00+08:00" data-updated="true" itemprop="datePublished">Dec 22<span>nd</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/php/'>php</a>, <a class='category' href='/categories/syntax/'>syntax</a>, <a class='category' href='/categories/vim/'>vim</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/12/vim-php-runtime-syntax-check-without-saving-file/" itemprop="url">Vim Runtime 不需存檔檢查 PHP 語法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>之前 vim PHP syntax check 都是跟存檔綁在一起，同事想要不用存檔就可以檢查，就弄了一下。</p>
+
+<div><script src='https://gist.github.com/1496197.js'></script>
+<noscript><pre><code>  set errorformat=%m\ in\ %f\ on\ line\ %l
+  if !exists(&#39;*PHPsynCHK&#39;)
+    function! PHPsynCHK()
+      ccl
+      let winnum = winnr()
+      let linenum = line(&#39;.&#39;)
+      let colnum = col(&#39;.&#39;)
+      silent execute &quot;%!php -l -f /dev/stdin | sed &#39;s/\\/dev\\/stdin/&quot;.bufname(&quot;%&quot;).&quot;/g&#39; &gt;.vimerr; cat&quot;
+      silent cf .vimerr
+      cw
+      execute winnum . &quot;wincmd w&quot;
+      silent undo
+      silent cf
+      if 1 == len(getqflist())
+         call cursor(linenum, colnum)
+      endif
+    endfunction
+  endif
+</code></pre></noscript></div>
+
+
+<p>用法直接 <code>:call PHPsynCHK()</code> 即可，可以自己綁定熱鍵。</p>
 
 		
 		
