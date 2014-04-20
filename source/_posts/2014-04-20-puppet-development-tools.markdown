@@ -11,7 +11,7 @@ categories: [Puppet, Vagrant]
 
 ## Vagrant
 
-現在 [Vagrant](http://www.vagrantup.com/) privisioner 直接提供了 [Puppet 選項](http://docs.vagrantup.com/v2/provisioning/puppet_apply.html)，可以幫你 sync hiera, manifests, modules 進去直接 run，也可以帶入 custom options 或是 factor，在開發 modules 的時候可以不用管其他東西，專心 focus 在 pp 本身。
+現在 [Vagrant](http://www.vagrantup.com/) provisioner 直接提供了 [Puppet 選項](http://docs.vagrantup.com/v2/provisioning/puppet_apply.html)，可以幫你 sync hiera, manifests, modules 進去直接 run，也可以帶入 custom options 或是 factor，在開發 modules 的時候可以不用管其他東西，專心 focus 在 pp 本身。
 
 只要在 Vagrantfile 裡面加入這樣的設定即可：
 
