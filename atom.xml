@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-20T14:28:05+08:00</updated>
+  <updated>2014-04-20T14:29:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -128,7 +128,7 @@
 
 <h3>Rake Tasks</h3>
 
-<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keysroke&hellip;</p>
+<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keystroke&hellip;</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

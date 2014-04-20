@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vagrant | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-20T14:28:05+08:00</updated>
+  <updated>2014-04-20T14:29:07+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -115,7 +115,7 @@ mod "puppetlabs/apt", :path =&gt; "modules/apt"
 
 <h3>Rake Tasks</h3>
 
-<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keysroke&hellip;</p>
+<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keystroke&hellip;</p>
 
 <p><code>bash
 $ rake -T                                  # List all tasks.
