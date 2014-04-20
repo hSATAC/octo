@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vagrant | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2014-04-20T14:18:34+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[Ash Wu]]></name>
+    <email><![CDATA[hsatac@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Puppet Development Tools]]></title>
+    <link href="http://blog.hsatac.net/2014/04/puppet-development-tools/"/>
+    <updated>2014-04-20T13:36:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/04/puppet-development-tools</id>
+    <content type="html"><![CDATA[<p>好一陣子沒寫 Puppet, 最近回來研究發現多了不少好用的工具，可以有效加速開發速度。</p>
+
+<h2>Vagrant</h2>
+
+<p>現在 <a href="http://www.vagrantup.com/">Vagrant</a> privisioner 直接提供了 <a href="http://docs.vagrantup.com/v2/provisioning/puppet_apply.html">Puppet 選項</a>，可以幫你 sync hiera, manifests, modules 進去直接 run，也可以帶入 custom options 或是 factor，在開發 modules 的時候可以不用管其他東西，專心 focus 在 pp 本身。</p>
+
+<p>只要在 Vagrantfile 裡面加入這樣的設定即可：</p>
+
+<p>```
+  # Puppet config
+  config.vm.provider &ldquo;virtualbox&rdquo; do |vb, override|</p>
+
+<pre><code>override.vm.provision "puppet" do |puppet|
+  puppet.options = "--parser future --verbose --debug" # For debug only
+  puppet.manifests_path = "manifests"
+  puppet.manifest_file  = "vagrant.pp"
+  puppet.module_path    = "modules"
+  puppet.hiera_config_path = "hiera.yaml"
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<p>不過有兩個小地方需要注意：</p>
+
+<!-- more -->
+
+
+<h3>Puppet 版本</h3>
+
+<p>Vagrant 附的 Puppet 版本比較舊，是 2.7x。如果有新版本的需求，可以使用這隻 script 來升級 Puppet：</p>
+
+<script src="https://gist.github.com/hSATAC/11106132.js"></script>
+
+
+<p><code>
+  # Upgrade Puppet from 2.7 to 3.x
+  config.vm.provision :shell, :path =&gt; "scripts/upgrade_puppet.sh"
+</code></p>
+
+<h3>Hiera 目錄</h3>
+
+<p>通常 hiera 不會只有一隻檔案，但 Vagrant 只會幫你掛上 modules 和 manifests 資料夾。這時就需要把 hiera 的目錄丟到 manifests 下面，並且在 hiera 設定 <code>:datadir: "%{settings::manifestdir}/hieradata"</code> 直接去吃 manifests 的路徑即可。</p>
+
+<hr />
+
+<h2>Librarian-Puppet</h2>
+
+<p><a href="http://librarian-puppet.com/">Librarian-Puppet</a> 是一個管理 puppet modules 的工具，基本上跟 bundler 的概念一樣。編寫 Puppetfile 以後，使用指令 <code>librarian-puppet install</code> 來安裝到 <code>modules</code> 目錄下。這樣就不用處理 <code>puppet module install</code> 和指定版本，以及安裝自己 private modules 的問題了。反正使用 librarian-puppet 他會幫你管好一個 <code>modules</code> 目錄。</p>
+
+<p>Puppetfile 支援幾種指定方式，都非常實用：</p>
+
+<p><code>
+modulefile
+</code></p>
+
+<p>只要直接下 modulefile 他就會去吃你 modulefile 裡面的 dependencies。這在開發 puppet modules 的時候會用到。</p>
+
+<p><code>
+mod "puppetlabs/stdlib"
+</code></p>
+
+<p>指定 puppet forge 的 package name。</p>
+
+<p><code>
+mod "puppetlabs/apt",
+  :git =&gt; "git://github.com/puppetlabs/puppetlabs-apt.git",
+  :ref =&gt; '0.0.3'
+</code></p>
+
+<p>指定某 repo 的 ref。</p>
+
+<p><code>
+mod "puppetlabs/apt",
+  :git =&gt; "git://github.com/fake/puppet-modules.git",
+  :path =&gt; "modules/apt"
+</code></p>
+
+<p>指定 repo 下的 path。</p>
+
+<p><code>
+mod "puppetlabs/apt", :path =&gt; "modules/apt"
+</code></p>
+
+<p>指定 local path，可以用在 private modules。</p>
+
+<hr />
+
+<h2>Puppet Skeleton</h2>
+
+<p>以上這兩個工具搭配起來，開發 Puppet 就變得很容易了：把需要的 community modules 定義在 Puppetfile 裡面，private modules 放在 local, 一樣用 Puppetfile 掛起來安裝，再透過 Vagrant 指定 manifest path, file, hiera 的設定，直接 <code>$ vagrant up</code> 就可以反覆測試 puppet 了。</p>
+
+<p>我有做了一個 <a href="https://github.com/hSATAC/puppet-skeleton">puppet-skeleton</a> 的專案，這是我自己開發 Puppet 的專案架構跟 workspace。</p>
+
+<h3>Rake Tasks</h3>
+
+<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keysroke&hellip;</p>
+
+<p><code>bash
+$ rake -T                                  # List all tasks.
+$ rake -D                                  # List all tasks with descriptions.
+$ rake module:lint                         # Puppet lint.
+$ rake module:reinstall                    # Clean and reinstall modules.
+$ rake module:sync                         # Sync private modules.
+$ rake syntax                              # Syntax check Puppet manifests and templates
+$ rake syntax:hiera                        # Syntax check Hiera config files
+$ rake syntax:manifests                    # Syntax check Puppet manifests
+$ rake syntax:templates                    # Syntax check Puppet templates
+$ rake vagrant:provision[name,provisioner] # Provision vagrant VM.
+$ rake vagrant:rebuild[name]               # Rebuild vagrant VM.
+</code></p>
+
+<h3>目錄架構</h3>
+
+<p>跟上面講的差不多，除了特別把 <code>role</code> 跟 <code>profile</code> 兩個 modules 從 <code>private</code> modules 裡面抽出來到頂層。</p>
+
+<p>關於 <code>role</code> 以及 <code>profile</code> 可以看我之前的文章 <a href="http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet/">Roles and Profiles Pattern in Puppet</a>。</p>
+
+<p>也算是提供一個這個 pattern 的範例。</p>
+
+<p><code>``bash
+.
+├── Gemfile             # Required rubygems, use bundler to install.
+├── Puppetfile          # Required puppet modules, use librarian-puppet to install.
+├── README.md
+├── Rakefile            # Some predefined tasks, to speed up development.
+├── Vagrantfile         # Vagrant configuration.
+├── hiera.yaml          # Puppet hiera config, only define hierarchy and datadir in this file.
+├── docs                # Some documents
+├── manifests
+│   ├── hieradata         # The actual heirdata stored in this folder.
+│   ├── site.pp           # Node definition for production.
+│   └── vagrant.pp        # Node definition for local development.
+├── private             # Private modules, will be sync into</code>modules<code>folder by</code>librarian-puppet`.
+│   ├── common
+│   └── users
+├── profile             # Profile, abstraction of &ldquo;Technology stack&rdquo;
+│   ├── files
+│   └── manifests
+├── role                # Role, abstraction of &ldquo;What does this server do?&rdquo;
+│   └── manifests
+├── spec                # Put test files
+└── scripts</p>
+
+<pre><code>└── upgrade_puppet.sh # Script of upgrading puppet to version 3 on Ubuntu
+</code></pre>
+
+<p>```</p>
+
+<h3>在 EC2 上測試</h3>
+
+<p>只要稍微設定一下 Vagrantfile，就可以利用 <a href="https://github.com/mitchellh/vagrant-aws">Vagrant-AWS</a> 直接 deploy 到 AWS EC2 上面測試。</p>
+]]></content>
+  </entry>
+  
+</feed>

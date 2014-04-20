@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Dec 9th, 2012 Ruby, Rubyconf Comments RubyConf.tw 2012 Ruby Conf Taiwan 2012 is so amazing I have to write it down. Before Party ihower had been &hellip;">
+	<meta name="description" content="Jan 30th, 2013 Ruby Comments 追蹤 Rubygems Require 緩慢紀錄 昨天灌了一台新的機器，正準備用 puppet bootstrap 時卻發現他的 puppet 執行的非常緩慢。追蹤解決問題的過程十分有趣，在這邊紀錄一下。 由於 puppet &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,97 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-30T10:18:00+08:00" data-updated="true" itemprop="datePublished">Jan 30<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/ruby/'>Ruby</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/01/trace-rubygems-require-slow/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/01/trace-rubygems-require-slow/" itemprop="url">追蹤 Rubygems Require 緩慢紀錄</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>昨天灌了一台新的機器，正準備用 <a href="http://puppetlabs.com">puppet</a> bootstrap 時卻發現他的 puppet 執行的非常緩慢。追蹤解決問題的過程十分有趣，在這邊紀錄一下。</p>
+
+<p>由於 puppet 執行檔本身是一隻 ruby script，於是開啟了 irb -d 使用 DEBUG 模式直接執行看看該 script 的內容，看看能否看出問題在哪。</p>
+
+
+		
+		<a href="/2013/01/trace-rubygems-require-slow/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-11T13:41:00+08:00" data-updated="true" itemprop="datePublished">Dec 11<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/nagios/'>nagios</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/12/nagios-basic-configuration/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/nagios-basic-configuration/" itemprop="url">Nagios 基本設定</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Nagios 是一個相當萬用的老牌監控軟體，資源和插件都很多。不過由於他的彈性太好，相對設定上就不是很容易上手。這篇文章將會紀錄比較重要的一些基本設定和觀念。</p>
+
+<p>由於不同 distribution 的差異，以下路徑都是 Archlinux 下的，可能會有所不同。</p>
+
+<h3>/etc/nagios/nagios.cfg</h3>
+
+<p>所有相關 nagios 本身的設定都在此。如果之後發現有一些預期以外的行為，通常回來這個檔案仔細檢查問題都在這。基礎跑的話可以先不用修改這個檔案的內容。先把監控項目設定起來，最後再回頭來微調就好。</p>
+
+<h3>/etc/nagios/objects</h3>
+
+<p>這個目錄是最重要的目錄，所有監控的設定都放在這邊。</p>
+
+<h3>/etc/nagios/objects/templates.cfg</h3>
+
+<p>Nagios 設定的方式有點 OO 的感覺，許多設定都是繼承某個原型而來。當然你也可以都不要繼承，每一條都詳細設定，不過這樣寫起來會很繁瑣，日後也不好維護管理。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -474,89 +565,6 @@
 
 		
 		<a href="/2012/10/sync-git-with-hg/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-28T13:45:00+08:00" data-updated="true" itemprop="datePublished">Sep 28<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/ack/'>ack</a>, <a class='category' href='/categories/ag/'>ag</a>, <a class='category' href='/categories/bashmarks/'>bashmarks</a>, <a class='category' href='/categories/commandline/'>commandline</a>, <a class='category' href='/categories/goaccess/'>goaccess</a>, <a class='category' href='/categories/htop/'>htop</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>, <a class='category' href='/categories/mosh/'>mosh</a>, <a class='category' href='/categories/pdcp/'>pdcp</a>, <a class='category' href='/categories/pdsh/'>pdsh</a>, <a class='category' href='/categories/rpdcp/'>rpdcp</a>, <a class='category' href='/categories/the-silver-searcher/'>the_silver_searcher</a>, <a class='category' href='/categories/tig/'>tig</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/" itemprop="url">8 款我最近常用的 Command Line 工具</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>介紹八款我最近常用的 command line 工具，對開發很有幫助。</p>
-
-
-		
-		<a href="/2012/09/8-command-line-tools-i-have-been-using-lately/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-20T23:23:00+08:00" data-updated="true" itemprop="datePublished">Sep 20<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/book/'>book</a>, <a class='category' href='/categories/fitness/'>fitness</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/09/the-4-hours-body/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/09/the-4-hours-body/" itemprop="url">身體調校聖經</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><img src="/images/the_4_hours_body/cover.jpg" alt="cover" /></p>
-
-<blockquote><p>⋯⋯《身體調校聖經》所提供的，是對人類重建身體的全新探索，全盤收錄幾百位優異運動員、幾十位醫師，以及幾千小時讓人目瞪口呆的個人實驗智慧；從奧林匹克訓練中心到地下實驗室，從矽谷到南非，作者提摩西．費里斯念茲在茲的改變人生問題是：</p><p>　　對所有關於身體的事情，如何以最小的改變來創造最大的成果？⋯⋯</p></blockquote>
-
-
-<p>前陣子很紅的《<a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010541859">身體調校聖經</a>》，看了許多人的心得和推薦以後覺得很有意思，也買了一本。</p>
-
-<p>我的故事很平常，跟大多數人一樣，入伍時有著健康的好身材，退伍就業沒多久就因為天天坐在電腦前缺乏運動而發胖。從 70 kg 暴增到 90 kg。一直都有要減重的念頭，卻遲遲沒有實行。直到看了這本書。</p>
-
-
-		
-		<a href="/2012/09/the-4-hours-body/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

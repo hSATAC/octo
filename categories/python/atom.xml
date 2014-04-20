@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/python/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-15T22:58:14+08:00</updated>
+  <updated>2014-04-20T14:18:34+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -91,6 +91,47 @@
 <p>可以修改 <code>redmine/config/environment.rb</code> 打開 <code>config.log_level = :debug</code> 看更詳細的 log</p>
 
 <p>應該可以看到實際執行的 hg 指令，用 redmine user 去執行看看就能抓出問題所在。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在 Mac 環境使用 homebrew 安裝 python + easy_install]]></title>
+    <link href="http://blog.hsatac.net/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/"/>
+    <updated>2011-03-22T00:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2011/03/在-mac-環境使用-homebrew-安裝-python-easy_install</id>
+    <content type="html"><![CDATA[<p><p style="text-align: center;"><img class="size-full wp-image-317 aligncenter" title="python-logo-glassy[1]" src="http://blog.hsatac.net/images/wp-uploads/2011/03/python-logo-glassy1.png" alt="" width="286" height="364" /></p>
+今天傳說中的 python 達人 / vim之神 <a href="http://tib.tw/frame.htm" target="_blank">Tiberius 大大</a> 在公司主講了 python 基本教學，讓大家眼界都開了不少。</p>
+
+
+
+
+<p>回家想在 mac 上安裝 python 卻發現有些問題。</p>
+
+
+
+
+<p>使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install (2.6) 失效，因此要稍微做一點處理：</p>
+
+
+
+
+<p><!--more-->
+<pre lang="bash">brew install python</pre>
+之後若執行 easy_install ，會出現如下的錯誤：
+<pre>python version 2.6.1 can't run ./easy_install.  Try the alternative(s):</pre></p>
+
+
+
+
+<p>Run "man python" for more information about multiple version support in<br />
+Mac OS X.
+這時只要去 <a href="http://pypi.python.org/pypi/setuptools" target="_blank">setup-tools</a> 的網站下載<a href="http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg#md5=fe1f997bc722265116870bc7919059ea" target="_blank">版本符合的安裝檔</a>之後執行安裝：
+<pre lang="bash">sh setuptools-0.6c11-py2.7.egg</pre>
+就會把 easy_install 安裝在 homebrew 的 Celler 裡面了。<br />
+還沒結束呢！要在 .profile 裡面把 Celler 的 python bin 路徑加上去：
+<pre lang="bash">export PATH=`brew --prefix python`/bin:$PATH</pre>
+這樣就可以正常使用了！</p>
+
 ]]></content>
   </entry>
   

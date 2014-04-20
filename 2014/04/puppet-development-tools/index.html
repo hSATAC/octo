@@ -1,0 +1,406 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Puppet Development Tools - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Apr 20th, 2014 Puppet, Vagrant Puppet Development Tools 好一陣子沒寫 Puppet, 最近回來研究發現多了不少好用的工具，可以有效加速開發速度。 Vagrant 現在 Vagrant privisioner 直接提供了 Puppet 選項， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/2014/04/puppet-development-tools/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.ash.cat">Hobbies</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I am a programming language user. Here are some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-20T13:36:00+08:00" data-updated="true" itemprop="datePublished">Apr 20<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/puppet/'>Puppet</a>, <a class='category' href='/categories/vagrant/'>Vagrant</a>
+
+
+</div>
+    </div>
+	<h1 class="title" itemprop="name">Puppet Development Tools</h1>
+	<div class="entry-content" itemprop="articleBody"><p>好一陣子沒寫 Puppet, 最近回來研究發現多了不少好用的工具，可以有效加速開發速度。</p>
+
+<h2>Vagrant</h2>
+
+<p>現在 <a href="http://www.vagrantup.com/">Vagrant</a> privisioner 直接提供了 <a href="http://docs.vagrantup.com/v2/provisioning/puppet_apply.html">Puppet 選項</a>，可以幫你 sync hiera, manifests, modules 進去直接 run，也可以帶入 custom options 或是 factor，在開發 modules 的時候可以不用管其他東西，專心 focus 在 pp 本身。</p>
+
+<p>只要在 Vagrantfile 裡面加入這樣的設定即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  # Puppet config
+</span><span class='line'>  config.vm.provider "virtualbox" do |vb, override|
+</span><span class='line'>    override.vm.provision "puppet" do |puppet|
+</span><span class='line'>      puppet.options = "--parser future --verbose --debug" # For debug only
+</span><span class='line'>      puppet.manifests_path = "manifests"
+</span><span class='line'>      puppet.manifest_file  = "vagrant.pp"
+</span><span class='line'>      puppet.module_path    = "modules"
+</span><span class='line'>      puppet.hiera_config_path = "hiera.yaml"
+</span><span class='line'>    end
+</span><span class='line'>  end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>不過有兩個小地方需要注意：</p>
+
+<!-- more -->
+
+
+<h3>Puppet 版本</h3>
+
+<p>Vagrant 附的 Puppet 版本比較舊，是 2.7x。如果有新版本的需求，可以使用這隻 script 來升級 Puppet：</p>
+
+<script src="https://gist.github.com/hSATAC/11106132.js"></script>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  # Upgrade Puppet from 2.7 to 3.x
+</span><span class='line'>  config.vm.provision :shell, :path =&gt; "scripts/upgrade_puppet.sh"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Hiera 目錄</h3>
+
+<p>通常 hiera 不會只有一隻檔案，但 Vagrant 只會幫你掛上 modules 和 manifests 資料夾。這時就需要把 hiera 的目錄丟到 manifests 下面，並且在 hiera 設定 <code>:datadir: "%{settings::manifestdir}/hieradata"</code> 直接去吃 manifests 的路徑即可。</p>
+
+<hr />
+
+<h2>Librarian-Puppet</h2>
+
+<p><a href="http://librarian-puppet.com/">Librarian-Puppet</a> 是一個管理 puppet modules 的工具，基本上跟 bundler 的概念一樣。編寫 Puppetfile 以後，使用指令 <code>librarian-puppet install</code> 來安裝到 <code>modules</code> 目錄下。這樣就不用處理 <code>puppet module install</code> 和指定版本，以及安裝自己 private modules 的問題了。反正使用 librarian-puppet 他會幫你管好一個 <code>modules</code> 目錄。</p>
+
+<p>Puppetfile 支援幾種指定方式，都非常實用：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>modulefile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>只要直接下 modulefile 他就會去吃你 modulefile 裡面的 dependencies。這在開發 puppet modules 的時候會用到。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mod "puppetlabs/stdlib"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指定 puppet forge 的 package name。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mod "puppetlabs/apt",
+</span><span class='line'>  :git =&gt; "git://github.com/puppetlabs/puppetlabs-apt.git",
+</span><span class='line'>  :ref =&gt; '0.0.3'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指定某 repo 的 ref。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mod "puppetlabs/apt",
+</span><span class='line'>  :git =&gt; "git://github.com/fake/puppet-modules.git",
+</span><span class='line'>  :path =&gt; "modules/apt"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指定 repo 下的 path。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mod "puppetlabs/apt", :path =&gt; "modules/apt"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>指定 local path，可以用在 private modules。</p>
+
+<hr />
+
+<h2>Puppet Skeleton</h2>
+
+<p>以上這兩個工具搭配起來，開發 Puppet 就變得很容易了：把需要的 community modules 定義在 Puppetfile 裡面，private modules 放在 local, 一樣用 Puppetfile 掛起來安裝，再透過 Vagrant 指定 manifest path, file, hiera 的設定，直接 <code>$ vagrant up</code> 就可以反覆測試 puppet 了。</p>
+
+<p>我有做了一個 <a href="https://github.com/hSATAC/puppet-skeleton">puppet-skeleton</a> 的專案，這是我自己開發 Puppet 的專案架構跟 workspace。</p>
+
+<h3>Rake Tasks</h3>
+
+<p>這邊是一些我自己開發常用的 rake tasks，基本上就是省 keysroke&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake -T                                  <span class="c"># List all tasks.</span>
+</span><span class='line'><span class="nv">$ </span>rake -D                                  <span class="c"># List all tasks with descriptions.</span>
+</span><span class='line'><span class="nv">$ </span>rake module:lint                         <span class="c"># Puppet lint.</span>
+</span><span class='line'><span class="nv">$ </span>rake module:reinstall                    <span class="c"># Clean and reinstall modules.</span>
+</span><span class='line'><span class="nv">$ </span>rake module:sync                         <span class="c"># Sync private modules.</span>
+</span><span class='line'><span class="nv">$ </span>rake syntax                              <span class="c"># Syntax check Puppet manifests and templates</span>
+</span><span class='line'><span class="nv">$ </span>rake syntax:hiera                        <span class="c"># Syntax check Hiera config files</span>
+</span><span class='line'><span class="nv">$ </span>rake syntax:manifests                    <span class="c"># Syntax check Puppet manifests</span>
+</span><span class='line'><span class="nv">$ </span>rake syntax:templates                    <span class="c"># Syntax check Puppet templates</span>
+</span><span class='line'><span class="nv">$ </span>rake vagrant:provision<span class="o">[</span>name,provisioner<span class="o">]</span> <span class="c"># Provision vagrant VM.</span>
+</span><span class='line'><span class="nv">$ </span>rake vagrant:rebuild<span class="o">[</span>name<span class="o">]</span>               <span class="c"># Rebuild vagrant VM.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>目錄架構</h3>
+
+<p>跟上面講的差不多，除了特別把 <code>role</code> 跟 <code>profile</code> 兩個 modules 從 <code>private</code> modules 裡面抽出來到頂層。</p>
+
+<p>關於 <code>role</code> 以及 <code>profile</code> 可以看我之前的文章 <a href="http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet/">Roles and Profiles Pattern in Puppet</a>。</p>
+
+<p>也算是提供一個這個 pattern 的範例。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>.
+</span><span class='line'>├── Gemfile             <span class="c"># Required rubygems, use bundler to install.</span>
+</span><span class='line'>├── Puppetfile          <span class="c"># Required puppet modules, use librarian-puppet to install.</span>
+</span><span class='line'>├── README.md
+</span><span class='line'>├── Rakefile            <span class="c"># Some predefined tasks, to speed up development.</span>
+</span><span class='line'>├── Vagrantfile         <span class="c"># Vagrant configuration.</span>
+</span><span class='line'>├── hiera.yaml          <span class="c"># Puppet hiera config, only define hierarchy and datadir in this file.</span>
+</span><span class='line'>├── docs                <span class="c"># Some documents</span>
+</span><span class='line'>├── manifests
+</span><span class='line'>│   ├── hieradata         <span class="c"># The actual heirdata stored in this folder.</span>
+</span><span class='line'>│   ├── site.pp           <span class="c"># Node definition for production.</span>
+</span><span class='line'>│   └── vagrant.pp        <span class="c"># Node definition for local development.</span>
+</span><span class='line'>├── private             <span class="c"># Private modules, will be sync into `modules` folder by `librarian-puppet`.</span>
+</span><span class='line'>│   ├── common
+</span><span class='line'>│   └── users
+</span><span class='line'>├── profile             <span class="c"># Profile, abstraction of &quot;Technology stack&quot;</span>
+</span><span class='line'>│   ├── files
+</span><span class='line'>│   └── manifests
+</span><span class='line'>├── role                <span class="c"># Role, abstraction of &quot;What does this server do?&quot;</span>
+</span><span class='line'>│   └── manifests
+</span><span class='line'>├── spec                <span class="c"># Put test files</span>
+</span><span class='line'>└── scripts
+</span><span class='line'>    └── upgrade_puppet.sh <span class="c"># Script of upgrading puppet to version 3 on Ubuntu</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>在 EC2 上測試</h3>
+
+<p>只要稍微設定一下 Vagrantfile，就可以利用 <a href="https://github.com/mitchellh/vagrant-aws">Vagrant-AWS</a> 直接 deploy 到 AWS EC2 上面測試。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Ash Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2014/04/puppet-development-tools/';
+        var disqus_url = 'http://blog.hsatac.net/2014/04/puppet-development-tools/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
