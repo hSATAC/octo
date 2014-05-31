@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Sep 20th, 2012 book, fitness Comments 身體調校聖經 ⋯⋯《身體調校聖經》所提供的，是對人類重建身體的全新探索，全盤收錄幾百位優異運動員、幾十位醫師，以及幾千小時讓人目瞪口呆的個人實驗智慧；從奧林匹克訓練中心到地下實驗室，從矽谷到南非，作者提摩西． &hellip;">
+	<meta name="description" content="Sep 28th, 2012 ack, ag, bashmarks, commandline, goaccess, htop, mitmproxy, mosh, pdcp, pdsh, rpdcp, the_silver_searcher, tig Comments 8 款我最近常用的 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,44 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-28T13:45:00+08:00" data-updated="true" itemprop="datePublished">Sep 28<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/ack/'>ack</a>, <a class='category' href='/categories/ag/'>ag</a>, <a class='category' href='/categories/bashmarks/'>bashmarks</a>, <a class='category' href='/categories/commandline/'>commandline</a>, <a class='category' href='/categories/goaccess/'>goaccess</a>, <a class='category' href='/categories/htop/'>htop</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>, <a class='category' href='/categories/mosh/'>mosh</a>, <a class='category' href='/categories/pdcp/'>pdcp</a>, <a class='category' href='/categories/pdsh/'>pdsh</a>, <a class='category' href='/categories/rpdcp/'>rpdcp</a>, <a class='category' href='/categories/the-silver-searcher/'>the_silver_searcher</a>, <a class='category' href='/categories/tig/'>tig</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/09/8-command-line-tools-i-have-been-using-lately/" itemprop="url">8 款我最近常用的 Command Line 工具</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>介紹八款我最近常用的 command line 工具，對開發很有幫助。</p>
+
+
+		
+		<a href="/2012/09/8-command-line-tools-i-have-been-using-lately/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -556,59 +594,6 @@ end</code></pre></noscript></div>
 
 		
 		<a href="/2012/06/aws-ec2-setup-dynamic-dns-using-route-53/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-02T16:29:00+08:00" data-updated="true" itemprop="datePublished">May 2<span>nd</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/kvm/'>kvm</a>, <a class='category' href='/categories/virsh/'>virsh</a>, <a class='category' href='/categories/vm/'>vm</a>, <a class='category' href='/categories/vnc/'>vnc</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/05/ssh-vm-with-virsh-console/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/05/ssh-vm-with-virsh-console/" itemprop="url">Ssh Vm With Virsh Console</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近在玩 kvm，當 guest vm 的 network 環境不確定的時候，可以用 virt-viewer vnc 進去作設定，但總有沒有 X 或不適合使用 GUI 的狀況。這時可以利用 virsh console 這個指令進行連線。不過在 guest vm 要先修改一下設定。</p>
-
-<p>首先修改 guest vm 的 <code>/etc/grub.conf</code> ，把 kernel 那行最後加上 <code>console=tty0 console=ttyS0,1152200</code></p>
-
-<p>例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>kernel /vmlinuz-2.6.32-220.13.1.el6.centos.plus.x86_64 ro root=/dev/mappp
-</span><span class='line'>er/vg_w2vm001-lv_root rd_NO_LUKS  KEYBOARDTYPE=pc KEYTABLE=us LANG=en_US.UTF-8 rr
-</span><span class='line'>d_LVM_LV=vg_w2vm001/lv_swap rd_NO_MD quiet rd_LVM_LV=vg_w2vm001/lv_root rhgb craa
-</span><span class='line'>shkernel=auto SYSFONT=latarcyrheb-sun16 rd_NO_DM console=tty0 console=ttyS0,1152200</span></code></pre></td></tr></table></div></figure>
-
-
-<p>重開 guest vm 之後，在 host 就可以用 <code>virsh console &lt;domain&gt;</code> 直接連到 ssh terminal 啦。</p>
-
-		
-		
 	</div>
 
 </article>

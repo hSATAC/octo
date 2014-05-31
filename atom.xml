@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-20T14:29:07+08:00</updated>
+  <updated>2014-06-01T01:55:21+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,125 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant Provider and Provisioner]]></title>
+    <link href="http://blog.hsatac.net/2014/06/vagrant-provider-and-privisioner/"/>
+    <updated>2014-06-01T01:34:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/vagrant-provider-and-privisioner</id>
+    <content type="html"><![CDATA[<p>在寫 Vagrantfile 的時候如果需要用不同的 provider，例如用 virtualbox 和 aws 兩個 provider，但是 provisioner 的內容非常類似，這時候想省掉重複的部分，可以利用 Vagrantfile 本身就是 Ruby 的特性，直接定義一個共用的 lambda，不同的地方再另外設定：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Puppet config</span>
+</span><span class='line'>  <span class="n">puppet_block</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">puppet</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="s2">&quot;--parser future --verbose --debug&quot;</span> <span class="c1"># For debug only</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifests_path</span> <span class="o">=</span> <span class="s2">&quot;manifests&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifest_file</span>  <span class="o">=</span> <span class="s2">&quot;vagrant.pp&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">module_path</span>    <span class="o">=</span> <span class="s2">&quot;modules&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">hiera_config_path</span> <span class="o">=</span> <span class="s2">&quot;hiera.yaml&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="s2">&quot;virtualbox&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="p">,</span> <span class="n">override</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">override</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">puppet_block</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="ss">:aws</span> <span class="k">do</span> <span class="o">|</span><span class="n">aws</span><span class="p">,</span> <span class="n">override</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">override</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">puppet_block</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<!--more-->
+
+
+<p>provisioner 其實是可以多個的，就算是相同類型也一樣，並且他會依照順序執行，例如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Upgrade Puppet from 2.7 to 3.x</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:shell</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;scripts/upgrade_puppet.sh&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Install hiera-eyaml for Puppet</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:shell</span><span class="p">,</span> <span class="ss">:path</span> <span class="o">=&gt;</span> <span class="s2">&quot;scripts/install_eyaml.sh&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上會依序執行兩個 script。萬一需要 override 掉之前的某個 provisioner 怎麼辦呢？</p>
+
+<p>按照 <a href="https://docs.vagrantup.com/v2/provisioning/basic_usage.html">官方文件</a>其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現&hellip;當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了&hellip;可以想見我心中的喜悅。</p>
+
+<p>於是在需要 override 的場合就可以這樣寫：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Puppet config</span>
+</span><span class='line'>  <span class="n">puppet_block</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">puppet</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="s2">&quot;--parser future --verbose --debug&quot;</span> <span class="c1"># For debug only</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifests_path</span> <span class="o">=</span> <span class="s2">&quot;manifests&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifest_file</span>  <span class="o">=</span> <span class="s2">&quot;vagrant.pp&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">module_path</span>    <span class="o">=</span> <span class="s2">&quot;modules&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">hiera_config_path</span> <span class="o">=</span> <span class="s2">&quot;hiera.yaml&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="s2">&quot;virtualbox&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="p">,</span> <span class="n">override</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">override</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s2">&quot;puppet&quot;</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">puppet_block</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span> <span class="s2">&quot;staging&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">staging</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">staging</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;staging&quot;</span>
+</span><span class='line'>    <span class="n">staging</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="ss">:preserve_order</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span> <span class="o">|</span><span class="n">puppet</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">puppet_block</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">puppet</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">puppet</span><span class="o">.</span><span class="n">facter</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s1">&#39;environment&#39;</span> <span class="o">=&gt;</span> <span class="s2">&quot;staging&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>preserve_order</code> 可以維持原本被 override 掉的 provisioner 順序，沒有指定的話會加到最後面，變成最後執行。如果你的 provisioner 有順序相依性請務必注意這點。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Puppet Development Tools]]></title>
@@ -2130,40 +2249,6 @@
 <li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
 <li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RWBY]]></title>
-    <link href="http://blog.hsatac.net/2013/02/rwby/"/>
-    <updated>2013-02-15T17:54:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/rwby</id>
-    <content type="html"><![CDATA[<p>RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！</p>
-
-<p>之前看完第一部 &ldquo;Red&rdquo; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &ldquo;White&rdquo; 以後整個點都被打到啦！直接去 itunes 收了這兩首 OST…</p>
-
-<p>下一部 &ldquo;Black&rdquo; 預計在 2013.07 發佈，這樣算來本體推出都要 2014 啦！實在是很大一個坑&hellip;</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/Vt9vl8iAN5Q" frameborder="0" allowfullscreen></iframe>
-
-
-<!--more-->
-
-
-
-
-<blockquote><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, tell me something.<br/>Tell me who&#8217;s the loneliest of all.</p><p>Mirror, locked inside of me.<br/>Tell me can a heart be turned to stone?</p><p>Mirror mirror what&#8217;s behind you?<br/>Save me from the things I see!<br/>I can keep it from the world,<br/>why wont you let me hide from me?</p><p>Mirror, mirror,<br/>tell me something.<br/>Who&#8217;s the loneliest of all?</p><p>I am the loneliest of all.</p></blockquote>
-
-
-<p>第一部 &ldquo;Red&rdquo;</p>
-
-<iframe width="560" height="315" src="http://www.youtube.com/embed/pYW2GmHB5xs" frameborder="0" allowfullscreen></iframe>
-
-
-
-
-<blockquote><p>Red like roses fills my dreams and brings me to the place you rest<br/>White is cold and always yearning burdened by a royal test<br/>Black the beast descends from shadows<br/>Yellow beauty burns gold</p></blockquote>
 
 ]]></content>
   </entry>

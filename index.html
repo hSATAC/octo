@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Apr 20th, 2014 Puppet, Vagrant Comments Puppet Development Tools 好一陣子沒寫 Puppet, 最近回來研究發現多了不少好用的工具，可以有效加速開發速度。 Vagrant 現在 Vagrant provisioner 直接提供了 &hellip;">
+	<meta name="description" content="Jun 1st, 2014 Vagrant Comments Vagrant Provider and Provisioner 在寫 Vagrantfile 的時候如果需要用不同的 provider，例如用 virtualbox 和 aws 兩個 provider，但是 provisioner &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,81 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-01T01:34:00+08:00" data-updated="true" itemprop="datePublished">Jun 1<span>st</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/vagrant/'>Vagrant</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/06/vagrant-provider-and-privisioner/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/06/vagrant-provider-and-privisioner/" itemprop="url">Vagrant Provider and Provisioner</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>在寫 Vagrantfile 的時候如果需要用不同的 provider，例如用 virtualbox 和 aws 兩個 provider，但是 provisioner 的內容非常類似，這時候想省掉重複的部分，可以利用 Vagrantfile 本身就是 Ruby 的特性，直接定義一個共用的 lambda，不同的地方再另外設定：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># Puppet config</span>
+</span><span class='line'>  <span class="n">puppet_block</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">puppet</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="s2">&quot;--parser future --verbose --debug&quot;</span> <span class="c1"># For debug only</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifests_path</span> <span class="o">=</span> <span class="s2">&quot;manifests&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">manifest_file</span>  <span class="o">=</span> <span class="s2">&quot;vagrant.pp&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">module_path</span>    <span class="o">=</span> <span class="s2">&quot;modules&quot;</span>
+</span><span class='line'>    <span class="n">puppet</span><span class="o">.</span><span class="n">hiera_config_path</span> <span class="o">=</span> <span class="s2">&quot;hiera.yaml&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="s2">&quot;virtualbox&quot;</span> <span class="k">do</span> <span class="o">|</span><span class="n">vb</span><span class="p">,</span> <span class="n">override</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">override</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">puppet_block</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span> <span class="ss">:aws</span> <span class="k">do</span> <span class="o">|</span><span class="n">aws</span><span class="p">,</span> <span class="n">override</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">override</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="s2">&quot;puppet&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">puppet_block</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+
+		
+		<a href="/2014/06/vagrant-provider-and-privisioner/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -565,48 +640,6 @@
 
 		
 		<a href="/2013/08/the-art-of-readable-code/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-16T12:40:00+08:00" data-updated="true" itemprop="datePublished">Jul 16<span>th</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/github/'>Github</a>, <a class='category' href='/categories/hub/'>Hub</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/07/github-pull-request-from-commandline/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/07/github-pull-request-from-commandline/" itemprop="url">用 Commandline 發 Github Pull Request</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>現在團隊使用 github 來作 code hosting, 利用 pull request 機制來做 code review。比以往自己架 gitosis 和 redmine 的方式更方便好用。</p>
-
-<p>不過 programmer 天性懶惰，日子一久對於要開 github 網頁用滑鼠選 branch 發 pull request 的操作感到厭倦，能自動化的東西就懶得自己按按鈕啦！</p>
-
-<p>使用 <a href="https://github.com/github/hub">hub</a> 就可以用 commandline 進行各種 github 的操作。</p>
-
-
-		
-		<a href="/2013/07/github-pull-request-from-commandline/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vagrant | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-04-20T14:29:07+08:00</updated>
+  <updated>2014-06-01T01:55:21+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,98 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant Provider and Provisioner]]></title>
+    <link href="http://blog.hsatac.net/2014/06/vagrant-provider-and-privisioner/"/>
+    <updated>2014-06-01T01:34:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/vagrant-provider-and-privisioner</id>
+    <content type="html"><![CDATA[<p>在寫 Vagrantfile 的時候如果需要用不同的 provider，例如用 virtualbox 和 aws 兩個 provider，但是 provisioner 的內容非常類似，這時候想省掉重複的部分，可以利用 Vagrantfile 本身就是 Ruby 的特性，直接定義一個共用的 lambda，不同的地方再另外設定：</p>
+
+<p>``` ruby
+  # Puppet config
+  puppet_block = lambda do |puppet|</p>
+
+<pre><code>puppet.options = "--parser future --verbose --debug" # For debug only
+puppet.manifests_path = "manifests"
+puppet.manifest_file  = "vagrant.pp"
+puppet.module_path    = "modules"
+puppet.hiera_config_path = "hiera.yaml"
+</code></pre>
+
+<p>  end</p>
+
+<p>  config.vm.provider &ldquo;virtualbox&rdquo; do |vb, override|</p>
+
+<pre><code>override.vm.provision "puppet", &amp;puppet_block
+</code></pre>
+
+<p>  end</p>
+
+<p>  config.vm.provider :aws do |aws, override|</p>
+
+<pre><code>override.vm.provision "puppet", &amp;puppet_block
+</code></pre>
+
+<p>  end
+```</p>
+
+<!--more-->
+
+
+<p>provisioner 其實是可以多個的，就算是相同類型也一樣，並且他會依照順序執行，例如：</p>
+
+<p>``` ruby
+  # Upgrade Puppet from 2.7 to 3.x
+  config.vm.provision :shell, :path => &ldquo;scripts/upgrade_puppet.sh&rdquo;</p>
+
+<p>  # Install hiera-eyaml for Puppet
+  config.vm.provision :shell, :path => &ldquo;scripts/install_eyaml.sh&rdquo;
+```</p>
+
+<p>以上會依序執行兩個 script。萬一需要 override 掉之前的某個 provisioner 怎麼辦呢？</p>
+
+<p>按照 <a href="https://docs.vagrantup.com/v2/provisioning/basic_usage.html">官方文件</a>其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現&hellip;當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了&hellip;可以想見我心中的喜悅。</p>
+
+<p>於是在需要 override 的場合就可以這樣寫：</p>
+
+<p>``` ruby
+  # Puppet config
+  puppet_block = lambda do |puppet|</p>
+
+<pre><code>puppet.options = "--parser future --verbose --debug" # For debug only
+puppet.manifests_path = "manifests"
+puppet.manifest_file  = "vagrant.pp"
+puppet.module_path    = "modules"
+puppet.hiera_config_path = "hiera.yaml"
+</code></pre>
+
+<p>  end</p>
+
+<p>  config.vm.provider &ldquo;virtualbox&rdquo; do |vb, override|</p>
+
+<pre><code>override.vm.provision "puppet", :id =&gt; "puppet" , &amp;puppet_block
+</code></pre>
+
+<p>  end</p>
+
+<p>  config.vm.define &ldquo;staging&rdquo; do |staging|</p>
+
+<pre><code>staging.vm.hostname = "staging"
+staging.vm.provision "puppet", :id =&gt; "puppet", :preserve_order =&gt; true do |puppet|
+  puppet_block.call(puppet)
+  puppet.facter = {
+    'environment' =&gt; "staging",
+  }
+end
+</code></pre>
+
+<p>  end
+```</p>
+
+<p><code>preserve_order</code> 可以維持原本被 override 掉的 provisioner 順序，沒有指定的話會加到最後面，變成最後執行。如果你的 provisioner 有順序相依性請務必注意這點。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Puppet Development Tools]]></title>
