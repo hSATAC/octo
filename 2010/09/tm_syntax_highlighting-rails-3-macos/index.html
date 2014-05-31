@@ -1,0 +1,238 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>tm_syntax_highlighting + rails 3 + MacOs - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Sep 20th, 2010 Mac, Rails Tm_syntax_highlighting + Rails 3 + MacOs tm_syntax_highlighting是一個rails的syntax高亮plugin。 這類型的plugin有許多選擇，有一篇文章對常見的此類rails &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.ash.cat">Hobbies</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I am a programming language user. Here are some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-09-20T00:00:00+08:00" data-updated="true" itemprop="datePublished">Sep 20<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
+
+
+</div>
+    </div>
+	<h1 class="title" itemprop="name">Tm_syntax_highlighting + Rails 3 + MacOs</h1>
+	<div class="entry-content" itemprop="articleBody"><p>tm_syntax_highlighting是一個rails的syntax高亮plugin。</p>
+
+<p>這類型的plugin有許多選擇，有一篇文章對常見的此類rails plugin做了評比</p>
+
+<p><a title="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails">http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails</a></p>
+
+<p>直接說結論：最好的兩套是 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">harsh</a> 和 <a href="http://doblock.com/articles/a-whistle-stop-tour-of-syntax-highlighting-and-markdown-solutions-for-rails" target="_blank">tm_syntax_highlighting</a></p>
+
+<p><a href="/images/wp-uploads/2010/09/e24aa793bfb2.jpg"><img style="display: inline; border-width: 0px;" title="未命名" src="/images/wp-uploads/2010/09/thumb.jpg" border="0" alt="未命名" width="260" height="161" /></a></p>
+
+<p>這兩套其實差不多，都是用 ultraviolet + textpow 來做高亮，因此在安裝這兩套之前需要先安裝 ultraviolet。</p>
+
+<p>正常來說直接gem install ultraviolet就可以了，但我在我的mac上面碰到了一些問題，gem install無法正常安裝 oniguruma。</p>
+
+<p><!--more--></p>
+
+<p>2011/03/07更新：homebrew有oniguruma，直接brew install oniguruma
+<del datetime="2011-03-07T07:46:55+00:00">所以只好直接下載 <a href="http://www.geocities.jp/kosako3/oniguruma/" target="_blank">oniguruma</a> 下來一樣三步驟 ./configure;make;make install 後</del>再繼續安裝ultraviolet 就可以了。</p>
+
+<p>但如果直接用gem install tm_syntax_highlighting，安裝的版本非常奇怪，在rails 3 環境根本 run 不起來，generator 也沒有作用。去作者的 github 比對一下原始碼可以發現有許多修改都沒有放進去。好在 rails 3 的 Gemfile 可以指定git作為source了！但指定原作者的github為source，卻傳回錯誤訊息？</p>
+
+<p>稍微 google一下，發現有別人 release了 <a href="http://github.com/dasil003/tm_syntax_highlighting" target="_blank">for rails 3的此套件</a>，使用這個github來當source：
+<pre lang="ruby">gem 'tm_syntax_highlighting', :git=&gt;'http://github.com/dasil003/tm_syntax_highlighting.git'</pre>
+這樣就可以正常使用這個套件了，他的generator說明有點錯誤，直接下rails g syntax_css 就會把所有css檔案統統複製到public下面了，什麼list, all那些參數完全沒有作用。</p>
+
+<p>ultraviolet 支援的 syntax <a href="http://svn.textmate.org/trunk/Bundles/" target="_blank">列表在這</a></p>
+
+<p>使用時，傳:lang進去時記得要：
+<pre lang="ruby">str.downcase.gsub(" ","_")</pre></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Ash Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/';
+        var disqus_url = 'http://blog.hsatac.net/2010/09/tm_syntax_highlighting-rails-3-macos/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

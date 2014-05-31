@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 1st, 2014 Vagrant Comments Vagrant Provider and Provisioner 在寫 Vagrantfile 的時候如果需要用不同的 provider，例如用 virtualbox 和 aws 兩個 provider，但是 provisioner &hellip;">
+	<meta name="description" content="Jun 1st, 2014 Hiera, Puppet, eyaml Comments Puppet Hiera Encrypted YAML 在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,68 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-01T02:04:00+08:00" data-updated="true" itemprop="datePublished">Jun 1<span>st</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/hiera/'>Hiera</a>, <a class='category' href='/categories/puppet/'>Puppet</a>, <a class='category' href='/categories/eyaml/'>eyaml</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/06/puppet-hiera-encrypted-yml/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/06/puppet-hiera-encrypted-yml/" itemprop="url">Puppet Hiera Encrypted YAML</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 API key 或密碼等等，總是不想直接毫無保護的存進 git repository 中，以往我的作法是使用 <a href="https://github.com/crayfishx/hiera-gpg">Hiera-gpg</a> 來加密 YAML 檔，不過一來 gpg 頗為麻煩，二來他是整個檔案都加密，但有時我們只需要修改一些無傷大雅的設定，比如 cluster number 之類的，為此再抽一個加密的檔案專門放這些重要資訊，又破壞了原本的設計。</p>
+
+<p>這次改用了 <a href="https://github.com/TomPoulton/hiera-eyaml">Hiera-eyaml</a> 這個 plugin，他有許多特色和功能，最大的特點當然是他支援片段加密，也就是一個 YAML 檔，只有需要加密的地方再加密即可。我們的檔案可能就會長成這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>account: hSATAC
+</span><span class='line'>
+</span><span class='line'>password: &gt;
+</span><span class='line'>    ENC[PKCS7,Y22exl+OvjDe+drmik2XEeD3VQtl1uZJXFFF2NnrMXDWx0csyqLB/2NOWefv
+</span><span class='line'>    NBTZfOlPvMlAesyr4bUY4I5XeVbVk38XKxeriH69EFAD4CahIZlC8lkE/uDh
+</span><span class='line'>    jJGQfh052eonkungHIcuGKY/5sEbbZl/qufjAtp/ufor15VBJtsXt17tXP4y
+</span><span class='line'>    l5ZP119Fwq8xiREGOL0lVvFYJz2hZc1ppPCNG5lwuLnTekXN/OazNYpf4CMd
+</span><span class='line'>    /HjZFXwcXRtTlzewJLc+/gox2IfByQRhsI/AgogRfYQKocZgFb/DOZoXR7wm
+</span><span class='line'>    IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]</span></code></pre></td></tr></table></div></figure>
+
+
+
+		
+		<a href="/2014/06/puppet-hiera-encrypted-yml/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -598,48 +660,6 @@
 
 		
 		<a href="/2013/08/my-vimrc-for-golang/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-07T22:07:00+08:00" data-updated="true" itemprop="datePublished">Aug 7<span>th</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/art/'>Art</a>, <a class='category' href='/categories/programming/'>Programming</a>, <a class='category' href='/categories/readability/'>Readability</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/08/the-art-of-readable-code/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/08/the-art-of-readable-code/" itemprop="url">The Art of Readable Code 讀書筆記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這次公司的讀書分享會我被指定報告這本 <a href="http://shop.oreilly.com/product/9780596802301.do">The Art of Readable Code</a>。</p>
-
-<p><img src="/images/art_of_readable_code/cover.jpg" alt="The Art of Readable Code Cover" /></p>
-
-<p>這本書我以前就看過英文本，這次借這個機會重新複習整理了一下，又有新的收穫。把一些我覺得比較重要的點筆記下來，太基礎或可能用不太到的這邊就省略了。很推薦各位翻一下這本，是一本很值得一讀的小書。</p>
-
-
-		
-		<a href="/2013/08/the-art-of-readable-code/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

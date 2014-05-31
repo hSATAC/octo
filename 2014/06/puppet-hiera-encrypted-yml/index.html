@@ -1,0 +1,286 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Puppet Hiera Encrypted YAML - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Jun 1st, 2014 Hiera, Puppet, eyaml Puppet Hiera Encrypted YAML 在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 API key &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.ash.cat">Hobbies</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I am a programming language user. Here are some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-01T02:04:00+08:00" data-updated="true" itemprop="datePublished">Jun 1<span>st</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/hiera/'>Hiera</a>, <a class='category' href='/categories/puppet/'>Puppet</a>, <a class='category' href='/categories/eyaml/'>eyaml</a>
+
+
+</div>
+    </div>
+	<h1 class="title" itemprop="name">Puppet Hiera Encrypted YAML</h1>
+	<div class="entry-content" itemprop="articleBody"><p>在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 API key 或密碼等等，總是不想直接毫無保護的存進 git repository 中，以往我的作法是使用 <a href="https://github.com/crayfishx/hiera-gpg">Hiera-gpg</a> 來加密 YAML 檔，不過一來 gpg 頗為麻煩，二來他是整個檔案都加密，但有時我們只需要修改一些無傷大雅的設定，比如 cluster number 之類的，為此再抽一個加密的檔案專門放這些重要資訊，又破壞了原本的設計。</p>
+
+<p>這次改用了 <a href="https://github.com/TomPoulton/hiera-eyaml">Hiera-eyaml</a> 這個 plugin，他有許多特色和功能，最大的特點當然是他支援片段加密，也就是一個 YAML 檔，只有需要加密的地方再加密即可。我們的檔案可能就會長成這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>account: hSATAC
+</span><span class='line'>
+</span><span class='line'>password: &gt;
+</span><span class='line'>    ENC[PKCS7,Y22exl+OvjDe+drmik2XEeD3VQtl1uZJXFFF2NnrMXDWx0csyqLB/2NOWefv
+</span><span class='line'>    NBTZfOlPvMlAesyr4bUY4I5XeVbVk38XKxeriH69EFAD4CahIZlC8lkE/uDh
+</span><span class='line'>    jJGQfh052eonkungHIcuGKY/5sEbbZl/qufjAtp/ufor15VBJtsXt17tXP4y
+</span><span class='line'>    l5ZP119Fwq8xiREGOL0lVvFYJz2hZc1ppPCNG5lwuLnTekXN/OazNYpf4CMd
+</span><span class='line'>    /HjZFXwcXRtTlzewJLc+/gox2IfByQRhsI/AgogRfYQKocZgFb/DOZoXR7wm
+</span><span class='line'>    IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰匙即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。</p>
+
+<p>使用上非常容易，基本上只要在需要用到的地方(例如你開發的電腦，以及 puppet master)透過 gem 安裝 <code>hiera-eyaml</code> 即可。</p>
+
+<p>不過實際上我在配合 <a href="http://apt.puppetlabs.com/">apt.puppetlabs</a> 提供的 apt 套件時卻發生了問題，追了一下才發現因為 apt.puppetlabs 提供的 puppet 是直接安裝到 <code>/usr/lib/ruby/vendor_ruby/</code> 下面，所以直接用了一點暴力的方式來解決這個問題：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">gems</span><span class="o">=(</span> <span class="s2">&quot;hiera-eyaml-2.0.2&quot;</span> <span class="s2">&quot;trollop-2.0&quot;</span> <span class="s2">&quot;highline-1.6.21&quot;</span> <span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for </span>gem in <span class="s2">&quot;${gems[@]}&quot;</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span>wget http://rubygems.org/downloads/<span class="nv">$gem</span>.gem --quiet
+</span><span class='line'>    gem unpack <span class="nv">$gem</span>.gem
+</span><span class='line'>    sudo cp -r <span class="nv">$gem</span>/lib/* /usr/lib/ruby/vendor_ruby/
+</span><span class='line'>    rm -rf <span class="nv">$gem</span>*
+</span><span class='line'><span class="k">done</span>
+</span><span class='line'><span class="nv">gems</span><span class="o">=(</span> <span class="s2">&quot;hiera-eyaml-2.0.2&quot;</span> <span class="s2">&quot;trollop-2.0&quot;</span> <span class="s2">&quot;highline-1.6.21&quot;</span> <span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for </span>gem in <span class="s2">&quot;${gems[@]}&quot;</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span>wget http://rubygems.org/downloads/<span class="nv">$gem</span>.gem --quiet
+</span><span class='line'>    gem unpack <span class="nv">$gem</span>.gem
+</span><span class='line'>    sudo cp -r <span class="nv">$gem</span>/lib/* /usr/lib/ruby/vendor_ruby/
+</span><span class='line'>    rm -rf <span class="nv">$gem</span>*
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Ash Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml/';
+        var disqus_url = 'http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

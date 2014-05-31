@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Feb 15th, 2013 RWBY Comments RWBY RWBY 第二部預告片 &ldquo;White&rdquo; 終於推出！ 之前看完第一部 &ldquo;Red&rdquo; 時還沒有特別被萌到，只覺得創意、畫面和音樂都還不錯。不過這次看完 &ldquo;White& &hellip;">
+	<meta name="description" content="Feb 19th, 2013 Archlinux, puppet Comments 使用 Puppet 快速佈署 Archlinux 筆記一下安裝步驟&hellip;。 Install Archlinux 由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 @helmuthdu &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -125,6 +125,92 @@
   
 
 
+<time datetime="2013-02-19T17:51:00+08:00" data-updated="true" itemprop="datePublished">Feb 19<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/02/bootstrap-archlinux-with-puppet/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/bootstrap-archlinux-with-puppet/" itemprop="url">使用 Puppet 快速佈署 Archlinux</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>筆記一下安裝步驟&hellip;。</p>
+
+<h2>Install Archlinux</h2>
+
+<p>由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 <a href="https://twitter.com/helmuthdu">@helmuthdu</a> 的快速安裝 script <a href="https://github.com/helmuthdu/aui">AUI</a>，安裝完成後再使用 puppet bootstrap 環境</p>
+
+<ul>
+<li>放入 CD 選擇 x64_64 開機</li>
+<li>執行 <code>curl hsatac.net/getaui | sh</code></li>
+<li>進入 helmuthdu-aui-xxxx 目錄</li>
+<li>執行 <code>./aui --ais</code> 進入安裝程式</li>
+<li>輸入 1-14 執行全部安裝步驟</li>
+</ul>
+
+
+<p>ps. 如遇特定機種無法使用 grub2 可改用 syslinux bootloader</p>
+
+<h2>Reboot</h2>
+
+<p>安裝完成重開機後後首先設定讓網路能通
+可參考<a href="https://wiki.archlinux.org/index.php/Network_Configuration">官方wiki</a></p>
+
+<p>如欲使用 dhcp 可執行 <code>systemctl start dhcpcd</code>
+<code>systemctl enable dhcpcd</code> 開機自動執行</p>
+
+<ul>
+<li>回到 helmuthdu-aui-xxx 目錄</li>
+<li>執行 <code>./aui</code> 繼續安裝</li>
+<li>新增使用者步驟必須執行，因後續步驟需用 sudo</li>
+<li>AUR helper 選擇 yaourt
+(Yaourt 和 packer 大同小異，但因 puppet 使用 yaourt 所以改用。)</li>
+<li>後面的 setup 可跳過，或者裝 Basic Setup 即可，這邊都是 桌面環境相關</li>
+<li>設定 /etc/resolv.conf</li>
+</ul>
+
+
+<h2>使用 puppet</h2>
+
+<p>puppet 可使用 master-agent 架構或者單機(solo) 安裝，詳見 puppet wiki</p>
+
+<ul>
+<li><code>yaourt puppet</code> 安裝 puppet</li>
+<li>在 /etc/hosts 設定 puppet master hostname 並在 /etc/puppet/puppet.conf [agent] 區塊設定 <code>server = xxx</code> (hostname 要跟 master hostname 一樣不然憑證不會過)</li>
+<li>run <code>puppet agent --test</code> 會出現沒有憑證訊息</li>
+<li>回到 puppet master 執行 <code>puppet cert list</code> 會看到待簽署的憑證</li>
+<li>執行 <code>puppet cert sign [hostname]</code> 簽署</li>
+<li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
+<li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
+</ul>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2013-02-15T17:54:00+08:00" data-updated="true" itemprop="datePublished">Feb 15<span>th</span>, 2013</time></div>
         <div class="tags">
 
@@ -191,6 +277,57 @@
 
 		
 		<a href="/2013/01/trace-rubygems-require-slow/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-11T13:41:00+08:00" data-updated="true" itemprop="datePublished">Dec 11<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/nagios/'>nagios</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/12/nagios-basic-configuration/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/12/nagios-basic-configuration/" itemprop="url">Nagios 基本設定</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Nagios 是一個相當萬用的老牌監控軟體，資源和插件都很多。不過由於他的彈性太好，相對設定上就不是很容易上手。這篇文章將會紀錄比較重要的一些基本設定和觀念。</p>
+
+<p>由於不同 distribution 的差異，以下路徑都是 Archlinux 下的，可能會有所不同。</p>
+
+<h3>/etc/nagios/nagios.cfg</h3>
+
+<p>所有相關 nagios 本身的設定都在此。如果之後發現有一些預期以外的行為，通常回來這個檔案仔細檢查問題都在這。基礎跑的話可以先不用修改這個檔案的內容。先把監控項目設定起來，最後再回頭來微調就好。</p>
+
+<h3>/etc/nagios/objects</h3>
+
+<p>這個目錄是最重要的目錄，所有監控的設定都放在這邊。</p>
+
+<h3>/etc/nagios/objects/templates.cfg</h3>
+
+<p>Nagios 設定的方式有點 OO 的感覺，許多設定都是繼承某個原型而來。當然你也可以都不要繼承，每一條都詳細設定，不過這樣寫起來會很繁瑣，日後也不好維護管理。</p>
+
+		
+		
 	</div>
 
 </article>
@@ -479,86 +616,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-21T11:07:00+08:00" data-updated="true" itemprop="datePublished">Oct 21<span>st</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/logo/'>logo</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/10/about-my-logo/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/10/about-my-logo/" itemprop="url">關於我的 Logo</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
-
-<p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
-
-
-		
-		<a href="/2012/10/about-my-logo/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-17T10:20:00+08:00" data-updated="true" itemprop="datePublished">Oct 17<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/go/'>go</a>, <a class='category' href='/categories/gocode/'>gocode</a>, <a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/10/sync-git-with-hg/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/10/sync-git-with-hg/" itemprop="url">同步 Git 和 Hg 的 Repository</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近在玩 go，編輯器主要是使用 vim 搭配 <a href="https://github.com/nsf/gocode">gocode</a>。我習慣用 <a href="https://github.com/tpope/vim-pathogen">pathogen.vim</a> 來管理我的 vim 套件，不過 go 官方附的 vim syntax plugin 和 gocode 提供的 autocompletion plugin 目錄結構都無法直接當成 git submodule 引入我的 vim 設定中。</p>
-
-<p>由於我個人潔癖作祟，不想再用 copy 的方式來管理我的 vim plugins，所以我決定自己把這兩份 plugin 抽出來獨立成各自的 git repositories，就可以當成 git submodule 引用了。</p>
-
-
-		
-		<a href="/2012/10/sync-git-with-hg/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

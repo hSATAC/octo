@@ -4,7 +4,7 @@
   <title><![CDATA[Category: puppet | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/puppet/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T01:55:21+08:00</updated>
+  <updated>2014-06-01T02:19:51+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -420,6 +420,75 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Puppet Hiera Encrypted YAML]]></title>
+    <link href="http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml/"/>
+    <updated>2014-06-01T02:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml</id>
+    <content type="html"><![CDATA[<p>在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 API key 或密碼等等，總是不想直接毫無保護的存進 git repository 中，以往我的作法是使用 <a href="https://github.com/crayfishx/hiera-gpg">Hiera-gpg</a> 來加密 YAML 檔，不過一來 gpg 頗為麻煩，二來他是整個檔案都加密，但有時我們只需要修改一些無傷大雅的設定，比如 cluster number 之類的，為此再抽一個加密的檔案專門放這些重要資訊，又破壞了原本的設計。</p>
+
+<p>這次改用了 <a href="https://github.com/TomPoulton/hiera-eyaml">Hiera-eyaml</a> 這個 plugin，他有許多特色和功能，最大的特點當然是他支援片段加密，也就是一個 YAML 檔，只有需要加密的地方再加密即可。我們的檔案可能就會長成這樣：</p>
+
+<h2>```</h2>
+
+<p>account: hSATAC</p>
+
+<p>password: ></p>
+
+<pre><code>ENC[PKCS7,Y22exl+OvjDe+drmik2XEeD3VQtl1uZJXFFF2NnrMXDWx0csyqLB/2NOWefv
+NBTZfOlPvMlAesyr4bUY4I5XeVbVk38XKxeriH69EFAD4CahIZlC8lkE/uDh
+jJGQfh052eonkungHIcuGKY/5sEbbZl/qufjAtp/ufor15VBJtsXt17tXP4y
+l5ZP119Fwq8xiREGOL0lVvFYJz2hZc1ppPCNG5lwuLnTekXN/OazNYpf4CMd
+/HjZFXwcXRtTlzewJLc+/gox2IfByQRhsI/AgogRfYQKocZgFb/DOZoXR7wm
+IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰匙即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。</p>
+
+<p>使用上非常容易，基本上只要在需要用到的地方(例如你開發的電腦，以及 puppet master)透過 gem 安裝 <code>hiera-eyaml</code> 即可。</p>
+
+<p>不過實際上我在配合 <a href="http://apt.puppetlabs.com/">apt.puppetlabs</a> 提供的 apt 套件時卻發生了問題，追了一下才發現因為 apt.puppetlabs 提供的 puppet 是直接安裝到 <code>/usr/lib/ruby/vendor_ruby/</code> 下面，所以直接用了一點暴力的方式來解決這個問題：</p>
+
+<p>``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>gems=( &ldquo;hiera-eyaml-2.0.2&rdquo; &ldquo;trollop-2.0&rdquo; &ldquo;highline-1.6.21&rdquo; )</p>
+
+<p>for gem in &ldquo;${gems[@]}&rdquo;
+do</p>
+
+<pre><code>wget http://rubygems.org/downloads/$gem.gem --quiet
+gem unpack $gem.gem
+sudo cp -r $gem/lib/* /usr/lib/ruby/vendor_ruby/
+rm -rf $gem*
+</code></pre>
+
+<p>done
+gems=( &ldquo;hiera-eyaml-2.0.2&rdquo; &ldquo;trollop-2.0&rdquo; &ldquo;highline-1.6.21&rdquo; )</p>
+
+<p>for gem in &ldquo;${gems[@]}&rdquo;
+do</p>
+
+<pre><code>wget http://rubygems.org/downloads/$gem.gem --quiet
+gem unpack $gem.gem
+sudo cp -r $gem/lib/* /usr/lib/ruby/vendor_ruby/
+rm -rf $gem*
+</code></pre>
+
+<p>done</p>
+
+<p>```</p>
+
+<p>自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Puppet Development Tools]]></title>
     <link href="http://blog.hsatac.net/2014/04/puppet-development-tools/"/>
     <updated>2014-04-20T13:36:00+08:00</updated>
@@ -577,213 +646,6 @@ $ rake vagrant:rebuild[name]               # Rebuild vagrant VM.
 <h3>在 EC2 上測試</h3>
 
 <p>只要稍微設定一下 Vagrantfile，就可以利用 <a href="https://github.com/mitchellh/vagrant-aws">Vagrant-AWS</a> 直接 deploy 到 AWS EC2 上面測試。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Roles and Profiles Pattern in Puppet]]></title>
-    <link href="http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet/"/>
-    <updated>2014-04-12T14:04:00+08:00</updated>
-    <id>http://blog.hsatac.net/2014/04/roles-and-profiles-pattern-in-puppet</id>
-    <content type="html"><![CDATA[<p>一開始寫 Puppet 就是 node definition 直接寫寫寫&hellip;後來就會開始把重複的 resource, file 等等拆成 modules&hellip;。不過當機器越來越多，發現還是有許多重複的地方，例如有好多台 web server, 但是他們有些又有些許的不同&hellip;。</p>
-
-<!-- more -->
-
-
-<h2>Original Style</h2>
-
-<p>先看看傳統的寫法：</p>
-
-<p>```
-node web {</p>
-
-<pre><code>include users
-include nginx
-include rails
-</code></pre>
-
-<p>}</p>
-
-<p>node worker {</p>
-
-<pre><code>include users
-include rails
-include redis
-</code></pre>
-
-<p>}</p>
-
-<p>node db {</p>
-
-<pre><code>include users
-include mysql
-</code></pre>
-
-<p>}</p>
-
-<p>node web-qa {</p>
-
-<pre><code>include users
-include nginx
-include rails
-include mysql
-include redis
-</code></pre>
-
-<p>}
-```</p>
-
-<p>四個看起來還好，但是當機器越來越多的時候，就會感到難以維護了。</p>
-
-<h2>Roles and Profiles Pattern</h2>
-
-<blockquote><p>All problems in computer science can be solved by another level of indirection.</p></blockquote>
-
-<p>所有電腦科學領域的問題都可以用抽象化來解決(除了抽象太多層以外)，以上的問題我們可以用現在常見的 &ldquo;Roles and Profiles Pattern&rdquo; 來做抽象。</p>
-
-<h2>Role</h2>
-
-<p>Role 很好理解，顧名思義就是「扮演的角色」，以上面的例子我們就有 web, db, worker，web 可能又分成 production 環境和 QA 環境。</p>
-
-<p>這邊舉的例子可能太技術取向了，可以想想平常團隊在溝通時，在稱呼某台機器的時候都是怎麼稱呼的：「那台壓影片的」、「那台 QA 環境」&hellip;就很清楚明瞭了。</p>
-
-<p>用這個思路來整理 node 會變成這樣：</p>
-
-<p>```
-node web {</p>
-
-<pre><code>include role::web::production
-</code></pre>
-
-<p>}</p>
-
-<p>node worker {</p>
-
-<pre><code>include role::worker
-</code></pre>
-
-<p>}</p>
-
-<p>node db {</p>
-
-<pre><code>include role::db
-</code></pre>
-
-<p>}</p>
-
-<p>node web-qa {</p>
-
-<pre><code>include role::web::qa
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Role 本身大概會長這樣：</p>
-
-<p>```
-class role {
-  include profile::base
-}</p>
-
-<p>class role::web inherits role {
-  include profile::nginx
-}</p>
-
-<p>class role::web::production inherits role::web {
-  include profile::nginx::production
-}</p>
-
-<p>class role::web::qa inherits role::web {
-  include profile::nginx::qa
-  include profile::db
-  include profile::worker
-}</p>
-
-<p>class role::db inherits role {
-  include profile::mysql
-}</p>
-
-<p>class role::worker inherits role {
-  include profile::worker
-}
-```</p>
-
-<h2>Profile</h2>
-
-<p>Profile 則是用來抽象化「一組服務、設定」的。看上面 Role 的部份應該有點感覺了：</p>
-
-<p>```
-class profile::base {</p>
-
-<pre><code>include users
-</code></pre>
-
-<p>}</p>
-
-<p>class profile::web {</p>
-
-<pre><code>include nginx
-include rails
-</code></pre>
-
-<p>}</p>
-
-<p>class profile::web::production inherits profile::web {</p>
-
-<pre><code>::nginx::file { 'production.conf':
-  content =&gt; ...,
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>class profile::web::qa inherits profile::web {</p>
-
-<pre><code>::nginx::file { 'qa.conf':
-  content =&gt; ...,
-</code></pre>
-
-<p>  }
-}</p>
-
-<p>class profile::db inherits {</p>
-
-<pre><code>include profile::mysql
-</code></pre>
-
-<p>}</p>
-
-<p>class profile::worker {}</p>
-
-<pre><code>include rails
-include redis
-</code></pre>
-
-<p>}
-```</p>
-
-<p>這樣就可以把重複的程式碼減少，同時又保留彈性。</p>
-
-<h2>Tips</h2>
-
-<ul>
-<li>一個 node 只 include <em>一個</em> role。如果這兩個 role 很像，但又有些微不同，那就是一個新 role。</li>
-<li>一個 role include 一個或多個 profile，而且 <em>只能 include profile</em> 。</li>
-</ul>
-
-
-<h2>Further Reading</h2>
-
-<p>更多詳細細節、優缺點以及不同的設計方式可以參考以下的幾篇連結：</p>
-
-<ul>
-<li><a href="http://www.craigdunn.org/2012/05/239/">Designing Puppet – Roles and Profiles</a></li>
-<li><a href="http://www.slideshare.net/PuppetLabs/roles-talk">Designing Puppet: Roles/Profiles Pattern</a></li>
-<li><a href="http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/">Building a Functional Puppet Workflow Part 2: Roles and Profiles</a></li>
-<li><a href="http://sysadvent.blogspot.tw/2012/12/day-13-configuration-management-as-legos.html">Configuration Management as Legos</a></li>
-</ul>
-
 ]]></content>
   </entry>
   

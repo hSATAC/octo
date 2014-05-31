@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T01:55:21+08:00</updated>
+  <updated>2014-06-01T02:19:51+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Puppet Hiera Encrypted YAML]]></title>
+    <link href="http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml/"/>
+    <updated>2014-06-01T02:04:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/puppet-hiera-encrypted-yml</id>
+    <content type="html"><![CDATA[<p>在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 API key 或密碼等等，總是不想直接毫無保護的存進 git repository 中，以往我的作法是使用 <a href="https://github.com/crayfishx/hiera-gpg">Hiera-gpg</a> 來加密 YAML 檔，不過一來 gpg 頗為麻煩，二來他是整個檔案都加密，但有時我們只需要修改一些無傷大雅的設定，比如 cluster number 之類的，為此再抽一個加密的檔案專門放這些重要資訊，又破壞了原本的設計。</p>
+
+<p>這次改用了 <a href="https://github.com/TomPoulton/hiera-eyaml">Hiera-eyaml</a> 這個 plugin，他有許多特色和功能，最大的特點當然是他支援片段加密，也就是一個 YAML 檔，只有需要加密的地方再加密即可。我們的檔案可能就會長成這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>account: hSATAC
+</span><span class='line'>
+</span><span class='line'>password: &gt;
+</span><span class='line'>    ENC[PKCS7,Y22exl+OvjDe+drmik2XEeD3VQtl1uZJXFFF2NnrMXDWx0csyqLB/2NOWefv
+</span><span class='line'>    NBTZfOlPvMlAesyr4bUY4I5XeVbVk38XKxeriH69EFAD4CahIZlC8lkE/uDh
+</span><span class='line'>    jJGQfh052eonkungHIcuGKY/5sEbbZl/qufjAtp/ufor15VBJtsXt17tXP4y
+</span><span class='line'>    l5ZP119Fwq8xiREGOL0lVvFYJz2hZc1ppPCNG5lwuLnTekXN/OazNYpf4CMd
+</span><span class='line'>    /HjZFXwcXRtTlzewJLc+/gox2IfByQRhsI/AgogRfYQKocZgFb/DOZoXR7wm
+</span><span class='line'>    IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰匙即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。</p>
+
+<p>使用上非常容易，基本上只要在需要用到的地方(例如你開發的電腦，以及 puppet master)透過 gem 安裝 <code>hiera-eyaml</code> 即可。</p>
+
+<p>不過實際上我在配合 <a href="http://apt.puppetlabs.com/">apt.puppetlabs</a> 提供的 apt 套件時卻發生了問題，追了一下才發現因為 apt.puppetlabs 提供的 puppet 是直接安裝到 <code>/usr/lib/ruby/vendor_ruby/</code> 下面，所以直接用了一點暴力的方式來解決這個問題：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">gems</span><span class="o">=(</span> <span class="s2">&quot;hiera-eyaml-2.0.2&quot;</span> <span class="s2">&quot;trollop-2.0&quot;</span> <span class="s2">&quot;highline-1.6.21&quot;</span> <span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for </span>gem in <span class="s2">&quot;${gems[@]}&quot;</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span>wget http://rubygems.org/downloads/<span class="nv">$gem</span>.gem --quiet
+</span><span class='line'>    gem unpack <span class="nv">$gem</span>.gem
+</span><span class='line'>    sudo cp -r <span class="nv">$gem</span>/lib/* /usr/lib/ruby/vendor_ruby/
+</span><span class='line'>    rm -rf <span class="nv">$gem</span>*
+</span><span class='line'><span class="k">done</span>
+</span><span class='line'><span class="nv">gems</span><span class="o">=(</span> <span class="s2">&quot;hiera-eyaml-2.0.2&quot;</span> <span class="s2">&quot;trollop-2.0&quot;</span> <span class="s2">&quot;highline-1.6.21&quot;</span> <span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for </span>gem in <span class="s2">&quot;${gems[@]}&quot;</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span>wget http://rubygems.org/downloads/<span class="nv">$gem</span>.gem --quiet
+</span><span class='line'>    gem unpack <span class="nv">$gem</span>.gem
+</span><span class='line'>    sudo cp -r <span class="nv">$gem</span>/lib/* /usr/lib/ruby/vendor_ruby/
+</span><span class='line'>    rm -rf <span class="nv">$gem</span>*
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vagrant Provider and Provisioner]]></title>
@@ -2192,64 +2277,6 @@
 <h2>Openrc &amp; Systemd</h2>
 
 <p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用 Puppet 快速佈署 Archlinux]]></title>
-    <link href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/"/>
-    <updated>2013-02-19T17:51:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet</id>
-    <content type="html"><![CDATA[<p>筆記一下安裝步驟&hellip;。</p>
-
-<h2>Install Archlinux</h2>
-
-<p>由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 <a href="https://twitter.com/helmuthdu">@helmuthdu</a> 的快速安裝 script <a href="https://github.com/helmuthdu/aui">AUI</a>，安裝完成後再使用 puppet bootstrap 環境</p>
-
-<ul>
-<li>放入 CD 選擇 x64_64 開機</li>
-<li>執行 <code>curl hsatac.net/getaui | sh</code></li>
-<li>進入 helmuthdu-aui-xxxx 目錄</li>
-<li>執行 <code>./aui --ais</code> 進入安裝程式</li>
-<li>輸入 1-14 執行全部安裝步驟</li>
-</ul>
-
-
-<p>ps. 如遇特定機種無法使用 grub2 可改用 syslinux bootloader</p>
-
-<h2>Reboot</h2>
-
-<p>安裝完成重開機後後首先設定讓網路能通
-可參考<a href="https://wiki.archlinux.org/index.php/Network_Configuration">官方wiki</a></p>
-
-<p>如欲使用 dhcp 可執行 <code>systemctl start dhcpcd</code>
-<code>systemctl enable dhcpcd</code> 開機自動執行</p>
-
-<ul>
-<li>回到 helmuthdu-aui-xxx 目錄</li>
-<li>執行 <code>./aui</code> 繼續安裝</li>
-<li>新增使用者步驟必須執行，因後續步驟需用 sudo</li>
-<li>AUR helper 選擇 yaourt
-(Yaourt 和 packer 大同小異，但因 puppet 使用 yaourt 所以改用。)</li>
-<li>後面的 setup 可跳過，或者裝 Basic Setup 即可，這邊都是 桌面環境相關</li>
-<li>設定 /etc/resolv.conf</li>
-</ul>
-
-
-<h2>使用 puppet</h2>
-
-<p>puppet 可使用 master-agent 架構或者單機(solo) 安裝，詳見 puppet wiki</p>
-
-<ul>
-<li><code>yaourt puppet</code> 安裝 puppet</li>
-<li>在 /etc/hosts 設定 puppet master hostname 並在 /etc/puppet/puppet.conf [agent] 區塊設定 <code>server = xxx</code> (hostname 要跟 master hostname 一樣不然憑證不會過)</li>
-<li>run <code>puppet agent --test</code> 會出現沒有憑證訊息</li>
-<li>回到 puppet master 執行 <code>puppet cert list</code> 會看到待簽署的憑證</li>
-<li>執行 <code>puppet cert sign [hostname]</code> 簽署</li>
-<li>記得在 master 的 /etc/puppet/manifests/site.pp 設定新的 node 定義</li>
-<li>回到 agent 執行 <code>puppet agent --test</code> 進行安裝</li>
-</ul>
-
 ]]></content>
   </entry>
   
