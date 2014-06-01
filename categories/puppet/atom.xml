@@ -4,7 +4,7 @@
   <title><![CDATA[Category: puppet | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/puppet/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T09:06:58+08:00</updated>
+  <updated>2014-06-01T09:47:38+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -447,7 +447,7 @@ IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]
 <!--more-->
 
 
-<p>這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰匙即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。</p>
+<p>這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。</p>
 
 <p>使用上非常容易，基本上只要在需要用到的地方(例如你開發的電腦，以及 puppet master)透過 gem 安裝 <code>hiera-eyaml</code> 即可。</p>
 
@@ -469,7 +469,6 @@ rm -rf $gem*
 </code></pre>
 
 <p>done
-gems=( &ldquo;hiera-eyaml-2.0.2&rdquo; &ldquo;trollop-2.0&rdquo; &ldquo;highline-1.6.21&rdquo; )
 ```</p>
 
 <p>自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。</p>
