@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vagrant | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T02:19:51+08:00</updated>
+  <updated>2014-06-01T09:06:58+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -63,7 +63,7 @@ puppet.hiera_config_path = "hiera.yaml"
 
 <p>以上會依序執行兩個 script。萬一需要 override 掉之前的某個 provisioner 怎麼辦呢？</p>
 
-<p>按照 <a href="https://docs.vagrantup.com/v2/provisioning/basic_usage.html">官方文件</a>其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現&hellip;當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了&hellip;可以想見我心中的喜悅。</p>
+<p>按照<a href="https://docs.vagrantup.com/v2/provisioning/basic_usage.html">官方文件</a>其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現&hellip;當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了&hellip;可以想見我心中的喜悅。</p>
 
 <p>於是在需要 override 的場合就可以這樣寫：</p>
 

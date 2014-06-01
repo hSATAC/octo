@@ -9,7 +9,9 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 11th, 2011 PHP, 工作紀錄 Comments Better Array, Better PHP PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。 Read on &rarr; May 18th, 2011 &hellip;">
+	<meta name="description" content="Apr 14th, 2011 Mac, Rails Comments 整合 Redmine 和 Git 其實就是[專案設定] > [版本控管] 裡面填 git repo path 而已
+不過一直報找不到專案，看了一下 error log 原來是找不到 git 執行檔
+解法很簡單，原本 httpd &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -125,131 +127,6 @@
   
 
 
-<time datetime="2011-06-11T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 11<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/06/better-array-better-php/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/06/better-array-better-php/" itemprop="url">Better Array, Better PHP</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。
-<p style="text-align: center;"><a href="/images/wp-uploads/2011/06/betterphp.png"><img class="aligncenter size-full wp-image-445" title="betterphp" src="/images/wp-uploads/2011/06/betterphp.png" alt="" width="446" height="393" /></a></p>
-
-		
-		<a href="/2011/06/better-array-better-php/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-18T00:00:00+08:00" data-updated="true" itemprop="datePublished">May 18<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" itemprop="url">我的 Vimrc for Vim, Win32 Gvim, Macvim</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
-
-<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。
-		
-		<a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-28T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 28<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/04/firefox4-x-webm-x-apache/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/04/firefox4-x-webm-x-apache/" itemprop="url">Firefox4 X WebM X Apache</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
-
-<p>&nbsp;</p>
-
-<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
-
-<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
-
-<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
-<pre lang="bash">video/webm webm</pre>
-至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧&#8230;</p>
-
-<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
 <time datetime="2011-04-14T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 14<span>th</span>, 2011</time></div>
         <div class="tags">
 
@@ -308,75 +185,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
   
 
 
-<time datetime="2011-04-07T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 7<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/php/'>PHP</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/04/how-to-enable-php-gmp-on-mac-os-x/" itemprop="url">How to Enable Php Gmp on Mac OS X Without Macports</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>If you are using macports, you can easily install the package of &#8220;php-gmp&#8221;.</p>
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn&#8217;t work with PHP 5.3</p>
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-<p>And load it in your /private/etc/php.ini</p>
-
-<p>It&#8217;s done!</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
 <time datetime="2011-04-04T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 4<span>th</span>, 2011</time></div>
         <div class="tags">
 
@@ -397,49 +205,6 @@ MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' L
 
 		
 		<a href="/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-03-22T00:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 22<span>nd</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/python/'>Python</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/" itemprop="url">在 Mac 環境使用 Homebrew 安裝 Python + Easy_install</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><p style="text-align: center;"><img class="size-full wp-image-317 aligncenter" title="python-logo-glassy[1]" src="/images/wp-uploads/2011/03/python-logo-glassy1.png" alt="" width="286" height="364" /></p>
-今天傳說中的 python 達人 / vim之神 <a href="http://tib.tw/frame.htm" target="_blank">Tiberius 大大</a> 在公司主講了 python 基本教學，讓大家眼界都開了不少。</p>
-
-<p>回家想在 mac 上安裝 python 卻發現有些問題。</p>
-
-<p>使用 homebrew 安裝 python (2.7) 的話，會讓原本的 easy_install (2.6) 失效，因此要稍微做一點處理：</p>
-
-<p>
-		
-		<a href="/2011/03/%E5%9C%A8-mac-%E7%92%B0%E5%A2%83%E4%BD%BF%E7%94%A8-homebrew-%E5%AE%89%E8%A3%9D-python-easy_install/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -564,47 +329,239 @@ apache vhost的設法和 rails 的一樣即可
   
 
 
-<time datetime="2011-02-22T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2011</time></div>
+<time datetime="2011-02-17T00:00:00+08:00" data-updated="true" itemprop="datePublished">Feb 17<span>th</span>, 2011</time></div>
         <div class="tags">
 
 
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/rails/'>Rails</a>
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
 
 
 </div>
         
-        <span class="comments"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/#disqus_thread">Comments</a></span>
+        <span class="comments"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/#disqus_thread">Comments</a></span>
         
     </div>
-	<h1 class="title" itemprop="name"><a href="/2011/02/mac-osx-server-10-6-%E5%AE%89%E8%A3%9D-mysql2-gem/" itemprop="url">Mac OSX Server 10.6 安裝 Mysql2 Gem</a></h1>
+	<h1 class="title" itemprop="name"><a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" itemprop="url">用 Javascript 更改 Chrome, Firefox, IE 的預設搜尋引擎</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<p>想當初因為 mac osx server 已經內建 mysql ，所以就沒有完全照 xdite 大神和 ihower 大神的環境安裝 best practice 走<br />
-下場就是真的踩到很多地雷，真的是不聽老人言，吃虧在眼前。 mysql2 這個雷真的踩的很痛，然後 rvm 真的是好東西，別省這點時間。</p>
+		<p><img src="http://crazyhood.com/Content/_PostDir/Images/google_search_2.jpg" alt="" width="90%" /></p>
 
-<p>言歸正傳，當你安裝 mysql2 gem 時碰到這個錯誤訊息：
-<pre lang="bash">
-EBuilding native extensions.  This could take a while...
-ERROR:  Error installing mysql2:
-    ERROR: Failed to build gem native extension.</pre></p>
+<p>首先根據 <a href="http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document" target="_blank">OpenSearch</a> 的規格寫出自訂搜尋引擎的描述 xml 檔<br />
+如果用 Firefox 產生的 xml ，由於不是 OpenSearch 的標準格式，因此只有 Firefox 能辨認。</p>
 
-<p>/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/bin/ruby extconf.rb<br />
-checking for rb_thread_blocking_region()&#8230; no<br />
-checking for mysql.h&#8230; no<br />
-checking for mysql/mysql.h&#8230; no<br />
-&#8212;&#8211;<br />
-mysql.h is missing.  please check your installation of mysql and try again.<br />
-&#8212;&#8211;
-</p>
-
-<p>請下：
-<pre lang="bash">
-env ARCHFLAGS="-arch x86_64" gem install mysql2 -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
-</pre></p>
-
-<p>這樣應該就可以正常編譯了。(不過因為我為了解這個雷自己亂改過很多東西，所以我也不太確定，歡迎留言討論。)</p>
-
+<p>
 		
+		<a href="/2011/02/%E7%94%A8-javascript-%E6%9B%B4%E6%94%B9-chrome-firefox-ie-%E7%9A%84%E9%A0%90%E8%A8%AD%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-25T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jan 25<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" itemprop="url">Freenode伺服器名稱</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Freenode是著名的irc伺服器，每台機器的命名都是用著名的科幻小說家來當作名稱。<br />
+當登入的時候會顯示作家的簡介，整理如下：</p>
+
+<p><em><strong>roddenberry.freenode.ne</strong>t</em>
+RODDENBERRY, GENE (1921-1991). Born in Texas, USA,<br />
+Roddenberry worked as a pilot for the US Army and later<br />
+as a commercial pilot. He then went on to create the<br />
+Star Trek television series, among others.
 		
+		<a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-10-26T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 26<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2010/10/only-my-railgun/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2010/10/only-my-railgun/" itemprop="url">Only My Railgun</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天的Coding BGM是這首：Only my railgun
+<object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
+
+<p>
+		
+		<a href="/2010/10/only-my-railgun/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-27T00:00:00+08:00" data-updated="true" itemprop="datePublished">Aug 27<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/" itemprop="url">Transmission X Dropbox X Mac Mini Server = 動物機</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天繼續 Mac mini server 的探索…</p>
+
+<p>今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。</p>
+
+<p><a href="/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.34.14 PM" src="/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.34.14 PM" width="260" height="170" /></a></p>
+
+<p>原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載，回家後就可以享受成果了。</p>
+
+<p>搜尋Mac Bt的結果，第一個就是<a href="http://www.transmissionbt.com/" target="_blank">Transmission</a>，他帶給了我大大的驚奇。</p>
+
+<p>
+		
+		<a href="/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-24T00:00:00+08:00" data-updated="true" itemprop="datePublished">Aug 24<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/" itemprop="url">Mac Mini Server 心得&備忘</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><p>最近很熱門的Mac mini server我有幸也拿到了一台。</p>  <p><a href="/images/wp-uploads/2010/08/20100817_112424_451.jpg"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="2010-08-17_11-24-24_45" border="0" alt="2010-08-17_11-24-24_45" src="/images/wp-uploads/2010/08/20100817_112424_45_thumb1.jpg" width="260" height="155" /></a> </p>  <p>之前本來就有想要買Mac，但一直礙於價格不太親民所以還沒實行，恰好這次有這個機緣，又審核通過，實在是相當幸運。</p>  <p>我原本的ubuntu主機硬體壞掉，因此我的blog和網站都移到別人家裡借放。原本買這台Mac mini server就是為了替代原本的主機。再來就是想用textmate來開發程式，體驗一下MacOS傳說中的人性化介面，還有把Mac mini server當作家裡的多媒體中心，把音樂影片等等都丟上去。最後是把他當無線AP，讓家中網路無線化。</p>  <p>但是當Mac mini server來了以後，這些願景一個接著一個破滅了。</p> 
+		
+		<a href="/2010/08/mac-mini-server-%E5%BF%83%E5%BE%97%E5%82%99%E5%BF%98/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-03-13T00:00:00+08:00" data-updated="true" itemprop="datePublished">Mar 13<span>th</span>, 2010</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/" itemprop="url">倒數80天，我用aNobii記錄我的軍旅生活</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天是我入伍的第256天，也就是還有80天退伍。<br />
+很幸運的最後到了一個可以讓我有時間看書的地方，<br />
+而且也有圖書閱覽室可以借閱，<br />
+不然我應該會受不了&#8230;。</p>
+
+<p>新訓、憲訓看的書不算，到這邊後看的書我都用<a href="http://www.anobii.com">aNobii</a>記了下來，<br />
+總共到今天為止，一共有54本書、18003頁。</p>
+
+<p>破百後最難熬的三個月，一樣有書陪我渡過，<br />
+真是太幸福了:)</p>
+
+<p>
+		
+		<a href="/2010/03/%E5%80%92%E6%95%B880%E5%A4%A9%EF%BC%8C%E6%88%91%E7%94%A8anobii%E8%A8%98%E9%8C%84%E6%88%91%E7%9A%84%E8%BB%8D%E6%97%85%E7%94%9F%E6%B4%BB/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

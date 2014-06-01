@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T02:19:51+08:00</updated>
+  <updated>2014-06-01T09:06:58+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -133,81 +133,6 @@ PassengerRuby /usr/local/bin/ruby_with_env
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[How to enable php gmp on Mac OS X without macports]]></title>
-    <link href="http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x/"/>
-    <updated>2011-04-07T00:00:00+08:00</updated>
-    <id>http://blog.hsatac.net/2011/04/how-to-enable-php-gmp-on-mac-os-x</id>
-    <content type="html"><![CDATA[<p>If you are using macports, you can easily install the package of "php-gmp".</p>
-
-
-
-
-<p>But if you are a user of homebrew like me, you may need these tips.</p>
-
-
-
-
-<p>First, you have to install gmp via homebrew, but it will give you gmp 5.0.1, which doesn't work with PHP 5.3</p>
-
-
-
-
-<p>So you have to modify your Formula, go to /usr/local/Library/Formula/gmp.rb and modify:
-<pre lang="ruby">url 'ftp://ftp.gnu.org/gnu/gmp/gmp-5.0.1.tar.bz2'
-sha1 '6340edc7ceb95f9015a758c7c0d196eb0f441d49'</pre>
-to
-<pre lang="ruby">url 'ftp://ftp.gmplib.org/pub/gmp-4.3.2/gmp-4.3.2.tar.bz2'
-sha1 'c011e8feaf1bb89158bd55eaabd7ef8fdd101a2c'</pre></p>
-
-
-
-
-<p>Now, you can run <pre lang="bash">brew install gmp</pre> to install gmp.</p>
-
-
-
-
-<p>Next step, download the php source code from php.net, we will need to build a php_gmp.so module from it.</p>
-
-
-
-
-<p>Extract the source code and go to phpsource/ext/gmp/</p>
-
-
-
-
-<p>run
-<pre lang="bash">
-phpize
-./configure
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS='-O3 -fno-common -arch i386 -arch x86_64' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64' make -j6;sudo make install
-</pre></p>
-
-
-
-
-<p>And you will get your gmp.so in phpsource/ext/gmp/module/</p>
-
-
-
-
-<p>Copy that to your /usr/lib/php/extensions/no-debug-non-zts-20090626/</p>
-
-
-
-
-<p>And load it in your /private/etc/php.ini</p>
-
-
-
-
-<p>It's done!</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
     <title type="html"><![CDATA[連猴子也會之：在 Mac mini server 上架設 WebDAV git server]]></title>
     <link href="http://blog.hsatac.net/2011/04/%E9%80%A3%E7%8C%B4%E5%AD%90%E4%B9%9F%E6%9C%83%E4%B9%8B%EF%BC%9A%E5%9C%A8-mac-mini-server-%E4%B8%8A%E6%9E%B6%E8%A8%AD-webdav-git-server/"/>
     <updated>2011-04-04T00:00:00+08:00</updated>
@@ -273,6 +198,81 @@ git push origin master --force -v</pre>
 
 
 <p>以上，就大功告成啦！</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Transmission X Dropbox X Mac mini server = 動物機]]></title>
+    <link href="http://blog.hsatac.net/2010/08/transmission-x-dropbox-x-mac-mini-server-%E5%8B%95%E7%89%A9%E6%A9%9F/"/>
+    <updated>2010-08-27T00:00:00+08:00</updated>
+    <id>http://blog.hsatac.net/2010/08/transmission-x-dropbox-x-mac-mini-server-動物機</id>
+    <content type="html"><![CDATA[<p>今天繼續 Mac mini server 的探索…</p>
+
+
+
+
+<p>今天的目標是開啟Mac mini server的動物機模式!有這麼大的儲存空間，當然要好好利用。</p>
+
+
+
+
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.34.14 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.34.14PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.34.14 PM" width="260" height="170" /></a></p>
+
+
+
+
+<p>原本的想法是自己寫一個shell script或AppleScript再搭配Web介面來遠端操作BT，這樣就算在辦公室，也能上傳種子，控制mac下載，回家後就可以享受成果了。</p>
+
+
+
+
+<p>搜尋Mac Bt的結果，第一個就是<a href="http://www.transmissionbt.com/" target="_blank">Transmission</a>，他帶給了我大大的驚奇。</p>
+
+
+
+
+<p><!--more-->下載dmg安裝後打開，發現他居然內置了web介面！使用上也非常簡單，打勾選取就可以了，記得firewall要把9091 port打開。試用了一下相當滿意。</p>
+
+
+
+
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.33.28PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.33.28 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.33.28PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.33.28 PM" width="260" height="252" /></a></p>
+
+
+
+
+<p>不過後來又逛了一下偏好設定，裡面有些功能，搭配dropbox會比使用web UI來的更好用！(其實是不想為server多開一個port…)</p>
+
+
+
+
+<p><a href="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.42.07PM1.png"><img style="display: inline; border: 0px;" title="Screen shot 2010-08-26 at 11.42.07 PM" src="http://blog.hsatac.net/images/wp-uploads/2010/08/Screenshot20100826at11.42.07PM_thumb1.png" border="0" alt="Screen shot 2010-08-26 at 11.42.07 PM" width="260" height="201" /></a></p>
+
+
+
+
+<p>首先先把最下面的Audo add: Watch for torrent files in 打勾，並且設定在你的dropbox中的某個資料夾，例如我是設定在 Dropbox/bt種子/ 下面。這樣不管你是在辦公室還是其他電腦，只要把要抓的bt種子檔丟到這個目錄下，mac端dropbox同步後Transmission偵測到就會自動加入這個種子檔了！</p>
+
+
+
+
+<p>再來還有幾個設定要勾選，把Add window:下的Only when adding manually打勾，這樣偵測到新種子檔的時候就不會跳出確認視窗，而會自動加入並開始傳輸。</p>
+
+
+
+
+<p>還有一個很重要的設定，最上方的Default location記得改掉，原本預設是和種子同個目錄，如此一來你抓下來的東西就會統統同步到dropbox啦！記得改個設定，我改到Mac上的一個共享資料夾，這樣抓好後全家都可以直接存取到。Keep incomplete files in也記得調整，不然還沒下載完的暫存檔也是會都同步到dropbox。</p>
+
+
+
+
+<p>模擬使用情境：上班時認真蒐集資訊！看到一份重要的檔案要抓時怎麼辦呢？只要把種子檔丟進dropbox裡面的種子目錄，回家後抓好的檔案就在等著你啦！</p>
+
+
+
+
+<p>Transmission也有android端的軟體，有空時再來試試看。</p>
 
 ]]></content>
   </entry>
