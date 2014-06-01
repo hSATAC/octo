@@ -41,15 +41,6 @@ do
     rm -rf $gem*
 done
 gems=( "hiera-eyaml-2.0.2" "trollop-2.0" "highline-1.6.21" )
-
-for gem in "${gems[@]}"
-do
-    wget http://rubygems.org/downloads/$gem.gem --quiet
-    gem unpack $gem.gem
-    sudo cp -r $gem/lib/* /usr/lib/ruby/vendor_ruby/
-    rm -rf $gem*
-done
-
 ```
 
 自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。

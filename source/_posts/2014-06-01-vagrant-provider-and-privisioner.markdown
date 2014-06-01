@@ -39,7 +39,7 @@ provisioner 其實是可以多個的，就算是相同類型也一樣，並且�
 
 以上會依序執行兩個 script。萬一需要 override 掉之前的某個 provisioner 怎麼辦呢？
 
-按照 [官方文件](https://docs.vagrantup.com/v2/provisioning/basic_usage.html)其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現...當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了...可以想見我心中的喜悅。
+按照[官方文件](https://docs.vagrantup.com/v2/provisioning/basic_usage.html)其實是可以指定一個 id 來 override 掉，但是這個功能好像一直沒有實現...當我踩到這個雷的時候發現正好在一天前發佈的 Vagrant 1.6.1 把這個 bug 修掉了...可以想見我心中的喜悅。
 
 於是在需要 override 的場合就可以這樣寫：
 
