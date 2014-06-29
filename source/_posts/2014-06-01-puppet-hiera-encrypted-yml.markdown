@@ -23,7 +23,7 @@ password: >
     IZGeunzwhqfmEtGiqpvJJQ5wVRdzJVpTnANBA5qxeA==]
 ```
 <!--more-->
-這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰匙即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。
+這樣不用特別破壞原本的目錄結構，要改一般設定時也不需要麻煩的加解密，非常方便。使用公鑰即可加密，所以可以把 public key 放在 repo 中，私鑰給相關權限人等即可。
 
 使用上非常容易，基本上只要在需要用到的地方(例如你開發的電腦，以及 puppet master)透過 gem 安裝 `hiera-eyaml` 即可。
 
@@ -40,7 +40,6 @@ do
     sudo cp -r $gem/lib/* /usr/lib/ruby/vendor_ruby/
     rm -rf $gem*
 done
-gems=( "hiera-eyaml-2.0.2" "trollop-2.0" "highline-1.6.21" )
 ```
 
 自己手動把 gem 抓下來以後 unpack 也一起塞進 vendor_ruby 中就搞定了。如果你正常使用 gem 安裝 puppet 的話，應該直接安裝 hiera-eyaml 就可以了。
