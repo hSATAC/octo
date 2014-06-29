@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ci | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/ci/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-30T01:09:15+08:00</updated>
+  <updated>2014-06-30T01:55:50+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -32,7 +32,7 @@
 
 <p>在建立環境這邊基本上有兩個選擇，一種是全部包成一個 image, 就用這個 container 來跑測試。另一種是每個需要的 service 都是一個各自的 container, 彼此之間透過 <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> 來通訊，例如 postgresql 自己一個、elasticsearch 自己一個、rails 自己一個這樣。</p>
 
-<p>不過由於跑測試都試用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。</p>
+<p>不過由於跑測試都是用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。</p>
 
 <!--more-->
 
