@@ -294,6 +294,18 @@
 <h2>小結</h2>
 
 <p>Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。</p>
+
+<h2>補充</h2>
+
+<p>如果你是在 Mac 上使用 docker, 其實他底下是透過 boot2docker 連到一個 vm 裡面去跑 docker, 但是 Mac 常常蓋上電腦就走，這時 vm suspend 後開機 resume 時間都會跑掉，很容易造成靈異現象。這時要進去 boot2docker 的 vm 裡面調整時間。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ boot2docker ssh # 密碼 tcuser
+</span><span class='line'>$ sudo /usr/local/bin/ntpclient -s -h pool.ntp.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以考慮把這段寫成 crontab 省功夫。</p>
 </div>
 
 </article>

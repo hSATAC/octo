@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Oct 30th, 2012 iOS, unit test Comments Obj-C 單元測試非同步連線 使用 Xcode 的 OCUnit 來做單元測試網路連線時，由於 OCUnit 不會等 block 執行，所以會直接跳到 pass。一般正常作法應該是用 mock object 來測試， &hellip;">
+	<meta name="description" content="Nov 6th, 2012 PHP Comments PHP Array 相加與 Array_merge 今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。 在 PHP 中 array + array 與 array_merge 的行為是不一樣的，陣列相加的效能會比 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,50 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-06T13:17:00+08:00" data-updated="true" itemprop="datePublished">Nov 6<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/11/php-array-plus-array-versus-array-merge/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/php-array-plus-array-versus-array-merge/" itemprop="url">PHP Array 相加與 Array_merge</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。</p>
+
+<p>在 PHP 中 <code>array + array</code> 與 <code>array_merge</code> 的行為是不一樣的，陣列相加的效能會比 <code>array_merge</code> 來的好，但換來的代價是可能不是你預期的行為以及資料流失。</p>
+
+<p>PHP 的陣列可以有 key 也可以沒有 key，也可以兩者混合。不過所謂的沒有 key ，其實他還是有 key ，只是是自動編上去的 int 流水號 key 例如 0,1,2,3&hellip;不管是哪一種，在陣列相加以及 <code>array_merge</code> 的行為都不一樣。</p>
+
+<p>先講一下 <code>array_merge</code> 的行為，<code>array_merge($a, $b)</code> 的話，如果 <code>$a</code> 和 <code>$b</code> 裡面有 key 相同的元素，則會<strong>後蓋前</strong>也就是 <code>$b</code> 的值會蓋掉 <code>$a</code> 的值。那如果是沒有 key (流水號 key)的值，則會以附加在尾端 (append) 的方式合併上去，而所有流水號 key 的 index 則會重排。</p>
+
+
+		
+		<a href="/2012/11/php-array-plus-array-versus-array-merge/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -500,74 +544,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-14T10:49:00+08:00" data-updated="true" itemprop="datePublished">Jun 14<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/c/'>C</a>, <a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/openssl/'>openssl</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/" itemprop="url">PHP Openssl_pkey_get_details Implement in C</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>It&rsquo;s easy to generate a RSA keypair in PHP, just like this:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>// Create the keypair
-</span><span class='line'>$res=openssl_pkey_new();
-</span><span class='line'>
-</span><span class='line'>// Get private key
-</span><span class='line'>openssl_pkey_export($res, $privkey);
-</span><span class='line'>
-</span><span class='line'>// Get public key
-</span><span class='line'>$pubkey=openssl_pkey_get_details($res);
-</span><span class='line'>$pubkey=$pubkey["key"];
-</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>But when it comes to C, it&rsquo;s not that simple.</p>
-
-<p>You might want to use <code>RSA_generate_key</code> and then <code>PEM_write_RSAPublicKey</code>, but in fact, the output format of PHP&rsquo;s <code>openssl_pkey_get_details</code> is not a RSA public key.</p>
-
-<p>If you want to get the same result in C, you have to convert your RSA keypair into EVP keypair.</p>
-
-
-		
-		<a href="/2012/06/php-openssl-pkey-get-details-implement-in-c/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

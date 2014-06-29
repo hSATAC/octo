@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 29th, 2014 Docker Comments Docker Basics 隨著 AWS Elastic Beanstalk 支援 Docker, Google Computer Engine 也宣布支援 Docker，以及 Google 最近發表的一些 container &hellip;">
+	<meta name="description" content="Jun 29th, 2014 CI, Docker, Jenkins, Rails, RoR, Rspec Comments 整合 Jenkins 和 Docker 這篇將會記述一些我自己整合 Jenkins CI 和 Docker 的思路、想法、要點以及備忘。不會有 step by step &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,58 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T22:51:00+08:00" data-updated="true" itemprop="datePublished">Jun 29<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/docker/'>Docker</a>, <a class='category' href='/categories/jenkins/'>Jenkins</a>, <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ror/'>RoR</a>, <a class='category' href='/categories/rspec/'>Rspec</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/06/working-with-docker-and-jenkins/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/06/working-with-docker-and-jenkins/" itemprop="url">整合 Jenkins 和 Docker</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這篇將會記述一些我自己整合 Jenkins CI 和 Docker 的思路、想法、要點以及備忘。不會有 step by step 的教學，若有此類需求請參考最後附錄。</p>
+
+<h2>Why Docker?</h2>
+
+<p>Jenkins 跑的好好的，為什麼要摻 Docker 呢？原本我們 Rails Rspec 跑的其實也不錯，但受限於 database 以及 elasticsearch, redis 等 services，無法同時跑多個 worker, 再加上未來若有平行化測試以及多個專案 / 不同 db 版本等等的需求，引入 docker 可以完美解決這些問題。</p>
+
+<h2>Concept</h2>
+
+<p>使用 Docker 的好處就是原本的 shell script 幾乎都不用改即可繼續使用，引入的門檻降到極低。</p>
+
+<p>基本概念是建立一個可以跑 Rails app 起來的環境，然後把整個 CI 的 workspace 丟進去跑測試，其他的步驟都一模一樣。</p>
+
+<p>在建立環境這邊基本上有兩個選擇，一種是全部包成一個 image, 就用這個 container 來跑測試。另一種是每個需要的 service 都是一個各自的 container, 彼此之間透過 <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> 來通訊，例如 postgresql 自己一個、elasticsearch 自己一個、rails 自己一個這樣。</p>
+
+<p>不過由於跑測試都試用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。</p>
+
+
+		
+		<a href="/2014/06/working-with-docker-and-jenkins/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -576,51 +628,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 
 		
 		<a href="/2013/12/functional-reactive-programming/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-02T13:24:00+08:00" data-updated="true" itemprop="datePublished">Nov 2<span>nd</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/golang/'>Golang</a>, <a class='category' href='/categories/tdd/'>TDD</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/11/golang-development-toolbox/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/11/golang-development-toolbox/" itemprop="url">Go Development Toolbox</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這次去北京參加 RubyConfChina 2013 的來回飛機上，寫完了一個練習用的小專案：<a href="https://github.com/hSATAC/gosnake">gosnake</a>，很明顯就是用 Go 寫的貪食蛇。會挑貪食蛇來練習，是因為之前在 iOS Dev Bootcamp 參加 <a href="https://twitter.com/zonble">zonble</a> 的 workshop，題目就是寫一個貪食蛇，覺得這個題目拿來練習真的是挺不錯的。</p>
-
-<p>先來看看動起來的樣子：</p>
-
-<script type="text/javascript" src="http://asciinema.org/a/6115.js" id="asciicast-6115" async></script>
-
-
-<p>程式本身很簡單，沒什麼好說的，倒是想紀錄一些開發上使用到的工具。</p>
-
-
-		
-		<a href="/2013/11/golang-development-toolbox/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

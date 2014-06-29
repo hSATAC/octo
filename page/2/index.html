@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Sep 17th, 2013 Golang Comments Golang the Fun Part - Struct and Interfacce 之前說要寫一篇 Go 簡介…不過網路上 Go 的資料已經很豐富，把一些我喜歡 Go 的點記錄下來好了。 Go 是物件導向的語言嗎？是，也不是。 &hellip;">
+	<meta name="description" content="Nov 2nd, 2013 Golang, TDD Comments Go Development Toolbox 這次去北京參加 RubyConfChina 2013 的來回飛機上，寫完了一個練習用的小專案：gosnake，很明顯就是用 Go 寫的貪食蛇。會挑貪食蛇來練習，是因為之前在 iOS &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,51 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-02T13:24:00+08:00" data-updated="true" itemprop="datePublished">Nov 2<span>nd</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/golang/'>Golang</a>, <a class='category' href='/categories/tdd/'>TDD</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/11/golang-development-toolbox/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/11/golang-development-toolbox/" itemprop="url">Go Development Toolbox</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這次去北京參加 RubyConfChina 2013 的來回飛機上，寫完了一個練習用的小專案：<a href="https://github.com/hSATAC/gosnake">gosnake</a>，很明顯就是用 Go 寫的貪食蛇。會挑貪食蛇來練習，是因為之前在 iOS Dev Bootcamp 參加 <a href="https://twitter.com/zonble">zonble</a> 的 workshop，題目就是寫一個貪食蛇，覺得這個題目拿來練習真的是挺不錯的。</p>
+
+<p>先來看看動起來的樣子：</p>
+
+<script type="text/javascript" src="http://asciinema.org/a/6115.js" id="asciicast-6115" async></script>
+
+
+<p>程式本身很簡單，沒什麼好說的，倒是想紀錄一些開發上使用到的工具。</p>
+
+
+		
+		<a href="/2013/11/golang-development-toolbox/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -536,48 +581,6 @@
 
 		
 		<a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-27T15:45:00+08:00" data-updated="true" itemprop="datePublished">Feb 27<span>th</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/aws/'>aws</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/02/migrate-aws-ami-across-region-painlessly/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/02/migrate-aws-ami-across-region-painlessly/" itemprop="url">無痛跨 Region 轉移 AWS AMI</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
-
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&hellip;。</p>
-
-<p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
-
-
-		
-		<a href="/2013/02/migrate-aws-ami-across-region-painlessly/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

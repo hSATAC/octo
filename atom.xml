@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-29T12:22:26+08:00</updated>
+  <updated>2014-06-30T01:09:15+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,371 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[整合 Jenkins 和 Docker]]></title>
+    <link href="http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins/"/>
+    <updated>2014-06-29T22:51:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins</id>
+    <content type="html"><![CDATA[<p>這篇將會記述一些我自己整合 Jenkins CI 和 Docker 的思路、想法、要點以及備忘。不會有 step by step 的教學，若有此類需求請參考最後附錄。</p>
+
+<h2>Why Docker?</h2>
+
+<p>Jenkins 跑的好好的，為什麼要摻 Docker 呢？原本我們 Rails Rspec 跑的其實也不錯，但受限於 database 以及 elasticsearch, redis 等 services，無法同時跑多個 worker, 再加上未來若有平行化測試以及多個專案 / 不同 db 版本等等的需求，引入 docker 可以完美解決這些問題。</p>
+
+<h2>Concept</h2>
+
+<p>使用 Docker 的好處就是原本的 shell script 幾乎都不用改即可繼續使用，引入的門檻降到極低。</p>
+
+<p>基本概念是建立一個可以跑 Rails app 起來的環境，然後把整個 CI 的 workspace 丟進去跑測試，其他的步驟都一模一樣。</p>
+
+<p>在建立環境這邊基本上有兩個選擇，一種是全部包成一個 image, 就用這個 container 來跑測試。另一種是每個需要的 service 都是一個各自的 container, 彼此之間透過 <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> 來通訊，例如 postgresql 自己一個、elasticsearch 自己一個、rails 自己一個這樣。</p>
+
+<p>不過由於跑測試都試用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。</p>
+
+<!--more-->
+
+
+<h3>Base Image</h3>
+
+<p>我的設計是先建立一個 base image 例如給他 tag 叫 <code>project/base</code> 裡面先預裝好了所有環境包括 pg, elasticsearch, redis, rvm, ruby 等等。</p>
+
+<p>舉例來說可能長這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM ubuntu:12.04
+</span><span class='line'>MAINTAINER hSATAC
+</span><span class='line'>
+</span><span class='line'># We use bash
+</span><span class='line'>RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+</span><span class='line'>
+</span><span class='line'># We don't like apt-get warnings.
+</span><span class='line'>ENV DEBIAN_FRONTEND noninteractive
+</span><span class='line'>
+</span><span class='line'># Add the PostgreSQL PGP key to verify their Debian packages.
+</span><span class='line'># It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
+</span><span class='line'>RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+</span><span class='line'>
+</span><span class='line'># Add PostgreSQL's repository. It contains the most recent stable release
+</span><span class='line'>#     of PostgreSQL, ``9.3``.
+</span><span class='line'>RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list
+</span><span class='line'>
+</span><span class='line'># Update the Ubuntu and PostgreSQL repository indexes
+</span><span class='line'>RUN apt-get update
+</span><span class='line'>
+</span><span class='line'># === Locale ===
+</span><span class='line'>RUN locale-gen  en_US.UTF-8
+</span><span class='line'>ENV LANG en_US.UTF-8
+</span><span class='line'>ENV LANGUAGE en_US.UTF-8
+</span><span class='line'>ENV LC_ALL en_US.UTF-8
+</span><span class='line'>
+</span><span class='line'># === Requirements ===
+</span><span class='line'>RUN apt-get -y -q install nodejs libpq-dev wget git curl imagemagick vim postfix
+</span><span class='line'>
+</span><span class='line'>RUN cd /tmp &&\
+</span><span class='line'>  wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-linux-amd64_0.12.0-03c001d.tar.xz &&\
+</span><span class='line'>  tar Jxvf wkhtmltox-linux-amd64_0.12.0-03c001d.tar.xz &&\
+</span><span class='line'>  cd wkhtmltox &&\
+</span><span class='line'>  install bin/wkhtmltoimage /usr/bin/wkhtmltoimage
+</span><span class='line'>
+</span><span class='line'># === Redis ===
+</span><span class='line'>RUN apt-get -y -q install redis-server
+</span><span class='line'>
+</span><span class='line'># === Elasticsearch ===
+</span><span class='line'>RUN apt-get install openjdk-7-jre-headless -y -q
+</span><span class='line'>RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.deb
+</span><span class='line'>RUN dpkg -i elasticsearch-1.1.0.deb
+</span><span class='line'>
+</span><span class='line'># === RVM ===
+</span><span class='line'>RUN curl -L https://get.rvm.io | bash -s stable
+</span><span class='line'>ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+</span><span class='line'>RUN /bin/bash -l -c rvm requirements
+</span><span class='line'>RUN source /usr/local/rvm/scripts/rvm && rvm install ruby-2.1.2
+</span><span class='line'>RUN rvm all do gem install bundler
+</span><span class='line'>
+</span><span class='line'># === Postgresql ===
+</span><span class='line'>RUN apt-get -y -q install python-software-properties software-properties-common
+</span><span class='line'>RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+</span><span class='line'>
+</span><span class='line'># Update template1 to enable UTF-8 and hstore
+</span><span class='line'>USER postgres
+</span><span class='line'>RUN    /etc/init.d/postgresql start &&\
+</span><span class='line'>    psql -c "update pg_database set datistemplate=false where datname='template1';" &&\
+</span><span class='line'>    psql -c 'drop database Template1;' &&\
+</span><span class='line'>    psql -c "create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;" &&\
+</span><span class='line'>    psql -c 'CREATE EXTENSION hstore;' -d template1
+</span><span class='line'>
+</span><span class='line'># Create a PostgreSQL role and db
+</span><span class='line'>RUN    /etc/init.d/postgresql start &&\
+</span><span class='line'>    psql --command "CREATE ROLE jenkins LOGIN PASSWORD 'jenkins' SUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION;" &&\
+</span><span class='line'>    createdb -O jenkins jenkins_test &&\
+</span><span class='line'>    createdb -O jenkins jenkins_production
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'># Adjust PostgreSQL configuration
+</span><span class='line'>RUN echo "local all  all  md5" &gt; /etc/postgresql/9.3/main/pg_hba.conf
+</span><span class='line'>
+</span><span class='line'># And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``
+</span><span class='line'>RUN echo "listen_addresses='*'" &gt;&gt; /etc/postgresql/9.3/main/postgresql.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Test Image</h3>
+
+<p>接著用 <code>project/base</code> build 一個 <code>project/test</code>，這個 image 會安裝一些「只有測試會用到」的套件，順便把 Gemfile 複製進去安裝一下 Gem, 這樣到時在跑測試的時候就可以省略 <code>bundle install</code> 的時間了。因為我的 base image 還有打算拿來做其他用途，所以這邊是這樣設計。</p>
+
+<p>每天凌晨三點左右用 crontab 重新 Build 一次這個 <code>project/test</code> 的 image 以更新 gems. 當然這邊牽涉到一些如何同步你專案中的 Gemfile 不過這都是簡單的 script 可以解決的問題，這邊不贅述。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM project/base
+</span><span class='line'>
+</span><span class='line'># Switch back to root
+</span><span class='line'>USER root
+</span><span class='line'>
+</span><span class='line'># Set ENV
+</span><span class='line'>ENV RAILS_ENV test
+</span><span class='line'>
+</span><span class='line'># Preinstall gem
+</span><span class='line'>ADD gem /opt/project_gem # 這個 gem 目錄裡面有 Gemfile 和 Gemfile.lock
+</span><span class='line'>WORKDIR /opt/project_gem
+</span><span class='line'>RUN rvm all do bundle install
+</span><span class='line'>
+</span><span class='line'># Install Firefox & Xvfb
+</span><span class='line'>RUN apt-get -y install firefox xvfb # 跑 selenium test 用的
+</span><span class='line'>
+</span><span class='line'># Onbuild witch back to root
+</span><span class='line'>ONBUILD USER root
+</span><span class='line'>
+</span><span class='line'># Mound Rails directory
+</span><span class='line'>ONBUILD ADD . /opt/project
+</span><span class='line'>ONBUILD WORKDIR /opt/project
+</span><span class='line'>
+</span><span class='line'># Bundle install
+</span><span class='line'>ONBUILD RUN rvm all do bundle install
+</span><span class='line'>
+</span><span class='line'># Go
+</span><span class='line'>ONBUILD ADD start_services.sh /opt/project/start_services.sh
+</span><span class='line'>ONBUILD RUN chmod +x /opt/project/start_services.sh
+</span><span class='line'>ONBUILD ADD run_tests.sh /opt/project/run_tests.sh
+</span><span class='line'>ONBUILD RUN chmod +x /opt/project/run_tests.sh
+</span><span class='line'>ONBUILD CMD /opt/project/start_services.sh && /opt/project/run_tests.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意這邊最後一段用到了上一篇文章 <a href="http://blog.hsatac.net/2014/06/docker-basics/">Docker Basics</a> 中所講到的 ONBUILD, 使用這個功能我們就可以很輕鬆的 build 出真正用來測試的 Image.</p>
+
+<p>這幾行實際做的動作是複製兩個 scripts 分別名叫 <code>start_services.sh</code> 和 <code>run_tests.sh</code> 並且 <code>CMD</code> 預設執行這兩個檔案。</p>
+
+<p>但是這兩個檔案現在實際不存在，我會透過 jenkins 的 build scripts 來寫這兩個檔案，其實也就是原本在 build scripts 的內容移到這兩個檔案中了。之所以不把這兩個檔案存在某處再複製過來，就是想保留原本在 Jenkins configure 可以調整 Build Script 的機制，多留一點彈性。</p>
+
+<p>為什麼要這麼麻煩使用 ONBUILD + CMD ，而不是直接 RUN 然後最後直接看 Image 有沒有建置成功就好？除了上述想多留一點彈性的原因外，還有用 Build 這樣 Build 的過程勢必會跑這兩支 script, 而我有可能 Build 完以後不跑這兩支 script, 而是做一些其他的動作例如 <code>/bin/bash</code> 進去 debug 等等，當然可以透過改寫這兩支 script 的內容來使 Build 過程不跑測試，但增添了複雜度。使用這個機制我覺得是最有彈性的。</p>
+
+<h3>Jenkins Build Script</h3>
+
+<p>Jenkins build script 這邊改動的幅度不大，原本的流程大概是：</p>
+
+<ol>
+<li><p>改好相關 application.yml, database.yml 等等 local 設定檔並塞進去。</p></li>
+<li><p>跑 db:reset 等等重置環境</p></li>
+<li><p>跑測試</p></li>
+</ol>
+
+
+<p>基本步驟還是一樣，第一步可以完全不用變，後面就得修改一下，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Start services in docker
+</span><span class='line'>echo "
+</span><span class='line'>Xvfb :99 -screen 0 1366x768x24 -ac 2&gt;/dev/null &gt;/dev/null &
+</span><span class='line'>/etc/init.d/postgresql start &&\
+</span><span class='line'>/etc/init.d/redis-server start &&\
+</span><span class='line'>/etc/init.d/elasticsearch start
+</span><span class='line'>" &gt; start_services.sh
+</span><span class='line'>
+</span><span class='line'># Run tests
+</span><span class='line'>echo "
+</span><span class='line'>rvm all do bundle exec rake db:migrate &&\
+</span><span class='line'>DISPLAY=:99 rvm all do bundle exec rspec spec --format=documentation
+</span><span class='line'>" &gt; run_tests.sh
+</span><span class='line'>
+</span><span class='line'>echo "FROM project/test" &gt; Dockerfile
+</span><span class='line'>docker build --rm -t project/$BUILD_NUMBER .
+</span><span class='line'>docker run --rm project/$BUILD_NUMBER</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一開始用 echo 寫入兩個檔案，內容大致就是開啟 service 並且開始跑測試，值得注意的是我們在 Jenkins workspace 裡寫了一個新的 Dockerfile, 裡面只有一行內容 <code>FROM project/test</code> 配合之前的 <code>ONBUILD</code> 就可以建置出這個 image. 之所以不直接用 <code>&lt;</code> 的方式把內容丟到 <code>docker build</code> 指令，是因為 <code>ADD</code> 需要 context, 也就是 Jenkins workspace, 所以必須要寫實體的檔案出來。</p>
+
+<p>Image tag 直接取用 Jenkins 的環境變數 <code>$BUILD_NUMBER</code> 因此像第 300 個 build 他的 image 就會叫 <code>project/300</code> 清楚明瞭。</p>
+
+<p>Build 和 Run 都使用 <code>--rm</code> 來確保跑完以後就刪除，節省系統空間。當然如果有保留的需求，例如這個跑完以後自動 trigger 一個專門測 IE 的 selenium test target 的話這邊是可以不用刪除的，看個人需求。</p>
+
+<p>Build 完以後也可以同時跑好幾個 containers，利用一個 image 可以跑很多 containers 的特性，例如把 spec 目錄分成幾區，同時開始跑測試，這樣平行處理可以節省時間。</p>
+
+<p>這邊有一個問題就是 <code>docker run</code> 理論上要回傳 command 的 exit code 不過這部分常常出問題，<a href="https://github.com/dotcloud/docker/issues/6259">時好時壞</a> 所以這邊我決定自己來處理。</p>
+
+<p>想法很簡單，直接把 <code>docker run</code> 的 output 拿來檢查，有偵測到爆炸的話就寫一個檔案，最後來檢查檔案，如果沒過就手動爆炸。等這個 bug 修復穩定之後，就可以不要使用這個 workaround 了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker run --rm project/$BUILD_NUMBER | perl -pe '/Failed examples:/ && `echo "fail" &gt; docker-tests-failed`'
+</span><span class='line'>docker rmi project/$BUILD_NUMBER
+</span><span class='line'>
+</span><span class='line'>if [ ! -f docker-tests-failed ]; then
+</span><span class='line'>  echo -e "No docker-tests-failed file. Apparently tests passed."
+</span><span class='line'>else
+</span><span class='line'>  echo -e "docker-tests-failed file found, so build failed."
+</span><span class='line'>  rm docker-tests-failed
+</span><span class='line'>  exit 1
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>其他整合</h2>
+
+<p>Jenkins 有一個 plugin <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">Github Pull Request Builder</a> 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。</p>
+
+<p>另外也有 hipchat plugin 可以整合到公司通訊軟體，這部分和主題相關薄弱就不多談了。</p>
+
+<h2>參考連結</h2>
+
+<p>這邊列出一些不錯的連結：</p>
+
+<ul>
+<li><a href="http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/">Docker quicktip #3 – ONBUILD</a></li>
+<li><a href="http://www.powpark.com/blog/programming/2014/01/29/integrating-docker-with-jenkins-for-ruby-on-rails-app">Integrating Docker with Jenkins for continuous deployment of a Ruby on Rails application</a></li>
+<li><a href="http://www.activestate.com/blog/2014/01/using-docker-run-ruby-rspec-ci-jenkins">Using Docker To Run Ruby Rspec CI In Jenkins</a></li>
+<li><a href="http://blog.gemnasium.com/post/66356385701/your-dockerfile-for-rails">Your Dockerfile for Rails</a></li>
+<li><a href="http://ngauthier.com/2013/10/using-docker-to-parallelize-rails-tests.html">Using Docker to Parallelize Rails Tests</a></li>
+<li><a href="https://zapier.com/engineering/continuous-integration-jenkins-docker-github/">How to Set Up TravisCI-like Continuous Integration with Docker and Jenkins</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Docker Basics]]></title>
@@ -181,6 +546,18 @@
 <h2>小結</h2>
 
 <p>Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。</p>
+
+<h2>補充</h2>
+
+<p>如果你是在 Mac 上使用 docker, 其實他底下是透過 boot2docker 連到一個 vm 裡面去跑 docker, 但是 Mac 常常蓋上電腦就走，這時 vm suspend 後開機 resume 時間都會跑掉，很容易造成靈異現象。這時要進去 boot2docker 的 vm 裡面調整時間。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ boot2docker ssh # 密碼 tcuser
+</span><span class='line'>$ sudo /usr/local/bin/ntpclient -s -h pool.ntp.org</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以考慮把這段寫成 crontab 省功夫。</p>
 ]]></content>
   </entry>
   
@@ -2099,50 +2476,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
 
 <p>You don&rsquo;t need to rsync anything. It&rsquo;s just that easy!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[無痛跨 region 轉移 AWS AMI]]></title>
-    <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly/"/>
-    <updated>2013-02-27T15:45:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly</id>
-    <content type="html"><![CDATA[<p>最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。</p>
-
-<p>通常找來找去都是用 <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> 推薦的方法，在兩邊各開一個 ebs mount 起來然後 rsync 再 register 成 AMI…操作起來耗時又複雜；不然就是用 <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a> 提供的線上工具，不過他其實就只是幫你把上面這些動作自動化而已&hellip;。</p>
-
-<p>弄了一陣子發現，現在根本不需要這些瑣碎的步驟！ Amazone 在去年 12 月就發表了 <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> 可以自由的跨區複製 snapshot! 雖然還不能複製 AMI，不過我們只要手動多幾個步驟就好。</p>
-
-<!--more-->
-
-
-<p>整個過程很簡單，以下用圖示說明：</p>
-
-<p>先找出你 AMI 的 snapshot, 點選 <code>Copy Snapshot</code> 複製到你要的 region.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png" alt="1" /></a></p>
-
-<p>複製完成後，看一下原本的 AMI 資訊，注意 <code>Kernel ID</code> 這個欄位，把他記下來。</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
-
-<p>接著我們要使用演算法優化的大絕招 &ndash; 查表法。拜訪 <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> 找出這個 AKI 的 Description 是哪個 manifest.xml ，例如我的就是 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
-
-<p>接著再搜尋 <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code> 並找出你要的 region，記住這個 AKI。</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png" alt="4" /></a></p>
-
-<p>在已複製好的 snapshot 上右鍵點選 <code>Create Image from Snapshot</code></p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png" alt="5" /></a></p>
-
-<p>Kernel ID 選擇你剛剛查到的 AKI 就可以了！</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
-
-<p>完全不需要什麼 rsync 啦！無痛跨 region 轉移就這麼簡單！</p>
 ]]></content>
   </entry>
   

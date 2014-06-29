@@ -1,0 +1,566 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>整合 Jenkins 和 Docker - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Jun 29th, 2014 CI, Docker, Jenkins, Rails, RoR, Rspec 整合 Jenkins 和 Docker 這篇將會記述一些我自己整合 Jenkins CI 和 Docker 的思路、想法、要點以及備忘。不會有 step by step 的教學， &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.ash.cat">Hobbies</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I am a programming language user. Here are some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T22:51:00+08:00" data-updated="true" itemprop="datePublished">Jun 29<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/ci/'>CI</a>, <a class='category' href='/categories/docker/'>Docker</a>, <a class='category' href='/categories/jenkins/'>Jenkins</a>, <a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ror/'>RoR</a>, <a class='category' href='/categories/rspec/'>Rspec</a>
+
+
+</div>
+    </div>
+	<h1 class="title" itemprop="name">整合 Jenkins 和 Docker</h1>
+	<div class="entry-content" itemprop="articleBody"><p>這篇將會記述一些我自己整合 Jenkins CI 和 Docker 的思路、想法、要點以及備忘。不會有 step by step 的教學，若有此類需求請參考最後附錄。</p>
+
+<h2>Why Docker?</h2>
+
+<p>Jenkins 跑的好好的，為什麼要摻 Docker 呢？原本我們 Rails Rspec 跑的其實也不錯，但受限於 database 以及 elasticsearch, redis 等 services，無法同時跑多個 worker, 再加上未來若有平行化測試以及多個專案 / 不同 db 版本等等的需求，引入 docker 可以完美解決這些問題。</p>
+
+<h2>Concept</h2>
+
+<p>使用 Docker 的好處就是原本的 shell script 幾乎都不用改即可繼續使用，引入的門檻降到極低。</p>
+
+<p>基本概念是建立一個可以跑 Rails app 起來的環境，然後把整個 CI 的 workspace 丟進去跑測試，其他的步驟都一模一樣。</p>
+
+<p>在建立環境這邊基本上有兩個選擇，一種是全部包成一個 image, 就用這個 container 來跑測試。另一種是每個需要的 service 都是一個各自的 container, 彼此之間透過 <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> 來通訊，例如 postgresql 自己一個、elasticsearch 自己一個、rails 自己一個這樣。</p>
+
+<p>不過由於跑測試都試用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。</p>
+
+<!--more-->
+
+
+<h3>Base Image</h3>
+
+<p>我的設計是先建立一個 base image 例如給他 tag 叫 <code>project/base</code> 裡面先預裝好了所有環境包括 pg, elasticsearch, redis, rvm, ruby 等等。</p>
+
+<p>舉例來說可能長這樣：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM ubuntu:12.04
+</span><span class='line'>MAINTAINER hSATAC
+</span><span class='line'>
+</span><span class='line'># We use bash
+</span><span class='line'>RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+</span><span class='line'>
+</span><span class='line'># We don't like apt-get warnings.
+</span><span class='line'>ENV DEBIAN_FRONTEND noninteractive
+</span><span class='line'>
+</span><span class='line'># Add the PostgreSQL PGP key to verify their Debian packages.
+</span><span class='line'># It should be the same key as https://www.postgresql.org/media/keys/ACCC4CF8.asc
+</span><span class='line'>RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+</span><span class='line'>
+</span><span class='line'># Add PostgreSQL's repository. It contains the most recent stable release
+</span><span class='line'>#     of PostgreSQL, ``9.3``.
+</span><span class='line'>RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list
+</span><span class='line'>
+</span><span class='line'># Update the Ubuntu and PostgreSQL repository indexes
+</span><span class='line'>RUN apt-get update
+</span><span class='line'>
+</span><span class='line'># === Locale ===
+</span><span class='line'>RUN locale-gen  en_US.UTF-8
+</span><span class='line'>ENV LANG en_US.UTF-8
+</span><span class='line'>ENV LANGUAGE en_US.UTF-8
+</span><span class='line'>ENV LC_ALL en_US.UTF-8
+</span><span class='line'>
+</span><span class='line'># === Requirements ===
+</span><span class='line'>RUN apt-get -y -q install nodejs libpq-dev wget git curl imagemagick vim postfix
+</span><span class='line'>
+</span><span class='line'>RUN cd /tmp &&\
+</span><span class='line'>  wget http://downloads.sourceforge.net/project/wkhtmltopdf/0.12.0/wkhtmltox-linux-amd64_0.12.0-03c001d.tar.xz &&\
+</span><span class='line'>  tar Jxvf wkhtmltox-linux-amd64_0.12.0-03c001d.tar.xz &&\
+</span><span class='line'>  cd wkhtmltox &&\
+</span><span class='line'>  install bin/wkhtmltoimage /usr/bin/wkhtmltoimage
+</span><span class='line'>
+</span><span class='line'># === Redis ===
+</span><span class='line'>RUN apt-get -y -q install redis-server
+</span><span class='line'>
+</span><span class='line'># === Elasticsearch ===
+</span><span class='line'>RUN apt-get install openjdk-7-jre-headless -y -q
+</span><span class='line'>RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.deb
+</span><span class='line'>RUN dpkg -i elasticsearch-1.1.0.deb
+</span><span class='line'>
+</span><span class='line'># === RVM ===
+</span><span class='line'>RUN curl -L https://get.rvm.io | bash -s stable
+</span><span class='line'>ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+</span><span class='line'>RUN /bin/bash -l -c rvm requirements
+</span><span class='line'>RUN source /usr/local/rvm/scripts/rvm && rvm install ruby-2.1.2
+</span><span class='line'>RUN rvm all do gem install bundler
+</span><span class='line'>
+</span><span class='line'># === Postgresql ===
+</span><span class='line'>RUN apt-get -y -q install python-software-properties software-properties-common
+</span><span class='line'>RUN apt-get -y -q install postgresql-9.3 postgresql-client-9.3 postgresql-contrib-9.3
+</span><span class='line'>
+</span><span class='line'># Update template1 to enable UTF-8 and hstore
+</span><span class='line'>USER postgres
+</span><span class='line'>RUN    /etc/init.d/postgresql start &&\
+</span><span class='line'>    psql -c "update pg_database set datistemplate=false where datname='template1';" &&\
+</span><span class='line'>    psql -c 'drop database Template1;' &&\
+</span><span class='line'>    psql -c "create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;" &&\
+</span><span class='line'>    psql -c 'CREATE EXTENSION hstore;' -d template1
+</span><span class='line'>
+</span><span class='line'># Create a PostgreSQL role and db
+</span><span class='line'>RUN    /etc/init.d/postgresql start &&\
+</span><span class='line'>    psql --command "CREATE ROLE jenkins LOGIN PASSWORD 'jenkins' SUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION;" &&\
+</span><span class='line'>    createdb -O jenkins jenkins_test &&\
+</span><span class='line'>    createdb -O jenkins jenkins_production
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'># Adjust PostgreSQL configuration
+</span><span class='line'>RUN echo "local all  all  md5" &gt; /etc/postgresql/9.3/main/pg_hba.conf
+</span><span class='line'>
+</span><span class='line'># And add ``listen_addresses`` to ``/etc/postgresql/9.3/main/postgresql.conf``
+</span><span class='line'>RUN echo "listen_addresses='*'" &gt;&gt; /etc/postgresql/9.3/main/postgresql.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Test Image</h3>
+
+<p>接著用 <code>project/base</code> build 一個 <code>project/test</code>，這個 image 會安裝一些「只有測試會用到」的套件，順便把 Gemfile 複製進去安裝一下 Gem, 這樣到時在跑測試的時候就可以省略 <code>bundle install</code> 的時間了。因為我的 base image 還有打算拿來做其他用途，所以這邊是這樣設計。</p>
+
+<p>每天凌晨三點左右用 crontab 重新 Build 一次這個 <code>project/test</code> 的 image 以更新 gems. 當然這邊牽涉到一些如何同步你專案中的 Gemfile 不過這都是簡單的 script 可以解決的問題，這邊不贅述。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FROM project/base
+</span><span class='line'>
+</span><span class='line'># Switch back to root
+</span><span class='line'>USER root
+</span><span class='line'>
+</span><span class='line'># Set ENV
+</span><span class='line'>ENV RAILS_ENV test
+</span><span class='line'>
+</span><span class='line'># Preinstall gem
+</span><span class='line'>ADD gem /opt/project_gem # 這個 gem 目錄裡面有 Gemfile 和 Gemfile.lock
+</span><span class='line'>WORKDIR /opt/project_gem
+</span><span class='line'>RUN rvm all do bundle install
+</span><span class='line'>
+</span><span class='line'># Install Firefox & Xvfb
+</span><span class='line'>RUN apt-get -y install firefox xvfb # 跑 selenium test 用的
+</span><span class='line'>
+</span><span class='line'># Onbuild witch back to root
+</span><span class='line'>ONBUILD USER root
+</span><span class='line'>
+</span><span class='line'># Mound Rails directory
+</span><span class='line'>ONBUILD ADD . /opt/project
+</span><span class='line'>ONBUILD WORKDIR /opt/project
+</span><span class='line'>
+</span><span class='line'># Bundle install
+</span><span class='line'>ONBUILD RUN rvm all do bundle install
+</span><span class='line'>
+</span><span class='line'># Go
+</span><span class='line'>ONBUILD ADD start_services.sh /opt/project/start_services.sh
+</span><span class='line'>ONBUILD RUN chmod +x /opt/project/start_services.sh
+</span><span class='line'>ONBUILD ADD run_tests.sh /opt/project/run_tests.sh
+</span><span class='line'>ONBUILD RUN chmod +x /opt/project/run_tests.sh
+</span><span class='line'>ONBUILD CMD /opt/project/start_services.sh && /opt/project/run_tests.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意這邊最後一段用到了上一篇文章 <a href="/2014/06/docker-basics/">Docker Basics</a> 中所講到的 ONBUILD, 使用這個功能我們就可以很輕鬆的 build 出真正用來測試的 Image.</p>
+
+<p>這幾行實際做的動作是複製兩個 scripts 分別名叫 <code>start_services.sh</code> 和 <code>run_tests.sh</code> 並且 <code>CMD</code> 預設執行這兩個檔案。</p>
+
+<p>但是這兩個檔案現在實際不存在，我會透過 jenkins 的 build scripts 來寫這兩個檔案，其實也就是原本在 build scripts 的內容移到這兩個檔案中了。之所以不把這兩個檔案存在某處再複製過來，就是想保留原本在 Jenkins configure 可以調整 Build Script 的機制，多留一點彈性。</p>
+
+<p>為什麼要這麼麻煩使用 ONBUILD + CMD ，而不是直接 RUN 然後最後直接看 Image 有沒有建置成功就好？除了上述想多留一點彈性的原因外，還有用 Build 這樣 Build 的過程勢必會跑這兩支 script, 而我有可能 Build 完以後不跑這兩支 script, 而是做一些其他的動作例如 <code>/bin/bash</code> 進去 debug 等等，當然可以透過改寫這兩支 script 的內容來使 Build 過程不跑測試，但增添了複雜度。使用這個機制我覺得是最有彈性的。</p>
+
+<h3>Jenkins Build Script</h3>
+
+<p>Jenkins build script 這邊改動的幅度不大，原本的流程大概是：</p>
+
+<ol>
+<li><p>改好相關 application.yml, database.yml 等等 local 設定檔並塞進去。</p></li>
+<li><p>跑 db:reset 等等重置環境</p></li>
+<li><p>跑測試</p></li>
+</ol>
+
+
+<p>基本步驟還是一樣，第一步可以完全不用變，後面就得修改一下，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Start services in docker
+</span><span class='line'>echo "
+</span><span class='line'>Xvfb :99 -screen 0 1366x768x24 -ac 2&gt;/dev/null &gt;/dev/null &
+</span><span class='line'>/etc/init.d/postgresql start &&\
+</span><span class='line'>/etc/init.d/redis-server start &&\
+</span><span class='line'>/etc/init.d/elasticsearch start
+</span><span class='line'>" &gt; start_services.sh
+</span><span class='line'>
+</span><span class='line'># Run tests
+</span><span class='line'>echo "
+</span><span class='line'>rvm all do bundle exec rake db:migrate &&\
+</span><span class='line'>DISPLAY=:99 rvm all do bundle exec rspec spec --format=documentation
+</span><span class='line'>" &gt; run_tests.sh
+</span><span class='line'>
+</span><span class='line'>echo "FROM project/test" &gt; Dockerfile
+</span><span class='line'>docker build --rm -t project/$BUILD_NUMBER .
+</span><span class='line'>docker run --rm project/$BUILD_NUMBER</span></code></pre></td></tr></table></div></figure>
+
+
+<p>一開始用 echo 寫入兩個檔案，內容大致就是開啟 service 並且開始跑測試，值得注意的是我們在 Jenkins workspace 裡寫了一個新的 Dockerfile, 裡面只有一行內容 <code>FROM project/test</code> 配合之前的 <code>ONBUILD</code> 就可以建置出這個 image. 之所以不直接用 <code>&lt;</code> 的方式把內容丟到 <code>docker build</code> 指令，是因為 <code>ADD</code> 需要 context, 也就是 Jenkins workspace, 所以必須要寫實體的檔案出來。</p>
+
+<p>Image tag 直接取用 Jenkins 的環境變數 <code>$BUILD_NUMBER</code> 因此像第 300 個 build 他的 image 就會叫 <code>project/300</code> 清楚明瞭。</p>
+
+<p>Build 和 Run 都使用 <code>--rm</code> 來確保跑完以後就刪除，節省系統空間。當然如果有保留的需求，例如這個跑完以後自動 trigger 一個專門測 IE 的 selenium test target 的話這邊是可以不用刪除的，看個人需求。</p>
+
+<p>Build 完以後也可以同時跑好幾個 containers，利用一個 image 可以跑很多 containers 的特性，例如把 spec 目錄分成幾區，同時開始跑測試，這樣平行處理可以節省時間。</p>
+
+<p>這邊有一個問題就是 <code>docker run</code> 理論上要回傳 command 的 exit code 不過這部分常常出問題，<a href="https://github.com/dotcloud/docker/issues/6259">時好時壞</a> 所以這邊我決定自己來處理。</p>
+
+<p>想法很簡單，直接把 <code>docker run</code> 的 output 拿來檢查，有偵測到爆炸的話就寫一個檔案，最後來檢查檔案，如果沒過就手動爆炸。等這個 bug 修復穩定之後，就可以不要使用這個 workaround 了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker run --rm project/$BUILD_NUMBER | perl -pe '/Failed examples:/ && `echo "fail" &gt; docker-tests-failed`'
+</span><span class='line'>docker rmi project/$BUILD_NUMBER
+</span><span class='line'>
+</span><span class='line'>if [ ! -f docker-tests-failed ]; then
+</span><span class='line'>  echo -e "No docker-tests-failed file. Apparently tests passed."
+</span><span class='line'>else
+</span><span class='line'>  echo -e "docker-tests-failed file found, so build failed."
+</span><span class='line'>  rm docker-tests-failed
+</span><span class='line'>  exit 1
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>其他整合</h2>
+
+<p>Jenkins 有一個 plugin <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">Github Pull Request Builder</a> 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。</p>
+
+<p>另外也有 hipchat plugin 可以整合到公司通訊軟體，這部分和主題相關薄弱就不多談了。</p>
+
+<h2>參考連結</h2>
+
+<p>這邊列出一些不錯的連結：</p>
+
+<ul>
+<li><a href="http://www.tech-d.net/2014/02/06/docker-quicktip-3-onbuild/">Docker quicktip #3 – ONBUILD</a></li>
+<li><a href="http://www.powpark.com/blog/programming/2014/01/29/integrating-docker-with-jenkins-for-ruby-on-rails-app">Integrating Docker with Jenkins for continuous deployment of a Ruby on Rails application</a></li>
+<li><a href="http://www.activestate.com/blog/2014/01/using-docker-run-ruby-rspec-ci-jenkins">Using Docker To Run Ruby Rspec CI In Jenkins</a></li>
+<li><a href="http://blog.gemnasium.com/post/66356385701/your-dockerfile-for-rails">Your Dockerfile for Rails</a></li>
+<li><a href="http://ngauthier.com/2013/10/using-docker-to-parallelize-rails-tests.html">Using Docker to Parallelize Rails Tests</a></li>
+<li><a href="https://zapier.com/engineering/continuous-integration-jenkins-docker-github/">How to Set Up TravisCI-like Continuous Integration with Docker and Jenkins</a></li>
+</ul>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Ash Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins/';
+        var disqus_url = 'http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>
