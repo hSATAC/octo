@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-29T10:11:27+08:00</updated>
+  <updated>2014-06-29T10:14:59+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -25,7 +25,7 @@
 <ol>
 <li><p>從 AppStore 下載 OSX 安裝檔，不需要進行安裝。</p></li>
 <li><p><code>$ gem install iesd</code></p></li>
-<li><p><code>$ esd -i /Applications/Install\ OS\ X\ Mavericks.app -o Mavericks.dmg -t BaseSyste</code>
+<li><p><code>$ iesd -i /Applications/Install\ OS\ X\ Mavericks.app -o Mavericks.dmg -t BaseSyste</code>
 這個步驟做完在家目錄會多一個 Mavericks.dmg 檔案</p></li>
 <li><p>建立一個新的 Virtualbox 虛擬機器，選 OSX Mavericks 建立好以後先不要開機，進入設定 > 系統 > 晶片組選 PIIX3 然後確定 EFI 有打勾。</p></li>
 <li><p><code>$ VBoxManage modifyvm &lt;vmname&gt; –cpuidset 1 000206a7 02100800 1fbae3bf bfebfbff</code>
