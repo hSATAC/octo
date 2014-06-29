@@ -109,3 +109,14 @@ Dockerfile 是用來建置 Docker image 的檔案，簡介可以直接參考[官
 ## 小結
 
 Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。
+
+## 補充
+
+如果你是在 Mac 上使用 docker, 其實他底下是透過 boot2docker 連到一個 vm 裡面去跑 docker, 但是 Mac 常常蓋上電腦就走，這時 vm suspend 後開機 resume 時間都會跑掉，很容易造成靈異現象。這時要進去 boot2docker 的 vm 裡面調整時間。
+
+```
+$ boot2docker ssh # 密碼 tcuser
+$ sudo /usr/local/bin/ntpclient -s -h pool.ntp.org
+```
+
+可以考慮把這段寫成 crontab 省功夫。
