@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 1st, 2014 Hiera, Puppet, eyaml Comments Puppet Hiera Encrypted YAML 在 Puppet 中一些設定大多都是透過 hiera 來取得。 Hiera 最常見，也是預設的 backend 是 YAML 檔。不過有些機敏資訊諸如 &hellip;">
+	<meta name="description" content="Jun 29th, 2014 Mac, Virtualbox Comments 在 Virtualbox 中安裝 OSX Mavericks 10.9 筆記一下在 Virtualbox 中安裝 OSX 10.9.3 的方式，裝一個乾淨的 Mac vm image 作為測試環境或者 CI 編譯用的 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,59 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T09:58:00+08:00" data-updated="true" itemprop="datePublished">Jun 29<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/virtualbox/'>Virtualbox</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/06/install-osx-mavericks-on-virtualbox/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/06/install-osx-mavericks-on-virtualbox/" itemprop="url">在 Virtualbox 中安裝 OSX Mavericks 10.9</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>筆記一下在 Virtualbox 中安裝 OSX 10.9.3 的方式，裝一個乾淨的 Mac vm image 作為測試環境或者 CI 編譯用的 VM 來說相當實用。</p>
+
+<p>以下說明略過 Virtualbox 安裝以及使用的部分，請自行參考 Virtualbox 說明文件。以下步驟在 Virtualbox 4.3.12 測試成功。</p>
+
+<ol>
+<li><p>從 AppStore 下載 OSX 安裝檔，不需要進行安裝。</p></li>
+<li><p><code>$ gem install iesd</code></p></li>
+<li><p><code>$ esd -i /Applications/Install\ OS\ X\ Mavericks.app -o Mavericks.dmg -t BaseSyste</code>
+這個步驟做完在家目錄會多一個 Mavericks.dmg 檔案</p></li>
+<li><p>建立一個新的 Virtualbox 虛擬機器，選 OSX Mavericks 建立好以後先不要開機，進入設定 > 系統 > 晶片組選 PIIX3 然後確定 EFI 有打勾。</p></li>
+<li><p><code>$ VBoxManage modifyvm &lt;vmname&gt; –cpuidset 1 000206a7 02100800 1fbae3bf bfebfbff</code>
+vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list vms 查看)</p></li>
+<li><p>啟動虛擬機，會要求啟動磁碟，選剛剛的 Mavericks.dmg 經過一段開機時間後就會進入安裝畫面，依照正常程序安裝。</p></li>
+</ol>
+
+
+<p>Ref: <a href="http://www.robertsetiadi.net/install-os-x-virtualbox/">How to install OS X on VirtualBox</a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -606,60 +659,6 @@
 
 		
 		<a href="/2013/09/golang-the-fun-part-struct-and-interfacce/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-31T19:09:00+08:00" data-updated="true" itemprop="datePublished">Aug 31<span>st</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/golang/'>Golang</a>, <a class='category' href='/categories/vim/'>Vim</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/08/my-vimrc-for-golang/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/08/my-vimrc-for-golang/" itemprop="url">我的 Golang Vim 配置</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>去年九月發過一篇<a href="http://blog.hsatac.net/2012/09/golang-ides/">開發 Golang 的 IDEs</a>，不過現在我基本上都使用 vim 開發了， update 一下我現在的配置。所有資料都可以在我的 <a href="https://github.com/hSATAC/vimrc">vimrc</a> 找到。</p>
-
-<h3>插件</h3>
-
-<p>和之前一樣最主要還是靠 golang 官方 plugin 以及 <a href="https://github.com/nsf/gocode">gocode</a> 這兩個，多加了一個 <a href="https://github.com/jstemmer/gotags">gotags</a> 取代 ctags，這個超好用的。</p>
-
-<p>由於 golang 官方 plugin 和 gocode 的 plugin 都沒有抽出單獨的 repo，不方便 vundle 或 pathogen 使用，所以我之前就有自己抽出方便安裝的 repo：</p>
-
-<ul>
-<li><a href="https://github.com/golangtw/go.vim">Golang 官方 vim plugin</a></li>
-<li><a href="https://github.com/golangtw/gocode.vim">Gocode vim plugin</a></li>
-</ul>
-
-
-<p>如果搭配 <a href="https://github.com/ervandew/supertab">supertab</a> 可以設 <code>let g:SuperTabDefaultCompletionType = "context"</code> 來 trigger gocode 自動補完。</p>
-
-<p><img src="/images/vimrc_golang/gocode.png" alt="gocode" /></p>
-
-
-		
-		<a href="/2013/08/my-vimrc-for-golang/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

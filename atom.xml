@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-01T09:47:38+08:00</updated>
+  <updated>2014-06-29T10:11:27+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在 Virtualbox 中安裝 OSX Mavericks 10.9]]></title>
+    <link href="http://blog.hsatac.net/2014/06/install-osx-mavericks-on-virtualbox/"/>
+    <updated>2014-06-29T09:58:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/install-osx-mavericks-on-virtualbox</id>
+    <content type="html"><![CDATA[<p>筆記一下在 Virtualbox 中安裝 OSX 10.9.3 的方式，裝一個乾淨的 Mac vm image 作為測試環境或者 CI 編譯用的 VM 來說相當實用。</p>
+
+<p>以下說明略過 Virtualbox 安裝以及使用的部分，請自行參考 Virtualbox 說明文件。以下步驟在 Virtualbox 4.3.12 測試成功。</p>
+
+<ol>
+<li><p>從 AppStore 下載 OSX 安裝檔，不需要進行安裝。</p></li>
+<li><p><code>$ gem install iesd</code></p></li>
+<li><p><code>$ esd -i /Applications/Install\ OS\ X\ Mavericks.app -o Mavericks.dmg -t BaseSyste</code>
+這個步驟做完在家目錄會多一個 Mavericks.dmg 檔案</p></li>
+<li><p>建立一個新的 Virtualbox 虛擬機器，選 OSX Mavericks 建立好以後先不要開機，進入設定 > 系統 > 晶片組選 PIIX3 然後確定 EFI 有打勾。</p></li>
+<li><p><code>$ VBoxManage modifyvm &lt;vmname&gt; –cpuidset 1 000206a7 02100800 1fbae3bf bfebfbff</code>
+vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list vms 查看)</p></li>
+<li><p>啟動虛擬機，會要求啟動磁碟，選剛剛的 Mavericks.dmg 經過一段開機時間後就會進入安裝畫面，依照正常程序安裝。</p></li>
+</ol>
+
+
+<p>Ref: <a href="http://www.robertsetiadi.net/install-os-x-virtualbox/">How to install OS X on VirtualBox</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Puppet Hiera Encrypted YAML]]></title>
@@ -2190,75 +2215,6 @@
 <li><p>關於 Archlinux 使用 Puppet 相關可參考我上兩篇文章：<a href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a>、<a href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ArchLinux 使用 Puppet 注意事項]]></title>
-    <link href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/"/>
-    <updated>2013-02-21T14:12:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/using-puppet-on-archlinux</id>
-    <content type="html"><![CDATA[<p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
-
-<h2>systemctl 路徑</h2>
-
-<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
-
-<h2>套件庫需更新到最新版</h2>
-
-<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
-
-<p>以上這兩個問題我有寫了一段 module</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># For Archlinux. This issue will be fixed in puppet 3.1
-</span><span class='line'>
-</span><span class='line'>class archfix {
-</span><span class='line'>    file {'/bin/systemctl':
-</span><span class='line'>        ensure => link,
-</span><span class='line'>        target => '/usr/bin/systemctl',
-</span><span class='line'>    }   
-</span><span class='line'>    exec {'pacman -Syy':
-</span><span class='line'>        path => ["/usr/bin"]
-</span><span class='line'>    }   
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {
-</span><span class='line'>    stage { 'pre': }
-</span><span class='line'>    class {
-</span><span class='line'>        "archfix": stage => "pre"; 
-</span><span class='line'>    }   
-</span><span class='line'>    Stage["pre"] -> Stage["main"]
-</span><span class='line'>
-</span><span class='line'>  # include other modules...
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Openrc &amp; Systemd</h2>
-
-<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
 ]]></content>
   </entry>
   

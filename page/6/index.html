@@ -9,7 +9,8 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Dec 29th, 2011 linux, script Comments 用 Script 指令來紀錄輸出及輸入 假設我們現在要執行一個重要的動作，想要紀錄 terminal 下面每一個輸出和輸入，當然我們可以在每個指令後面用 cmd &gt; filename 把輸出導向 log 檔， &hellip;">
+	<meta name="description" content="Jan 5th, 2012 centos, redis Comments 在 CentOs 5 上升級 Redis 2.4.5 CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 PHP-Resque 需求 Redis 2.2 以上，只好手動升級了。 首先抓下最新穩定版解壓 1 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +110,88 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-05T13:51:00+08:00" data-updated="true" itemprop="datePublished">Jan 5<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/centos/'>centos</a>, <a class='category' href='/categories/redis/'>redis</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/01/upgrade-redis245-on-centos5/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/upgrade-redis245-on-centos5/" itemprop="url">在 CentOs 5 上升級 Redis 2.4.5</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>CentOS 5 上的 Redis 套件只有到 2.0
+最近用一套 <a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 需求 Redis 2.2 以上，只好手動升級了。</p>
+
+<p>首先抓下最新穩定版解壓</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://redis.googlecode.com/files/redis-2.4.5.tar.gz
+</span><span class='line'>tar zxvf redis-2.4.5.tar.gz
+</span><span class='line'>cd redis-2.4.5
+</span><span class='line'>make</span></code></pre></td></tr></table></div></figure>
+
+
+<p>跟原本的 redis 2.0 裝在同一個目錄</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo make PREFIX=/usr install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再把新的 config 檔蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp redis.conf /etc/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>為了讓原本的 init script 正常運作
+redis.conf 要稍微修改</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>daemonize yes
+</span><span class='line'>...
+</span><span class='line'>pidfile /var/run/redis/redis.pid</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原本 redis-server 是裝在 /usr/sbin 新的是裝在 /usr/bin
+把 /usr/sbin/redis-server 覆蓋過去</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mv /usr/bin/redis-server /usr/sbin/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>大功告成。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -558,55 +641,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 <p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。
 		
 		<a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-28T00:00:00+08:00" data-updated="true" itemprop="datePublished">Apr 28<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/04/firefox4-x-webm-x-apache/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/04/firefox4-x-webm-x-apache/" itemprop="url">Firefox4 X WebM X Apache</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a rel="attachment wp-att-397" href="http://blog.hsatac.net/?attachment_id=397"><img class="size-full wp-image-397 alignleft" title="webm_open-media-project_logo[1]" src="/images/wp-uploads/2011/04/webm_open-media-project_logo1.png" alt="" width="180" height="60" /></a> 今天在弄一些 WebM 的東西，同樣的頁面和影像檔在 chrome 都很正常，但是碰到 firefox 4 就會爛掉，可是 firefox 4 明明就支援 WebM 了啊</p>
-
-<p>&nbsp;</p>
-
-<p>後來做了幾個實驗，直接用 file:/// 開檔案，居然就正常了！ 但放到伺服器上，又出了問題。</p>
-
-<p>survey 了一下，果然是 apache 處理 WebM 時 mimetype 沒有正確送出。</p>
-
-<p>只要修改 /etc/apache2/mime.types 把 WebM 加進去就可以了
-<pre lang="bash">video/webm webm</pre>
-至於 chrome 為什麼會正常，只能猜測 chrome 有特別針對這個問題做優化吧&#8230;</p>
-
-<p>有沒有 chrome 偷偷對 WebM mimetype 做優化都不告訴別人的八卦？</p>
-
-		
-		
 	</div>
 
 </article>

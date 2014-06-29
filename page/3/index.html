@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Feb 19th, 2013 Archlinux, puppet Comments 使用 Puppet 快速佈署 Archlinux 筆記一下安裝步驟&hellip;。 Install Archlinux 由於 Archlinux 本身沒有提供方便的安裝模式、因此我們使用 @helmuthdu &hellip;">
+	<meta name="description" content="Feb 21st, 2013 Archlinux, puppet Comments ArchLinux 使用 Puppet 注意事項 想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。 systemctl 路徑 Arch 在之前的改版已經把 /bin/ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,103 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-21T14:12:00+08:00" data-updated="true" itemprop="datePublished">Feb 21<span>st</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/archlinux/'>Archlinux</a>, <a class='category' href='/categories/puppet/'>puppet</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/02/using-puppet-on-archlinux/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/using-puppet-on-archlinux/" itemprop="url">ArchLinux 使用 Puppet 注意事項</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>想在 ArchLinux 使用 Puppet 有一些需要注意的地方，在這邊順便補充一下。</p>
+
+<h2>systemctl 路徑</h2>
+
+<p>Arch 在之前的改版已經把 <code>/bin/systemctl</code> 移到 <code>/usr/bin/systemctl</code> 下，但 Puppet 還是抓 <code>/usr/systemctl</code> 導致找不到 systemd 這個 provider ，這個問題已經在 Puppet 3.1 修改，也可以自己手動 link 一下。</p>
+
+<h2>套件庫需更新到最新版</h2>
+
+<p>Arch 每次都要先 <code>pacman -Syy</code> 一下不然 package 會無法使用。</p>
+
+<p>以上這兩個問題我有寫了一段 module</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># For Archlinux. This issue will be fixed in puppet 3.1
+</span><span class='line'>
+</span><span class='line'>class archfix {
+</span><span class='line'>    file {'/bin/systemctl':
+</span><span class='line'>        ensure => link,
+</span><span class='line'>        target => '/usr/bin/systemctl',
+</span><span class='line'>    }   
+</span><span class='line'>    exec {'pacman -Syy':
+</span><span class='line'>        path => ["/usr/bin"]
+</span><span class='line'>    }   
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 manifest 中利用 stage 功能先執行 archfix 這個 module 就可以了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>node 'devm3' {
+</span><span class='line'>    stage { 'pre': }
+</span><span class='line'>    class {
+</span><span class='line'>        "archfix": stage => "pre"; 
+</span><span class='line'>    }   
+</span><span class='line'>    Stage["pre"] -> Stage["main"]
+</span><span class='line'>
+</span><span class='line'>  # include other modules...
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Openrc &amp; Systemd</h2>
+
+<p>ArchLinux 現在還有很多套件同時支援 openrc 的 initscript 和 systemd，Puppet 會偵測到兩個 provider 但是他會選擇用 initscript 。可以在 service resource 指定 <code>provider =&gt; systemd</code> 即可。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -565,46 +662,6 @@
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-21T11:07:00+08:00" data-updated="true" itemprop="datePublished">Oct 21<span>st</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/logo/'>logo</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/10/about-my-logo/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/10/about-my-logo/" itemprop="url">關於我的 Logo</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在<a href="http://kvzhuang.blogspot.tw/2012/10/logo.html">莊神的部落格</a>被點名了，再加上我好像也沒講過我 Logo 的故事，只好發文解釋一下。</p>
-
-<p><img src="http://www.loftwork.com/lw-content/users/8399/21a7cb1c760942198a0ace0efe362e78.gif" alt="Logo" /></p>
-
-
-		
-		<a href="/2012/10/about-my-logo/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
