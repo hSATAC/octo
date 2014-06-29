@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: docker | hSATAC]]></title>
+  <link href="http://blog.hsatac.net/categories/docker/atom.xml" rel="self"/>
+  <link href="http://blog.hsatac.net/"/>
+  <updated>2014-06-29T12:22:26+08:00</updated>
+  <id>http://blog.hsatac.net/</id>
+  <author>
+    <name><![CDATA[Ash Wu]]></name>
+    <email><![CDATA[hsatac@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Docker Basics]]></title>
+    <link href="http://blog.hsatac.net/2014/06/docker-basics/"/>
+    <updated>2014-06-29T10:52:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/docker-basics</id>
+    <content type="html"><![CDATA[<p>隨著 AWS Elastic Beanstalk <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.html">支援 Docker</a>, Google Computer Engine 也宣布<a href="https://developers.google.com/compute/docs/containers/container_vms">支援 Docker</a>，以及 Google 最近發表的一些 container 工具例如 <a href="https://github.com/google/cadvisor">cAdvisor</a> 這套分析 container 資源和效能的軟體，也同時支援 Google 自己的 <a href="https://github.com/google/lmctfy">lmctfy</a> 和 Docker 來看，Docker 真的是越來越普及了。這個月 Docker 更<a href="http://blog.docker.com/2014/06/its-here-docker-1-0/">釋出了 1.0 版</a> 標誌著 Docker 已經 production-ready 了。</p>
+
+<p>關於 Docker 的概念這邊不多加著墨，可以直接上 <a href="http://www.docker.com/">Docker 官網</a> 閱讀。第一次接觸的朋友可以花十分鐘玩一下 <a href="http://www.docker.com/tryit/">Try Docker</a>。這邊先簡單筆記一些名詞解說和常用的指令。</p>
+
+<!--more-->
+
+
+<h2>Containers and Images</h2>
+
+<p>使用 Docker 時很常見到 container 和 image 這兩個名詞。</p>
+
+<p>Image 是做好的磁碟檔案，可以透過四種方式取得，一種是 <code>docker pull</code> 拉下遠端檔案、另一種是 <code>docker build</code> 從 <code>Dockerfile</code> 開始建置、第三種是 <code>docker commit</code> 從某個 container commit 成 image, 第四種則是 <code>docker import</code> 匯入。</p>
+
+<p>Container 則是 <code>docker run</code> 某個 image 時產生的，可以透過 <code>docker ps</code> 查看正在運行中的 containers, 一個 image 可以同時運行好幾個 containers. <code>docker ps -a</code> 可以查看所有包含停止運行的 containers. 當 container 停止運行後，磁碟中的檔案會存在該 container 中，但記憶體中的資料都會消失。在 Docker 0.12 版本中使用 cgroup freeze 機制，加入了 <code>docker pause</code> 和 <code>docker unpause</code> 指令，可以 suspend 和 resume 指定的 container.</p>
+
+<p>會注意到每個 image 和 container 都有一個 hash id, 當你每 commit 一次上去時其實就是透過 aufs 疊了一層檔案上去。</p>
+
+<h2>常用指令</h2>
+
+<p>```
+docker ps</p>
+
+<h1>列出運行中的 container</h1>
+
+<p>docker ps -a</p>
+
+<h1>列出所有 container</h1>
+
+<p>docker images</p>
+
+<h1>列出 image</h1>
+
+<p>docker rm <container id></p>
+
+<h1>刪除 continer</h1>
+
+<p>docker rmi <image id></p>
+
+<h1>刪除 image</h1>
+
+<p>docker build .</p>
+
+<h1>Build ./Dockerfile 的 image</h1>
+
+<p>docker build &mdash;rm .</p>
+
+<h1>Build 但是刪除 intermediate layer, 也就是不會保留中間步驟產生的 container</h1>
+
+<p>docker build &mdash;no-cache .</p>
+
+<h1>不使用 cache, 會從頭重新 build</h1>
+
+<p>docker build -t kktix/base .</p>
+
+<h1>build 完以後給他一個 tag kktix/base</h1>
+
+<p>docker build &mdash;rm &mdash;no-cache -t base .</p>
+
+<h1>組合技</h1>
+
+<p>docker run base</p>
+
+<h1>跑 base image，會產生一個 container</h1>
+
+<p>docker run base /bin/ping www.google.com</p>
+
+<h1>跑 base image 並指定指令</h1>
+
+<p>docker run -d base /bin/ping www.google.com</p>
+
+<h1>用 daemon 模式跑</h1>
+
+<p>docker run -i -t base /bin/bash</p>
+
+<h1>(i)nterative (t)ty 跑 bash 就等於是進去他的 shell</h1>
+
+<p>docker run &mdash;rm base /bin/ping www.google.com</p>
+
+<h1>跑完以後自動把這個 container 砍掉，注意 &mdash;rm 和 -d 無法同時下</h1>
+
+<p>docker run -v /host/folder:/docker/folder base</p>
+
+<h1>把 Host 的目錄 mount 到 docker container 的目錄</h1>
+
+<p>docker run -d -i -t base /bin/bash</p>
+
+<h1>組合技，這樣可以用 docker attach 回去 shell</h1>
+
+<p>docker attach <container id></p>
+
+<h1>attach 回某個 container</h1>
+
+<h1>如果跑的時候不是給 -d -i -t /bin/bash 的話是不能下指令的</h1>
+
+<h1>ctrl + c 會跳出。</h1>
+
+<h1>但如果是 -d -i -t /bin/bash ctrl + c 會 stop 整個 container.</h1>
+
+<h1>在此情況下不想停止 container 只想跳出請用 ctrl + p, ctrl + q</h1>
+
+<p>```</p>
+
+<h2>Dockerfile</h2>
+
+<p>Dockerfile 是用來建置 Docker image 的檔案，簡介可以直接參考<a href="http://docs.docker.com/reference/builder/">官方文件</a>，這邊筆記一些容易搞錯的部分。</p>
+
+<h3>ENTRYPOINT, CMD and RUN</h3>
+
+<ul>
+<li><p><code>RUN</code> 是最基本的，就單純是在 build 的時候跑某個指令。</p></li>
+<li><p><code>CMD</code> 則是 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，如果沒有指定 command 時會跑的指令。</p></li>
+<li><p><code>ENTRYPOINT</code> 則是設定 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，用來接 command 的指令。預設的 <code>ENTRYPOINT</code> 是 <code>/bin/sh -c</code> ，例如我們把 <code>ENTRYPOINT</code> 改成 <code>/usr/bin/redis-cli</code> 這樣當我們跑 <code>docker run redis monitor</code> 時，他實際執行的指令就會是 <code>/usr/bin/redis-cli monitor</code>。</p></li>
+</ul>
+
+
+<h3>ADD vs COPY</h3>
+
+<p><code>ADD</code> 會把你指定的檔案或目錄複製到 docker image 中，需要注意的是他不能用 <code>../</code> 指定到當前目錄(context) 之外，並且如果你是用 <code>docker build - &lt; somefile</code> 這樣的方式也沒辦法使用，因為沒有 context。</p>
+
+<p><code>ADD</code> 和 <code>COPY</code> 基本上是一樣的，唯一的差別在於當使用 <code>ADD</code> 時，如果檔案是認得的壓縮檔(gzip, bzip2 or xz) 他會自動幫你解壓縮，而 COPY 則不會。</p>
+
+<h3>ONBUILD</h3>
+
+<p><code>ONBUILD</code> 是一個很好用的功能，他不會發生在你這個 Dockerfile 的建置過程中，而是「用此 Dockerfile 建置出來的 IMAGE 來建置」的過程才會觸發。</p>
+
+<p>舉例你用現在的 Dockerfile 建立了一個 image 叫做 base, 當有另一個 Dockerfile 使用 <code>FROM base</code> 來建置 image 時才會跑 <code>ONBUILD</code> 這行。這是一個有點 tricky 但又很實用的功能。</p>
+
+<h2>小結</h2>
+
+<p>Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。</p>
+]]></content>
+  </entry>
+  
+</feed>

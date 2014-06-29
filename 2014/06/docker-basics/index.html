@@ -1,0 +1,372 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Docker Basics - hSATAC</title>
+	<meta name="author" content="Ash Wu">
+
+	
+	<meta name="description" content="Jun 29th, 2014 Docker Docker Basics 隨著 AWS Elastic Beanstalk 支援 Docker, Google Computer Engine 也宣布支援 Docker，以及 Google 最近發表的一些 container 工具例如 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.hsatac.net/2014/06/docker-basics/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.fancybox.pack.js?v=2.0.4"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+  });
+</script>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("hsatac@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">hSATAC</a></h1>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="http://blog.ash.cat">Hobbies</a></li>
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I am a programming language user. Here are some breadcrumbs of my work and life.
+ >> ('cat' + 'ash').reverse #=> "hsatac"
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		<a class="facebook" href="http://www.facebook.com/hSATAC" title="Facebook">Facebook</a>
+		
+		
+		<a class="google" href="https://plus.google.com/113141223333997550446" rel="author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/hSATAC" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/hSATAC" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		<a class="linkedin" href="http://www.linkedin.com/in/hSATAC" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/cat" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="http://feeds.feedburner.com/hsatac" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T10:52:00+08:00" data-updated="true" itemprop="datePublished">Jun 29<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/docker/'>Docker</a>
+
+
+</div>
+    </div>
+	<h1 class="title" itemprop="name">Docker Basics</h1>
+	<div class="entry-content" itemprop="articleBody"><p>隨著 AWS Elastic Beanstalk <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.html">支援 Docker</a>, Google Computer Engine 也宣布<a href="https://developers.google.com/compute/docs/containers/container_vms">支援 Docker</a>，以及 Google 最近發表的一些 container 工具例如 <a href="https://github.com/google/cadvisor">cAdvisor</a> 這套分析 container 資源和效能的軟體，也同時支援 Google 自己的 <a href="https://github.com/google/lmctfy">lmctfy</a> 和 Docker 來看，Docker 真的是越來越普及了。這個月 Docker 更<a href="http://blog.docker.com/2014/06/its-here-docker-1-0/">釋出了 1.0 版</a> 標誌著 Docker 已經 production-ready 了。</p>
+
+<p>關於 Docker 的概念這邊不多加著墨，可以直接上 <a href="http://www.docker.com/">Docker 官網</a> 閱讀。第一次接觸的朋友可以花十分鐘玩一下 <a href="http://www.docker.com/tryit/">Try Docker</a>。這邊先簡單筆記一些名詞解說和常用的指令。</p>
+
+<!--more-->
+
+
+<h2>Containers and Images</h2>
+
+<p>使用 Docker 時很常見到 container 和 image 這兩個名詞。</p>
+
+<p>Image 是做好的磁碟檔案，可以透過四種方式取得，一種是 <code>docker pull</code> 拉下遠端檔案、另一種是 <code>docker build</code> 從 <code>Dockerfile</code> 開始建置、第三種是 <code>docker commit</code> 從某個 container commit 成 image, 第四種則是 <code>docker import</code> 匯入。</p>
+
+<p>Container 則是 <code>docker run</code> 某個 image 時產生的，可以透過 <code>docker ps</code> 查看正在運行中的 containers, 一個 image 可以同時運行好幾個 containers. <code>docker ps -a</code> 可以查看所有包含停止運行的 containers. 當 container 停止運行後，磁碟中的檔案會存在該 container 中，但記憶體中的資料都會消失。在 Docker 0.12 版本中使用 cgroup freeze 機制，加入了 <code>docker pause</code> 和 <code>docker unpause</code> 指令，可以 suspend 和 resume 指定的 container.</p>
+
+<p>會注意到每個 image 和 container 都有一個 hash id, 當你每 commit 一次上去時其實就是透過 aufs 疊了一層檔案上去。</p>
+
+<h2>常用指令</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker ps
+</span><span class='line'># 列出運行中的 container
+</span><span class='line'>
+</span><span class='line'>docker ps -a
+</span><span class='line'># 列出所有 container
+</span><span class='line'>
+</span><span class='line'>docker images
+</span><span class='line'># 列出 image
+</span><span class='line'>
+</span><span class='line'>docker rm &lt;container id&gt;
+</span><span class='line'># 刪除 continer
+</span><span class='line'>
+</span><span class='line'>docker rmi &lt;image id&gt;
+</span><span class='line'># 刪除 image
+</span><span class='line'>
+</span><span class='line'>docker build .
+</span><span class='line'># Build ./Dockerfile 的 image
+</span><span class='line'>
+</span><span class='line'>docker build --rm . 
+</span><span class='line'># Build 但是刪除 intermediate layer, 也就是不會保留中間步驟產生的 container
+</span><span class='line'>
+</span><span class='line'>docker build --no-cache . 
+</span><span class='line'># 不使用 cache, 會從頭重新 build
+</span><span class='line'>
+</span><span class='line'>docker build -t kktix/base . 
+</span><span class='line'># build 完以後給他一個 tag kktix/base
+</span><span class='line'>
+</span><span class='line'>docker build --rm --no-cache -t base . 
+</span><span class='line'># 組合技
+</span><span class='line'>
+</span><span class='line'>docker run base 
+</span><span class='line'># 跑 base image，會產生一個 container
+</span><span class='line'>
+</span><span class='line'>docker run base /bin/ping www.google.com 
+</span><span class='line'># 跑 base image 並指定指令
+</span><span class='line'>
+</span><span class='line'>docker run -d base /bin/ping www.google.com 
+</span><span class='line'># 用 daemon 模式跑
+</span><span class='line'>
+</span><span class='line'>docker run -i -t base /bin/bash 
+</span><span class='line'># (i)nterative (t)ty 跑 bash 就等於是進去他的 shell
+</span><span class='line'>
+</span><span class='line'>docker run --rm base /bin/ping www.google.com 
+</span><span class='line'># 跑完以後自動把這個 container 砍掉，注意 --rm 和 -d 無法同時下
+</span><span class='line'>
+</span><span class='line'>docker run -v /host/folder:/docker/folder base
+</span><span class='line'># 把 Host 的目錄 mount 到 docker container 的目錄
+</span><span class='line'>
+</span><span class='line'>docker run -d -i -t base /bin/bash 
+</span><span class='line'># 組合技，這樣可以用 docker attach 回去 shell
+</span><span class='line'>
+</span><span class='line'>docker attach &lt;container id&gt; 
+</span><span class='line'># attach 回某個 container
+</span><span class='line'># 如果跑的時候不是給 -d -i -t /bin/bash 的話是不能下指令的
+</span><span class='line'># ctrl + c 會跳出。
+</span><span class='line'># 但如果是 -d -i -t /bin/bash ctrl + c 會 stop 整個 container.
+</span><span class='line'># 在此情況下不想停止 container 只想跳出請用 ctrl + p, ctrl + q</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Dockerfile</h2>
+
+<p>Dockerfile 是用來建置 Docker image 的檔案，簡介可以直接參考<a href="http://docs.docker.com/reference/builder/">官方文件</a>，這邊筆記一些容易搞錯的部分。</p>
+
+<h3>ENTRYPOINT, CMD and RUN</h3>
+
+<ul>
+<li><p><code>RUN</code> 是最基本的，就單純是在 build 的時候跑某個指令。</p></li>
+<li><p><code>CMD</code> 則是 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，如果沒有指定 command 時會跑的指令。</p></li>
+<li><p><code>ENTRYPOINT</code> 則是設定 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，用來接 command 的指令。預設的 <code>ENTRYPOINT</code> 是 <code>/bin/sh -c</code> ，例如我們把 <code>ENTRYPOINT</code> 改成 <code>/usr/bin/redis-cli</code> 這樣當我們跑 <code>docker run redis monitor</code> 時，他實際執行的指令就會是 <code>/usr/bin/redis-cli monitor</code>。</p></li>
+</ul>
+
+
+<h3>ADD vs COPY</h3>
+
+<p><code>ADD</code> 會把你指定的檔案或目錄複製到 docker image 中，需要注意的是他不能用 <code>../</code> 指定到當前目錄(context) 之外，並且如果你是用 <code>docker build - &lt; somefile</code> 這樣的方式也沒辦法使用，因為沒有 context。</p>
+
+<p><code>ADD</code> 和 <code>COPY</code> 基本上是一樣的，唯一的差別在於當使用 <code>ADD</code> 時，如果檔案是認得的壓縮檔(gzip, bzip2 or xz) 他會自動幫你解壓縮，而 COPY 則不會。</p>
+
+<h3>ONBUILD</h3>
+
+<p><code>ONBUILD</code> 是一個很好用的功能，他不會發生在你這個 Dockerfile 的建置過程中，而是「用此 Dockerfile 建置出來的 IMAGE 來建置」的過程才會觸發。</p>
+
+<p>舉例你用現在的 Dockerfile 建立了一個 image 叫做 base, 當有另一個 Dockerfile 使用 <code>FROM base</code> 來建置 image 時才會跑 <code>ONBUILD</code> 這行。這是一個有點 tricky 但又很實用的功能。</p>
+
+<h2>小結</h2>
+
+<p>Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - Ash Wu -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span> - Logo authorized by <a href="http://www3.ocn.ne.jp/~musimaru/">64CAT64</a>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'hsatac';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2014/06/docker-basics/';
+        var disqus_url = 'http://blog.hsatac.net/2014/06/docker-basics/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-27441833-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-06-29T10:14:59+08:00</updated>
+  <updated>2014-06-29T12:22:26+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,177 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Docker Basics]]></title>
+    <link href="http://blog.hsatac.net/2014/06/docker-basics/"/>
+    <updated>2014-06-29T10:52:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/06/docker-basics</id>
+    <content type="html"><![CDATA[<p>隨著 AWS Elastic Beanstalk <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.html">支援 Docker</a>, Google Computer Engine 也宣布<a href="https://developers.google.com/compute/docs/containers/container_vms">支援 Docker</a>，以及 Google 最近發表的一些 container 工具例如 <a href="https://github.com/google/cadvisor">cAdvisor</a> 這套分析 container 資源和效能的軟體，也同時支援 Google 自己的 <a href="https://github.com/google/lmctfy">lmctfy</a> 和 Docker 來看，Docker 真的是越來越普及了。這個月 Docker 更<a href="http://blog.docker.com/2014/06/its-here-docker-1-0/">釋出了 1.0 版</a> 標誌著 Docker 已經 production-ready 了。</p>
+
+<p>關於 Docker 的概念這邊不多加著墨，可以直接上 <a href="http://www.docker.com/">Docker 官網</a> 閱讀。第一次接觸的朋友可以花十分鐘玩一下 <a href="http://www.docker.com/tryit/">Try Docker</a>。這邊先簡單筆記一些名詞解說和常用的指令。</p>
+
+<!--more-->
+
+
+<h2>Containers and Images</h2>
+
+<p>使用 Docker 時很常見到 container 和 image 這兩個名詞。</p>
+
+<p>Image 是做好的磁碟檔案，可以透過四種方式取得，一種是 <code>docker pull</code> 拉下遠端檔案、另一種是 <code>docker build</code> 從 <code>Dockerfile</code> 開始建置、第三種是 <code>docker commit</code> 從某個 container commit 成 image, 第四種則是 <code>docker import</code> 匯入。</p>
+
+<p>Container 則是 <code>docker run</code> 某個 image 時產生的，可以透過 <code>docker ps</code> 查看正在運行中的 containers, 一個 image 可以同時運行好幾個 containers. <code>docker ps -a</code> 可以查看所有包含停止運行的 containers. 當 container 停止運行後，磁碟中的檔案會存在該 container 中，但記憶體中的資料都會消失。在 Docker 0.12 版本中使用 cgroup freeze 機制，加入了 <code>docker pause</code> 和 <code>docker unpause</code> 指令，可以 suspend 和 resume 指定的 container.</p>
+
+<p>會注意到每個 image 和 container 都有一個 hash id, 當你每 commit 一次上去時其實就是透過 aufs 疊了一層檔案上去。</p>
+
+<h2>常用指令</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>docker ps
+</span><span class='line'># 列出運行中的 container
+</span><span class='line'>
+</span><span class='line'>docker ps -a
+</span><span class='line'># 列出所有 container
+</span><span class='line'>
+</span><span class='line'>docker images
+</span><span class='line'># 列出 image
+</span><span class='line'>
+</span><span class='line'>docker rm &lt;container id&gt;
+</span><span class='line'># 刪除 continer
+</span><span class='line'>
+</span><span class='line'>docker rmi &lt;image id&gt;
+</span><span class='line'># 刪除 image
+</span><span class='line'>
+</span><span class='line'>docker build .
+</span><span class='line'># Build ./Dockerfile 的 image
+</span><span class='line'>
+</span><span class='line'>docker build --rm . 
+</span><span class='line'># Build 但是刪除 intermediate layer, 也就是不會保留中間步驟產生的 container
+</span><span class='line'>
+</span><span class='line'>docker build --no-cache . 
+</span><span class='line'># 不使用 cache, 會從頭重新 build
+</span><span class='line'>
+</span><span class='line'>docker build -t kktix/base . 
+</span><span class='line'># build 完以後給他一個 tag kktix/base
+</span><span class='line'>
+</span><span class='line'>docker build --rm --no-cache -t base . 
+</span><span class='line'># 組合技
+</span><span class='line'>
+</span><span class='line'>docker run base 
+</span><span class='line'># 跑 base image，會產生一個 container
+</span><span class='line'>
+</span><span class='line'>docker run base /bin/ping www.google.com 
+</span><span class='line'># 跑 base image 並指定指令
+</span><span class='line'>
+</span><span class='line'>docker run -d base /bin/ping www.google.com 
+</span><span class='line'># 用 daemon 模式跑
+</span><span class='line'>
+</span><span class='line'>docker run -i -t base /bin/bash 
+</span><span class='line'># (i)nterative (t)ty 跑 bash 就等於是進去他的 shell
+</span><span class='line'>
+</span><span class='line'>docker run --rm base /bin/ping www.google.com 
+</span><span class='line'># 跑完以後自動把這個 container 砍掉，注意 --rm 和 -d 無法同時下
+</span><span class='line'>
+</span><span class='line'>docker run -v /host/folder:/docker/folder base
+</span><span class='line'># 把 Host 的目錄 mount 到 docker container 的目錄
+</span><span class='line'>
+</span><span class='line'>docker run -d -i -t base /bin/bash 
+</span><span class='line'># 組合技，這樣可以用 docker attach 回去 shell
+</span><span class='line'>
+</span><span class='line'>docker attach &lt;container id&gt; 
+</span><span class='line'># attach 回某個 container
+</span><span class='line'># 如果跑的時候不是給 -d -i -t /bin/bash 的話是不能下指令的
+</span><span class='line'># ctrl + c 會跳出。
+</span><span class='line'># 但如果是 -d -i -t /bin/bash ctrl + c 會 stop 整個 container.
+</span><span class='line'># 在此情況下不想停止 container 只想跳出請用 ctrl + p, ctrl + q</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Dockerfile</h2>
+
+<p>Dockerfile 是用來建置 Docker image 的檔案，簡介可以直接參考<a href="http://docs.docker.com/reference/builder/">官方文件</a>，這邊筆記一些容易搞錯的部分。</p>
+
+<h3>ENTRYPOINT, CMD and RUN</h3>
+
+<ul>
+<li><p><code>RUN</code> 是最基本的，就單純是在 build 的時候跑某個指令。</p></li>
+<li><p><code>CMD</code> 則是 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，如果沒有指定 command 時會跑的指令。</p></li>
+<li><p><code>ENTRYPOINT</code> 則是設定 <code>docker run &lt;image&gt; &lt;command&gt;</code> 時，用來接 command 的指令。預設的 <code>ENTRYPOINT</code> 是 <code>/bin/sh -c</code> ，例如我們把 <code>ENTRYPOINT</code> 改成 <code>/usr/bin/redis-cli</code> 這樣當我們跑 <code>docker run redis monitor</code> 時，他實際執行的指令就會是 <code>/usr/bin/redis-cli monitor</code>。</p></li>
+</ul>
+
+
+<h3>ADD vs COPY</h3>
+
+<p><code>ADD</code> 會把你指定的檔案或目錄複製到 docker image 中，需要注意的是他不能用 <code>../</code> 指定到當前目錄(context) 之外，並且如果你是用 <code>docker build - &lt; somefile</code> 這樣的方式也沒辦法使用，因為沒有 context。</p>
+
+<p><code>ADD</code> 和 <code>COPY</code> 基本上是一樣的，唯一的差別在於當使用 <code>ADD</code> 時，如果檔案是認得的壓縮檔(gzip, bzip2 or xz) 他會自動幫你解壓縮，而 COPY 則不會。</p>
+
+<h3>ONBUILD</h3>
+
+<p><code>ONBUILD</code> 是一個很好用的功能，他不會發生在你這個 Dockerfile 的建置過程中，而是「用此 Dockerfile 建置出來的 IMAGE 來建置」的過程才會觸發。</p>
+
+<p>舉例你用現在的 Dockerfile 建立了一個 image 叫做 base, 當有另一個 Dockerfile 使用 <code>FROM base</code> 來建置 image 時才會跑 <code>ONBUILD</code> 這行。這是一個有點 tricky 但又很實用的功能。</p>
+
+<h2>小結</h2>
+
+<p>Docker 真的是把 linux container 的操作難度降低非常多，也加上了很多實用的功能以及安全性的限制，他可以運用的範圍非常廣，接下來預計寫幾篇我們實際運用 docker 的例子和筆記。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 Virtualbox 中安裝 OSX Mavericks 10.9]]></title>
@@ -1972,249 +2143,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 <p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
 
 <p>完全不需要什麼 rsync 啦！無痛跨 region 轉移就這麼簡單！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Puppet 學習筆記]]></title>
-    <link href="http://blog.hsatac.net/2013/02/puppet-study-note/"/>
-    <updated>2013-02-22T11:38:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/puppet-study-note</id>
-    <content type="html"><![CDATA[<p>前陣子玩了 Puppet…把一些重點和資源紀錄在這邊…
-初學 Puppet 的話很建議看一遍<a href="http://docs.puppetlabs.com/learning/">官方教學</a>，雖然沒有很完整但整個 run 過基礎的概念會有。</p>
-
-<h2>Infrastructure as Code</h2>
-
-<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&hellip;？</p>
-
-<p>其實基本上是相通的…但概念層次上高了一層。寫 shell script 主要是加速重複性工作、減少人為疏失，但你也很難去 reuse 這些東西。</p>
-
-<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&hellip;。</p>
-
-<p>Code 就是文件， code 就是你的 infrastructure。不但好寫好讀好維護，更可直接拿來執行。</p>
-
-<!--more-->
-
-
-<h2>Resource</h2>
-
-<p>Puppet 中最重要的東西、以及最基本的基礎元件叫做 resource，例如 file, package, service 這三個就是最常用的 resource ，你可以透過 resource 來指定你的檔案狀態、套件安裝狀態、服務狀態等等。</p>
-
-<p>Resource 列表和用法可參考：<a href="http://docs.puppetlabs.com/references/latest/type.html">http://docs.puppetlabs.com/references/latest/type.html</a></p>
-
-<p>resource type 要注意大小寫，當作 metaparameters 的時候寫作 <code>Type[title]</code> Type 要大寫。</p>
-
-<h2>Dependencies</h2>
-
-<p>我們會撰寫 manifest 檔案來描述 resource，需要注意的是這些 resource 都是 sync 執行的，並不是順序執行，因此就會有相依性的問題產生。</p>
-
-<p>Puppet 提供了 before / require 關鍵字</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>file {'/tmp/test1':
-</span><span class='line'>      ensure  => present,
-</span><span class='line'>      content => "Hi.",
-</span><span class='line'>      before  => Notify['/tmp/test1 has already been synced.'],
-</span><span class='line'>      # (See what I meant about symbolic titles being a good idea?)
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    notify {'/tmp/test1 has already been synced.':}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>也可以用 chaining 的寫法，以箭頭表示 &lt;&ndash; 或 &ndash;> 都可以：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>file {'/tmp/test1':
-</span><span class='line'>      ensure  => present,
-</span><span class='line'>      content => "Hi.",
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    notify {'after':
-</span><span class='line'>      message => '/tmp/test1 has already been synced.',
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    File['/tmp/test1'] -> Notify['after']</span></code></pre></td></tr></table></div></figure>
-
-
-<p>另外有一組「觸發」的關鍵字叫 notify / subscribe ，可以用 &lt;~ 或 ~> 表示，當前面的 Resource 有更新，會通知後面的 resource 執行。</p>
-
-<p>還有一些狀況 Puppet 會自動處理 dependencies 。這叫 Autorequire。</p>
-
-<p>例如你定義了兩個目錄，其中一個目錄在另一個目錄之下，Puppet 很聰明會自動判斷他們的相依性。又例如你定義 user 和這個 user 的 ssh_authorized_key，Puppet 也會自動處理他們的順序。</p>
-
-<h2>Module</h2>
-
-<p>在 Puppet 裡面我們可以寫 class，而 module 就是可重用的 class。放在 modulepath 裡面。</p>
-
-<p>可使用 <code>puppet apply --configprint modulepath</code> 查看 modulepath 設定值。</p>
-
-<p><code>puppet apply --configprint all</code> 可看全部設定。</p>
-
-<p>Module 目錄有固定的格式</p>
-
-<ul>
-<li><p><code>/etc/puppet/module/{module_name}/manifests/init.pp</code> 這是 module 的 main file</p></li>
-<li><p><code>/etc/puppet/module/{module_name}/manifests/files</code> 使用 <code>puppet://</code> 來 serve file 的時候會抓這下面的檔案。例如 <code>puppet:///module/php/php.conf</code> 就是 <code>`/etc/puppet/module/php/files/php.conf</code>。</p></li>
-<li><p><code>/etc/puppet/module/{module_name}/templates/</code> module 若有使用 template 就要放在這。</p></li>
-</ul>
-
-
-<p>寫好 module 後想測試可執行 <code>puppet apply -e "include php"</code> 來測試，想看完整 debug 訊息可加上 <code>-vd</code> 參數 <code>puppet apply -e "include php" -vd</code></p>
-
-<p>除了自己寫的 module 以外也可以使用別人寫好的 module 來加快開發速度。</p>
-
-<p>關於 module 設計的一些基本概念可以參考這篇好文：<a href="http://www.devco.net/archives/2012/12/13/simple-puppet-module-structure-redux.php">Simple Puppet Module Structure Redux</a></p>
-
-<h3>Puppet Forge</h3>
-
-<p>Puppet 提供了一個 module 集中地 <a href="http://forge.puppetlabs.com/">Puppet Forge</a> 可以直接來此搜尋現成的 module。不過根據我的觀察這些 module 大多都是支援 debian/ubuntu 等主流 distro，若使用其他 distro 的可能要考慮自己寫或是 contribute 。</p>
-
-<p>不管怎樣，可以來這裡參考別人寫的 module 收穫會很多。</p>
-
-<p>安裝 Puppet module 可使用以下指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>puppet module install puppetlabs-apache --version 0.0.2
-</span><span class='line'>puppet module list
-</span><span class='line'>puppet module search apache
-</span><span class='line'>puppet module uninstall puppetlabs-apache
-</span><span class='line'>puppet module upgrade puppetlabs-apache --version 0.0.3</span></code></pre></td></tr></table></div></figure>
-
-
-<p>更詳細的說明可參考：<a href="http://docs.puppetlabs.com/puppet/latest/reference/modules_installing.html">Modules Installing</a></p>
-
-<h2>Defined Resource Types</h2>
-
-<p>我們可以定義自己的 resource type，透過 <code>define</code> 這個關鍵字。跟 class 用法基本上一樣，但是 define 不支援繼承。有點像是 marco 的功能，例如我們可以定義一個 developer 的 resource，把相關的東西都包在一起：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>define developer($user = $title, $uid, $ssh_key) {
-</span><span class='line'>        $key_seg = split($ssh_key, ' ')
-</span><span class='line'>        $ssh_key_title = $key_seg[2]
-</span><span class='line'>        $ssh_key_type  = $key_seg[0]
-</span><span class='line'>        $ssh_key_hash  = $key_seg[1]
-</span><span class='line'>        user {$user:
-</span><span class='line'>                ensure => present,
-</span><span class='line'>                managehome => true,
-</span><span class='line'>                groups => ['wheel', 'users'],
-</span><span class='line'>                uid => $uid,
-</span><span class='line'>        } ->
-</span><span class='line'>        ssh_authorized_key {"${user}_puppet_key":
-</span><span class='line'>                ensure => present,
-</span><span class='line'>                key => $ssh_key_hash,
-</span><span class='line'>                user => $user,
-</span><span class='line'>                type => $ssh_key_type,
-</span><span class='line'>                name => "${user}_puppet_key",
-</span><span class='line'>        } ->
-</span><span class='line'>        file {"/home/${user}":
-</span><span class='line'>                mode => 0755,
-</span><span class='line'>        } ->
-</span><span class='line'>        file {"/home/dev/${user}":
-</span><span class='line'>                ensure => link,
-</span><span class='line'>                target => '/home/$user',
-</span><span class='line'>        }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Functions</h2>
-
-<p>Puppet 提供了一些函數可運用，可透過 <code>puppet doc --reference function</code> 指令查看，或者至 <a href="http://docs.puppetlabs.com/references/latest/function.html%20function%20list">http://docs.puppetlabs.com/references/latest/function.html function list</a></p>
-
-<h2>Stage</h2>
-
-<p>有些狀況想讓不同 module 在不同的 stage 執行，就可以使用 stage 功能。</p>
-
-<p>預設所有 module 都是 default 在 <code>main</code> stage，所以可以定義其他的 stage 在 main 之前或之後即可。</p>
-
-<p>詳細參考 <a href="http://docs.puppetlabs.com/puppet/latest/reference/lang_run_stages.html">Puppet Run Stages</a></p>
-
-<h2>Puppet 目錄架構</h2>
-
-<ul>
-<li><p><code>/etc/puppet/puppet.conf</code> 主要設定檔，可參考<a href="http://docs.puppetlabs.com/guides/configuring.html">官方文件</a></p></li>
-<li><p><code>/etc/puppet/modules/</code> 放你寫的 modules</p></li>
-<li><p><code>/etc/puppet/manifests/site.pp</code> 放你的 node 描述檔，也就是你每台伺服器要怎樣定義寫在這。</p></li>
-</ul>
-
-
-<h2>Puppet 流程</h2>
-
-<p>Puppet 會把我們撰寫的 manifest 檔案 compile 起來並處理其中的 dependencies 後打成一包，再查詢目前系統的狀態後更改系統到我們定義的狀態，如圖示：</p>
-
-<p><img src="http://docs.puppetlabs.com/learning/images/manifest_to_defined_state_unified.png" alt="manifest to defined state" /></p>
-
-<h3>Master-Agent</h3>
-
-<p>Puppet 可以採用 Master-Agent 架構，一台 master 據說能承載 5000 個 agents。也可以單機跑，也就是類似所謂的 Chef solo。</p>
-
-<p>Master-Agent 的流程如下圖：</p>
-
-<p><img src="http://docs.puppetlabs.com/learning/images/manifest_to_defined_state_split.png" alt="master agent" /></p>
-
-<p>基本架構就是 master 上 run <code>puppetmaster</code> 服務， agent 上 run <code>puppetagent</code> 服務。</p>
-
-<p>也可以手動從 agent 觸發，執行 <code>puppet agent --test -vd</code>。</p>
-
-<h3>Masterless Puppet</h3>
-
-<p>想要使用 masterless puppet 非常容易，只要自己指定你的 modulepath 和你的 site.pp 即可。</p>
-
-<p><code>puppet apply --modulepath ./modules manifests/site.pp</code></p>
-
-<h2>其他參考資料</h2>
-
-<ul>
-<li><p><a href="http://docs.puppetlabs.com/guides/troubleshooting.html">Trouble Shooting</a> Puppet 使用上有問題可以先來這邊查查看。</p></li>
-<li><p><a href="http://www.puppetcookbook.com/">Puppet CookBook</a> 有許多實用案例</p></li>
-<li><p><a href="https://github.com/jordansissel/puppet-examples">Puppet Examples</a> 有很多東西直接看 code 是最快的&hellip;。</p></li>
-<li><p>關於 Archlinux 使用 Puppet 相關可參考我上兩篇文章：<a href="http://blog.hsatac.net/2013/02/using-puppet-on-archlinux/">ArchLinux 使用 Puppet 注意事項</a>、<a href="http://blog.hsatac.net/2013/02/bootstrap-archlinux-with-puppet/">使用 Puppet 快速佈署 Archlinux</a></p></li>
-</ul>
-
 ]]></content>
   </entry>
   

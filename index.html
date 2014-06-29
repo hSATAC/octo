@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 29th, 2014 Mac, Virtualbox Comments 在 Virtualbox 中安裝 OSX Mavericks 10.9 筆記一下在 Virtualbox 中安裝 OSX 10.9.3 的方式，裝一個乾淨的 Mac vm image 作為測試環境或者 CI 編譯用的 &hellip;">
+	<meta name="description" content="Jun 29th, 2014 Docker Comments Docker Basics 隨著 AWS Elastic Beanstalk 支援 Docker, Google Computer Engine 也宣布支援 Docker，以及 Google 最近發表的一些 container &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,46 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-29T10:52:00+08:00" data-updated="true" itemprop="datePublished">Jun 29<span>th</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/docker/'>Docker</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/06/docker-basics/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/06/docker-basics/" itemprop="url">Docker Basics</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>隨著 AWS Elastic Beanstalk <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.html">支援 Docker</a>, Google Computer Engine 也宣布<a href="https://developers.google.com/compute/docs/containers/container_vms">支援 Docker</a>，以及 Google 最近發表的一些 container 工具例如 <a href="https://github.com/google/cadvisor">cAdvisor</a> 這套分析 container 資源和效能的軟體，也同時支援 Google 自己的 <a href="https://github.com/google/lmctfy">lmctfy</a> 和 Docker 來看，Docker 真的是越來越普及了。這個月 Docker 更<a href="http://blog.docker.com/2014/06/its-here-docker-1-0/">釋出了 1.0 版</a> 標誌著 Docker 已經 production-ready 了。</p>
+
+<p>關於 Docker 的概念這邊不多加著墨，可以直接上 <a href="http://www.docker.com/">Docker 官網</a> 閱讀。第一次接觸的朋友可以花十分鐘玩一下 <a href="http://www.docker.com/tryit/">Try Docker</a>。這邊先簡單筆記一些名詞解說和常用的指令。</p>
+
+
+		
+		<a href="/2014/06/docker-basics/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -581,84 +621,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 
 		
 		<a href="/2013/11/golang-development-toolbox/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-17T22:03:00+08:00" data-updated="true" itemprop="datePublished">Sep 17<span>th</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/golang/'>Golang</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/09/golang-the-fun-part-struct-and-interfacce/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/09/golang-the-fun-part-struct-and-interfacce/" itemprop="url">Golang the Fun Part - Struct and Interfacce</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>之前說要寫一篇 Go 簡介…不過網路上 Go 的資料已經很豐富，把一些我喜歡 Go 的點記錄下來好了。</p>
-
-<p>Go 是物件導向的語言嗎？是，也不是。</p>
-
-<p>他沒有類別，也沒有繼承。我們來用實例來看看 Go 如何實現物件導向的特性。</p>
-
-<h3>Struct</h3>
-
-<p>有接觸過 c-like 語言的人應該都對 <code>struct</code> 不陌生，我們可以定義一組結構，裡面包含各種資料型態的變數。</p>
-
-<p>舉例來說我們可以定義一個叫 <code>Human</code> 的 <code>struct</code>：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kd">type</span> <span class="nx">Human</span> <span class="kd">struct</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">name</span> <span class="kt">string</span>
-</span><span class='line'>  <span class="nx">age</span> <span class="kt">int</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然後我們就可以這樣來使用：</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="nx">person</span> <span class="o">:=</span> <span class="nx">Human</span><span class="p">{</span><span class="s">&quot;Ash&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">}</span>
-</span><span class='line'><span class="c1">//或者</span>
-</span><span class='line'><span class="nx">person</span> <span class="o">:=</span> <span class="nx">Human</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="s">&quot;Ash&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
-</span><span class='line'><span class="nx">person</span><span class="p">.</span><span class="nx">age</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-
-		
-		<a href="/2013/09/golang-the-fun-part-struct-and-interfacce/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

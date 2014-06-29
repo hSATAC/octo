@@ -459,8 +459,12 @@
         <lastmod>2014-06-29T10:14:51+08:00</lastmod>
     </url>
     <url>
+        <loc>http://blog.hsatac.net/2014/06/docker-basics/</loc>
+        <lastmod>2014-06-29T12:21:24+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://blog.hsatac.net/blog/archives/</loc>
-        <lastmod>2014-06-29T10:14:51+08:00</lastmod>
+        <lastmod>2014-06-29T12:21:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/blog/categories/</loc>
@@ -468,7 +472,7 @@
     </url>
     <url>
         <loc>http://blog.hsatac.net/</loc>
-        <lastmod>2014-06-29T10:14:51+08:00</lastmod>
+        <lastmod>2014-06-29T12:21:24+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.hsatac.net/robots.txt</loc>

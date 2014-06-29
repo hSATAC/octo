@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Aug 31st, 2013 Golang, Vim Comments 我的 Golang Vim 配置 去年九月發過一篇開發 Golang 的 IDEs，不過現在我基本上都使用 vim 開發了， update 一下我現在的配置。所有資料都可以在我的 vimrc 找到。 插件 &hellip;">
+	<meta name="description" content="Sep 17th, 2013 Golang Comments Golang the Fun Part - Struct and Interfacce 之前說要寫一篇 Go 簡介…不過網路上 Go 的資料已經很豐富，把一些我喜歡 Go 的點記錄下來好了。 Go 是物件導向的語言嗎？是，也不是。 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,84 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-17T22:03:00+08:00" data-updated="true" itemprop="datePublished">Sep 17<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/golang/'>Golang</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/09/golang-the-fun-part-struct-and-interfacce/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/09/golang-the-fun-part-struct-and-interfacce/" itemprop="url">Golang the Fun Part - Struct and Interfacce</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>之前說要寫一篇 Go 簡介…不過網路上 Go 的資料已經很豐富，把一些我喜歡 Go 的點記錄下來好了。</p>
+
+<p>Go 是物件導向的語言嗎？是，也不是。</p>
+
+<p>他沒有類別，也沒有繼承。我們來用實例來看看 Go 如何實現物件導向的特性。</p>
+
+<h3>Struct</h3>
+
+<p>有接觸過 c-like 語言的人應該都對 <code>struct</code> 不陌生，我們可以定義一組結構，裡面包含各種資料型態的變數。</p>
+
+<p>舉例來說我們可以定義一個叫 <code>Human</code> 的 <code>struct</code>：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="kd">type</span> <span class="nx">Human</span> <span class="kd">struct</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">name</span> <span class="kt">string</span>
+</span><span class='line'>  <span class="nx">age</span> <span class="kt">int</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後我們就可以這樣來使用：</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='go'><span class='line'><span class="nx">person</span> <span class="o">:=</span> <span class="nx">Human</span><span class="p">{</span><span class="s">&quot;Ash&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">}</span>
+</span><span class='line'><span class="c1">//或者</span>
+</span><span class='line'><span class="nx">person</span> <span class="o">:=</span> <span class="nx">Human</span><span class="p">{</span><span class="nx">name</span><span class="p">:</span><span class="s">&quot;Ash&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">person</span><span class="p">.</span><span class="nx">name</span>
+</span><span class='line'><span class="nx">person</span><span class="p">.</span><span class="nx">age</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+
+		
+		<a href="/2013/09/golang-the-fun-part-struct-and-interfacce/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -500,55 +578,6 @@
 
 		
 		<a href="/2013/02/migrate-aws-ami-across-region-painlessly/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-22T11:38:00+08:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2013</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/puppet/'>puppet</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2013/02/puppet-study-note/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2013/02/puppet-study-note/" itemprop="url">Puppet 學習筆記</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>前陣子玩了 Puppet…把一些重點和資源紀錄在這邊…
-初學 Puppet 的話很建議看一遍<a href="http://docs.puppetlabs.com/learning/">官方教學</a>，雖然沒有很完整但整個 run 過基礎的概念會有。</p>
-
-<h2>Infrastructure as Code</h2>
-
-<p>Puppet 的概念是 infrastructure as code，那跟以往寫 shell scripts 有何不同&hellip;？</p>
-
-<p>其實基本上是相通的…但概念層次上高了一層。寫 shell script 主要是加速重複性工作、減少人為疏失，但你也很難去 reuse 這些東西。</p>
-
-<p>Puppet 則是往上拉了一層虛擬層，你只要定義你 infrastructure 的狀態，。可以模組化、重用你程式碼，用清楚易懂的 code 描述套件要怎麼裝，設定檔有哪些，每個 server 之間的關係是怎麼樣&hellip;。</p>
-
-<p>Code 就是文件， code 就是你的 infrastructure。不但好寫好讀好維護，更可直接拿來執行。</p>
-
-
-		
-		<a href="/2013/02/puppet-study-note/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

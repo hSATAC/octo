@@ -9,8 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jan 5th, 2012 centos, redis Comments 在 CentOs 5 上升級 Redis 2.4.5 CentOS 5 上的 Redis 套件只有到 2.0
-最近用一套 PHP-Resque 需求 Redis 2.2 以上，只好手動升級了。 首先抓下最新穩定版解壓 1 &hellip;">
+	<meta name="description" content="Jan 6th, 2012 PHP, PHP-Resque, Resque Comments PHP-Resque 簡介 Resque 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +109,62 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-06T15:14:00+08:00" data-updated="true" itemprop="datePublished">Jan 6<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/01/php-resque-introduction/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/01/php-resque-introduction/" itemprop="url">PHP-Resque 簡介</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://github.com/defunkt/resque">Resque</a> 是 Github 基於 Redis 開發的 background job 系統。相較其他肥大的 queue 系統， Resque 的設計真的非常單純簡潔，充分利用 Redis 的特性。更多介紹可以看<a href="https://github.com/blog/542-introducing-resque">原作者的 Blog</a></p>
+
+<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> 是把 Resque porting 到 PHP 的專案。使用和 原本 Resque 一樣的概念和設計。甚至連 Redis 的 key 命名都一樣，因此也可以使用 Ruby 版本的 <a href="https://github.com/defunkt/resque-web">resque-web</a> 來監控 PHP-Resque 的運行狀況。</p>
+
+<h2>設計</h2>
+
+<p>Resque 的設計有兩個角色： Job 和 Worker。 每個 Job 都是定義成類別，新增 Job 的時候會將 Job 的類別和相關參數 json_encode 後儲存到不同的 queue 裡面，而 Worker(s) 則會依序從 redis 讀取 Job 出來執行。</p>
+
+<p>執行的時候並不是這個 Worker 本身去執行，而是會 fork 一個 process 來執行。這樣設計是為了避免時間一長， Worker 的記憶體管理不良導致卡死的狀況。</p>
+
+<p>讀取 queue 時會依據你啟動 worker 的時候給的 queue 順序來讀取，因此優先權較高的 queue 要設定在前面。 Redis 可以是單機或 RedisCluster。而許多不同伺服器上可以按需求部屬執行不同 queue 的 worker。</p>
+
+<p>Resque Job 執行失敗並不會自動重試，而是把它丟到 fail 的 queue 裡面。如果你有重試的需求可能要自己處理。若是有特別重要的 Job 需要監控執行狀態的，可以參考 README 中的 Tracking Job Statuses 一節。</p>
+
+<p>以下先來介紹如何使用 PHP-Resque：</p>
+
+<h2>安裝 PHP-Resque</h2>
+
+<p>安裝非常容易，只要 <code>git clone https://github.com/chrisboulton/php-resque.git</code> 下來，放到你想要的地方，由於 Resque 沒有 config 檔的設計，設定都是寫在環境變數中再執行就可以了。</p>
+
+
+		
+		<a href="/2012/01/php-resque-introduction/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -603,44 +658,6 @@ Hank 一開場就直接嗆「aws feature 比微軟和 google 多的多」<br />
 
 		
 		<a href="/2011/06/better-array-better-php/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-05-18T00:00:00+08:00" data-updated="true" itemprop="datePublished">May 18<span>th</span>, 2011</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" itemprop="url">我的 Vimrc for Vim, Win32 Gvim, Macvim</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="/images/wp-uploads/2011/05/gvim.png"><img class="size-large wp-image-416 aligncenter" title="gvim" src="/images/wp-uploads/2011/05/gvim-1024x649.png" alt="" width="393" height="249" /></a></p>
-
-<p>最近在調整我的 vim 設定，目標是在 vim, win32 gvim, macvim 上都能有盡量相同的編輯體驗。
-		
-		<a href="/2011/05/my-vimrc-for-vim-win32-gvim-macvim/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
