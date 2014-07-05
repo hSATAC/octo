@@ -217,13 +217,13 @@ fi
 
 ## 其他整合
 
-Jenkins 有一個 plugin [Github Pull Request Builder](https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin) 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。
+* Jenkins 有一個 plugin [Github Pull Request Builder](https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin) 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。
 
-另外也有 hipchat plugin 可以整合到公司通訊軟體，這部分和主題相關薄弱就不多談了。
+* Hipchat plugin 可以整合到公司通訊軟體。
 
-[rspec_junit_formatter](https://github.com/sj26/rspec_junit_formatter) 可以把 rspec 的結果產生成 JUnit 的 xml 給 Jenkins 讀取。
+* [rspec_junit_formatter](https://github.com/sj26/rspec_junit_formatter) 可以把 rspec 的結果產生成 JUnit 的 xml 給 Jenkins 讀取。
 
-Test Coverage 的部分我們則是使用 [SimpleCov](https://github.com/colszowka/simplecov) 可以搭配 [SimpleCov Rcov Formatter](https://github.com/fguillen/simplecov-rcov) 產生 Jenkins 可讀的報表。
+* Test Coverage 的部分我們則是使用 [SimpleCov](https://github.com/colszowka/simplecov) 可以搭配 [SimpleCov Rcov Formatter](https://github.com/fguillen/simplecov-rcov) 產生 Jenkins 可讀的報表。
 
 要使用以上這兩個套件，必須在測試跑完以後使用 `docker cp <file> .` 指令把報表複製回 workspace 讓 Jenkins 讀取。
 
