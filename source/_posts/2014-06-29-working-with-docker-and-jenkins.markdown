@@ -20,8 +20,10 @@ Jenkins 跑的好好的，為什麼要摻 Docker 呢？原本我們 Rails Rspec 
 
 在建立環境這邊基本上有兩個選擇，一種是全部包成一個 image, 就用這個 container 來跑測試。另一種是每個需要的 service 都是一個各自的 container, 彼此之間透過 [Docker Container Linking](https://docs.docker.com/userguide/dockerlinks/) 來通訊，例如 postgresql 自己一個、elasticsearch 自己一個、rails 自己一個這樣。
 
-不過由於跑測試都試用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。
+不過由於跑測試都是用過即丟，這次我直接採用最簡單的包一大包的策略來進行，減少複雜度。
 <!--more-->
+我會選擇自己 Build docker 來跑測試主要是還想運用在其他地方，包括 trigger 不同的瀏覽器跑 feature tests 而不需重新 Build docker image 等等，如果沒有特殊需求的話也可以參考看看 Jenkins 的 [Docker Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin) 基本概念是直接把 Jenkins slave 用 docker 跑起來。可以評估看看自己是否合用。
+
 ### Base Image
 
 我的設計是先建立一個 base image 例如給他 tag 叫 `project/base` 裡面先預裝好了所有環境包括 pg, elasticsearch, redis, rvm, ruby 等等。
@@ -211,11 +213,19 @@ else
 fi
 ```
 
+如果你沒有遇到這個問題，或者你是使用 [rspec_junit_formatter](https://github.com/sj26/rspec_junit_formatter) 之類的套件產生 JUnit 檔案的話並加掛 Post-build action 的話，這個動作會讀 JUnit 檔案的內容來改變 Build result 因此也不需要這個 workaround.
+
 ## 其他整合
 
 Jenkins 有一個 plugin [Github Pull Request Builder](https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin) 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。
 
 另外也有 hipchat plugin 可以整合到公司通訊軟體，這部分和主題相關薄弱就不多談了。
+
+[rspec_junit_formatter](https://github.com/sj26/rspec_junit_formatter) 可以把 rspec 的結果產生成 JUnit 的 xml 給 Jenkins 讀取。
+
+Test Coverage 的部分我們則是使用 [SimpleCov](https://github.com/colszowka/simplecov) 可以搭配 [SimpleCov Rcov Formatter](https://github.com/fguillen/simplecov-rcov) 產生 Jenkins 可讀的報表。
+
+要使用以上這兩個套件，必須在測試跑完以後使用 `docker cp <file> .` 指令把報表複製回 workspace 讓 Jenkins 讀取。
 
 ## 參考連結
 
