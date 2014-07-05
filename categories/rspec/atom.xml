@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rspec | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/rspec/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-07-06T02:54:56+08:00</updated>
+  <updated>2014-07-06T02:56:53+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -266,13 +266,13 @@ fi
 
 <h2>其他整合</h2>
 
-<p>Jenkins 有一個 plugin <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">Github Pull Request Builder</a> 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。</p>
+<ul>
+<li><p>Jenkins 有一個 plugin <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">Github Pull Request Builder</a> 可以讓 Jenkins 像 travis-ci 那類 service 在 Github 有人發 PR 時自動抓回來 Build。</p></li>
+<li><p>Hipchat plugin 可以整合到公司通訊軟體。</p></li>
+<li><p><a href="https://github.com/sj26/rspec_junit_formatter">rspec_junit_formatter</a> 可以把 rspec 的結果產生成 JUnit 的 xml 給 Jenkins 讀取。</p></li>
+<li><p>Test Coverage 的部分我們則是使用 <a href="https://github.com/colszowka/simplecov">SimpleCov</a> 可以搭配 <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov Rcov Formatter</a> 產生 Jenkins 可讀的報表。</p></li>
+</ul>
 
-<p>另外也有 hipchat plugin 可以整合到公司通訊軟體，這部分和主題相關薄弱就不多談了。</p>
-
-<p><a href="https://github.com/sj26/rspec_junit_formatter">rspec_junit_formatter</a> 可以把 rspec 的結果產生成 JUnit 的 xml 給 Jenkins 讀取。</p>
-
-<p>Test Coverage 的部分我們則是使用 <a href="https://github.com/colszowka/simplecov">SimpleCov</a> 可以搭配 <a href="https://github.com/fguillen/simplecov-rcov">SimpleCov Rcov Formatter</a> 產生 Jenkins 可讀的報表。</p>
 
 <p>要使用以上這兩個套件，必須在測試跑完以後使用 <code>docker cp &lt;file&gt; .</code> 指令把報表複製回 workspace 讓 Jenkins 讀取。</p>
 
