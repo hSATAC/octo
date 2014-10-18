@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Nov 6th, 2012 PHP Comments PHP Array 相加與 Array_merge 今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。 在 PHP 中 array + array 與 array_merge 的行為是不一樣的，陣列相加的效能會比 &hellip;">
+	<meta name="description" content="Nov 13th, 2012 Sentry Comments Sentry 簡介投影片 Nov 6th, 2012 PHP Comments PHP Array 相加與 Array_merge 今天聊到這個問題，喚起我沈睡的記憶…應該寫下來不然兩年後我大概又會忘了。 在 PHP 中 array &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,44 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-13T11:53:00+08:00" data-updated="true" itemprop="datePublished">Nov 13<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/sentry/'>Sentry</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/11/sentry-introduction-slides/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/11/sentry-introduction-slides/" itemprop="url">Sentry 簡介投影片</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<script async class="speakerdeck-embed" data-id="509a1faa3a7976000202bd2c" data-ratio="1.2994923857868" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -505,45 +543,6 @@
 
 		
 		<a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-28T20:30:00+08:00" data-updated="true" itemprop="datePublished">Jul 28<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/git/'>Git</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/07/git-restore-removed-files/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/07/git-restore-removed-files/" itemprop="url">Git 救回已刪除的檔案</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
-
-<p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
-
-		
-		
 	</div>
 
 </article>

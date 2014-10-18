@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Feb 27th, 2013 aws Comments 無痛跨 Region 轉移 AWS AMI 最近要把一些日本的東西轉移到新加坡，根據以前參加 AWS 201 的資料，跨 region 轉移 AMI(Amazon Machine Image) 這件事有點麻煩。 通常找來找去都是用 &hellip;">
+	<meta name="description" content="Feb 27th, 2013 aws Comments Migrate AWS AMI Across Region Painlessly Recently I need to migrate my infrastructure from Tokyo to Singapore. According &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,48 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-27T15:45:00+08:00" data-updated="true" itemprop="datePublished">Feb 27<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/aws/'>aws</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/" itemprop="url">Migrate AWS AMI Across Region Painlessly</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
+
+<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
+
+<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
+
+
+		
+		<a href="/2013/02/migrate-aws-ami-across-region-painlessly-en/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -601,44 +643,6 @@
 <p>參考 <a href="http://jollyjinx.tumblr.com/post/34638496292/fusion-drive-on-older-macs-yes-since-apple-has">Fusion drive on older Macs? YES!</a> 的說明做好 Fusion Drive，再用 Carbon Copy Cloner 把外接 USB 硬碟的資料複製回做好的 Fusion Drive。值得一提的是 Fusion Drive 似乎無法製作 Recovery Partition，這部份只好無視他的 warning 。</p>
 
 <p>最後把 Fusion Drive 設為開機碟重開就完成了這次的升級。相關照片和紀錄都放在 <a href="http://www.facebook.com/media/set/?set=a.4857081506317.2196205.1275503618&amp;type=1&amp;l=bb8d23d675">Facebook 相簿</a> 中。</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-13T11:53:00+08:00" data-updated="true" itemprop="datePublished">Nov 13<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/sentry/'>Sentry</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/11/sentry-introduction-slides/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/11/sentry-introduction-slides/" itemprop="url">Sentry 簡介投影片</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<script async class="speakerdeck-embed" data-id="509a1faa3a7976000202bd2c" data-ratio="1.2994923857868" src="//speakerdeck.com/assets/embed.js"></script>
-
 
 		
 		

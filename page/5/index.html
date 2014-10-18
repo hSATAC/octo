@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 14th, 2012 C, PHP, openssl Comments PHP Openssl_pkey_get_details Implement in C It&rsquo;s easy to generate a RSA keypair in PHP, just like this &hellip;">
+	<meta name="description" content="Jul 28th, 2012 Git Comments Git 救回已刪除的檔案 在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,45 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-28T20:30:00+08:00" data-updated="true" itemprop="datePublished">Jul 28<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/git/'>Git</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/07/git-restore-removed-files/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/07/git-restore-removed-files/" itemprop="url">Git 救回已刪除的檔案</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ，這時這些檔案會被刪除，但因為沒有 commit 所以無法用 reset 救回。並且在 git reflog 裡面也不會有紀錄。</p>
+
+<p>還好 Git 非常萬能，可以使用 <code>git fsck --cache --unreachable</code> 會列出一堆檔案的 bash ，再使用 <code>git show &lt;hash&gt;</code> 逐一檢視檔案內容即可救回失去的檔案。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -662,50 +701,6 @@ end</code></pre></noscript></div>
 
 		
 		<a href="/2012/02/php-resque-auto-scale-workers/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-17T19:33:00+08:00" data-updated="true" itemprop="datePublished">Jan 17<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/google-music/'>Google Music</a>, <a class='category' href='/categories/ruby/'>Ruby</a>, <a class='category' href='/categories/youtube/'>Youtube</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/01/youtube-favorite-add-google-music/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/01/youtube-favorite-add-google-music/" itemprop="url">Youtube 加入我的最愛後自動抓檔上傳至 Google Music</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這個標題很冗長，不過正是 Youtube 加入我的最愛後自動抓檔上傳到 Google Music 。</p>
-
-<p>這個需求是這樣來的，我常常在 Youtube 聽到喜歡的歌，習慣性按加入最愛，隨時可以拿出來重複播放。不過在最近都用 Google Music 來管理我的音樂庫，行進時也可以用 Android 上的 Google Music App 聆聽音樂。</p>
-
-<p>但這樣一來，就要透過 Youtube Downloader 等網站或軟體抓下影片檔後再轉檔、上傳到 Google Music ，這樣實在是太麻煩了。</p>
-
-<p>有沒有什麼方法可以把這個過程自動化呢？第一個想到的是利用 ifttt 。不過 ifttt 要達成這個功能需要繞許多彎路，最後決定自己寫一個。</p>
-
-
-		
-		<a href="/2012/01/youtube-favorite-add-google-music/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

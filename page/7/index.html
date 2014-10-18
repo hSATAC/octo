@@ -9,7 +9,9 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jun 11th, 2011 PHP, 工作紀錄 Comments Better Array, Better PHP PHP 的 array() 大家都是詬病已久了，總是在想，要是能像其他語言一樣，用個中括號括起來就好那該有多好。 Read on &rarr; May 18th, 2011 &hellip;">
+	<meta name="description" content="Jun 12th, 2011 工作紀錄 Comments 讓 Empathy 支援 P4-Context 這兩天灌了 Ubuntu 11.04 在玩
+內建的 Empathy 即時通訊軟體很強大，整合了多種 im
+但是他的 msn 不支援 msn protocol 的 P4-Context tag &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +111,57 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-12T00:00:00+08:00" data-updated="true" itemprop="datePublished">Jun 12<span>th</span>, 2011</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/gong-zuo-ji-lu/'>工作紀錄</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2011/06/empathy-p4-context/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2011/06/empathy-p4-context/" itemprop="url">讓 Empathy 支援 P4-Context</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這兩天灌了 Ubuntu 11.04 在玩<br />
+內建的 Empathy 即時通訊軟體很強大，整合了多種 im<br />
+但是他的 msn 不支援 msn protocol 的 P4-Context tag<br />
+最直接的影響就是 m群看不到是誰在說話。<br />
+看了一下發現他底層是用 python-papyon 這套 msn lib<br />
+於是就可以直接動手修改啦！</p>
+
+<p>先開啟 /usr/share/pyshared/papyon/conversation.py<br />
+找到 387 行：
+<pre lang="python" line="387">        if message_type == 'text/plain':
+            msg = ConversationMessage(unicode(message.body, message_encoding),
+                    TextFormat.parse(message_formatting),
+                    self.__last_received_msn_objects)
+            try:
+                display_name = message.get_header('P4-Context')</pre>
+
+		
+		<a href="/2011/06/empathy-p4-context/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -517,45 +570,6 @@ as a commercial pilot. He then went on to create the<br />
 Star Trek television series, among others.
 		
 		<a href="/2011/01/freenode%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%90%8D%E7%A8%B1/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-10-26T00:00:00+08:00" data-updated="true" itemprop="datePublished">Oct 26<span>th</span>, 2010</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/sheng-huo-za-tan/'>生活雜談</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2010/10/only-my-railgun/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2010/10/only-my-railgun/" itemprop="url">Only My Railgun</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>今天的Coding BGM是這首：Only my railgun
-<object width="100%" height="300px"><param name="movie" value="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/rqx8tAdID9w?fs=1&amp;hl=zh_TW&amp;rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="100%" height="300px"></embed></object></p>
-
-<p>
-		
-		<a href="/2010/10/only-my-railgun/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

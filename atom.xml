@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-07-06T02:56:53+08:00</updated>
+  <updated>2014-10-18T18:50:06+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,315 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[使用 Docker 建置 QA 環境]]></title>
+    <link href="http://blog.hsatac.net/2014/10/build-qa-environment-with-docker/"/>
+    <updated>2014-10-18T16:58:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/10/build-qa-environment-with-docker</id>
+    <content type="html"><![CDATA[<p>這篇是延續上一篇<a href="http://blog.hsatac.net/2014/06/working-with-docker-and-jenkins/">《整合 Jenkins 和 Docker》</a>，使用 Docker 來建置 QA 環境的想法。</p>
+
+<p>在上一篇有提到，原本的設計是當 Github 收到 Pull Request 時，就讓 Jenkins 來跑測試，如果測試通過，就直接用原本建置出來的 docker image 建立起一個 QA 環境，這樣就可以直接透過連到 <code>&lt;ticket-number&gt;.qa.domain.internal</code> 的方式來驗收，確定無誤後再按下 merge 按鈕，然後 trigger 自動關閉此 QA 環境。</p>
+
+<p>不過後來因為這個情境不適合我們的 workflow, 所以最後沒有這樣實做。而是寫成 rake task 來運用。</p>
+
+<!-- more -->
+
+
+<p>具體的方式是，把整個 docker 中的 app 目錄 mount 出來，然後 nginx 透過 subdomain  來決定 app root 和 proxy_pass backend. 由於可能會有許多 qa 環境同時存在，要弄轉 port 還挺麻煩的，所以這邊都使用 unix domain socket.</p>
+
+<h2>Nginx</h2>
+
+<p>先來看一下 nginx 這邊的設定，其實很單純，簡化過後大概就長這樣：</p>
+
+<div><script src='https://gist.github.com/fba5950eec5e90385015.js?file=nginx.conf'></script>
+<noscript><pre><code>server {
+        listen       80;
+        server_name  &quot;~^(?&lt;sub&gt;.+)\.qa\.domain\.internal$&quot; &quot;~^(.+)\.(?&lt;sub&gt;.+)\.qa-cc\.domain\.internal$&quot;;
+        root /var/www/qa/$sub/appname/public;
+        charset utf-8;
+        try_files $uri/index.html $uri.html $uri @app;
+        location @app {
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+                proxy_pass http://unix:/var/www/qa/$sub/appname/puma.sock;
+                error_page 502 /qa_404.html; # Does not exist.
+        }
+        location ~* ^\/(images|javascripts)\/.*\.(ico|css|js|gif|jpe?g|png)(\?[0-9]+)?$  {
+                expires max;
+                break;
+        }
+}</code></pre></noscript></div>
+
+
+<p>這樣透過 <code>newfeature.qa.domain.internal</code> 就可以連到從 docker 裡面 mount 出來到 <code>/var/www/newfeature</code> 這個目錄的靜態檔案和 unix domain socket.</p>
+
+<h2>Makefile</h2>
+
+<p>Makefile 是用來 build docker image, 這部分做的事情大致上是切到一個 workspace 目錄，此目錄是我 app 的 git repo, 然後切到我要建置的 QA branch 後開始 build docker image.</p>
+
+<div><script src='https://gist.github.com/fba5950eec5e90385015.js?file=Makefile'></script>
+<noscript><pre><code>all: base gem test qa
+base:
+    docker build --rm --no-cache -t myapp/base base
+gem: fetch_workspace
+    rm -f gem/*
+    cp workspace/myapp/Gemfile* gem/
+test:
+    cp -R gem test/
+    docker build --rm --no-cache -t myapp/test test
+    rm -rf test/gem
+qa:
+    cp -R gem qa/
+    docker build --rm --no-cache -t myapp/qa qa
+    rm -rf qa/gem
+clean_workspace:
+    cd workspace/myapp;\
+    git clean -f;\
+    git reset --hard HEAD
+fetch_workspace: clean_workspace
+    cd workspace/myapp;\
+    git fetch;\
+    git checkout master;\
+    git pull
+qa_branch:
+ifdef QA_BRANCH
+    $(info ******* Start building branch ${QA_BRANCH} for name ${QA_DOMAIN} ********)
+    # Check out the branch
+    cd workspace/myapp;\
+    git clean -f;\
+    git reset --hard HEAD;\
+    git fetch;\
+    git checkout ${QA_BRANCH};\
+    git pull
+    # Copy required files
+    cp -r qa/config/* workspace/myapp/config/
+    # use sed to replace some config in config/*.yml here.
+    cp qa/*.sh workspace/myapp/
+    echo &quot;FROM myapp/qa&quot; &gt; workspace/myapp/Dockerfile
+    # Store branch and domain name into files
+    echo &quot;${QA_DOMAIN}&quot; &gt; workspace/myapp/qa_domain
+    echo &quot;${QA_BRANCH}&quot; &gt; workspace/myapp/qa_branch
+    # Build
+    docker build --rm -t myapp_qa/${QA_DOMAIN} workspace/myapp/
+    # Clean
+    cd workspace/myapp;\
+    git clean -f;\
+    git reset --hard HEAD;\
+    git checkout master
+else
+    $(info ******* Please specify QA_BRANCH ********)
+endif
+.PHONY: all base test qa qa_branch gem</code></pre></noscript></div>
+
+
+<p>gem 的部分再上一篇有提過，預先安裝 gem 是為了加速整個建置的過程，這邊會丟到 crontab 每天晚上自動執行更新。</p>
+
+<p>執行 <code>make qa_branch QA_BRANCH=master QA_DOMAIN=master</code> 即可建置出特定 branch 的 docker image.</p>
+
+<p>可以看到我直接把 branch name 和 domain name 寫到 app 資料夾中，這樣就不用資料庫來紀錄什麼 domain name 對應什麼 branch 了。</p>
+
+<p>這邊需要注意由於 domain name 用在三個地方：</p>
+
+<ol>
+<li>domain</li>
+<li>路徑</li>
+<li>docker image name</li>
+</ol>
+
+
+<p>比較麻煩的是 domain name 只能有 <code>-</code> 不能有 <code>_</code>, 而 docker image name 則剛好相反，不能有 <code>-</code> 只能有 <code>_</code> 所以在輸入名稱的時候要特別注意。由於我外面是包 messaging bot 來下指令，那邊有做檢查，所以這邊就沒有另外再做檢查。</p>
+
+<h2>Rakefile</h2>
+
+<p>Rakefile 是拿來啟動 / 關閉 QA 環境用的。</p>
+
+<div><script src='https://gist.github.com/fba5950eec5e90385015.js?file=Rakefile'></script>
+<noscript><pre><code>require &#39;yaml&#39;
+require &#39;docker&#39;
+require &#39;pty&#39;
+require &#39;slack-notifier&#39;
+
+Docker.url = &quot;tcp://127.0.0.1:4243&quot;
+
+QA_DIR = &quot;/var/www/qa&quot;
+
+QA_URL = &quot;qa.domain.internal&quot;
+
+QA_IMAGE_REGEX = /myapp_qa\/(\w+):latest/
+
+ROOT_PATH = File.dirname(__FILE__)
+
+desc &quot;List running containers&quot;
+task :running do
+    puts `docker ps`
+end
+
+desc &quot;Clean stopped containers&quot;
+task :remove_stopped_containers do
+    puts &quot;----- Cleaning stopped containers -----&quot;
+    puts `#{ROOT_PATH}/bin/remove_stopped_containers.sh`
+end
+
+namespace :qa do
+    desc &quot;List all running QA containers&quot;
+    task :list do
+        running_qa_domains = qa_running_containers.map {|c| c.info[&quot;Image&quot;].match(QA_IMAGE_REGEX)[1]}
+        puts &quot;----- Current QA containers -----&quot;
+        running_qa_domains.each do |domain|
+            puts &quot;http://#{domain}.#{QA_URL} (#{`cat #{QA_DIR}/#{domain}/myapp/qa_branch`.strip})&quot;
+        end
+    end
+
+    desc &quot;Build and start a QA container&quot;
+    task :start, [:branch_name, :domain_name] do |t, args|
+        branch_name = args[:branch_name]
+        domain_name = args[:domain_name]
+        hipchat_notify(&quot;Start to build QA container *myapp_qa/#{domain_name}* for :branch: *#{branch_name}*&quot;)
+        puts &quot;----- Building QA container myapp_qa/#{domain_name} for branch #{branch_name}&quot;
+        pipe_exec &quot;cd #{ROOT_PATH} &amp;&amp; make qa_branch QA_BRANCH=#{branch_name} QA_DOMAIN=#{domain_name}&quot;
+        puts &quot;----- Starting QA container myapp_qa/#{domain_name} for branch #{branch_name}&quot;
+        puts `sudo rm -rf #{QA_DIR}/#{domain_name}` # Remove workspace if it existed
+        pipe_exec &quot;docker run -d -i -t -v #{QA_DIR}/#{domain_name}:/opt/run:rw --privileged myapp_qa/#{domain_name}&quot;
+        puts &quot;----- Running and initializing fake data and indexes... -----&quot;
+        
+        status_file = &quot;#{QA_DIR}/#{domain_name}/myapp/status&quot;
+        status = &quot;init&quot;
+        loop do # Loop until ready.
+            if File.exists?(status_file)
+                current_status = File.read(status_file).strip
+                break if current_status == &quot;ready&quot;
+                if status != current_status
+                    puts &quot;#### Status changed from #{status} to #{current_status} ####&quot;
+                    status = current_status
+                end
+            end
+            sleep 5
+        end 
+        puts &quot;=====&gt; http://#{domain_name}.#{QA_URL} &lt;=====&quot;
+        hipchat_notify(&quot;QA environment for :branch: *#{branch_name}* is ready at http://#{domain_name}.#{QA_URL}&quot;)
+    end
+
+    desc &quot;Stop QA container&quot;
+    task :stop, [:domain_name] do |t, args|
+    domain_name = args[:domain_name]
+        container = nil
+        Docker::Container.all.each do |c| 
+            container = c if c.info[&quot;Image&quot;] == &quot;myapp_qa/#{domain_name}:latest&quot;
+        end
+        if container
+            puts &quot;----- Stopping QA container #{domain_name} -----&quot;
+            puts container.stop
+            puts &quot;----- Deleting QA container #{domain_name} -----&quot;
+            puts container.delete
+            puts &quot;----- Deleting QA workspace #{domain_name} -----&quot;
+            puts `sudo rm -rf #{QA_DIR}/#{domain_name}`
+            puts &quot;----- Deleting QA image myapp_qa/#{domain_name} -----&quot;
+            puts `docker rmi myapp_qa/#{domain_name}`
+            puts &quot;----- Done. -----&quot;
+        else
+            puts &quot;There&#39;s no running QA container of domain #{domain_name}&quot;
+        end
+    end
+
+    desc &quot;Clean stopped container and remove unused workspaces.&quot;
+    task :clean do
+        Rake::Task[&quot;remove_stopped_containers&quot;].invoke
+
+        running_qa_domains = qa_running_containers.map {|c| c.info[&quot;Image&quot;].match(QA_IMAGE_REGEX)[1]}
+        puts &quot;----- Deleting unused QA images -----&quot;
+        qa_images.map do |image|
+            unless running_qa_domains.include?(image.info[&quot;RepoTags&quot;].first.match(QA_IMAGE_REGEX)[1])
+                puts &quot;Image #{image.info[&quot;RepoTags&quot;].first} removed.&quot;
+                image.remove 
+            end
+        end
+        puts &quot;----- Cleaning stopped QA workspaces -----&quot;
+        Dir.glob(&quot;#{QA_DIR}/*&quot;).each do |f|
+            unless running_qa_domains.include?(File.basename(f))
+                puts `sudo rm -rf #{f}` 
+            end
+        end
+            
+    end
+end
+
+######## Helpers ########
+#
+def pipe_exec(command)
+  begin
+    PTY.spawn(command) do |stdin, stdout, pid|
+      begin
+        stdin.each { |line| print line }
+      rescue Errno::EIO
+      end
+    end
+  rescue PTY::ChildExited
+    puts &quot;The child process exited!&quot;
+  end
+end
+
+def qa_running_containers
+    Docker::Container.all.select {|c| c.info[&quot;Image&quot;] =~ QA_IMAGE_REGEX }
+end
+
+def qa_images
+    Docker::Image.all.select { |c| c.info[&quot;RepoTags&quot;].first =~ QA_IMAGE_REGEX }
+end
+
+def hipchat_notify(msg)
+    config = YAML.load_file(&#39;config/config.yml&#39;)
+    return if config[&#39;slack_token&#39;] == nil || config[&#39;slack_token&#39;] == &quot;&quot;
+    notifier = Slack::Notifier.new &quot;kkbox&quot;, config[&#39;slack_token&#39;], channel: &#39;#myapp&#39;, username: &#39;Docker&#39;
+    notifier.ping msg, icon_emoji: &quot;:myapp:&quot;
+end
+</code></pre></noscript></div>
+
+
+<p>這邊值得一提的是，由於 container build 好，到整個 service run 起來其實還有一段時間差，是用來啟動 service, initial db 等等動作&hellip;所以在 app 目錄下會寫一個 <code>status</code> file 來判斷現在 app initial 到什麼階段，等他變成 <code>ready</code> 後才判斷為建置完成。</p>
+
+<h2>start_rails.sh</h2>
+
+<p>這是 QA docker image run 起來後會執行的 script, 比較重要的有兩個部分，一個是上面提的把目前階段寫入 <code>status</code> 檔案，讓外面知道現在進行到什麼步驟；另一個則是使用 <a href="http://www.dest-unreach.org/socat/">socat</a> 把 port 轉為 unix domain socket 再 mount 出去，就可以讓外面的 nginx 跟 docker 內部的 web services 溝通，而不需要處理 docker 的 port 了。</p>
+
+<p>把 8080 port 轉到 <code>/opt/run/myapp/go.sock</code>：</p>
+
+<p><code>socat UNIX-LISTEN:/opt/run/myapp/go.sock,reuseaddr,fork TCP:localhost:8080</code></p>
+
+<div><script src='https://gist.github.com/fba5950eec5e90385015.js?file=start_rails.sh'></script>
+<noscript><pre><code>echo &quot;dev:fake&quot; &gt; /opt/run/myapp/status
+cd /opt/run/myapp &amp;&amp; rvm all do bundle exec rake dev:build
+cd /opt/run/myapp &amp;&amp; rvm all do bundle exec rake dev:load
+cd /opt/run/myapp &amp;&amp; rvm all do unicorn_rails -c config/unicorn.rb -D
+
+echo &quot;building golang&quot; &gt; /opt/run/myapp/status
+if [ -d &quot;/opt/run/myapp/go&quot; ]; then
+    #cd /opt/run/myapp/go &amp;&amp; gom install # This takes some time.
+    cd /opt/run/myapp/go &amp;&amp; ./make build
+    cd /opt/run/myapp/go &amp;&amp; ./kktix_go start -d
+    socat UNIX-LISTEN:/opt/run/myapp/go.sock,reuseaddr,fork TCP:localhost:8080 &amp;
+fi
+
+echo &quot;sidekiq&quot; &gt; /opt/run/myapp/status
+cd /opt/run/myapp &amp;&amp; rvm all do bundle exec sidekiq -c 5 -d -L log/sidekiq.log &amp;
+cd /opt/run/myapp &amp;&amp; rvm all do ruby -rsidekiq/api -e &#39;loop do;count = Sidekiq::Stats.new.enqueued;puts &quot;Remaining jobs: #{count}&quot;;if count == 0;`echo &quot;ready&quot; &gt; /opt/run/kktix/status`;break;end;sleep 5;end&#39;
+
+if [ -e &quot;/opt/run/myapp/go.sock&quot; ]; then
+    chmod 777 /opt/run/myapp/go.sock
+fi
+
+cd /opt/run/myapp &amp;&amp; /bin/bash
+</code></pre></noscript></div>
+
+
+<h2>Conclusion</h2>
+
+<p>這篇的 scripts 有點繁雜，不過概念其實很簡單，只是細節上有不少需要注意的地方。</p>
+
+<p>使用 docker 來建置 QA branch 可以方便快速的建出乾淨的環境，相較以往要處理非常多資料庫 / 轉 port / services isolation 等等問題，實在是輕鬆太多了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[整合 Jenkins 和 Docker]]></title>
@@ -2442,50 +2751,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 
 <script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Migrate AWS AMI across region painlessly]]></title>
-    <link href="http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en/"/>
-    <updated>2013-02-27T15:45:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/02/migrate-aws-ami-across-region-painlessly-en</id>
-    <content type="html"><![CDATA[<p>Recently I need to migrate my infrastructure from Tokyo to Singapore. According to the information I gathered from AWS 201 course, it&rsquo;s a little troublesome to migrate AWS AMI between regions.</p>
-
-<p>As <a href="http://alestic.com/2010/10/ec2-ami-copy">Copying EBS Boot AMIs Between EC2 Regions</a> demostrated, we need to mount ebs for each regions and rsync them, than we register the ebs as AMI; Also there&rsquo;s <a href="https://cloudyscripts.com/tool/show/5">CloudyScript</a>, it&rsquo;s a online tool that does these steps for you.</p>
-
-<p>After some study, I found that it&rsquo;s not necessary now. Amazon announced <a href="http://aws.typepad.com/aws/2012/12/ebs-snapshot-copy.html">EBS Snapshot Copy</a> last December. Although you can&rsquo;t migrate AMI but we could do so just for some more steps.</p>
-
-<!--more-->
-
-
-<p>It&rsquo;s really simple:</p>
-
-<p>Find the snapshot or your AMI, click <code>Copy Snapshot</code> to copy snapshot to your destinated region.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_1.png" alt="1" /></a></p>
-
-<p>Check the <code>Kernel ID</code> field of your AMI.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_2.png" alt="2" /></a></p>
-
-<p>Visit <a href="http://thecloudmarket.com/image/aki-ee5df7ef">the cloud market</a> to check AKI&rsquo;s description to see which manifest.xml it belongs. For instance: <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code></p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_3.png" alt="3" /></a></p>
-
-<p>Search for <code>pv-grub-hd0_1.02-x86_64.gz.manifest.xml</code> and find the AKI for your destinated region.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_4.png" alt="4" /></a></p>
-
-<p>Perform <code>Create Image from Snapshot</code> on your cloned snapshot.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_5.png" alt="5" /></a></p>
-
-<p>Select the AKI you just got.</p>
-
-<p><a href="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png"><img src="http://blog.hsatac.net/images/ami_migrate/migrate_aws_ami_across_region_painlessly_6.png" alt="6" /></a></p>
-
-<p>You don&rsquo;t need to rsync anything. It&rsquo;s just that easy!</p>
 ]]></content>
   </entry>
   
