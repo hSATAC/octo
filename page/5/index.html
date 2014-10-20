@@ -9,7 +9,8 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Jul 28th, 2012 Git Comments Git 救回已刪除的檔案 在 Git 操作的過程中，有些檔案是無法用 git checkout 救回來的。這些稱之為 unreachable files 。例如你 git add 了，但還沒 commit 就 pull ， &hellip;">
+	<meta name="description" content="Aug 9th, 2012 Python, mitmproxy Comments 使用 Mitmproxy 替換 Request Host 和 Port 常在開發或測試階段會有更換 http request host 的需求。
+簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +110,51 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-09T11:25:00+08:00" data-updated="true" itemprop="datePublished">Aug 9<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/mitmproxy/'>mitmproxy</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" itemprop="url">使用 Mitmproxy 替換 Request Host 和 Port</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>常在開發或測試階段會有更換 http request host 的需求。
+簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 port 都需要轉，那就需要其他方式了。</p>
+
+<p>一般在 windows 上是推薦 <a href="http://www.fiddler2.com">fiddler 2</a> 這套軟體，非常好用。可以參考 <a href="http://blog.xuite.net/vexed/tech/62341108">vexed 的文章</a>。</p>
+
+<p>不過在其他平台，可以使用 <a href="http://mitmproxy.org">mitmproxy</a> 這套軟體，他是 CUI 介面，操作上沒有 fiddler 那樣直覺，但稍微看一下說明即可上手。</p>
+
+<p>mitmproxy 提供許多 API 讓使用者自訂需求，都使用 Python 來編寫。不過關於 script 的 document 較少，可以參考<a href="http://mitmproxy.org//doc/scripts.html">官方說明</a>有簡單的範例，或者使用 <code>pydoc libmproxy.flow.Request</code> 這樣的指令來查閱，再不然就只能直接看<a href="https://github.com/cortesi/mitmproxy/">原始碼</a>了。</p>
+
+
+		
+		<a href="/2012/08/mitmproxy-modify-request-host-and-port-howto/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -655,52 +701,6 @@ end</code></pre></noscript></div>
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-02T14:56:00+08:00" data-updated="true" itemprop="datePublished">Feb 2<span>nd</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/php/'>PHP</a>, <a class='category' href='/categories/php-resque/'>PHP-Resque</a>, <a class='category' href='/categories/resque/'>Resque</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/02/php-resque-auto-scale-workers/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/02/php-resque-auto-scale-workers/" itemprop="url">PHP-Resque Auto Scale Workers</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p><a href="https://github.com/chrisboulton/php-resque">PHP-Resque</a> is an amazing PHP port of <a href="http://github.com/defunkt/resque/">Resque</a>. After playing it for a while, an idea crossed my mind: It&rsquo;s a total waste to create numbers of workers when there&rsquo;s not many jobs to do. How about auto scale it? With the EventListener design of PHP-Resque, we could achieve it by writing some simple hooks.</p>
-
-<p>Also, it solved <a href="https://github.com/chrisboulton/php-resque/issues/32">issue #32 of PHP-Resque</a>.</p>
-
-<p>Here&rsquo;s my code: <a href="https://github.com/hSATAC/php-resque-auto-scale">PHP-Resque Auto Scale</a></p>
-
-<h2>Introduction</h2>
-
-<p>This is a project trying to build an auto scale architecture of PHP-Resque.</p>
-
-
-		
-		<a href="/2012/02/php-resque-auto-scale-workers/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

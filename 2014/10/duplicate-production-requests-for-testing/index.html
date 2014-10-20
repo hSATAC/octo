@@ -5,11 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Category: go - hSATAC</title>
+	<title>Duplicate Production Requests for Testing - hSATAC</title>
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Category: go">
+	<meta name="description" content="Oct 21st, 2014 Go, devOps, gor Duplicate Production Requests for Testing 當我們上新的架構或者調整資料庫參數等等的時候，總希望能夠用 production 環境來測試才比較準確， &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@
 
 	<link href="http://feeds.feedburner.com/hsatac" rel="alternate" title="hSATAC" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://blog.hsatac.netcategories/go/">
+	<link rel="canonical" href="http://blog.hsatac.net/2014/10/duplicate-production-requests-for-testing/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -107,59 +107,98 @@
 				
 			
 			<div class="mid-col-container">
-				<div id="content" class="inner">
-	
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
 
 
-	
-	
-	<section class="archives"><h1 class="year">2012</h1>
-
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2012-10-17T10:20:00+08:00" itemprop="datePublished">Oct 17</time></span>
-		<br>
-		<span class="tags">
 
 
-	<a class='category' href='/categories/git/'>Git</a>, <a class='category' href='/categories/go/'>go</a>, <a class='category' href='/categories/gocode/'>gocode</a>, <a class='category' href='/categories/golang/'>golang</a>, <a class='category' href='/categories/hg/'>hg</a>, <a class='category' href='/categories/mercurial/'>mercurial</a>
 
 
-</span>
-	    
-	    <span class="comments"><a href="/2012/10/sync-git-with-hg/#disqus_thread">Comments</a></span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2012/10/sync-git-with-hg/">同步 git 和 hg 的 repository</a></h1>
-</article>
-
-	
 
 
-	
-	
-		</section>
-	
-	<section class="archives"><h1 class="year">2014</h1>
+  
 
-<article itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<span class="date"><time datetime="2014-10-21T00:09:00+08:00" itemprop="datePublished">Oct 21</time></span>
-		<br>
-		<span class="tags">
+
+<time datetime="2014-10-21T00:09:00+08:00" data-updated="true" itemprop="datePublished">Oct 21<span>st</span>, 2014</time></div>
+        <div class="tags">
 
 
 	<a class='category' href='/categories/go/'>Go</a>, <a class='category' href='/categories/devops/'>devOps</a>, <a class='category' href='/categories/gor/'>gor</a>
 
 
-</span>
-	    
-	    <span class="comments"><a href="/2014/10/duplicate-production-requests-for-testing/#disqus_thread">Comments</a></span>
-	    
-	</div>
-	<h1 class="title" itemprop="name"><a href="/2014/10/duplicate-production-requests-for-testing/">Duplicate Production Requests for Testing</a></h1>
+</div>
+    </div>
+	<h1 class="title" itemprop="name">Duplicate Production Requests for Testing</h1>
+	<div class="entry-content" itemprop="articleBody"><p>當我們上新的架構或者調整資料庫參數等等的時候，總希望能夠用 production 環境來測試才比較準確，不過這麼重大的改變不能隨便拿正式環境和使用者當白老鼠；就算使用 production 資料庫的 dump, 也無法重複真正使用者的行為。</p>
+
+<p>一般常用的方式是偷偷把 production 環境的流量複製一份，導到測試機器/環境去，觀察看看行為是否符合預期。</p>
+
+<p>相較於以往看到較為複雜的 solution, 這邊介紹一個用 Go 開發的工具 &ndash; <a href="https://github.com/buger/gor">gor</a></p>
+
+<!--more-->
+
+
+<h2>簡介</h2>
+
+<p>gor 已經發展了一年多了，進展的非常快。現在是一個簡單又非常好用的工具。可以監聽你指定的 port, 把流量轉到其他機器、或者 dump 成檔案，之後可再從這個檔案 replay、如果有統計分析的需求，也可以直接 redirect 進 elasticsearch 中再進行處理。</p>
+
+<h2>Usage</h2>
+
+<p>這邊列幾個基本常用的用途：</p>
+
+<ul>
+<li>把 request dump 到檔案</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-raw :80 --output-file requests.gor</code></p>
+
+<ul>
+<li>從檔案 replay 流量 (限定 GET)</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-file requests.gor --output-http http://10.2.7.202 --output-http-method GET</code></p>
+
+<ul>
+<li>直接複製流量丟到測試機</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-raw :80 --output-http http://10.2.7.202 --output-http-method GET</code></p>
+
+<p>注意：這個動作會比較吃 CPU, 官方文件是建議開兩個 process 一個錄流量，一個丟到 output.</p>
+
+<p>除此之外還有很多功能，例如各種 regex, filter, 插入 header, http basic auth, 丟到多個機器&hellip;等等。</p>
+</div>
+
 </article>
 
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
 </div>
 			</div>
 			<footer id="footer" class="inner"><p>
@@ -175,7 +214,10 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       var disqus_shortname = 'hsatac';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.hsatac.net/2014/10/duplicate-production-requests-for-testing/';
+        var disqus_url = 'http://blog.hsatac.net/2014/10/duplicate-production-requests-for-testing/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-10-18T18:50:06+08:00</updated>
+  <updated>2014-10-21T00:21:20+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Duplicate Production Requests for Testing]]></title>
+    <link href="http://blog.hsatac.net/2014/10/duplicate-production-requests-for-testing/"/>
+    <updated>2014-10-21T00:09:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/10/duplicate-production-requests-for-testing</id>
+    <content type="html"><![CDATA[<p>當我們上新的架構或者調整資料庫參數等等的時候，總希望能夠用 production 環境來測試才比較準確，不過這麼重大的改變不能隨便拿正式環境和使用者當白老鼠；就算使用 production 資料庫的 dump, 也無法重複真正使用者的行為。</p>
+
+<p>一般常用的方式是偷偷把 production 環境的流量複製一份，導到測試機器/環境去，觀察看看行為是否符合預期。</p>
+
+<p>相較於以往看到較為複雜的 solution, 這邊介紹一個用 Go 開發的工具 &ndash; <a href="https://github.com/buger/gor">gor</a></p>
+
+<!--more-->
+
+
+<h2>簡介</h2>
+
+<p>gor 已經發展了一年多了，進展的非常快。現在是一個簡單又非常好用的工具。可以監聽你指定的 port, 把流量轉到其他機器、或者 dump 成檔案，之後可再從這個檔案 replay、如果有統計分析的需求，也可以直接 redirect 進 elasticsearch 中再進行處理。</p>
+
+<h2>Usage</h2>
+
+<p>這邊列幾個基本常用的用途：</p>
+
+<ul>
+<li>把 request dump 到檔案</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-raw :80 --output-file requests.gor</code></p>
+
+<ul>
+<li>從檔案 replay 流量 (限定 GET)</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-file requests.gor --output-http http://10.2.7.202 --output-http-method GET</code></p>
+
+<ul>
+<li>直接複製流量丟到測試機</li>
+</ul>
+
+
+<p><code>sudo ./gor --input-raw :80 --output-http http://10.2.7.202 --output-http-method GET</code></p>
+
+<p>注意：這個動作會比較吃 CPU, 官方文件是建議開兩個 process 一個錄流量，一個丟到 output.</p>
+
+<p>除此之外還有很多功能，例如各種 regex, filter, 插入 header, http basic auth, 丟到多個機器&hellip;等等。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 Docker 建置 QA 環境]]></title>
@@ -2739,18 +2788,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 <h3>結語</h3>
 
 <p>寫測試的好處真的百百種，說都說不完，而且現在寫測試應該也算是 programmer 的必備技能了。前陣子我發給 <a href="https://github.com/mroth/lolcommits">lolcommits</a> 的 pull request 也被要求補測試才收我的 patch。可預見不遠的將來，甚至是現在，寫測試將會是軟體開發中不可或缺的一個環節。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Diff Puppet Chef]]></title>
-    <link href="http://blog.hsatac.net/2013/05/diff-puppet-chef/"/>
-    <updated>2013-05-14T22:29:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/05/diff-puppet-chef</id>
-    <content type="html"><![CDATA[<p>這次和 <a href="https://twitter.com/v1nc3ntlaw">@v1nc3ntlaw </a> 在 Ruby Tuesday 分享的 diff puppet chef 投影片</p>
-
-<script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="http://blog.hsatac.net//speakerdeck.com/assets/embed.js"></script>
-
 ]]></content>
   </entry>
   

@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Feb 27th, 2013 aws Comments Migrate AWS AMI Across Region Painlessly Recently I need to migrate my infrastructure from Tokyo to Singapore. According &hellip;">
+	<meta name="description" content="May 14th, 2013 Chef, Puppet Comments Diff Puppet Chef 這次和 @v1nc3ntlaw 在 Ruby Tuesday 分享的 diff puppet chef 投影片 Feb 27th, 2013 aws Comments Migrate &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,46 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-14T22:29:00+08:00" data-updated="true" itemprop="datePublished">May 14<span>th</span>, 2013</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/chef/'>Chef</a>, <a class='category' href='/categories/puppet/'>Puppet</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2013/05/diff-puppet-chef/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2013/05/diff-puppet-chef/" itemprop="url">Diff Puppet Chef</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>這次和 <a href="https://twitter.com/v1nc3ntlaw">@v1nc3ntlaw </a> 在 Ruby Tuesday 分享的 diff puppet chef 投影片</p>
+
+<script async class="speakerdeck-embed" data-id="2ea36f409ebd01301b2f469a61e096c5" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -595,57 +635,6 @@
 
 		
 		<a href="/2012/12/ruby-conf-taiwan-2012/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-26T15:15:00+08:00" data-updated="true" itemprop="datePublished">Nov 26<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/11/macbook-pro-2010-mid-replace-optical-drive-with-ssd-and-fusion-drive/" itemprop="url">2010 MBP 升級 SSD 與 Fusion Drive</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>我現在用來開發 iOS 的電腦是公司提供的一台 Macbook Pro 13&#8221; 2010 mid 4G ram。使用上還算堪用，但時不時的 lag 以及 freeze 實在非常挑戰開發者的耐心。尤其當我 Xcode 開著，git 切換 branch 然後 Xcode 重新 index 的時候簡直慘不忍睹。</p>
-
-<p>畢竟電腦還是自己在用，開心順手最重要，所以決定自己投資一點下去升級。因為光碟機很少在用，所以查了一下以前看過的硬碟轉接托架，意外發現非常便宜才 200 多元，還附拆機工具組。參考<a href="http://blog.lyhdev.com/2012/10/apple-macbook-pro-ssd.html">玩物喪誌</a>的心得一樣購買 Jeyi 的硬碟托架以及 Micron M4 7mm 超薄 SSD。別人踩過一次的雷就不用再踩了。</p>
-
-<p>把光碟機拆下，原本的位置裝上 SSD。內裝的硬碟則不動。如果把內裝硬碟裝在硬碟托架的話硬碟的感震偵測會無法作用。拆機安裝部分參考 <a href="http://www.ifixit.com/Guide/MacBook+Pro+13-Inch+Unibody+Mid+2010+Optical+Drive+Replacement/4318/">ifixit</a> 的說明。最需要注意的是螺絲不要滑牙了。</p>
-
-<p>在拆機的過程中也順便把家裡的 Mac mini server 8G 出包版的記憶體拆下與 MBP 的 4G 對調，兩組都是 DDR 3 1066 的規格，對換毫無困難。</p>
-
-<p>裝上以後開機確認是否有抓到及辨識到 SSD 固態硬碟，link speed 也跑到 SATA II 全速。接著使用 Carbon Copy Cloner 先把原本的系統碟備份到外接 USB 硬碟。再改用 USB 硬碟開機，準備做 Fusion Drive。</p>
-
-<p>會使用 Fusion Drive 的原因是 SSD 實在不夠大，原本要自己安排哪些目錄放 SSD，哪些少用放 HD ，但是使用 Fusion Drive 技術的話可以將 SSD 與 HD 變成一顆邏輯磁碟，而系統會自己幫你判斷哪些常用的檔案放在 SSD, 不常用的則移去 HD ，兼顧了速度與容量和便利性，似乎是個不錯的選擇，所以決定試試看。</p>
-
-<p>參考 <a href="http://jollyjinx.tumblr.com/post/34638496292/fusion-drive-on-older-macs-yes-since-apple-has">Fusion drive on older Macs? YES!</a> 的說明做好 Fusion Drive，再用 Carbon Copy Cloner 把外接 USB 硬碟的資料複製回做好的 Fusion Drive。值得一提的是 Fusion Drive 似乎無法製作 Recovery Partition，這部份只好無視他的 warning 。</p>
-
-<p>最後把 Fusion Drive 設為開機碟重開就完成了這次的升級。相關照片和紀錄都放在 <a href="http://www.facebook.com/media/set/?set=a.4857081506317.2196205.1275503618&amp;type=1&amp;l=bb8d23d675">Facebook 相簿</a> 中。</p>
-
-		
-		
 	</div>
 
 </article>
