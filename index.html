@@ -9,7 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Oct 21st, 2014 Go, devOps, gor Comments Duplicate Production Requests for Testing 當我們上新的架構或者調整資料庫參數等等的時候，總希望能夠用 production 環境來測試才比較準確， &hellip;">
+	<meta name="description" content="Oct 22nd, 2014 Docker, devOps Comments Docker 1.3 釋出 Docker 1.3 釋出。 最方便的一個地方是多了一個 docker exec 可以 inject 新的 process 到正在執行中的 docker container 中，只要下 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +109,47 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-10-22T11:09:00+08:00" data-updated="true" itemprop="datePublished">Oct 22<span>nd</span>, 2014</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/docker/'>Docker</a>, <a class='category' href='/categories/devops/'>devOps</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2014/10/docker-1-dot-3-release/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2014/10/docker-1-dot-3-release/" itemprop="url">Docker 1.3 釋出</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/">Docker 1.3</a> 釋出。</p>
+
+<p>最方便的一個地方是多了一個 <code>docker exec</code> 可以 inject 新的 process 到正在執行中的 docker container 中，只要下 <code>docker exec -i -t &lt;container id&gt; /bin/bash</code> 就可以進 shell 了， debug 方便許多，不需要再像之前一樣用各種 hack 例如 <code>lxc-attach</code> 或者 endpoint script 最後下 <code>/bin/bash</code> 之類的 workaround 來解了。</p>
+
+<p>再來就是 boot2docker 在這版也解了 OSX 的 mount volume 的問題，可以正確 mount 到 Mac 本機，一樣可以拋棄之前的第三方 workaround 了。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -578,55 +619,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 
 		
 		<a href="/2014/04/roles-and-profiles-pattern-in-puppet/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-12T04:42:00+08:00" data-updated="true" itemprop="datePublished">Apr 12<span>th</span>, 2014</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/rails/'>Rails</a>, <a class='category' href='/categories/ror/'>RoR</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2014/04/rails-i18n-relative-key-in-controller-before-action/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2014/04/rails-i18n-relative-key-in-controller-before-action/" itemprop="url">Rails I18n Relative Key in Controller Before Action</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>在 Rails i18n 裡面可以用 relative path 像 <code>t('.key')</code> 這樣的 shortcut，不過這個 shortcut 吃得是 <code>"#{ controller_path.tr('/', '.') }.#{ action_name }#{ key }"</code>。</p>
-
-<p>今天碰到 controller 的 before action 裡面用 relative path 結果 locale yml 編到 before action 的 key，但真正會去 lookup 的是 <code>action_name</code> 而不是 before action 的 method name 所以就爆 missing 了。</p>
-
-<p>萬一這個 before_action 之後多加幾個其他的 action 的話很容易就沒改到 locale yml 而爆錯誤，為了保險起見決定把他們都改成 absolute key path. 不過 controller 檔案非常多，所以要寫一隻程式把所有 before action 裡面有用到 relative path 的 t 撈出來。</p>
-
-<p>一開始的想法是用 regex 速解，不過因為 controller 裡面的 t 還滿多的，然後我又很難判斷 before action method 的 scope，於是念頭一轉就直接改用 <a href="https://github.com/whitequark/parser">Ruby Parser</a> 來做。</p>
-
-<p>直接把 controller 檔案都讀進來，拿 AST 來抓 before actions，再去檢查這些 before action 是否有 call 到 relative keypath 的 t。用起來還滿方便的，效率也不差，一下子就寫完了。</p>
-
-<p>程式碼放在 <a href="https://github.com/hSATAC/parse-relative-key">Github</a>，不過這麼特定目的東西應該是無法重用，放著以後有需要的時候回來看一下。</p>
-
-<p>最後就是&hellip;i18n 沒事還是不要用 relative key 比較好&hellip;散在 controller, helper, service 裡面到時要搬移 code 或者作 refactor 的時候就麻煩了。動態語言重構不像靜態語言這麼便利啊&hellip;。</p>
-
-		
-		
 	</div>
 
 </article>

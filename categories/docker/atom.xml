@@ -4,7 +4,7 @@
   <title><![CDATA[Category: docker | hSATAC]]></title>
   <link href="http://blog.hsatac.net/categories/docker/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-10-21T00:21:20+08:00</updated>
+  <updated>2014-10-22T11:15:51+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Docker 1.3 釋出]]></title>
+    <link href="http://blog.hsatac.net/2014/10/docker-1-dot-3-release/"/>
+    <updated>2014-10-22T11:09:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/10/docker-1-dot-3-release</id>
+    <content type="html"><![CDATA[<p><a href="https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/">Docker 1.3</a> 釋出。</p>
+
+<p>最方便的一個地方是多了一個 <code>docker exec</code> 可以 inject 新的 process 到正在執行中的 docker container 中，只要下 <code>docker exec -i -t &lt;container id&gt; /bin/bash</code> 就可以進 shell 了， debug 方便許多，不需要再像之前一樣用各種 hack 例如 <code>lxc-attach</code> 或者 endpoint script 最後下 <code>/bin/bash</code> 之類的 workaround 來解了。</p>
+
+<p>再來就是 boot2docker 在這版也解了 OSX 的 mount volume 的問題，可以正確 mount 到 Mac 本機，一樣可以拋棄之前的第三方 workaround 了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 Docker 建置 QA 環境]]></title>

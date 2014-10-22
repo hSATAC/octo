@@ -9,8 +9,7 @@
 	<meta name="author" content="Ash Wu">
 
 	
-	<meta name="description" content="Aug 9th, 2012 Python, mitmproxy Comments 使用 Mitmproxy 替換 Request Host 和 Port 常在開發或測試階段會有更換 http request host 的需求。
-簡單一點的方法就是直接更改 /etc/hosts 檔案。但如果連 &hellip;">
+	<meta name="description" content="Aug 12th, 2012 Git Comments 自動檢查 Git Branch 是否 Merge 過 按照一般 Git branching model 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,6 +109,44 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="meta">
+        <div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-12T12:28:00+08:00" data-updated="true" itemprop="datePublished">Aug 12<span>th</span>, 2012</time></div>
+        <div class="tags">
+
+
+	<a class='category' href='/categories/git/'>Git</a>
+
+
+</div>
+        
+        <span class="comments"><a href="/2012/08/git-branching-model-regular-check/#disqus_thread">Comments</a></span>
+        
+    </div>
+	<h1 class="title" itemprop="name"><a href="/2012/08/git-branching-model-regular-check/" itemprop="url">自動檢查 Git Branch 是否 Merge 過</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>按照一般 <a href="http://nvie.com/posts/a-successful-git-branching-model/">Git branching model</a> 來開發，當團隊人數稍多時，管理 Git branch 會變得有些麻煩。Branch 數量多之外，也很難記得哪些 branches 是已經 merge 進主幹、不再需要可以刪除；或者哪些 branches 沒有 merge 進主幹但已經放棄不用。這時就需要一些自動化的 script 幫助管理。</p>
+
+
+		
+		<a href="/2012/08/git-branching-model-regular-check/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -610,94 +647,6 @@ end</code></pre></noscript></div>
 <p>接著講要把檔案和 commit log 匯到已存在的 B repository：接續上一步，用 <code>mkdir &lt;你要的目錄&gt;; mv * &lt;你要的目錄&gt;</code> 把抽出來的檔案都移到你預想要放的目錄 <code>git add .; git commit</code> 後 <code>cd ..</code> 再用 git clone 把 B repository clone 出來，切到 B repository 的目錄，用 add local repository as remote 的方式 <code>git remote add repoA ../&lt;A repo 的目錄&gt;</code> 然後 <code>git pull repoA master</code> 就完成了。</p>
 
 <p>參考：<a href="http://gbayer.com/development/moving-files-from-one-git-repository-to-another-preserving-history/">Moving Files from one Git Repository to Another, Preserving History</a></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="meta">
-        <div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-07T10:05:00+08:00" data-updated="true" itemprop="datePublished">Mar 7<span>th</span>, 2012</time></div>
-        <div class="tags">
-
-
-	<a class='category' href='/categories/mac/'>Mac</a>, <a class='category' href='/categories/xcode/'>Xcode</a>, <a class='category' href='/categories/ios/'>iOS</a>, <a class='category' href='/categories/testflight/'>testflight</a>
-
-
-</div>
-        
-        <span class="comments"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/#disqus_thread">Comments</a></span>
-        
-    </div>
-	<h1 class="title" itemprop="name"><a href="/2012/03/xcode-4-dot-3-publish-ipa-for-testflight/" itemprop="url">Xcode 4.3 Publish Ipa for Testflight</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>這兩天在研究 testflight 碰到了一點 Xcode 4.3 的小雷，記錄一下。</p>
-
-<p>按照 testflight 的教學上傳 ipa 檔，一直出現 <code>mismatched-ubiquitykvstore-identifier-value</code> 的錯誤，但是憑證已經確認多次，肯定沒有問題。</p>
-
-<p>翻了一下應該是 APP ID enable iCloud 的問題，但是不能 disable 掉的狀況，只好自己去 entitlement 補上需要的參數。</p>
-
-<p>Xcode 4.3 的 entitlement 換地方了。</p>
-
-<ul>
-<li>請到 target 的 summary tab 拉到最底下找到 entitlement 區塊，勾選 <code>enable Entitlement</code>。</li>
-<li><code>iCloud key-value Store</code> 這個欄位填上 <code>.*</code></li>
-<li><code>iCloud Container</code> 這個部分自己加一個值 <code>.*</code></li>
-</ul>
-
-
-<p>存檔後你的專案就會多一個 <code>專案名.entitlements</code> 的檔案，打開確認一下內容是否有</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
-</span><span class='line'> &lt;array&gt;
-</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;
-</span><span class='line'> &lt;/array&gt;
-</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
-</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix).*&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再做 Archive, Share 成 ipa 檔上傳就可以了。</p>
-
-<p><em>2012/04/42 補充</em></p>
-
-<p>用 .* 的 key 送審 AppStore 時會被 reject，請設成跟你的 bundle identifier 一樣即可。</p>
-
-<p>也就是：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;key&gt;com.apple.developer.ubiquity-container-identifiers&lt;/key&gt;
-</span><span class='line'> &lt;array&gt;
-</span><span class='line'>     &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;
-</span><span class='line'> &lt;/array&gt;
-</span><span class='line'> &lt;key&gt;com.apple.developer.ubiquity-kvstore-identifier&lt;/key&gt;
-</span><span class='line'> &lt;string&gt;$(TeamIdentifierPrefix)com.yourcompany.coolapp&lt;/string&gt;</span></code></pre></td></tr></table></div></figure>
-
 
 		
 		

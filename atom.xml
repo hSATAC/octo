@@ -4,7 +4,7 @@
   <title><![CDATA[hSATAC]]></title>
   <link href="http://blog.hsatac.net/atom.xml" rel="self"/>
   <link href="http://blog.hsatac.net/"/>
-  <updated>2014-10-21T00:21:20+08:00</updated>
+  <updated>2014-10-22T11:15:51+08:00</updated>
   <id>http://blog.hsatac.net/</id>
   <author>
     <name><![CDATA[Ash Wu]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Docker 1.3 釋出]]></title>
+    <link href="http://blog.hsatac.net/2014/10/docker-1-dot-3-release/"/>
+    <updated>2014-10-22T11:09:00+08:00</updated>
+    <id>http://blog.hsatac.net/2014/10/docker-1-dot-3-release</id>
+    <content type="html"><![CDATA[<p><a href="https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/">Docker 1.3</a> 釋出。</p>
+
+<p>最方便的一個地方是多了一個 <code>docker exec</code> 可以 inject 新的 process 到正在執行中的 docker container 中，只要下 <code>docker exec -i -t &lt;container id&gt; /bin/bash</code> 就可以進 shell 了， debug 方便許多，不需要再像之前一樣用各種 hack 例如 <code>lxc-attach</code> 或者 endpoint script 最後下 <code>/bin/bash</code> 之類的 workaround 來解了。</p>
+
+<p>再來就是 boot2docker 在這版也解了 OSX 的 mount volume 的問題，可以正確 mount 到 Mac 本機，一樣可以拋棄之前的第三方 workaround 了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Duplicate Production Requests for Testing]]></title>
@@ -2729,65 +2742,6 @@ vmname 請帶入你設定的虛擬機器名稱 (可使用指令 VBoxManage list 
 <li><a href="http://xunitpatterns.com/Test%20Spy.html">Test Spy Pattern</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[TDD Rails]]></title>
-    <link href="http://blog.hsatac.net/2013/05/tdd-rails/"/>
-    <updated>2013-05-19T19:23:00+08:00</updated>
-    <id>http://blog.hsatac.net/2013/05/tdd-rails</id>
-    <content type="html"><![CDATA[<p>這兩個月到新公司學到了不少東西，對於「寫測試」這件事也有了新的想法。先感謝最近一直和我 pair 的 @ilake，許多觀念和工具都是他帶給我的。</p>
-
-<p>還記得幾年前剛聽到「測試」、「TDD」這些名詞的時候，那時我去 Ruby Tuesday 碰到人就會問一下：「你有在寫測試嗎？」@ihower 跟 @xdite 應該都被我問過這個問題。那時雖然知道寫測試的好處，也大概試過 TDD 的手法，不過總感覺搔不到癢處；再加上那時待的公司也都沒有這個環境，就放置 Play 了。</p>
-
-<p>一直到跟 @ilake pair 過後才知道，問題不在「要不要寫測試」、而是「測試該怎麼寫」。</p>
-
-<!-- more -->
-
-
-<h3>Why TDD? Why Not?</h3>
-
-<p>我們一般對寫測試和 TDD 會有以下的迷思：</p>
-
-<ul>
-<li>TDD 違反人類思考的習慣</li>
-<li>寫測試會比較耗時間</li>
-<li>沒牽涉到金流等重大功能不需要寫測試</li>
-</ul>
-
-
-<p>先講第一點，<strong>TDD 違反人類思考的習慣？</strong>：其實我們平常寫程式的行為，本來就是寫一點點、然後切過去執行看看、再寫一點點、再切過去執行看看&hellip;&hellip;重複這個循環。</p>
-
-<p>這跟 TDD 的開發模式基本上是一樣的，差別只在於先把想要的結果寫好而已。而且這樣的方式可以強迫你用比較好測試的方式去組織你的程式碼，也就是說你的 code 天生架構就會比較好。</p>
-
-<p><strong>寫測試會比較耗時間嗎？</strong>這邊應該分成整體開發時間和單元開發時間來看。先說整體開發時間，有寫測試可以讓整個 team 都放心改 code ，減低踩雷的機會。與其寫一寫發現之前寫的東西爆炸了再回頭修改，寫測試反而能降低整體開發的時間。</p>
-
-<p>那單元測試時間呢？TDD 寫的 code 比較多，理論上應該會增加單元開發時間，不過只要使用對的工具和 work flow，其實單元開發時間不會增加多少，甚至還有可能更快。開發 Rails 可能寫一寫就要切到瀏覽器看一下行為，但是使用 TDD 我們可以一鍵直接測到我們想測的部份，不用花時間在切換、等待上面。等到整個 feature 開發完成再去瀏覽器做最後確認就好，反而增加了開發效率。</p>
-
-<p><strong>沒牽涉到金流等重大功能不需要寫測試？</strong>：當你享受過 TDD 帶來的好處時其實就不會再有這樣的想法了，不過寫測試的確還有其他的優點。我到 Faria 第一天就能直接上工解 issue 就是因為有測試當我的後盾。測試本身也就是 spec ，能清楚定義你程式的行為。碰到有 bug 的時候就直接寫一個這個 bug 的測試，修到他過了，以後就再也不會碰到那種「咦，這個 bug 不是我以前解過了嗎？怎麼又跑出來了？」的狀況。</p>
-
-<h3>Work Flow</h3>
-
-<p>前面說到只要使用對的工具和 work flow，就能享受到 TDD 的快感。相關的工具和 library 非常多，這邊直接講兩個重點：</p>
-
-<ol>
-<li>快速執行測試以及觀看測試結果(一鍵執行)</li>
-<li>跑測試本身的速度要快</li>
-</ol>
-
-
-<p>前陣子使用 Sublime Text 2 時，搭配 <a href="https://github.com/maltize/sublime-text-2-ruby-tests">Sublime Text 2 Ruby Tests</a> 這個 plugin，只要按 <code>cmd + shift + r</code> 就可以直接跑當前游標所在測試 <code>cmd + shift + t</code> 跑整個檔案 <code>cmd + shift + e</code> 跑上一次執行的測試。</p>
-
-<p>最近改回 vim 環境則是使用 @ilake 推薦的 <a href="https://github.com/jgdavey/vim-turbux">turbux</a> 和 <a href="https://github.com/jgdavey/tslime.vim">tslime</a> 一樣一鍵執行測試，並送到你選擇的 tmux windows 去執行。詳細的設定可以參考<a href="https://github.com/hSATAC/vimrc">我的 vimrc</a>。</p>
-
-<p>至於跑測試本身的速度要快這點，由於 Rails 環境要 boot 起來其實花的時間真的挺久的，可以使用 <a href="https://github.com/burke/zeus">Zeus</a> 或 <a href="https://github.com/jonleighton/spring">Spring</a> 來加速。</p>
-
-<p>其實以上這兩點都是為了一個目的，就是要「快速拿到你的 feedback」。當你有了這個環境，你寫好測試你就只要一直去 run 他 run 到你的實作通過測試為止。絕對比寫一寫切到瀏覽器看一下來的快速可靠。</p>
-
-<h3>結語</h3>
-
-<p>寫測試的好處真的百百種，說都說不完，而且現在寫測試應該也算是 programmer 的必備技能了。前陣子我發給 <a href="https://github.com/mroth/lolcommits">lolcommits</a> 的 pull request 也被要求補測試才收我的 patch。可預見不遠的將來，甚至是現在，寫測試將會是軟體開發中不可或缺的一個環節。</p>
 ]]></content>
   </entry>
   
